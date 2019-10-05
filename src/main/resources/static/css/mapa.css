@@ -1,0 +1,12 @@
+.fundo{
+    background-image: url('../images/bg_mapa.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: white;
+}
+canvas {
+	display: block;
+	margin: 0 auto;
+}
