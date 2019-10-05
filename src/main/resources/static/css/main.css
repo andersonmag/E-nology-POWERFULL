@@ -178,7 +178,7 @@ h4.hello{
 img.user{				
 width: 20%;
 					
-margin: 27% 0% 0% 40%;
+margin: 10% 0% 0% 40%;
 				
 }
 		
@@ -758,6 +758,11 @@ td, th {
 }
 
 @media (max-width: 767px) {
+  img.user{				
+    width: 20%;     
+    margin: 20% 0% 0% 40%;
+            
+    }
   .no-flex-xs {
     display: block !important;
   }
@@ -997,6 +1002,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 767px) {
+  img.user{				
+    width: 20%;
+              
+    margin: 20% 0% 0% 40%;
+            
+    }
   .main-wrapper-first {
     margin-top: 3rem;
     width: 97%;
@@ -1021,6 +1032,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 767px) {
+  img.user{				
+    width: 20%;
+              
+    margin: 20% 0% 0% 40%;
+            
+    }
   .main-wrapper {
     width: 97%;
   }
@@ -1052,6 +1069,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 991px) {
+  img.user{				
+    width: 20%;
+              
+    margin: 20% 0% 0% 40%;
+            
+    }
   .section-title p br {
     display: none;
   }
