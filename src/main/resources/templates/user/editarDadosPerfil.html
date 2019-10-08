@@ -18,7 +18,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-        <a class="navbar-brand" href="mapa.html">E-nology</a>
+        <a class="navbar-brand" href="/mapa">E-nology</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,16 +27,16 @@
         <div class="navbar-collapse collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="perfil.html">Perfil</a>
+                    <a class="nav-link active" href="/perfil">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Sobre</a>
+                    <a class="nav-link active" href="#/sobre">Sobre</a>
                 </li>
             </ul>
             <form class="form-inline">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Sair</a>
+                        <a class="nav-link active" href="/">Sair</a>
                     </li>
                 </ul>
             </form>
@@ -138,22 +138,30 @@
                             </h5>
 
                             <ul class="list-group mt-3">
-                                <form action="perfil.html">
+                                <form action="/salvar" method="post" th:object="${usuario}">
+
+                                    <input type="hidden" name="id" th:value="${usuario.id}" />
 
                                 <li class="list-group-item form-inline"><b>Nome:</b>
-                                    <input type="text" class="form-control" name="nome" value="Scanor" required />
+                                    <input type="text" class="form-control" name="prenome" th:field="*{prenome}"
+                                    th:value="${prenome}" required />
+                                </li>
+                                <li class="list-group-item form-inline"><b>Sobrenome:</b>
+                                    <input type="text" class="form-control" name="sobrenome" th:field="*{sobrenome}"
+                                    th:value="${sobrenome}" required />
                                 </li>
                                 <li class="list-group-item form-inline"><b>E-mail: </b>
-                                    <input type="email" class="form-control" name="email" value="scanor@gmail.com"
-                                        required />
+                                    <input type="email" class="form-control" name="email" th:field="*{email}"
+                                    th:value="${email}" required />
                                     <p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
                                         confirmação!
                                     </p>
                                 <li class="list-group-item form-inline"><b>Senha Atual:</b>
-                                    <input type="password" class="form-control" name="senha" />
+                                    <input type="password" class="form-control" name="repsenha" />
                                 </li>
                                 <li class="list-group-item form-inline"><b>Nova Senha:</b>
-                                    <input type="password" class="form-control" name="repsenha" />
+                                    <input type="password" class="form-control" name="senha" th:field="*{senha}"
+                                    th:value="${senha}"/>
                                 </li>
                                 <li class="list-group-item"><b>País</b> BRASIL</li>
                                 <button type="submit" class="btn submit" style="width: 50%;">Atualizar</button>

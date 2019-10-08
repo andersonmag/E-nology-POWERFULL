@@ -18,7 +18,7 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-		<a class="navbar-brand" href="mapa.html">E-nology</a>
+		<a class="navbar-brand" href="/mapa">E-nology</a>
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01"
 			aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -27,16 +27,16 @@
 		<div class="navbar-collapse collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link active" href="perfil.html">Perfil</a>
+					<a class="nav-link active" href="/perfil">Perfil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="#">Sobre</a>
+					<a class="nav-link active" href="/sobre">Sobre</a>
 				</li>
 			</ul>
 			<form class="form-inline">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link active" href="index.html">Sair</a>
+						<a class="nav-link active" href="/">Sair</a>
 					</li>
 				</ul>
 			</form>
@@ -136,10 +136,10 @@
 							</h5>
 							<ul class="list-group mt-3">
 
-								<li class="list-group-item"><b>Nome: </b> Scanor</li>
-								<li class="list-group-item"><b>E-mail: </b> scanor@gmail.com</li>
+								<li class="list-group-item"><b>Nome:</b> <a th:text="${usuario.prenome} + ' ' + ${usuario.sobrenome}"></a></li>
+								<li class="list-group-item"><b>E-mail:</b> <a th:text="${usuario.email}"></a></li>
 								<li class="list-group-item"><b>País</b> BRASIL</li>
-								<a href="editarDadosPerfil.html" id="editarDadosPerfil.html#nav-profile"
+								<a href="/editarPerfil" id="/editarPerfil#nav-profile"
 									style="width: 80%;"><button type="submit" class="btn submit">Editar
 										Perfil</button></a>
 							</ul>
