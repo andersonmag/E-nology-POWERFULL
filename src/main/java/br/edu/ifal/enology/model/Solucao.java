@@ -4,14 +4,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Solucao{
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String resposta;
-    private String correcao;
+
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    private Usuario aluno;
+
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    private Tarefa correcao;
 
     public Long getId() {
         return id;
@@ -21,19 +31,19 @@ public class Solucao{
         this.id = id;
     }
 
-    public String getResposta() {
-        return resposta;
+    public Usuario getAluno() {
+        return aluno;
     }
 
-    public void setResposta(String resposta) {
-        this.resposta = resposta;
+    public void setAluno(Usuario aluno) {
+        this.aluno = aluno;
     }
 
-    public String getCorrecao() {
+    public Tarefa getCorrecao() {
         return correcao;
     }
 
-    public void setCorrecao(String correcao) {
+    public void setCorrecao(Tarefa correcao) {
         this.correcao = correcao;
     }
     

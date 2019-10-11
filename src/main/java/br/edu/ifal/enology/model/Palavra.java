@@ -13,7 +13,7 @@ public class Palavra{
     private String portugues;
     private String ingles;
     private byte[] imagem;
-    private String descricao;
+    private String definição;
 
     public Long getId() {
         return id;
@@ -47,12 +47,13 @@ public class Palavra{
         this.imagem = imagem;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDefinição() {
+        return definição;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDefinição(String definição) {
+        this.definição = definição;
     }
-    
+
+
 }

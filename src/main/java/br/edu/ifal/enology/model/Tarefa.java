@@ -10,10 +10,19 @@ public class Tarefa{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String tipoTarefa;
+    private enum tipoTarefa{
+
+        // 
+    
+    };
     private boolean status;
     private int pontuacao;
-    private String nivel;
+    private String resposta;
+    private enum nivel{
+
+        FÁCIL, MÉDIO, DIFICIL   
+    
+    };
 
     public Long getId() {
         return id;
@@ -21,14 +30,6 @@ public class Tarefa{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTipoTarefa() {
-        return tipoTarefa;
-    }
-
-    public void setTipoTarefa(String tipoTarefa) {
-        this.tipoTarefa = tipoTarefa;
     }
 
     public boolean isStatus() {
@@ -47,12 +48,12 @@ public class Tarefa{
         this.pontuacao = pontuacao;
     }
 
-    public String getNivel() {
-        return nivel;
+    public String getResposta() {
+        return resposta;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
+    public void setResposta(String resposta) {
+        this.resposta = resposta;
     }
    
 }
