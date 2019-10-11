@@ -78,4 +78,16 @@ public class Controller{
         return model;
     }
 
+    @RequestMapping("/licao")
+    public ModelAndView licao(){
+
+        return new ModelAndView("task/licao1");
+    }
+
+    @RequestMapping("/licao2")
+    public ModelAndView licao2(){
+
+        return new ModelAndView("task/licao2.html");
+    }
+
 }
