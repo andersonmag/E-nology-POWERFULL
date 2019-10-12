@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <title>Lição N° 3</title>
+    <meta name="keywords" content="Apps Login Form Responsive widget, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <h4 class="navbar-brand ml-5" href="/mapa" style="font-size: 25px">Lição 3</h4>
+
+        <ul class="navbar-nav" style="font-size: 20px; margin-bottom: 0.5%">
+            <li class="nav-item" style="border: 1px rgb(253, 253, 253) solid">
+                <a class="nav-link active" href="/mapa" style="color: rgb(238, 255, 0)">Cancelar</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="form-inline" style="margin-top: 8%; margin-left: 10%;">
+        <img src="images/caneta.png" style="width: 3%; height: 3%; margin-right: 1%;" title="Escreva em Português">
+        <h3
+            style=" font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: rgb(71, 63, 63);">
+            <b>Escreva em Português</b></h3>
+    </div>
+    <div class="card" style="width: 20rem;margin-left: 35%;">
+        <h4 style="margin-top: 2%; text-align: center; margin-bottom: 5%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+         sans-serif; color: rgba(5, 5, 5, 0.507);" title="Hello World.">
+            <b> Hello World.</b></h4>
+    </div>
+    <audio id="audio_play">
+        <source src="images/world.mp3" type="audio/mp3" />
+    </audio>
+    <input type="image" src="images/som.png" onClick="play()" title="Ouvir"
+        style="width: 3%; height: 3%; margin-left: 45%; margin-top: 1%;" />
+
+        <div class="form-group mt-2">
+            <label for="texto"></label>
+            <textarea class="form-control mb-5" id="texto" rows="5" name="texto" required
+                placeholder="Digite a Tradução Aqui" style="width: 40%; margin-left: 30%;"></textarea>
+        </div>
+
+        <div class="container">
+            <div class="col-lg-10">
+                <div class="progress ml-5" style="height: 4.5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="25"
+                        aria-valuemin="0" aria-valuemax="100" title="Barra de Progresso">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn-lg btn-success" style="margin-left: 75%; margin-top: 2%">Continuar</button>
+        </div>
+
+    <script>
+
+        function play() {
+
+            document.getElementById('audio_play').play();
+
+        }
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -9,39 +9,41 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.RepositoryUser;
 
 @RestController
-public class Controller{
+public class Controller {
 
     @Autowired
     RepositoryUser rep;
 
-	@RequestMapping("/")
-    public ModelAndView index(){
+    @RequestMapping("/")
+    public ModelAndView index() {
 
-        return new ModelAndView("index");        
+        return new ModelAndView("index");
     }
 
     @RequestMapping("/cadastro")
-    public ModelAndView cadastro(){
+    public ModelAndView cadastro() {
 
         return new ModelAndView("user/cadastro");
     }
 
     @RequestMapping("/mapa")
-    public ModelAndView mostrarMapa(){
+    public ModelAndView mostrarMapa() {
 
         return new ModelAndView("map/mapa.html");
     }
 
     @RequestMapping("/perfil")
-    public ModelAndView mostrarPerfil(@CookieValue(name = "id", defaultValue = "") Long IdCookie){
+    public ModelAndView mostrarPerfil(@CookieValue(name = "id", defaultValue = "") Long IdCookie) {
         ModelAndView model = new ModelAndView("user/perfil");
         Optional<Usuario> opcao = rep.findById(IdCookie);
 
-        if(opcao.isPresent()){
+        if (opcao.isPresent()) {
 
             Usuario usuario = opcao.get();
             model.addObject("usuario", usuario);
@@ -53,7 +55,7 @@ public class Controller{
     }
 
     @RequestMapping("/salvar")
-    public ModelAndView salvar(@Valid Usuario usuario, HttpServletResponse response){
+    public ModelAndView salvar(@Valid Usuario usuario, HttpServletResponse response) {
 
         rep.save(usuario);
         Cookie cookie = new Cookie("id", usuario.getId().toString());
@@ -63,11 +65,11 @@ public class Controller{
     }
 
     @RequestMapping("/editarPerfil")
-    public ModelAndView editarPerfil(@CookieValue(name = "id", defaultValue = "") Long IdCookie){
+    public ModelAndView editarPerfil(@CookieValue(name = "id", defaultValue = "") Long IdCookie) {
         ModelAndView model = new ModelAndView("user/editarDadosPerfil");
         Optional<Usuario> opcao = rep.findById(IdCookie);
 
-        if(opcao.isPresent()){
+        if (opcao.isPresent()) {
 
             Usuario usuario = opcao.get();
             model.addObject("usuario", usuario);
@@ -79,15 +81,21 @@ public class Controller{
     }
 
     @RequestMapping("/licao")
-    public ModelAndView licao(){
+    public ModelAndView licao() {
 
         return new ModelAndView("task/licao1");
     }
 
     @RequestMapping("/licao2")
-    public ModelAndView licao2(){
+    public ModelAndView licao2() {
 
         return new ModelAndView("task/licao2.html");
+    }
+
+    @RequestMapping("/licao3")
+    public ModelAndView licao3() {
+
+        return new ModelAndView("task/licao3.html");
     }
 
 }
