@@ -12,7 +12,7 @@ public class Usuario{
     private Long id;
     private String email;
     private String senha;
-    private String prenome;
+    private String nome;
     private String sobrenome;
 
     public Long getId() {
@@ -39,12 +39,12 @@ public class Usuario{
         this.senha = senha;
     }
 
-    public String getPrenome() {
-        return prenome;
+    public String getNome() {
+        return nome;
     }
 
-    public void setPrenome(String prenome) {
-        this.prenome = prenome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSobrenome() {
