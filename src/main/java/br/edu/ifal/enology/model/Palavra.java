@@ -14,6 +14,7 @@ public class Palavra{
     private String ingles;
     private byte[] imagem;
     private String definição;
+    private boolean termoTecnico;
 
     public Long getId() {
         return id;
@@ -55,5 +56,12 @@ public class Palavra{
         this.definição = definição;
     }
 
+    public boolean isTermoTecnico() {
+        return termoTecnico;
+    }
+
+    public void setTermoTecnico(boolean termoTecnico) {
+        this.termoTecnico = termoTecnico;
+    }
 
 }
