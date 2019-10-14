@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import br.edu.ifal.enology.model.Aluno;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.RepositoryUser;
 
@@ -53,10 +54,10 @@ public class Controller {
     }
 
     @RequestMapping("/salvar")
-    public ModelAndView salvar(@Valid Usuario usuario, HttpServletResponse response) {
+    public ModelAndView salvar(@Valid Aluno aluno, HttpServletResponse response) {
 
-        rep.save(usuario);
-        Cookie cookie = new Cookie("id", usuario.getId().toString());
+        rep.save(aluno);
+        Cookie cookie = new Cookie("id", aluno.getId().toString());
         response.addCookie(cookie);
 
         return new ModelAndView("redirect:/perfil");
