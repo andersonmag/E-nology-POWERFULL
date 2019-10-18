@@ -18,6 +18,9 @@ body a:hover {
 body a:focus, a:hover {
 	text-decoration: none;
 }
+.text{
+    color: rgb(25, 12, 109);
+}
 input[type="button"], input[type="submit"] {
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
@@ -26,15 +29,16 @@ input[type="button"], input[type="submit"] {
 	-ms-transition: 0.5s all;
 }
 h1, h2, h3, h4, h5, h6 {
-    color: #fff;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 	margin: 0;
 	padding: 0;
-	font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 p {
 	margin: 0;
     font-family: 'Open Sans', sans-serif;
-    color: black";
+    color: black;
 }
 ul {
 	margin: 0;
@@ -57,7 +61,7 @@ p.pzinho{
     color: rgb(163, 160, 0);
 }
 body{
-    background: url('../images/fundo.jpg') no-repeat;
+    background: url('../images/fundo6.jpg') no-repeat;
     /* url('../images/banner1.jpg') */
     /* rgb(58, 156, 185)*/
     background-size: cover;
@@ -112,7 +116,6 @@ label.ola{
 }
 .agile-login h1 {
     text-align: center;
-    color: #fff;
     margin-bottom: 2%;
     font-size: 45px;
     font-weight: 300;
@@ -144,11 +147,11 @@ input[type="submit"] {
     padding: 9px 60px;
     font-size: 18px;
     border: none;
-    background-color:#13caca;
+    background-color:#1d6acf;
     color: #fff;
     text-transform: uppercase;
     outline: 0;
-    border: 2px solid #13caca;
+    border: 2px solid #311de9;
 	cursor: pointer;
 	    width: 100%;
 	    letter-spacing: 1px;	
@@ -156,7 +159,7 @@ input[type="submit"] {
 
 .submit {
     margin: 2.3em auto 0;
-    background:#13caca;
+    background:#2756f0;
     border: none;
     cursor: pointer;
     font-weight: 600;
@@ -188,10 +191,12 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    color: #13caca;
+    color: #1679ca;
     background-color: transparent;
-	border: 2px solid #13caca;
+	border: 2px solid #1344ca;
 }
+
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #ccc6c6;
 }
