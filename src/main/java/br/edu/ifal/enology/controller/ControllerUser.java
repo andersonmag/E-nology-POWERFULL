@@ -14,26 +14,18 @@ import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.RepositoryUser;
 
 @RestController
-public class Controller {
+public class ControllerUser {
 
     @Autowired
     RepositoryUser rep;
 
-    @RequestMapping("/")
-    public ModelAndView index() {
-
-        return new ModelAndView("index");
-    }
-
     @RequestMapping("/cadastro")
     public ModelAndView cadastro() {
-
         return new ModelAndView("user/cadastro");
     }
 
     @RequestMapping("/mapa")
     public ModelAndView mostrarMapa() {
-
         return new ModelAndView("map/mapa.html");
     }
 
@@ -43,10 +35,8 @@ public class Controller {
         Optional<Usuario> opcao = rep.findById(IdCookie);
 
         if (opcao.isPresent()) {
-
             Usuario usuario = opcao.get();
             model.addObject("usuario", usuario);
-
             return model;
         }
 
@@ -55,7 +45,6 @@ public class Controller {
 
     @RequestMapping("/salvar")
     public ModelAndView salvar(@Valid Aluno aluno, HttpServletResponse response) {
-
         rep.save(aluno);
         Cookie cookie = new Cookie("id", aluno.getId().toString());
         response.addCookie(cookie);
@@ -69,7 +58,6 @@ public class Controller {
         Optional<Usuario> opcao = rep.findById(IdCookie);
 
         if (opcao.isPresent()) {
-
             Usuario usuario = opcao.get();
             model.addObject("usuario", usuario);
 
@@ -81,20 +69,16 @@ public class Controller {
 
     @RequestMapping("/licao")
     public ModelAndView licao() {
-
         return new ModelAndView("task/licao1");
     }
 
     @RequestMapping("/licao2")
     public ModelAndView licao2() {
-
         return new ModelAndView("task/licao2.html");
     }
 
     @RequestMapping("/licao3")
     public ModelAndView licao3() {
-
         return new ModelAndView("task/licao3.html");
-    }
-
+    }  
 }
