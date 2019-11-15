@@ -138,35 +138,39 @@
                             </h5>
 
                             <ul class="list-group mt-3">
-                                <form action="/salvar" method="post" th:object="${usuario}">
+                                <form action="/salvar" method="post" th:object="${usuario}"  onsubmit="return verificarCampos()">
 
                                     <input type="hidden" name="id" th:value="${usuario.id}" />
 
-                                <li class="list-group-item form-inline"><b>Nome:</b>
-                                    <input type="text" class="form-control" name="nome" th:field="*{nome}"
-                                    th:value="${nome}" required />
-                                </li>
-                                <li class="list-group-item form-inline"><b>Sobrenome:</b>
-                                    <input type="text" class="form-control" name="sobrenome" th:field="*{sobrenome}"
-                                    th:value="${sobrenome}" required />
-                                </li>
-                                <li class="list-group-item form-inline"><b>E-mail: </b>
-                                    <input type="email" class="form-control" name="email" th:field="*{email}"
-                                    th:value="${email}" required />
-                                    <p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
-                                        confirmação!
-                                    </p>
-                                <li class="list-group-item form-inline"><b>Senha Atual:</b>
-                                    <input type="password" class="form-control" name="repsenha" />
-                                </li>
-                                <li class="list-group-item form-inline"><b>Nova Senha:</b>
-                                    <input type="password" class="form-control" name="senha" th:field="*{senha}"
-                                    th:value="${senha}"/>
-                                </li>
-                                <li class="list-group-item"><b>País</b> BRASIL</li>
-                                <button type="submit" class="btn submit" style="width: 50%;">Atualizar</button>
+                                    <li class="list-group-item form-inline"><b>Nome:</b>
+                                        <input type="text" class="form-control" name="nome" th:field="*{nome}" onkeyup="validarNome()"
+                                            th:value="${nome}" />
+                                            <small id="erroNome" style="color: red"></small>
+                                    </li>
+                                    <li class="list-group-item form-inline"><b>Sobrenome:</b>
+                                        <input type="text" class="form-control" name="sobrenome" th:field="*{sobrenome}" onkeyup="validarSobrenome()"
+                                            th:value="${sobrenome}" />
+                                            <small id="erroSobrenome" style="color: red"></small>
+                                    </li>
+                                    <li class="list-group-item form-inline"><b>E-mail: </b>
+                                        <input type="email" class="form-control" name="email" th:field="*{email}" onkeyup="validarEmail()"
+                                            th:value="${email}" />
+                                            <small id="erroEmail" style="color: red"></small>
+                                        <p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
+                                            confirmação!
+                                        </p>
+                                    <li class="list-group-item form-inline"><b>Senha Atual:</b>
+                                        <input type="password" class="form-control" name="senhaAtual" />
+                                        <small style="color: red" th:text="${mensagem}"></small>
+                                    </li>
+                                    <p th:text="${message}" style="color: red;"></p>
+                                    <li class="list-group-item form-inline"><b>Nova Senha:</b>
+                                        <input type="password" class="form-control" name="novaSenha" />
+                                    </li>
+                                    <li class="list-group-item"><b>País</b> BRASIL</li>
+                                    <button type="submit" class="btn submit" style="width: 50%;">Atualizar</button>
                             </ul>
-                        </form>
+                            </form>
 
                             <h5 style="color: rgb(48, 119, 119); font-size: 25px; margin: 2%" class="ml-3 mt-2">
                                 Configurações</h5>
@@ -187,9 +191,9 @@
 
         <script>
             location.href = "#veim";
-            
-        </script>
 
+        </script>
+        <script src="js/cadastro.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>

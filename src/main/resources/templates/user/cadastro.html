@@ -21,15 +21,15 @@
 			<div class="w3ls-form">
 				<form action="/salvar" method="post" onsubmit="return verificarCampos()">
 					<label for="nome">Nome
-						<input type="text" onkeyup="validarNome()" id="nome" class="form-control" name="nome" required />
+						<input type="text" onkeyup="validarNome()" id="nome" class="form-control" name="nome" />
 						<small id="erroNome" style="color: red"></small>
 					</label>	
 					<label for="sobrenome">Sobrenome
-						<input type="text" id="sobrenome" onkeyup="validarSobrenome()" class="form-control" name="sobrenome" required />
+						<input type="text" id="sobrenome" onkeyup="validarSobrenome()" class="form-control" name="sobrenome" />
 						<small id="erroSobrenome" style="color: red;"></small>
 					</label>
 					<label for="email">Email
-						<input type="email" id="email" onkeyup="validarEmail()" class="form-control" name="email" required />
+						<input type="email" id="email" onkeyup="validarEmail()" class="form-control" name="email" />
 						<small id="erroEmail" style="color: red;"></small>
 					</label>
 					<label for="senha">Senha 
