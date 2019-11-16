@@ -21,11 +21,12 @@
 			<img src="images/user.png" width="20%">
 			<h2></h2>
 			<div class="w3ls-form">
-				<form action="mapa.html" method="post">
+				<form action="/autenticacao" method="post">
 					<label>Email</label>
 					<input type="email" class="form-control" name="email" required />
 					<label>Senha</label>
 					<input type="password" class="form-control" name="senha" required />
+					<small style="color: red" th:text="${erroUser}"></small>
 					<a href="#" class="pass">Esqueceu a Senha?</a>
 					<button type="submit" class="btn submit">Login</button>
 				</form>
