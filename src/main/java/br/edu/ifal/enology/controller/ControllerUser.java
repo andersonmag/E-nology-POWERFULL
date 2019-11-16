@@ -3,18 +3,14 @@ package br.edu.ifal.enology.controller;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
-import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import br.edu.ifal.enology.model.Aluno;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.RepositoryUser;
 
@@ -35,30 +31,29 @@ public class ControllerUser {
     }
 
     @RequestMapping("/perfil")
-    public ModelAndView mostrarPerfil(@CookieValue(name = "id", defaultValue = "") Long IdCookie) {
+    public ModelAndView perfil(HttpServletRequest request) {
         ModelAndView model = new ModelAndView("user/perfil");
-        Optional<Usuario> opcao = rep.findById(IdCookie);
 
-        if (opcao.isPresent()) {
-            Usuario usuario = opcao.get();
-            model.addObject("usuario", usuario);
-            return model;
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        System.err.println(usuario.getEmail());
+
+        if (usuario.equals(null)) {
+
+            usuario = new Usuario();
         }
 
+        model.addObject("usuario", usuario);
         return model;
     }
 
-    public boolean redefinirSenha(String senha) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public boolean redefinirSenha(String email, String senha)
+            throws UnsupportedEncodingException, NoSuchAlgorithmException {
 
-        Usuario usuario = validarUsuario(senha);
+        Usuario usuario = rep.findByEmailAndSenha(email, senha);
 
         if (usuario != null) {
 
-            if (senha.equals(usuario.getSenha())) {
-
-                System.out.println("Olo");
-                return true;
-            }
+            return true;
         }
 
         return false;
@@ -66,17 +61,26 @@ public class ControllerUser {
 
     @RequestMapping("/salvar")
     public ModelAndView salvar(@Valid Usuario usuario, HttpServletResponse response, String senhaAtual,
-                                RedirectAttributes redirect, String novaSenha)
+            RedirectAttributes redirect, String novaSenha, HttpServletRequest request)
             throws UnsupportedEncodingException, NoSuchAlgorithmException {
+
+
+        if (senhaAtual == "") {
+
+            return new ModelAndView("redirect:/perfil");
+        }
 
         if (senhaAtual != null) {
 
             senhaAtual = criptografarSenha(senhaAtual);
 
-            if (redefinirSenha(senhaAtual)) {
+            if (redefinirSenha(usuario.getEmail(), senhaAtual)) {
 
+                novaSenha = criptografarSenha(novaSenha);
                 usuario.setSenha(novaSenha);
                 rep.save(usuario);
+
+                return new ModelAndView("redirect:/perfil");
             }
 
             else {
@@ -87,17 +91,14 @@ public class ControllerUser {
 
             }
         }
-
+        
         usuario.setSenha(criptografarSenha(usuario.getSenha()));
         rep.save(usuario);
 
-        Cookie cookie = new Cookie("id", usuario.getId().toString());
-        response.addCookie(cookie);
-
-        return new ModelAndView("redirect:/perfil");
+        return new ModelAndView("redirect:/login");
     }
 
-    private String criptografarSenha(String senha) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    static String criptografarSenha(String senha) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
         byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
@@ -112,34 +113,18 @@ public class ControllerUser {
         return hexString.toString();
     }
 
-    private Usuario validarUsuario(String senha) {
-
-        Usuario usuario = rep.findBySenha(senha);
-
-        if (usuario != null) {
-
-            System.out.println(usuario.getSenha() + " ||| " + senha);
-            return usuario;
-        }
-
-        else {
-
-            return null;
-        }
-    }
-
     @RequestMapping("/editarPerfil")
-    public ModelAndView editarPerfil(@CookieValue(name = "id", defaultValue = "") Long IdCookie) {
+    public ModelAndView editarPerfil(HttpServletRequest request) {
         ModelAndView model = new ModelAndView("user/editarDadosPerfil");
-        Optional<Usuario> opcao = rep.findById(IdCookie);
 
-        if (opcao.isPresent()) {
-            Usuario usuario = opcao.get();
-            model.addObject("usuario", usuario);
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-            return model;
+        if (usuario.equals(null)) {
+
+            usuario = new Usuario();
         }
 
+        model.addObject("usuario", usuario);
         return model;
     }
 
