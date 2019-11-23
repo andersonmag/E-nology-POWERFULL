@@ -16,17 +16,23 @@
 
 <body>
 	<div class="agile-login">
-		<a href="/"><h1>E-nology</h1></a>
+		<a href="/">
+			<h1>E-nology</h1>
+		</a>
 		<div class="wrapper">
 			<img src="images/user.png" width="20%">
 			<h2></h2>
 			<div class="w3ls-form">
-				<form action="/autenticacao" method="post">
+				<form name="f" th:action="@{/login}" method="post">
+
+					<div th:if="${param.error}" class="alert alert-danger">
+						Email ou Senha Incorreto!
+					</div>
+
 					<label>Email</label>
-					<input type="email" class="form-control" name="email" required />
+					<input type="email" class="form-control" name="email" id="email" required />
 					<label>Senha</label>
-					<input type="password" class="form-control" name="senha" required />
-					<small style="color: red" th:text="${erroUser}"></small>
+					<input type="password" class="form-control" name="senha" id="senha" required />
 					<a href="#" class="pass">Esqueceu a Senha?</a>
 					<button type="submit" class="btn submit">Login</button>
 				</form>
@@ -34,7 +40,6 @@
 		</div>
 		<br>
 	</div>
-
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
