@@ -27,15 +27,16 @@
                     <a class="nav-link active" href="/sobre">Sobre</a>
                 </li>
             </ul>
-            <form class="form-inline">
+            <form class="form-inline" th:action="@{/logout}" form-method="POST">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Sair</a>
+                        <button class="nav-link active bg-primary btn" type="submit">Sair</button>
                     </li>
                 </ul>
             </form>
         </div>
     </nav>
+
     <div class="container-fluid">
         <div class="row">
             <canvas id="canvas" width= 480px height= 500px onclick="location.href = '/licao';" style="cursor: hand;"></canvas>
