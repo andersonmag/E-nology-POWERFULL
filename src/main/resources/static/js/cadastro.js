@@ -1,14 +1,35 @@
-function validarNome(){
+
+function classColor() {
+
+    var elemento = document.getElementById("erroAlert");
+
+    if (validarNome() && validarSobrenome() && validarEmail()) {
+        
+        elemento.classList.remove('alert');
+        document.getElementById("xis").style.display = "none";
+        elemento.classList.remove('alert-danger');
+    }
+
+    else {
+           
+        elemento.classList.add('alert');
+        document.getElementById("xis").style.display = "inline";
+        elemento.classList.add('alert-danger');
+    }
+}
+
+function validarNome() {
+
     var nome = document.getElementById("nome").value;
     var erroNome = document.getElementById("erroNome");
 
-    if(verificarSePossuiCaracteresInvalidos(nome)){
+    if (verificarSePossuiCaracteresInvalidos(nome)) {
         erroNome.innerHTML = "O nome não pode ter caracteres inválidos."
         return false;
-    }else{
+    } else {
         erroNome.innerHTML = "";
 
-        if(verificarSePossuiTresCaracteres(nome)){
+        if (verificarSePossuiTresCaracteres(nome)) {
             erroNome.innerHTML = "O nome precisa ter no mínimo 3 letras!";
             return false;
         }
@@ -16,17 +37,17 @@ function validarNome(){
     }
 }
 
-function validarSobrenome(){
+function validarSobrenome() {
     var sobrenome = document.getElementById("sobrenome").value;
     var erroSobrenome = document.getElementById("erroSobrenome");
 
-    if(verificarSePossuiCaracteresInvalidos(sobrenome)){
+    if (verificarSePossuiCaracteresInvalidos(sobrenome)) {
         erroSobrenome.innerHTML = "O sobrenome não pode ter caracteres inválidos."
         return false;
-    }else{
+    } else {
         erroSobrenome.innerHTML = "";
 
-        if(verificarSePossuiTresCaracteres(sobrenome)){
+        if (verificarSePossuiTresCaracteres(sobrenome)) {
             erroSobrenome.innerHTML = "O sobrenome precisa ter no mínimo 3 letras!";
             return false;
         }
@@ -34,28 +55,29 @@ function validarSobrenome(){
     }
 }
 
-function validarEmail(){
+function validarEmail() {
     var email = document.getElementById("email").value;
     var erroEmail = document.getElementById("erroEmail");
 
-    if(email.indexOf('@') == -1 || email.indexOf('.') == -1){
+    if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
         erroEmail.innerHTML = "Email inválido.";
         return false;
-    }else{
+    } else {
         erroEmail.innerHTML = "";
         return true;
     }
 }
 
-function verificarSePossuiTresCaracteres(texto){
+function verificarSePossuiTresCaracteres(texto) {
+
     return texto.trim().length < 3;
 }
 
-function verificarSePossuiCaracteresInvalidos(texto){
+function verificarSePossuiCaracteresInvalidos(texto) {
     var caracteresPermitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ";
-    
-    for(i = 0; i < texto.length; i++){
-        if(caracteresPermitidos.indexOf(texto.charAt(i)) == -1){
+
+    for (i = 0; i < texto.length; i++) {
+        if (caracteresPermitidos.indexOf(texto.charAt(i)) == -1) {
             return true;
         }
     }
@@ -63,7 +85,7 @@ function verificarSePossuiCaracteresInvalidos(texto){
     return false;
 }
 
+function verificarCampos() {
 
-function verificarCampos(){
     return validarNome() && validarSobrenome() && validarEmail();
 }

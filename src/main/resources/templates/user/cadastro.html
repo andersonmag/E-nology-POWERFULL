@@ -15,24 +15,36 @@
 
 <body>
 	<div class="agile-login">
-		<a href="/"><h1>E-NOLOGY</h1></a>
+		<a href="/">
+			<h1>E-NOLOGY</h1>
+		</a>
 		<div class="wrapper">
 			<h2>Cadastro</h2>
 			<div class="w3ls-form">
 				<form action="/salvar" method="post" onsubmit="return verificarCampos()">
+					<div id="erroAlert" style="font-size: 15px;">
+						<button id="xis" type="button" class="close" data-dismiss="alert" aria-label="Close" style="display: none;">
+							<span aria-hidden="true">&times;</span>
+						  </button>
+						<p class="erroCor" id="erroNome"></p>
+						<p class="erroCor" id="erroSobrenome"></p>
+						<p class="erroCor" id="erroEmail"></p>
+					</div>
 					<label for="nome">Nome
-						<input type="text" onkeyup="validarNome()" id="nome" class="form-control" name="nome" />
-						<small id="erroNome" style="color: red"></small>
-					</label>	
+						<input type="text" onkeyup="validarNome(), classColor()" id="nome" class="form-control"
+							name="nome" />
+					</label>
 					<label for="sobrenome">Sobrenome
-						<input type="text" id="sobrenome" onkeyup="validarSobrenome()" class="form-control" name="sobrenome" />
-						<small id="erroSobrenome" style="color: red;"></small>
+						<input type="text" id="sobrenome" onkeyup="validarSobrenome(), classColor()"
+							class="form-control" name="sobrenome" />
+
 					</label>
 					<label for="email">Email
-						<input type="email" id="email" onkeyup="validarEmail()" class="form-control" name="email" />
-						<small id="erroEmail" style="color: red;"></small>
+						<input type="email" id="email" onkeyup="validarEmail(), classColor()" class="form-control"
+							name="email" />
+
 					</label>
-					<label for="senha">Senha 
+					<label for="senha">Senha
 						<input type="password" id="senha" class="form-control" name="senha" required />
 					</label>
 					<label for="repSenha">Confirme a Senha
