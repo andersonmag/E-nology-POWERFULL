@@ -23,12 +23,11 @@
 			<div class="w3ls-form">
 				<form action="/salvar" method="post" onsubmit="return verificarCampos()">
 					<div id="erroAlert" style="font-size: 15px;">
-						<button id="xis" type="button" class="close" data-dismiss="alert" aria-label="Close" style="display: none;">
-							<span aria-hidden="true">&times;</span>
-						  </button>
 						<p class="erroCor" id="erroNome"></p>
 						<p class="erroCor" id="erroSobrenome"></p>
 						<p class="erroCor" id="erroEmail"></p>
+						<p class="erroCor" id="erroSenha"></p>
+						<p class="erroCor" id="erroRepSenha"></p>
 					</div>
 					<label for="nome">Nome
 						<input type="text" onkeyup="validarNome(), classColor()" id="nome" class="form-control"
@@ -37,19 +36,16 @@
 					<label for="sobrenome">Sobrenome
 						<input type="text" id="sobrenome" onkeyup="validarSobrenome(), classColor()"
 							class="form-control" name="sobrenome" />
-
 					</label>
 					<label for="email">Email
 						<input type="email" id="email" onkeyup="validarEmail(), classColor()" class="form-control"
 							name="email" />
-
 					</label>
 					<label for="senha">Senha
-						<input type="password" id="senha" class="form-control" name="senha" required />
+						<input type="password" id="senha" onkeyup="validarSenha(), classColor()" class="form-control" name="senha" required />
 					</label>
 					<label for="repSenha">Confirme a Senha
-						<input type="password" id="repSenha" class="form-control" name="repsenha" required />
-						<small id="erroRepSenha" style="color: red;"></small>
+						<input type="password" id="repSenha" onkeyup="validarRepetirSenha(), classColor()" class="form-control" name="repsenha" required />	
 					</label>
 					<button type="submit" class="btn submit">Enviar</button>
 				</form>

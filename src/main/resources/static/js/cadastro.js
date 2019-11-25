@@ -1,25 +1,18 @@
-
 function classColor() {
-
     var elemento = document.getElementById("erroAlert");
 
-    if (validarNome() && validarSobrenome() && validarEmail()) {
-        
+    if (validarNome() && validarSobrenome() && validarEmail() && validarSenha() && validarReperirSenha()) {  
         elemento.classList.remove('alert');
-        document.getElementById("xis").style.display = "none";
         elemento.classList.remove('alert-danger');
     }
 
-    else {
-           
+    else {       
         elemento.classList.add('alert');
-        document.getElementById("xis").style.display = "inline";
         elemento.classList.add('alert-danger');
     }
 }
 
 function validarNome() {
-
     var nome = document.getElementById("nome").value;
     var erroNome = document.getElementById("erroNome");
 
@@ -68,9 +61,40 @@ function validarEmail() {
     }
 }
 
-function verificarSePossuiTresCaracteres(texto) {
+function validarSenha(){
+    var senha = document.getElementById("senha").value;
+    var erroSenha = document.getElementById("erroSenha");
 
+    if(verificarSePossuiCincoCaracteres(senha)){
+        erroSenha.innerHTML = "A senha deve ter no mínimo 5 caracteres.";
+        return false;
+    }else{
+        erroSenha.innerHTML = "";
+        return true;
+    }
+}
+
+function validarRepetirSenha(){
+    var senha = document.getElementById("senha").value;
+    var repSenha = document.getElementById("repSenha").value;
+    var erroRepSenha = document.getElementById("erroRepSenha");
+
+    if(senha != repSenha){
+        erroRepSenha.innerHTML = "As senhas estão diferentes!";
+        return false;
+    }else{
+        erroRepSenha.innerHTML = "";
+        return true;
+    }
+}
+
+
+function verificarSePossuiTresCaracteres(texto) {
     return texto.trim().length < 3;
+}
+
+function verificarSePossuiCincoCaracteres(texto){
+    return texto.trim().length < 5;
 }
 
 function verificarSePossuiCaracteresInvalidos(texto) {
@@ -86,6 +110,5 @@ function verificarSePossuiCaracteresInvalidos(texto) {
 }
 
 function verificarCampos() {
-
-    return validarNome() && validarSobrenome() && validarEmail();
+    return validarNome() && validarSobrenome() && validarEmail() && validarSenha() && validarRepetirSenha();
 }
