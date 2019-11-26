@@ -1,8 +1,11 @@
 package br.edu.ifal.enology.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,17 +31,20 @@ public class UserController {
     }
 
     @RequestMapping("/perfil")
-    public ModelAndView perfil(Authentication authentication) {
+    public ModelAndView perfil(Authentication authentication, HttpServletRequest redirect) {
         ModelAndView model = new ModelAndView("user/perfil");
 
-        Usuario usuario = (Usuario) authentication.getPrincipal();
+        Usuario usuario2 = (Usuario) authentication.getPrincipal();
+        Usuario usuario = rep.findByEmail(usuario2.getEmail());
 
-        if (usuario.equals(null)) {
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(usuario, authentication.getCredentials(),
+                authentication.getAuthorities());
 
-            usuario = new Usuario();
-        }
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
 
-        model.addObject("usuario", usuario);
+        usuario2 = (Usuario) newAuth.getPrincipal();
+
+        model.addObject("usuario", usuario2);
         return model;
     }
 
@@ -58,10 +64,21 @@ public class UserController {
     }
 
     @RequestMapping("/salvar")
-    public ModelAndView salvar(@Valid Usuario usuario, String senhaAtual, String novaSenha,
-            RedirectAttributes redirect) {
+    public ModelAndView salvar(@Valid Usuario usuario, String senhaAtual, String novaSenha, RedirectAttributes redirect,
+            HttpServletRequest request) {
+
+        if (senhaAtual == "" && novaSenha != "") {
+
+            redirect.addFlashAttribute("mensagem", "Senha Incorreta.");
+            return new ModelAndView("redirect:/editarPerfil");
+        }
 
         if (senhaAtual == "") {
+
+            Usuario usuario2 = rep.findByEmail(usuario.getEmail());
+
+            usuario.setSenha(usuario2.getSenha());
+            rep.save(usuario);
 
             return new ModelAndView("redirect:/perfil");
         }
@@ -70,18 +87,26 @@ public class UserController {
 
             if (compararSenha(usuario.getEmail(), senhaAtual)) {
 
-                novaSenha = new BCryptPasswordEncoder().encode(novaSenha);
+                if (novaSenha != "") {
 
-                usuario.setSenha(novaSenha);
-                rep.save(usuario);
+                    novaSenha = new BCryptPasswordEncoder().encode(novaSenha);
 
-                return new ModelAndView("redirect:/perfil");
+                    usuario.setSenha(novaSenha);
+                    rep.save(usuario);
+
+                    return new ModelAndView("redirect:/perfil");
+                }
+
+                else {
+
+                    redirect.addFlashAttribute("mensagem2", "Nova Senha não pode ser vazia!");
+                    return new ModelAndView("redirect:/editarPerfil");
+                }
             }
 
             else {
 
-                redirect.addFlashAttribute("usuario", usuario);
-                redirect.addFlashAttribute("mensagem", "Senha Invalida.");
+                redirect.addFlashAttribute("mensagem", "Senha Incorreta.");
                 return new ModelAndView("redirect:/editarPerfil");
             }
         }

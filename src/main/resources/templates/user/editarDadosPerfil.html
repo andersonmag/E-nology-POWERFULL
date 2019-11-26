@@ -33,10 +33,10 @@
                     <a class="nav-link active" href="/sobre">Sobre</a>
                 </li>
             </ul>
-            <form class="form-inline">
+            <form class="form-inline" th:action="@{/logout}" form-method="POST">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Sair</a>
+                        <button class="nav-link active bg-primary btn" type="submit">Sair</button>
                     </li>
                 </ul>
             </form>
@@ -131,6 +131,7 @@
                             </div>
                         </div>
 
+
                         <div class="tab-pane fade show active mb-3" id="nav-profile" role="tabpanel"
                             aria-labelledby="nav-profile-tab">
 
@@ -139,33 +140,35 @@
 
                             <ul class="list-group mt-3">
                                 <form action="/salvar" method="post" th:object="${usuario}"  onsubmit="return verificarCampos()">
-
                                     <input type="hidden" name="id" th:value="${usuario.id}" />
 
                                     <li class="list-group-item form-inline"><b>Nome:</b>
                                         <input type="text" class="form-control" name="nome" th:field="*{nome}" onkeyup="validarNome()"
                                             th:value="${nome}" />
-                                            <small id="erroNome" style="color: red"></small>
+                                            <small class="erroCor" id="erroNome"></small>
                                     </li>
                                     <li class="list-group-item form-inline"><b>Sobrenome:</b>
                                         <input type="text" class="form-control" name="sobrenome" th:field="*{sobrenome}" onkeyup="validarSobrenome()"
                                             th:value="${sobrenome}" />
-                                            <small id="erroSobrenome" style="color: red"></small>
+                                            <small class="erroCor" id="erroSobrenome"></small>
                                     </li>
                                     <li class="list-group-item form-inline"><b>E-mail: </b>
                                         <input type="email" class="form-control" name="email" th:field="*{email}" onkeyup="validarEmail()"
                                             th:value="${email}" />
-                                            <small id="erroEmail" style="color: red"></small>
+                                            <small id="erroEmail" class="erroCor"></small>
                                         <p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
                                             confirmação!
                                         </p>
+
                                     <li class="list-group-item form-inline"><b>Senha Atual:</b>
                                         <input type="password" class="form-control" name="senhaAtual" />
-                                        <small style="color: red" th:text="${mensagem}"></small>
+                                        <small th:text="${mensagem}" class="erroCor"></small>
                                     </li>
+
                                     <p th:text="${message}" style="color: red;"></p>
                                     <li class="list-group-item form-inline"><b>Nova Senha:</b>
                                         <input type="password" class="form-control" name="novaSenha" />
+                                        <small th:text="${mensagem2}" class="erroCor"></small>
                                     </li>
                                     <li class="list-group-item"><b>País</b> BRASIL</li>
                                     <button type="submit" class="btn submit" style="width: 50%;">Atualizar</button>
