@@ -1,8 +1,8 @@
 function classColor() {
     var elemento = document.getElementById("erroAlert");
 
-    if (validarNome() && validarSobrenome() && validarEmail() && validarSenha() && validarReperirSenha()) {  
-        elemento.classList.remove('alert');
+    if (validarNome() && validarSobrenome() && validarEmail() && validarSenha() && validarRepetirSenha()) {  
+        elemento.classList.remove('alert');        
         elemento.classList.remove('alert-danger');
     }
 

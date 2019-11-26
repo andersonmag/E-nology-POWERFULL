@@ -33,13 +33,13 @@
 					<a class="nav-link active" href="/sobre">Sobre</a>
 				</li>
 			</ul>
-			<form class="form-inline">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/">Sair</a>
-					</li>
-				</ul>
-			</form>
+			<form class="form-inline" th:action="@{/logout}" form-method="POST">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <button class="nav-link active bg-primary btn" type="submit">Sair</button>
+                    </li>
+                </ul>
+            </form>
 		</div>
 	</nav>
 	<div class="main-wrapper">
@@ -61,16 +61,16 @@
 				<div class="col-lg-12">
 					<nav>
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-								role="tab" aria-controls="nav-home" aria-selected="true"
-								style="font-size: 20px;">Progresso</a>
-							<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-								role="tab" aria-controls="nav-profile" aria-selected="false"
-								style="font-size: 20px;">Perfil</a>
-						</div>
+                            <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                                role="tab" aria-controls="nav-home" aria-selected="true"
+                                style="font-size: 20px;">Progresso</a>
+                            <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
+                                href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"
+                                style="font-size: 20px;">Perfil</a>
+                        </div>
 					</nav>
 					<div class="tab-content" id="nav-tabContent">
-						<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+						<div class="tab-pane fade show" id="nav-home" role="tabpanel"
 							aria-labelledby="nav-home-tab">
 							<div class="row">
 								<div class="col-lg-7">
@@ -130,7 +130,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade mb-3 " id="nav-profile" role="tabpanel"
+						<div class="tab-pane fade show active mb-3 " id="nav-profile" role="tabpanel"
 							aria-labelledby="nav-profile-tab">
 
 							<h5 style="color: rgb(48, 119, 119); font-size: 25px; margin: 2%" class="ml-3 mt-4">

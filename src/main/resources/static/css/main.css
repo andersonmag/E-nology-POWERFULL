@@ -113,6 +113,14 @@ a, a:focus, a:hover {
   margin: 0;
   padding: 60px;
 }
+.erroCor{
+    
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(124, 1, 1);
+  font-size: 15px;
+  margin-left: 0.5%;
+  margin-top: 10%;
+}
 
 /**
  *  Typography
