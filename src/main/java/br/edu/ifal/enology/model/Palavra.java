@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Palavra{
@@ -15,6 +16,9 @@ public class Palavra{
     private byte[] imagem;
     private String definição;
     private boolean termoTecnico;
+    
+    @OneToOne
+    private Topico topico;
 
     public Long getId() {
         return id;
@@ -64,4 +68,11 @@ public class Palavra{
         this.termoTecnico = termoTecnico;
     }
 
+    public Topico getTopico() {
+        return topico;
+    }
+
+    public void setTopico(Topico topico) {
+        this.topico = topico;
+    }
 }

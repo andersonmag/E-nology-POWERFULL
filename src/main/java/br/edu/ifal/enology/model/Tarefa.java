@@ -4,17 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Tarefa{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private boolean status;
+    private boolean finalizou;
     private int pontuacao;
-    private String resposta;
+    
+    @OneToOne
+    private Palavra resposta;
     private Nivel nivel;
     private TipoTarefa tipoTarefa;
+    private String enunciado;
 
     public Long getId() {
         return id;
@@ -25,11 +29,11 @@ public class Tarefa{
     }
 
     public boolean isStatus() {
-        return status;
+        return finalizou;
     }
 
     public void setStatus(boolean status) {
-        this.status = status;
+        this.finalizou = status;
     }
 
     public int getPontuacao() {
@@ -40,11 +44,11 @@ public class Tarefa{
         this.pontuacao = pontuacao;
     }
 
-    public String getResposta() {
+    public Palavra getResposta() {
         return resposta;
     }
 
-    public void setResposta(String resposta) {
+    public void setResposta(Palavra resposta) {
         this.resposta = resposta;
     }
    
@@ -62,5 +66,13 @@ public class Tarefa{
 
     public TipoTarefa geTipoTarefa(){
         return tipoTarefa;
+    }
+
+    public String getEnunciado() {
+        return enunciado;
+    }
+
+    public void setEnunciado(String enunciado) {
+        this.enunciado = enunciado;
     }
 }
