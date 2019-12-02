@@ -11,7 +11,7 @@ public class Tarefa{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private boolean finalizou;
+    private boolean finalizado;
     private int pontuacao;
     
     @OneToOne
@@ -28,12 +28,12 @@ public class Tarefa{
         this.id = id;
     }
 
-    public boolean isStatus() {
-        return finalizou;
+    public boolean isFinalizado() {
+        return finalizado;
     }
 
-    public void setStatus(boolean status) {
-        this.finalizou = status;
+    public void setFinalizado(boolean finalizado) {
+        this.finalizado = finalizado;
     }
 
     public int getPontuacao() {
