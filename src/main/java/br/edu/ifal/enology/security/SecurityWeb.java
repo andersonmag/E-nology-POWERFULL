@@ -22,7 +22,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/mapa", "/perfil", "/editarPerfil")
+                .antMatchers("/mapa", "/perfil", "/editarPerfil", "/licao")
                 .authenticated()
                 .anyRequest()
                 .permitAll()
