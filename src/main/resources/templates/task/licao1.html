@@ -10,14 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <script language="JavaScript">
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
     <style>
         td {
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             font-size: 22px;
         }
-    
-
     </style>
 </head>
 
@@ -27,43 +30,29 @@
 
         <ul class="navbar-nav" style="font-size: 20px; margin-bottom: 0.5%">
             <li class="nav-item" style="border: 1px rgb(253, 253, 253) solid">
-                <a class="nav-link active" href="/mapa" style="color: rgb(238, 255, 0)">Cancelar</a>
+                <a class="nav-link active" href="/cancelar" style="color: rgb(238, 255, 0)">Cancelar</a>
             </li>
         </ul>
     </nav>
+    <div class="container mt-5">
+        <div class="row"></div>
+        <div class="row d-flex justify-content-center">
+            <h3 th:text="${enunciado}"
+                style="margin-top: 10%; text-align: center; margin-bottom: 5%; font-family: Verdana, Geneva, Tahoma, sans-serif">
 
-    <h3
-        style="margin-top: 10%; text-align: center; margin-bottom: 5%; font-family: Verdana, Geneva, Tahoma, sans-serif">
-        Whitch of these is a <br> <b>condicion structure?
-        </b></h3>
-
-    <table class="table table-hover center" style="text-align: center">
-        <tbody>
-            <tr onclick="location.href = 'https://bit.ly/2Vqav23';" style="cursor: hand;">
-                <td>IF</td>
-            </tr>
-            <tr onclick="location.href = 'https://bit.ly/2AZ5dkF';" style="cursor: hand;">
-                <td>FOR</td>
-            </tr>
-            <tr onclick="location.href = 'https://bit.ly/2AZ5dkF';" style="cursor: hand;">
-                <td>WHILE</td>
-            </tr>
-            <tr onclick="location.href = 'https://bit.ly/2AZ5dkF';" style="cursor: hand;">
-                <td>CASE</td>
-            </tr>
-            <tr><td></td></tr>
-        </tbody>
-    </table>
-
-    <div class="container">
-    <div class="col-lg-10">
-    <div class="progress mt- ml-5" style="height: 4.5px;">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" title="Barra de Progresso"></div>
-          </div>
+                </b></h3>
         </div>
-        <a href="/licao2">
-        <button type="submit" class="btn-lg btn-success" style="margin-left: 75%; margin-top: 2%">Continuar</button>
-    </a>
+        <table class="table table-hover center" style="text-align: center">
+            <tbody>
+                <tr th:each="palavra: ${palavras}" style="cursor: hand;">
+                    <td>
+                        <a th:href="@{'/corrigir/' + ${palavra}}">
+                            <p th:text="${palavra}"></p>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

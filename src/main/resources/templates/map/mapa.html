@@ -8,6 +8,12 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mapa.css">
+    <script language="JavaScript">
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
 </head>
 
 <body class="fundo">
@@ -42,8 +48,9 @@
             <div class="row mt-5"></div>
             <div class="row mt-5 d-flex justify-content-center">
                 <div class="col-4"></div>
-                <div class="col-4 d-flex justify-content-center"><img id="btn1" class="img-fluid" src="images/btn1.png" width="80" onclick="location.href = '/licao';" style="cursor: hand;"></div>
-                <div class="col-4"></div>      
+                <div class="col-4 d-flex justify-content-center"><img id="btn1" class="img-fluid" src="images/btn1.png"
+                        width="80" onclick="location.href = '/licao';" style="cursor: hand;"></div>
+                <div class="col-4"></div>
             </div>
             <div class="row d-flex justify-content-center mt-5">
                 <div class="container">
@@ -68,6 +75,20 @@
                         </div>
                         <div class="col-3 d-flex justify-content-center">
                             <img class="img-fluid" src="images/btn5.png" width="80">
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-3 d-flex justify-content-center">
+                            <img class="img-fluid" src="images/btnMg1.png" width="80">
+                        </div>
+                        <div class="col-3 d-flex justify-content-center">
+                            <img class="img-fluid" src="images/btnMg2.png" width="80">
                         </div>
                         <div class="col-3"></div>
                     </div>
