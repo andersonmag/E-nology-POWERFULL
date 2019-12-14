@@ -1,13 +1,20 @@
 package br.edu.ifal.enology.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import br.edu.ifal.enology.model.Licao;
+import br.edu.ifal.enology.model.Tarefa;
+import br.edu.ifal.enology.repository.TarefaRepository;
 
 @RestController
 public class TaskController {
+
+    @Autowired
+    TarefaRepository tar;
+    
     Licao licao = new Licao();
     boolean terminouPergunta1 = false;
     boolean terminouPergunta2 = false;
@@ -141,4 +148,17 @@ public class TaskController {
     //     return new ModelAndView("task/licao3.html");
     // }
 
+    @RequestMapping("/aaa/{palavra}")
+    public String aaaa(@PathVariable("palavra") String palavra){
+        
+        Iterable<Tarefa> tarefas = tar.findByRespostaPortugues(palavra);
+
+        String rodo = "";
+        for (Tarefa tarefa : tarefas) {
+        
+            rodo += tarefa + " , ";
+        }
+
+        return rodo;
+    }
 }

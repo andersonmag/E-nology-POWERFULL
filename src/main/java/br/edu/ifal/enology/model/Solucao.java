@@ -18,9 +18,11 @@ public class Solucao{
     @OneToOne
     @Cascade(CascadeType.ALL)
     private Usuario aluno;
-
+    @OneToOne
+    private Tarefa tarefa;
     private String resposta;
     private boolean acertou;
+    private int pontuacao;
 
     public Long getId() {
         return id;
@@ -52,5 +54,21 @@ public class Solucao{
 
     public void setAcertou(boolean acertou) {
         this.acertou = acertou;
+    }
+
+    public Tarefa getTarefa() {
+        return tarefa;
+    }
+
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
 }

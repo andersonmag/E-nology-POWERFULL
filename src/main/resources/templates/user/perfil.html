@@ -34,12 +34,12 @@
 				</li>
 			</ul>
 			<form class="form-inline" th:action="@{/logout}" form-method="POST">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <button class="nav-link active bg-primary btn" type="submit">Sair</button>
-                    </li>
-                </ul>
-            </form>
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<button class="nav-link active bg-primary btn" type="submit">Sair</button>
+					</li>
+				</ul>
+			</form>
 		</div>
 	</nav>
 	<div class="main-wrapper">
@@ -47,31 +47,28 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-
-					<div class="form-inline">
-						<img class="user" src="images/pig.png">
-						<h4 class="hello">Scanor</h4>
-						<a name="veim"></a>
-					</div>
-
+					<img class="user" src="images/pig.png">
+					<a name="veim"></a>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row d-flex justify-content-center mb-1">
+				<h4 class="hello ">Scanor</h4>
+			</div>
+				<div class="row">
 
 				<div class="col-lg-12">
 					<nav>
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                                role="tab" aria-controls="nav-home" aria-selected="true"
-                                style="font-size: 20px;">Progresso</a>
-                            <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
-                                href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"
-                                style="font-size: 20px;">Perfil</a>
-                        </div>
+							<a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home"
+								role="tab" aria-controls="nav-home" aria-selected="true"
+								style="font-size: 20px;">Progresso</a>
+							<a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
+								href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"
+								style="font-size: 20px;">Perfil</a>
+						</div>
 					</nav>
 					<div class="tab-content" id="nav-tabContent">
-						<div class="tab-pane fade show" id="nav-home" role="tabpanel"
-							aria-labelledby="nav-home-tab">
+						<div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="form-inline">
@@ -151,7 +148,7 @@
 										th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"></a></li>
 								<li class="list-group-item"><b>E-mail:</b> <a th:text="${usuario.email}"></a></li>
 								<li class="list-group-item"><b>País</b> BRASIL</li>
-								<a href="/editarPerfil" id="/editarPerfil#nav-profile" style="width: 80%;"><button
+								<a href="/editarPerfil" id="/editarPerfil#nav-profile" style="width: 100%;"><button
 										type="submit" class="btn submit mb-4">Editar
 										Perfil</button></a>
 							</ul>
