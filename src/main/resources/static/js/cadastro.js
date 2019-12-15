@@ -7,7 +7,9 @@ var erroRepSenha = document.getElementById("erroRepSenha");
 function classColor() {
     var elemento = document.getElementById("erroAlert");
 
-    if (erroNome.innerHTML == "" && erroSobrenome.innerHTML == "" && erroEmail.innerHTML == "" && erroSenha.innerHTML == "" && erroRepSenha.innerHTML == "") {
+    if (erroNome.innerHTML == "" && erroSobrenome.innerHTML == ""
+     && erroEmail.innerHTML == "" && erroSenha.innerHTML == "" 
+     && erroRepSenha.innerHTML == "") {
         
         elemento.classList.remove('alert');
         elemento.classList.remove('alert-danger');

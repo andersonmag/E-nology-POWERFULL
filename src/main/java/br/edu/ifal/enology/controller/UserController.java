@@ -111,6 +111,14 @@ public class UserController {
             }
         }
 
+        Usuario usuario2 = rep.findByEmail(usuario.getEmail());
+
+        if (usuario2 != null) {
+
+            redirect.addFlashAttribute("mensagem", "Email já existe!");
+            return new ModelAndView("redirect:/cadastro");
+        }
+
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
         rep.save(usuario);
 

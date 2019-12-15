@@ -26,28 +26,30 @@
 						<p class="erroCor" id="erroNome"></p>
 						<p class="erroCor" id="erroSobrenome"></p>
 						<p class="erroCor" id="erroEmail"></p>
+						<div th:if="${mensagem}" class="alert alert-danger">
+							Email já existe!
+						</div>
 						<p class="erroCor" id="erroSenha"></p>
 						<p class="erroCor" id="erroRepSenha"></p>
 					</div>
 					<label for="nome">Nome
-						<input type="text" id="nome" class="form-control"
-							name="nome" />
+						<input type="text" id="nome" class="form-control" name="nome" />
 					</label>
 					<label for="sobrenome">Sobrenome
-						<input type="text" id="sobrenome"
-							class="form-control" name="sobrenome" />
+						<input type="text" id="sobrenome" class="form-control" name="sobrenome" />
 					</label>
 					<label for="email">Email
-						<input type="email" id="email" class="form-control"
-							name="email" />
+						<input type="email" id="email" class="form-control" name="email" />
 					</label>
 					<label for="senha">Senha
 						<input type="password" id="senha" class="form-control" name="senha" />
 					</label>
 					<label for="repSenha">Confirme a Senha
-						<input type="password" id="repSenha" class="form-control" name="repsenha" />	
+						<input type="password" id="repSenha" class="form-control" name="repsenha" />
 					</label>
-					<button type="submit" class="btn submit" onclick="verificarCampos(), classColor()">Enviar</button>
+					<button type="submit" class="btn submit"
+						onclick="validarNome(), validarSobrenome(),validarEmail(), validarSenha(), validarRepetirSenha(), classColor()">
+						Enviar</button>
 				</form>
 			</div>
 		</div>
