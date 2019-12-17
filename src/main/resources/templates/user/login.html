@@ -28,20 +28,31 @@
 					<div th:if="${param.error}" class="alert alert-danger">
 						Email ou Senha Incorreto!
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							  </button>
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 
 					<label>Email</label>
 					<input type="email" class="form-control" name="email" id="email" />
 					<label>Senha</label>
 					<input type="password" class="form-control" name="senha" id="senha" />
-					<a href="#" class="pass">Esqueceu a Senha?</a>
+					<a href="/kkkk" class="pass">Esqueceu a Senha?</a>
 					<button type="submit" class="btn submit">Login</button>
+
 				</form>
+				<div class="row d-flex justify-content-center mb-3 mt-2">
+					<h6 href="#" class="pass  mt-4" style="color: black;">Não tem conta
+						ainda?</h6>
+				</div>
+				<div class="row  d-flex justify-content-center">
+					<a href="/cadastro">
+						<button type="submit" class="btn btn-outline-success btn-lg">Cadastre-se</button>
+					</a>
+				</div>
 			</div>
 		</div>
-		<br>
+	</div>
+	<br>
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
