@@ -3,6 +3,10 @@ body{
     padding: 0;
 }
 
+#minhaTabela tr.selecionado td{
+    background-color: #aff7ff;
+  }
+
 body{
     background-color: rgb(255, 255, 255);
     background-size: cover;
@@ -143,6 +147,7 @@ a.pass {
     font-size: 15px;
 	    color: #ef4242;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
+        width: 20%;
 }
 .w3ls-form a {
     display: block;

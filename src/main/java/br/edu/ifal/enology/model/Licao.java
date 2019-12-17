@@ -17,8 +17,8 @@ public class Licao {
     }
 
     private void inicializarListaPalavras() {
-        palavras = Arrays.asList("WHILE", "IF", "FOR", "ELSE", "switch-case", "else", "break", "continue", "void",
-                "int", "double", "char", "cobol", "assembly", "prolog", "html", "me", "myself", "I", "idk");
+        palavras = Arrays.asList("WHILE", "IF", "FOR", "ELSE", "SWITCH-CASE", "ELSE", "BREAK", "CONTINUE", "VOID",
+                "INT", "DOUBLE", "CHAR", "COBOL", "ASSEMBLY", "PROLOG", "HTML", "ME", "MYSELF", "I", "IDKS");
     }
 
     private void inicializarListaEnunciados() {
