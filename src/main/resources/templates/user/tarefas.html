@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Cadastro de Tarefas || ADMIN </title>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row mt-5">
+            <div class="col  d-flex justify-content-center mt-3">
+                <div class="alert alert-warning d-flex justify-content-center" role="alert">
+                    Cadastre uma palavra
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+
+            <form class="custom-control" method="POST" action="/cadastrar">
+                <div class="row mt-2">
+
+                    <div class="col-6">
+                        <label for="">Português</label>
+                        <input type="text" class="form-control" name="portugues">
+                    </div>
+                    <div class="col-6">
+                        <label for="">Inglês</label>
+                        <input type="text" class="form-control" name="ingles">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="exampleFormControlTextarea1">Definição</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            name="definicao"></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col custom-control custom-checkbox ml-3">
+                        <input type="checkbox" class="custom-control-input" id="customControlInline" name="termoTecnico"
+                            th:checked="${termoTecnico}">
+                        <label class="custom-control-label" for="customControlInline">Termo Técnico?</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-lg btn-info d-flex justify-content-center mt-5" style="width: 100%;"
+                    type="submit">Cadastrar</button>
+
+            </form>
+
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row ml-5 mt-5">
+            <div class="col d-flex justify-content-center">
+                <img src="images/note-task-comment-message-edit-write_108613.png" class="img-fluid" width="80" alt="">
+
+            </div>
+
+        </div>
+        <div class="row ml-4 mb-3">
+            <div class="col  d-flex justify-content-center mt-2">
+                <div class="alert alert-warning d-flex justify-content-center" role="alert">
+                    Crie uma Tarefa
+                </div>
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-center">
+
+            <form class="custom-control" method="POST" action="/cadastrar">
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="exampleFormControlTextarea1">Enunciado da Tarefa</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="enunciado"
+                            placeholder="Digite aqui o Enunciado"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <label class="mt-2" for="inlineFormCustomSelect">Tipo da Tarefa</label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="tipoTarefa">
+                            <option selected disabled>Escolha...</option>
+                            <option th:each="tipoTarefa : ${T(br.edu.ifal.enology.model.TipoTarefa).values()}"
+                                th:value="${tipoTarefa}" th:text="${tipoTarefa}"></option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label class="mt-2" for="inlineFormCustomSelect">Nível da Tarefa</label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="nivel">
+                            <option selected disabled>Escolha...</option>
+                            <option th:each="nivel : ${T(br.edu.ifal.enology.model.Nivel).values()}" th:value="${nivel}"
+                                th:text="${nivel}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="d-flex justify-content-center mt-2 mb-2">
+                        <form method="GET" th:action="@{/buscar_item}">
+                            <div class="input-group ml-5">
+                                <input type="search" class="form-control" placeholder="Pesquisar pelo Nome" id="q"
+                                    name="q" style="width: 100%;">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="submit">Pesquisar</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <button class="btn btn-lg btn-info d-flex justify-content-center mt-2 mb-5" style="width: 100%;"
+                        type="submit">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
