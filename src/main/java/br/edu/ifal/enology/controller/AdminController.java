@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Tarefa;
-import br.edu.ifal.enology.model.TipoTarefa;
 import br.edu.ifal.enology.repository.PalavraRepository;
 import br.edu.ifal.enology.repository.TarefaRepository;
 
@@ -23,9 +22,12 @@ public class AdminController {
     TarefaRepository tarefaRepository;
 
     @RequestMapping("/cadastro_tarefa")
-    public ModelAndView cadastro_tarefa(Tarefa tarefa) {
+    public ModelAndView cadastro_tarefa(Palavra palavra) {
 
         ModelAndView model = new ModelAndView("user/tarefas");
+        Iterable<Palavra> palavras = palavraRepository.findAll();
+
+        model.addObject("palavras", palavras);
 
         // Iterable<Palavra> palavras = palavraRepository.findAll();
         // model.addObject("palavras", palavras);
@@ -35,8 +37,7 @@ public class AdminController {
 
     @RequestMapping("/cadastrar")
     public ModelAndView cadastrar(Palavra palavra, Tarefa tarefa) {
-
-        if (palavra != null) {
+        if (palavra.getIngles() != null) {
             palavraRepository.save(palavra);
         } else {
             tarefaRepository.save(tarefa);
@@ -46,7 +47,7 @@ public class AdminController {
     }
 
     @RequestMapping("/buscar")
-    public ModelAndView buscar(String q, RedirectAttributes redirect) {
+    public ModelAndView buscar(@RequestParam(value = "q", required = false) String q, RedirectAttributes redirect) {
         ModelAndView model = new ModelAndView("redirect:/cadastro_tarefa");
         List<Palavra> palavras = palavraRepository.findByInglesContaining(q);
         model.addObject("palavras", palavras);
