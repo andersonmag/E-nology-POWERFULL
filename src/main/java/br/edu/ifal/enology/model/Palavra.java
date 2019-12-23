@@ -13,8 +13,8 @@ public class Palavra{
     private Long id;
     private String portugues;
     private String ingles;
-    private byte[] imagem;
-    private String definição;
+    // private byte[] imagem;
+    private String definicao;
     private boolean termoTecnico;
     
     @OneToOne
@@ -44,23 +44,23 @@ public class Palavra{
         this.ingles = ingles;
     }
 
-    public byte[] getImagem() {
-        return imagem;
+    // public byte[] getImagem() {
+    //     return imagem;
+    // }
+
+    // public void setImagem(byte[] imagem) {
+    //     this.imagem = imagem;
+    // }
+
+    public String getDefinicao() {
+        return definicao;
     }
 
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setDefinicao(String definicao) {
+        this.definicao = definicao;
     }
 
-    public String getDefinição() {
-        return definição;
-    }
-
-    public void setDefinição(String definição) {
-        this.definição = definição;
-    }
-
-    public boolean isTermoTecnico() {
+    public boolean getTermoTecnico() {
         return termoTecnico;
     }
 

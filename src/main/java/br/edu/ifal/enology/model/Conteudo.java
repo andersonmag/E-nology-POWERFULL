@@ -1,7 +1,6 @@
 package br.edu.ifal.enology.model;
 
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +31,14 @@ public class Conteudo{
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public List<Palavra> getPalavras() {
+        return palavras;
+    }
+
+    public void setPalavras(List<Palavra> palavras) {
+        this.palavras = palavras;
     }
     
 }

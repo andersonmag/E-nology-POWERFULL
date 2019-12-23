@@ -18,7 +18,7 @@ public class Licao {
 
     private void inicializarListaPalavras() {
         palavras = Arrays.asList("WHILE", "IF", "FOR", "ELSE", "SWITCH-CASE", "ELSE", "BREAK", "CONTINUE", "VOID",
-                "INT", "DOUBLE", "CHAR", "COBOL", "ASSEMBLY", "PROLOG", "HTML", "ME", "MYSELF", "I", "IDKS");
+                "INT", "DOUBLE", "CHAR", "COBOL", "ASSEMBLY", "PROLOG", "HTML", "ME", "MYSELF", "I", "IDK");
     }
 
     private void inicializarListaEnunciados() {
@@ -29,7 +29,7 @@ public class Licao {
     }
 
     private void inicializarListaRespostas() {
-        respostas = Arrays.asList("IF", "break", "double", "html");
+        respostas = Arrays.asList("IF", "BREAK", "DOUBLE", "HTML");
     }
 
     public List<String> getEnunciados() {
