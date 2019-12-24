@@ -29,9 +29,6 @@ public class AdminController {
 
         model.addObject("palavras", palavras);
 
-        // Iterable<Palavra> palavras = palavraRepository.findAll();
-        // model.addObject("palavras", palavras);
-
         return model;
     }
 
@@ -44,16 +41,6 @@ public class AdminController {
         }
 
         return new ModelAndView("redirect:/cadastro_tarefa");
-    }
-
-    @RequestMapping("/buscar")
-    public ModelAndView buscar(@RequestParam(value = "q", required = false) String q, RedirectAttributes redirect) {
-        ModelAndView model = new ModelAndView("redirect:/cadastro_tarefa");
-        List<Palavra> palavras = palavraRepository.findByInglesContaining(q);
-        model.addObject("palavras", palavras);
-        redirect.addFlashAttribute("palavras", palavras);
-
-        return model;
     }
 
 }

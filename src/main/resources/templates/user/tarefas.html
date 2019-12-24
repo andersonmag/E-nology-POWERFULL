@@ -7,14 +7,10 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <title>Cadastro de Tarefas || ADMIN </title>
-    <style>
-        /**Cor quando selecionado**/
-        #minhaTabela tr.selecionado td {
-            background-color: #06b11488;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -34,18 +30,19 @@
 
                     <div class="col-6">
                         <label for="">Português</label>
-                        <input type="text" class="form-control" name="portugues">
+                        <input type="text" class="form-control" required name="portugues"
+                            placeholder="Digite em português">
                     </div>
                     <div class="col-6">
                         <label for="">Inglês</label>
-                        <input type="text" class="form-control" name="ingles">
+                        <input type="text" class="form-control" required name="ingles" placeholder="Digite em inglês">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col">
                         <label for="exampleFormControlTextarea1">Definição</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                            name="definicao"></textarea>
+                            placeholder="Digite a definição" name="definicao"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -87,8 +84,8 @@
                 <div class="row mt-3">
                     <div class="col">
                         <label for="exampleFormControlTextarea1">Enunciado da Tarefa</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="enunciado"
-                            placeholder="Digite aqui o Enunciado"></textarea>
+                        <textarea class="form-control" required id="exampleFormControlTextarea1" rows="3"
+                            name="enunciado" placeholder="Digite aqui o Enunciado"></textarea>
                     </div>
                 </div>
 
@@ -96,40 +93,33 @@
                 <div class="row">
                     <div class="col-6">
                         <label class="mt-2" for="inlineFormCustomSelect">Tipo da Tarefa</label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="tipoTarefa">
-                            <option selected disabled>Escolha...</option>
+                        <select class="custom-select mr-sm-2" required id="inlineFormCustomSelect" name="tipoTarefa">
+                            <option selected disabled value="">Escolha...</option>
                             <option th:each="tipoTarefa : ${T(br.edu.ifal.enology.model.TipoTarefa).values()}"
                                 th:value="${tipoTarefa}" th:text="${tipoTarefa}"></option>
                         </select>
                     </div>
                     <div class="col-6">
                         <label class="mt-2" for="inlineFormCustomSelect">Nível da Tarefa</label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="nivel">
-                            <option selected disabled>Escolha...</option>
+                        <select class="custom-select mr-sm-2" required id="inlineFormCustomSelect" name="nivel">
+                            <option selected disabled value="">Escolha...</option>
                             <option th:each="nivel : ${T(br.edu.ifal.enology.model.Nivel).values()}" th:value="${nivel}"
                                 th:text="${nivel}"></option>
                         </select>
                     </div>
                 </div>
+                <div class="d-flex justify-content-center">
+                    <div class="row mt-3 mb-2 d-flex justify-content-center">
+                        <div class="col">
+                            <label class="mt-2" for="inlineFormCustomSelect">Resposta da Tarefa</label>
+                            <select class="selectpicker" required data-live-search="true" name="resposta">
+                                <option th:each="palavra:${palavras}" th:value="${palavra.id}"
+                                    th:text="${palavra.ingles} + ', ' + ${palavra.portugues}"></option>
+                            </select>
 
-                <div class="row mt-3">
-                    <div class="col-6">
-                        <label class="mt-2" for="inlineFormCustomSelect">Resposta</label>
-                        <table class="table table-hover center" style="text-align: center" id="minhaTabela">
-                            <tbody>
-                                <tr th:each="palavra: ${palavras}">
-                                    <td th:text="${palavra.ingles}" th:value="${palavra.ingles}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+                        </div>
                     </div>
                 </div>
-
         </div>
 
         <div class="row d-flex justify-content-center">
@@ -139,30 +129,7 @@
         </form>
 
     </div>
-    <script>
-        var tabela = document.getElementById("minhaTabela");
-        var linhas = tabela.getElementsByTagName("tr");
 
-        for (var i = 0; i < linhas.length; i++) {
-            var linha = linhas[i];
-            linha.addEventListener("click", function () {
-                //Adicionar ao atual
-                selLinha(this, false); //Selecione apenas um
-                //selLinha(this, true); //Selecione quantos quiser
-            });
-        }
-
-        function selLinha(linha, multiplos) {
-            if (!multiplos) {
-                var linhas = linha.parentElement.getElementsByTagName("tr");
-                for (var i = 0; i < linhas.length; i++) {
-                    var linha_ = linhas[i];
-                    linha_.classList.remove("selecionado");
-                }
-            }
-            linha.classList.toggle("selecionado");
-        }
-    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -172,6 +139,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 </body>
 
 </html>
