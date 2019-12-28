@@ -26,8 +26,17 @@ public class UserController {
     }
 
     @RequestMapping("/mapa")
-    public ModelAndView mostrarMapa() {
-        return new ModelAndView("map/mapa.html");
+    public ModelAndView mostrarMapa(Authentication authentication) {
+        ModelAndView model = new ModelAndView("map/mapa.html");
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+
+        if (usuario.equals(null)) {
+
+            usuario = new Usuario();
+        }
+
+        model.addObject("usuario", usuario);
+        return model;
     }
 
     @RequestMapping("/perfil")
