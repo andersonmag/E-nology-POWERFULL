@@ -1,15 +1,14 @@
 package br.edu.ifal.enology.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Tarefa;
+import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.PalavraRepository;
 import br.edu.ifal.enology.repository.TarefaRepository;
 
@@ -22,13 +21,13 @@ public class AdminController {
     TarefaRepository tarefaRepository;
 
     @RequestMapping("/cadastro_tarefa")
-    public ModelAndView cadastro_tarefa(Palavra palavra) {
-
+    public ModelAndView cadastro_tarefa(Palavra palavra, Authentication authentication) {
+        Usuario usuario = (Usuario) authentication.getPrincipal();
         ModelAndView model = new ModelAndView("user/tarefas");
         Iterable<Palavra> palavras = palavraRepository.findAll();
 
         model.addObject("palavras", palavras);
-
+        model.addObject("usuario", usuario);
         return model;
     }
 

@@ -1,10 +1,11 @@
 package br.edu.ifal.enology.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.edu.ifal.enology.model.Licao;
 import br.edu.ifal.enology.repository.TarefaRepository;
 
@@ -13,7 +14,7 @@ public class TaskController {
 
     @Autowired
     TarefaRepository tar;
-    
+
     Licao licao = new Licao();
     boolean terminouPergunta1 = false;
     boolean terminouPergunta2 = false;
@@ -66,49 +67,60 @@ public class TaskController {
         return pagina;
     }
 
-    @RequestMapping("/corrigir/{palavra}")
-    public ModelAndView verificar(@PathVariable("palavra") String palavra) {
+    @RequestMapping("/corrigir")
+    public ModelAndView verificar(String palavra, RedirectAttributes redirect) {
         ModelAndView pagina;
+        System.out.println(palavra);
         if (terminouPergunta1) {
             if (licao.conferirResposta1(palavra)) {
-                pagina = new ModelAndView("task/correto");
+                redirect.addFlashAttribute("respostaC", "Resposta Correta");
                 terminouPergunta1 = false;
+                return new ModelAndView("redirect:/licao");
             } else {
-                pagina = new ModelAndView("task/errado");
+                redirect.addFlashAttribute("respostaR", "Resposta Errada");
                 terminouPergunta1 = false;
+                return new ModelAndView("redirect:/licao");
             }
 
         } else if (terminouPergunta2) {
             if (licao.conferirResposta2(palavra)) {
-                pagina = new ModelAndView("task/correto");
+                redirect.addFlashAttribute("respostaC", "Resposta Correta");
                 terminouPergunta2 = false;
+                return new ModelAndView("redirect:/licao");
             } else {
-                pagina = new ModelAndView("task/errado");
-                terminouPergunta2 = false;
+                redirect.addFlashAttribute("respostaR", "Resposta Errada");
+                terminouPergunta1 = false;
+                return new ModelAndView("redirect:/licao");
             }
         } else if (terminouPergunta3) {
             if (licao.conferirResposta3(palavra)) {
-                pagina = new ModelAndView("task/correto");
+                redirect.addFlashAttribute("respostaC", "Resposta Correta");
                 terminouPergunta3 = false;
+                return new ModelAndView("redirect:/licao");
             } else {
-                pagina = new ModelAndView("task/errado");
+                redirect.addFlashAttribute("respostaR", "Resposta Errada");
                 terminouPergunta3 = false;
+                return new ModelAndView("redirect:/licao");
             }
         } else if (terminouPergunta4) {
             if (licao.conferirResposta4(palavra)) {
-                pagina = new ModelAndView("task/correto");
+                redirect.addFlashAttribute("respostaC", "Resposta Correta");
                 terminouPergunta4 = false;
+                return new ModelAndView("redirect:/licao");
             } else {
-                pagina = new ModelAndView("task/errado");
+                redirect.addFlashAttribute("respostaR", "Resposta Errada");
                 terminouPergunta4 = false;
+                return new ModelAndView("redirect:/licao");
             }
         } else if (terminouPergunta5) {
             if (licao.conferirResposta5()) {
-                pagina = new ModelAndView("task/correto");
+                redirect.addFlashAttribute("respostaC", "Resposta Correta");
                 terminouPergunta4 = false;
+                return new ModelAndView("redirect:/licao");
             } else {
-                pagina = new ModelAndView("task/errado");
+                redirect.addFlashAttribute("respostaR", "Resposta Errada");
                 terminouPergunta4 = false;
+                return new ModelAndView("redirect:/licao");
             }
         } else {
             pagina = new ModelAndView("redirect:/mapa");
@@ -127,37 +139,28 @@ public class TaskController {
         return new ModelAndView("redirect:/mapa");
     }
 
-    @RequestMapping("/finalizar")
-    public ModelAndView finalizar() {
-        i = 0;
-        terminouPergunta1 = false;
-        terminouPergunta2 = false;
-        terminouPergunta3 = false;
-        terminouPergunta4 = false;
-        return new ModelAndView("redirect:/mapa");
-    }
 
     // @RequestMapping("/licao2")
     // public ModelAndView licao2() {
-    //     return new ModelAndView("task/licao2.html");
+    // return new ModelAndView("task/licao2.html");
     // }
 
     // @RequestMapping("/licao3")
     // public ModelAndView licao3() {
-    //     return new ModelAndView("task/licao3.html");
+    // return new ModelAndView("task/licao3.html");
     // }
 
     // @RequestMapping("/aaa/{palavra}")
     // public String aaaa(@PathVariable("palavra") String palavra){
-        
-    //     Iterable<Tarefa> tarefas = tar.findByRespostaPortugues(palavra);
 
-    //     String rodo = "";
-    //     for (Tarefa tarefa : tarefas) {
-        
-    //         rodo += tarefa + " , ";
-    //     }
+    // Iterable<Tarefa> tarefas = tar.findByRespostaPortugues(palavra);
 
-    //     return rodo;
+    // String rodo = "";
+    // for (Tarefa tarefa : tarefas) {
+
+    // rodo += tarefa + " , ";
+    // }
+
+    // return rodo;
     // }
 }
