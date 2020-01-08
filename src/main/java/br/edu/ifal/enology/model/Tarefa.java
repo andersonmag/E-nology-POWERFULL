@@ -13,12 +13,12 @@ public class Tarefa{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int pontuacao;
-    
-    @ManyToOne
-    private Palavra resposta;
     private Nivel nivel;
     private TipoTarefa tipoTarefa;
     private String enunciado;
+
+    @ManyToOne
+    private Palavra resposta;
 
     public Long getId() {
         return id;

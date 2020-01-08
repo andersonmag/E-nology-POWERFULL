@@ -1,13 +1,17 @@
 package br.edu.ifal.enology.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Palavra{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,8 +21,8 @@ public class Palavra{
     private String definicao;
     private boolean termoTecnico;
     
-    @OneToOne
-    private Topico topico;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Conteudo> conteudos;
 
     public Long getId() {
         return id;
@@ -68,11 +72,11 @@ public class Palavra{
         this.termoTecnico = termoTecnico;
     }
 
-    public Topico getTopico() {
-        return topico;
+    public List<Conteudo> getConteudos() {
+        return conteudos;
     }
 
-    public void setTopico(Topico topico) {
-        this.topico = topico;
+    public void setConteudos(List<Conteudo> conteudos) {
+        this.conteudos = conteudos;
     }
 }

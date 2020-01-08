@@ -1,6 +1,7 @@
 package br.edu.ifal.enology.model;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,12 +10,13 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Conteudo{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "conteudos", cascade = CascadeType.ALL)
     private List<Palavra> palavras;
 
     public Long getId() {
