@@ -24,6 +24,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
                 .antMatchers("/mapa", "/perfil", "/editarPerfil", "/licao")
                 .authenticated()
+                .antMatchers("/", "/cadastro").anonymous()
                 .anyRequest()
                 .permitAll()
                 .and()
@@ -34,7 +35,9 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
             .defaultSuccessUrl("/mapa")
             .and()
             .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/login"); 
+            .logoutSuccessUrl("/login")
+            .and()
+            .exceptionHandling().accessDeniedPage("/mapa");
     }
 
     @Override
@@ -46,6 +49,6 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
 
     public void configure(WebSecurity web) throws Exception{
 
-        web.ignoring().antMatchers("/h2-console/**", "/salvar/**", "/cadastrar/**", "/buscar/**", "/corrigir/**");
+        web.ignoring().antMatchers("/h2-console/**", "/salvar/**", "/cadastrar/**");
     }
 }
