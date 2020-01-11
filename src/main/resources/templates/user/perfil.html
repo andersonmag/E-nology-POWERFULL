@@ -69,10 +69,11 @@
 
 <body>
 	<div style="background-color: #2f353a; height: 50px;" class="row align-items-center fixed-top">
-		<span style="font-size:30px;cursor:pointer; margin-left: 5%; color: white;" onclick="changeNav()">&#9776; </span>
+		<span style="font-size:30px;cursor:pointer; margin-left: 5%; color: white;" onclick="mostrarSidebar()">&#9776;
+		</span>
 	</div>
 	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+		<a href="javascript:void(0)" class="closebtn" onclick="mostrarSidebar()"
 			style="background-color:transparent !important">&times;</a>
 		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
 			<div class="d-flex justify-content-center">
@@ -89,11 +90,11 @@
 			<br>
 
 		</div>
-        <br>
-        <div class="ra" style="border-bottom: 1px solid #3a3f48;">
-            <a href="/cadastro_tarefa"><span class="fa fa-file"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
-            <br>
-        </div>
+		<br>
+		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
+			<a href="/cadastro_tarefa"><span class="fa fa-file"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
+			<br>
+		</div>
 		<br>
 		<a href="/sobre"> <span class="fa fa-wheelchair-alt"><span class="ml-2 fonte">Sobre</span></span></a>
 		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
@@ -118,74 +119,71 @@
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
 							<a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home"
 								role="tab" aria-controls="nav-home" aria-selected="true"
-								style="font-size: 20px;">Progresso</a>
+								style="font-size: 20px;">Loading ...</a>
 							<a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
 								href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"
 								style="font-size: 20px;">Perfil</a>
 						</div>
 					</nav>
-					<div class="tab-content" id="nav-tabContent">
+					<div class="tab-content" id="nav-tabContent" style="display: block;">
 						<div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-							<div class="row">
-								<div class="col-lg-7">
-									<div class="form-inline">
-										<img style="margin: 10% 2% 0% 4%" src="images/motherboard.png" width="25%">
-										<p class="mt-5 ml-5"><b>Mother-Board</b>
-											<br>
-											Seus Componentes
-											<br>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-inline">
-									<img style="margin: 8% 2% 0% 4%" src="images/cpu.png" width="25%">
-									<p class="mt-5 ml-5"><b>CPU</b>
-										<br>
-										Partes Principais
-										<br>
-										1/2
-									</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-inline">
-									<img style="margin: 8% 0% 0% 0%" src="images/usb.png" width="35%">
-									<p class="mt-5"><b>Pen Drive</b>
-										<br>
-										O que é?
-										<br>
-										1/2
-									</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-inline">
-									<img style="margin: 8% 2% 0% 4%" src="images/memory_ram.png" width="40%">
-									<p class="mt-5 ml-5"><b>Memory Ram</b>
-										<br>
-										Sua Função
-										<br>
-										1/2
-									</p>
-								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-inline">
-									<img style="margin: 8% 2% 0% 4%" src="images/hd.png" width="40%">
-									<p class="mt-5 ml-5"><b>HD</b>
-										<br>
-										Hard Disk
-										<br>
-										1/2
-									</p>
-								</div>
-							</div>
 						</div>
 						<div class="tab-pane fade show active mb-3 " id="nav-profile" role="tabpanel"
 							aria-labelledby="nav-profile-tab">
+
+							<h5 style="color: rgb(48, 119, 119); font-size: 25px;" class="ml-3 mt-3">Detalhes de Perfil
+							</h5>
+
+
+							<ul class="list-group mt-3" style="display: block;" id="nav1">
+
+								<li class="list-group-item"><b>Nome:</b> <a
+										th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"></a></li>
+								<li class="list-group-item"><b>E-mail:</b> <a th:text="${usuario.email}"></a></li>
+								<li class="list-group-item"><b>País</b> BRASIL</li>
+								<button onclick="mudarNav()" type="submit" class="btn submit mb-4">Editar
+									Perfil</button></a>
+							</ul>
+
+							<ul class="list-group mt-3" id="nav2" style="display: none;">
+								<form action="/salvar" method="post" th:object="${usuario}"
+									onsubmit="return verificarCampos()">
+									<input type="hidden" name="id" th:value="${usuario.id}" />
+
+									<li class="list-group-item form-inline"><b>Nome:</b>
+										<input type="text" class="form-control" name="nome" th:field="*{nome}"
+											onkeyup="validarNome()" th:value="${nome}" />
+										<small class="erroCor" id="erroNome"></small>
+									</li>
+									<li class="list-group-item form-inline"><b>Sobrenome:</b>
+										<input type="text" class="form-control" name="sobrenome" th:field="*{sobrenome}"
+											onkeyup="validarSobrenome()" th:value="${sobrenome}" />
+										<small class="erroCor" id="erroSobrenome"></small>
+									</li>
+									<li class="list-group-item form-inline"><b>E-mail: </b>
+										<input type="email" class="form-control" name="email" th:field="*{email}"
+											onkeyup="validarEmail()" th:value="${email}" />
+										<small id="erroEmail" class="erroCor"></small>
+										<p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
+											confirmação!
+										</p>
+
+									<li class="list-group-item form-inline"><b>Senha Atual:</b>
+										<input type="password" class="form-control" name="senhaAtual" />
+										<small th:text="${mensagem}" class="erroCor" id="erroSenhaAtual"></small>
+									</li>
+
+									<p th:text="${message}" style="color: red;"></p>
+									<li class="list-group-item form-inline"><b>Nova Senha:</b>
+										<input type="password" class="form-control" name="novaSenha" />
+										<small th:text="${mensagem2}" class="erroCor" id="erroNovaSenha"></small>
+									</li>
+									<li class="list-group-item"><b>País</b> BRASIL</li>
+									<button type="submit" class="btn submit" style="width: 50%;">Atualizar</button>
+
+								</form>
+							</ul>
 
 							<h5 style="color: rgb(48, 119, 119); font-size: 25px; margin: 2%" class="ml-3 mt-4">
 								Configurações</h5>
@@ -196,20 +194,6 @@
 									<label for="someSwitchOptionPrimary" class="label-primary"></label>
 							<li class="list-group-item"><i>Recado</i><textarea class="form-control"
 									id="exampleFormControlTextarea1" rows="2" style="width: 60%"></textarea></li>
-
-							<h5 style="color: rgb(48, 119, 119); font-size: 25px;" class="ml-3 mt-3">Detalhes de Perfil
-							</h5>
-							<ul class="list-group mt-3">
-
-								<li class="list-group-item"><b>Nome:</b> <a
-										th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"></a></li>
-								<li class="list-group-item"><b>E-mail:</b> <a th:text="${usuario.email}"></a></li>
-								<li class="list-group-item"><b>País</b> BRASIL</li>
-								<a href="/editarPerfil" id="/editarPerfil#nav-profile" style="width: 100%;"><button
-										type="submit" class="btn submit mb-4">Editar
-										Perfil</button></a>
-							</ul>
-
 						</div>
 						</li>
 					</div>
@@ -218,20 +202,9 @@
 		</div>
 	</div>
 
-	<script>
-		location.href = "#veim";
-	</script>
-	<script>
-		function changeNav() {
-
-			if (document.getElementById("mySidenav").style.width == "250px") {
-				document.getElementById("mySidenav").style.width = "0";
-			}
-			else {
-				document.getElementById("mySidenav").style.width = "250px";
-			}
-		}
-	</script>
+	<script src="js/perfil.js"></script>
+	<script src="js/sidebar.js"></script>
+	<script src="js/cadastro.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
