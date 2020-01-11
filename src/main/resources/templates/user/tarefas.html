@@ -9,108 +9,102 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+        <title>Cadastro de Tarefas || ADMIN </title>
     <style>
         .fonte {
-            font-family: 'Nunito', sans-serif;
+          font-family: 'Nunito', sans-serif;
         }
-
+      
         .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #2f353a;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
+			height: 100%;
+			width: 0;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			background-color: #2f353a;
+			overflow-x: hidden;
+			transition: 0.5s;
+			padding-top: 60px;
+		}
+      
         .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 15px;
-            color: #ffffff;
-            display: block;
-            transition: 0.3s;
-
+          padding: 8px 8px 8px 32px;
+          text-decoration: none;
+          font-size: 15px;
+          color: #ffffff;
+          display: block;
+          transition: 0.3s;
+      
         }
-
+      
         .sidenav a:hover {
-            background-color: rgb(3, 84, 151);
+          background-color: rgb(3, 84, 151);
         }
-
+      
         .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
+          position: absolute;
+          top: 0;
+          right: 25px;
+          font-size: 36px;
+          margin-left: 50px;
         }
-
+      
         @media screen and (max-height: 450px) {
-            .sidenav {
-                padding-top: 15px;
-            }
-
-            .sidenav a {
-                font-size: 18px;
-            }
+          .sidenav {
+            padding-top: 15px;
+          }
+      
+          .sidenav a {
+            font-size: 18px;
+          }
         }
-    </style>
-
-    <title>Cadastro de Tarefas || ADMIN </title>
-
+      </style>
 </head>
 
 <body>
     <div style="background-color: #2f353a; height: 50px;" class="row align-items-center fixed-top">
-        <span style="font-size:30px;cursor:pointer; margin-left: 5%; color: white;" onclick="changeNav()">&#9776;
-        </span>
-    </div>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-            style="background-color:transparent !important">&times;</a>
-        <div class="ra" style="border-bottom: 1px solid #3a3f48;">
-            <div class="d-flex justify-content-center">
-                <img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
-            </div>
-            <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
-                style="color: #ffffff; background-color: none;font-size: 15px;"
-                class="mt-1 d-flex justify-content-center"></span>
-            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f700ff;">ADMIN</span>
-            <br>
-            <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
-            <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
-            <a href="#"><span class="fa fa-gear"><span class="ml-2 fonte">Configurações</span></span></a>
-            <br>
+		<span style="font-size:30px;cursor:pointer; margin-left: 5%;color: white;" onclick="changeNav()">&#9776; </span>
+	</div>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+			style="background-color:transparent !important">&times;</a>
+		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
+			<div class="d-flex justify-content-center">
+				<img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
+			</div>
+			<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+				style="color: #ffffff; background-color: none;font-size: 15px;"
+				class="mt-1 d-flex justify-content-center"></span>
+			<span class="d-flex justify-content-center mt-2 fonte" style="color: #f700ff;">ADMIN</span>
+			<br>
+			<a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Casa</span></span></a>
+			<a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
+			<a href="/perfil"><span class="fa fa-gear"><span class="ml-2 fonte">Configurações</span></span></a>
+			<br>
 
         </div>
         <br>
         <div class="ra" style="border-bottom: 1px solid #3a3f48;">
-            <a href="#"><span class="fa fa-file"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
+            <a href="#"><span class="fa fa-file-code-o"><span class="ml-2">Criar Tarefa</span></span></a>
+
             <br>
         </div>
 		<br>
-        <a href="/sobre"> <span class="fa fa-wheelchair-alt"><span class="ml-2 fonte">Sobre</span></span></a>
-        <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
-    </div>
+		<a href="/sobre"> <span class="fa fa-wheelchair-alt"><span class="ml-2 fonte">Sobre</span></span></a>
+		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
+	</div>
     <div class="container">
-        <div class="row ml-5 mt-5">
+        <div class="row mt-5">
             <div class="col d-flex justify-content-center">
-                <img src="images/note-task-comment-message-edit-write_108613.png" class="img-fluid mt-5" width="80" alt="">
-
+                <img src="images/note-task-comment-message-edit-write_108613.png" class="img-fluid" width="80" alt="">
             </div>
 
         </div>
-        <div class="row">
-            <div class="col  d-flex justify-content-center mt-3">
+        <div class="row ">
+            <div class="col  d-flex justify-content-center mt-2">
                 <div class="alert alert-warning d-flex justify-content-center" role="alert">
                     Cadastre uma palavra
                 </div>
@@ -118,7 +112,7 @@
         </div>
         <div class="d-flex justify-content-center">
 
-            <form class="custom-control" method="POST" action="/cadastrar" th:object="${Palavra}">
+            <form class="custom-control" method="POST" action="/cadastrar" th:object="${palavra}">
                 <div class="row mt-2">
 
                     <div class="col-6">
@@ -138,15 +132,26 @@
                             placeholder="Digite a definição" name="definicao"></textarea>
                     </div>
                 </div>
-                <div class="row mt-3">
+                
+                    <div class="row">
+                    <div class="col">
+                        <label class="mt-3" for="inlineFormCustomSelect">Conteudo: </label>
+                        <select multiple class="custom-select" required id="inlineFormCustomSelect"  th:field="*{conteudos}" name="conteudo" th:value="${conteudos}">
+                           
+                            <option th:each="conteudo:${conteudos}" th:value="${conteudo.id}" th:text="${conteudo.titulo}"></option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
                     <div class="col custom-control custom-checkbox ml-3">
                         <input type="checkbox" class="custom-control-input" id="customControlInline" name="termoTecnico"
                             th:checked="${termoTecnico}">
-                        <label class="custom-control-label" for="customControlInline">Termo Técnico?</label>
+                        <label class="custom-control-label mt-3" for="customControlInline">Termo Técnico?</label>
                     </div>
                 </div>
 
-                <button class="btn btn-lg btn-info d-flex justify-content-center mt-5" style="width: 100%;"
+                <button class="btn btn-lg btn-primary d-flex justify-content-center mt-4" style="width: 100%;"
                     type="submit">Cadastrar</button>
 
             </form>
@@ -157,12 +162,12 @@
 
         <div class="row ml-5 mt-5">
             <div class="col d-flex justify-content-center">
-                <img src="images/note-task-comment-message-edit-write_108613.png" class="img-fluid mt-4 mb-2" width="80" alt="">
+                <img src="images/note-task-comment-message-edit-write_108613.png" class="img-fluid" width="80" alt="">
 
             </div>
 
         </div>
-        <div class="row">
+        <div class="row ml-4 mb-3">
             <div class="col  d-flex justify-content-center mt-2">
                 <div class="alert alert-warning d-flex justify-content-center" role="alert">
                     Crie uma Tarefa
@@ -172,7 +177,7 @@
         </div>
         <div class="d-flex justify-content-center">
 
-            <form class="custom-control" method="POST" action="/cadastrar" th:object="${Tarefa}">
+            <form class="custom-control" method="POST" action="/cadastrar" th:object="${tarefa}">
 
                 <div class="row mt-3">
                     <div class="col">
@@ -216,23 +221,28 @@
         </div>
 
         <div class="row d-flex justify-content-center">
-            <button class="btn btn-lg btn-info d-flex justify-content-center mt-2 mb-5" style="width: 50%;"
+            <button class="btn btn-lg btn-primary d-flex justify-content-center mt-2 mb-5" style="width: 50%;"
                 type="submit">Cadastrar</button>
         </div>
         </form>
+<!-- 
+        <form action="/sea" class="mt-3 mb-2">
+        <input type="search" name="conteudo">
+        <button type="submit">Enviar</button>
+        </form> -->
 
     </div>
+	<script>
+		function changeNav() {
 
-    <script>
-        function changeNav() {
-            if (document.getElementById("mySidenav").style.width == "250px") {
-                document.getElementById("mySidenav").style.width = "0";
-            }
-            else {
-                document.getElementById("mySidenav").style.width = "250px";
-            }
-        }
-    </script>
+			if (document.getElementById("mySidenav").style.width == "250px") {
+				document.getElementById("mySidenav").style.width = "0";
+			}
+			else {
+				document.getElementById("mySidenav").style.width = "250px";
+			}
+		}
+	</script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
