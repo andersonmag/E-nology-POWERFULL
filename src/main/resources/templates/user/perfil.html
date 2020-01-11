@@ -15,56 +15,7 @@
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-	<style>
-		.fonte {
-			font-family: 'Nunito', sans-serif;
-		}
-
-		.sidenav {
-			height: 100%;
-			width: 0;
-			position: fixed;
-			z-index: 1;
-			top: 0;
-			left: 0;
-			background-color: #2f353a;
-			overflow-x: hidden;
-			transition: 0.5s;
-			padding-top: 60px;
-		}
-
-		.sidenav a {
-			padding: 8px 8px 8px 32px;
-			text-decoration: none;
-			font-size: 15px;
-			color: #ffffff;
-			display: block;
-			transition: 0.3s;
-
-		}
-
-		.sidenav a:hover {
-			background-color: rgb(3, 84, 151);
-		}
-
-		.sidenav .closebtn {
-			position: absolute;
-			top: 0;
-			right: 25px;
-			font-size: 36px;
-			margin-left: 50px;
-		}
-
-		@media screen and (max-height: 450px) {
-			.sidenav {
-				padding-top: 15px;
-			}
-
-			.sidenav a {
-				font-size: 18px;
-			}
-		}
-	</style>
+	<link href="css/sidebar.css" rel="stylesheet"> 
 </head>
 
 <body>
@@ -72,9 +23,7 @@
 		<span style="font-size:30px;cursor:pointer; margin-left: 5%; color: white;" onclick="mostrarSidebar()">&#9776;
 		</span>
 	</div>
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="mostrarSidebar()"
-			style="background-color:transparent !important">&times;</a>
+	<div id="sidebar" class="sidenav">
 		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
 			<div class="d-flex justify-content-center">
 				<img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
@@ -201,7 +150,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="js/perfil.js"></script>
 	<script src="js/sidebar.js"></script>
 	<script src="js/cadastro.js"></script>
@@ -215,5 +163,4 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 </body>
-
 </html>

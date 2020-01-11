@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -9,81 +9,31 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-        <title>Cadastro de Tarefas || ADMIN </title>
-    <style>
-        .fonte {
-          font-family: 'Nunito', sans-serif;
-        }
-      
-        .sidenav {
-			height: 100%;
-			width: 0;
-			position: fixed;
-			z-index: 1;
-			top: 0;
-			left: 0;
-			background-color: #2f353a;
-			overflow-x: hidden;
-			transition: 0.5s;
-			padding-top: 60px;
-		}
-      
-        .sidenav a {
-          padding: 8px 8px 8px 32px;
-          text-decoration: none;
-          font-size: 15px;
-          color: #ffffff;
-          display: block;
-          transition: 0.3s;
-      
-        }
-      
-        .sidenav a:hover {
-          background-color: rgb(3, 84, 151);
-        }
-      
-        .sidenav .closebtn {
-          position: absolute;
-          top: 0;
-          right: 25px;
-          font-size: 36px;
-          margin-left: 50px;
-        }
-      
-        @media screen and (max-height: 450px) {
-          .sidenav {
-            padding-top: 15px;
-          }
-      
-          .sidenav a {
-            font-size: 18px;
-          }
-        }
-      </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <title>Cadastro de Tarefas || ADMIN </title>
+    <link href="css/sidebar.css" rel="stylesheet">
 </head>
 
 <body>
     <div style="background-color: #2f353a; height: 50px;" class="row align-items-center fixed-top">
-		<span style="font-size:30px;cursor:pointer; margin-left: 5%;color: white;" onclick="changeNav()">&#9776; </span>
-	</div>
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-			style="background-color:transparent !important">&times;</a>
-		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
-			<div class="d-flex justify-content-center">
-				<img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
-			</div>
-			<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
-				style="color: #ffffff; background-color: none;font-size: 15px;"
-				class="mt-1 d-flex justify-content-center"></span>
-			<span class="d-flex justify-content-center mt-2 fonte" style="color: #f700ff;">ADMIN</span>
-			<br>
-			<a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Casa</span></span></a>
-			<a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
-			<a href="/perfil"><span class="fa fa-gear"><span class="ml-2 fonte">Configurações</span></span></a>
-			<br>
+        <span style="font-size:30px;cursor:pointer; margin-left: 5%;color: white;" onclick="mostrarSidebar()">&#9776;
+        </span>
+    </div>
+    <div id="sidebar" class="sidenav">
+        <div class="ra" style="border-bottom: 1px solid #3a3f48;">
+            <div class="d-flex justify-content-center">
+                <img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
+            </div>
+            <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+                style="color: #ffffff; background-color: none;font-size: 15px;"
+                class="mt-1 d-flex justify-content-center"></span>
+            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f700ff;">ADMIN</span>
+            <br>
+            <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Casa</span></span></a>
+            <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
+            <a href="/perfil"><span class="fa fa-gear"><span class="ml-2 fonte">Configurações</span></span></a>
+            <br>
 
         </div>
         <br>
@@ -92,12 +42,12 @@
 
             <br>
         </div>
-		<br>
-		<a href="/sobre"> <span class="fa fa-wheelchair-alt"><span class="ml-2 fonte">Sobre</span></span></a>
-		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
-	</div>
+        <br>
+        <a href="/sobre"> <span class="fa fa-wheelchair-alt"><span class="ml-2 fonte">Sobre</span></span></a>
+        <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
+    </div>
     <div class="container">
-        <div class="row mt-5">
+        <div class="row" style="margin-top: 7%;">
             <div class="col d-flex justify-content-center">
                 <img src="images/note-task-comment-message-edit-write_108613.png" class="img-fluid" width="80" alt="">
             </div>
@@ -132,13 +82,15 @@
                             placeholder="Digite a definição" name="definicao"></textarea>
                     </div>
                 </div>
-                
-                    <div class="row">
+
+                <div class="row">
                     <div class="col">
                         <label class="mt-3" for="inlineFormCustomSelect">Conteudo: </label>
-                        <select multiple class="custom-select" required id="inlineFormCustomSelect"  th:field="*{conteudos}" name="conteudo" th:value="${conteudos}">
-                           
-                            <option th:each="conteudo:${conteudos}" th:value="${conteudo.id}" th:text="${conteudo.titulo}"></option>
+                        <select multiple class="custom-select" required id="inlineFormCustomSelect"
+                            th:field="*{conteudos}" name="conteudo" th:value="${conteudos}">
+
+                            <option th:each="conteudo:${conteudos}" th:value="${conteudo.id}"
+                                th:text="${conteudo.titulo}"></option>
                         </select>
                     </div>
 
@@ -225,24 +177,9 @@
                 type="submit">Cadastrar</button>
         </div>
         </form>
-<!-- 
-        <form action="/sea" class="mt-3 mb-2">
-        <input type="search" name="conteudo">
-        <button type="submit">Enviar</button>
-        </form> -->
-
     </div>
-	<script>
-		function changeNav() {
 
-			if (document.getElementById("mySidenav").style.width == "250px") {
-				document.getElementById("mySidenav").style.width = "0";
-			}
-			else {
-				document.getElementById("mySidenav").style.width = "250px";
-			}
-		}
-	</script>
+    <script src="js/sidebar.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
