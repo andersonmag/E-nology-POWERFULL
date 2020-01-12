@@ -1,11 +1,18 @@
 .fonte {
+
     font-family: 'Nunito', sans-serif;
   }
 
   .navbar{
+
       background-color: #011f41;
-      height: 50px;
   }
+
+  .linha {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, transparent, #CCC, transparent);
+}
 
   .sidenav {
       height: 100%;
@@ -28,6 +35,15 @@
     display: block;
     transition: 0.3s;
 
+  }
+
+  .teste{
+
+    padding: 8px 0px 8px 8px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #ffffff;
+    transition: 0.3s;
   }
 
   .sidenav a:hover {

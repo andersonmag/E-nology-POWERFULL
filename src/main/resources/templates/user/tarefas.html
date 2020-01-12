@@ -30,15 +30,14 @@
                 class="mt-1 d-flex justify-content-center"></span>
             <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;">ADMIN</span>
             <br>
-            <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Casa</span></span></a>
+            <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
             <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
             <a href="/perfil"><span class="fa fa-gear"><span class="ml-2 fonte">Configurações</span></span></a>
             <br>
-
         </div>
         <br>
         <div class="ra" style="border-bottom: 1px solid #3a3f48;">
-            <a href="#"><span class="fa fa-file-code-o"><span class="ml-2">Criar Tarefa</span></span></a>
+            <a href="#"><span class="fa fa-file-code-o"><span class="fonte ml-2">Criar Tarefa</span></span></a>
 
             <br>
         </div>
@@ -160,13 +159,20 @@
                 <div class="d-flex justify-content-center">
                     <div class="row mt-3 mb-2 d-flex justify-content-center">
                         <div class="col">
-                            <label class="mt-2" for="inlineFormCustomSelect">Resposta da Tarefa</label>
+                            <label class="mt-2">Resposta da Tarefa</label>
                             <select class="selectpicker" required data-live-search="true" name="resposta">
                                 <option th:each="palavra:${palavras}" th:value="${palavra.id}"
                                     th:text="${palavra.ingles} + ', ' + ${palavra.portugues}"></option>
                             </select>
 
                         </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="mt-2">Pontuação da Tarefa</label>
+                        <input type="number" value="0" min="0" max="1000" step="1" class="form-control" required name="pontuacao" style="width: 30%;">
                     </div>
                 </div>
         </div>

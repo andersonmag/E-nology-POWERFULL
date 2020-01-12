@@ -12,13 +12,31 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/licao.css">
+    <style>
+        .direita {
+            justify-content: center;
+        }
+        .teste {
+            padding: 6px 6px 6px 6px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #ffffff;
+            transition: 0.3s;
+        }
+    </style>
 </head>
 
 <body class="fundo" oncopy="return false" oncut="return false" onpaste="return false">
-    <div class="row align-items-center fixed-top navbar">
+    <div class="row fixed-top navbar">
         <span class="botao" onclick="mostrarSidebar()">&#9776;
         </span>
+        <div class="direita align-middle">
+            <span class="teste fa fa-diamond " style="font-size: 25px;"></span>
+            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}"></span>
+        </div>
     </div>
     <div id="sidebar" class="sidenav">
         <div style="border-bottom: 1px solid #3a3f48;">
@@ -37,7 +55,7 @@
         </div>
         <br>
         <div class="ra" style="border-bottom: 1px solid #3a3f48;">
-            <a href="/cadastro_tarefa"><span class="fa fa-file"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
+            <a href="/cadastro_tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
             <br>
         </div>
         <br>
@@ -51,7 +69,7 @@
             <div class="row mt-5 d-flex justify-content-center">
                 <div class="col-4"></div>
                 <div class="col-4 d-flex justify-content-center"><img id="btn1" class="img-fluid" src="images/btn1.png"
-                        width="80" onclick="location.href = '/licao';" style="cursor: hand;"></div>
+                        width="80" onclick="location.href = '/licao/kk';" style="cursor: hand;"></div>
                 <div class="col-4"></div>
             </div>
             <div class="row d-flex justify-content-center mt-5">
