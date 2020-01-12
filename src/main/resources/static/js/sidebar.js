@@ -1,12 +1,12 @@
 
 function mostrarSidebar() {
 
-    if (document.getElementById("mySidenav").style.width == "250px") {
+    if (document.getElementById("sidebar").style.width == "250px") {
 
-        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("sidebar").style.width = "0";
     }
     else {
 
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("sidebar").style.width = "250px";
     }
 }
