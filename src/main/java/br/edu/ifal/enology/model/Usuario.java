@@ -19,6 +19,7 @@ public class Usuario implements UserDetails {
     private String senha;
     private String nome;
     private String sobrenome;
+    private int pontuacaoDoAluno;
 
     public Long getId() {
         return id;
@@ -93,5 +94,13 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public int getPontuacaoDoAluno() {
+        return pontuacaoDoAluno;
+    }
+
+    public void setPontuacaoDoAluno(int pontuacaoDoAluno) {
+        this.pontuacaoDoAluno = pontuacaoDoAluno;
     }
 }

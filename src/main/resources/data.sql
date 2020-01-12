@@ -1,6 +1,6 @@
 
-INSERT INTO USUARIO (DTYPE, ID, EMAIL, NOME, SENHA, SOBRENOME) 
-VALUES ('Usuario', 1, 'teste@gmail.com', 'Usuario',/*(12345)*/ '$2a$10$rUmx8yw4tF9JF0FsRh8wWepjOTD6HWF.1gA.kI/qjgGToWSbNsKN6', 'Teste');
+INSERT INTO USUARIO (DTYPE, ID, EMAIL, NOME, SENHA, SOBRENOME, PONTUACAO_DO_ALUNO) 
+VALUES ('Usuario', 1, 'teste@gmail.com', 'Usuario',/*(12345)*/ '$2a$10$rUmx8yw4tF9JF0FsRh8wWepjOTD6HWF.1gA.kI/qjgGToWSbNsKN6', 'Teste', 100);
 
 /* Palavras já cadastradas*/
 INSERT INTO PALAVRA (ID, DEFINICAO, INGLES, PORTUGUES, TERMO_TECNICO)
