@@ -23,7 +23,7 @@
   width: 40px;
 }
 .material-switch > label::after {
-  background: #13caca;
+  background: #00475b;
   border-radius: 16px;
   content: '';
   height: 24px;
@@ -44,7 +44,7 @@
 }
 .material-switch > input[type="checkbox"]:checked + label::after {
   background: inherit;
-  background: #13caca;
+  background: #00475b;
   left: 20px;
 }
 
@@ -116,7 +116,7 @@ a, a:focus, a:hover {
 .erroCor{
     
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: rgb(124, 1, 1);
+  color: #036977;
   font-size: 15px;
   margin-left: 0.5%;
   margin-top: 10%;
@@ -150,7 +150,7 @@ p.pzinho{
   font-size: 15px;
   margin-bottom: auto;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgb(163, 160, 0);
+  color: #777777;
 }
 
 .h1, .h2, .h3,

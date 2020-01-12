@@ -16,19 +16,19 @@
 </head>
 
 <body class="fundo">
-    <div style="background-color: #2f353a; height: 50px;" class="row align-items-center fixed-top">
-        <span style="font-size:30px;cursor:pointer; margin-left: 5%;color: white;" onclick="mostrarSidebar()">&#9776;
+    <div class="row align-items-center fixed-top navbar">
+        <span class="botao" onclick="mostrarSidebar()">&#9776;
         </span>
     </div>
     <div id="sidebar" class="sidenav">
-        <div class="ra" style="border-bottom: 1px solid #3a3f48;">
+        <div style="border-bottom: 1px solid #3a3f48;">
             <div class="d-flex justify-content-center">
                 <img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
             </div>
             <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
                 style="color: #ffffff; background-color: none;font-size: 15px;"
                 class="mt-1 d-flex justify-content-center"></span>
-            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f700ff;">ADMIN</span>
+            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;">ADMIN</span>
             <br>
             <a href="#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
             <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>

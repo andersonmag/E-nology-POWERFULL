@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <div style="background-color: #2f353a; height: 50px;" class="row align-items-center fixed-top">
-        <span style="font-size:30px;cursor:pointer; margin-left: 5%;color: white;" onclick="mostrarSidebar()">&#9776;
+    <div class="row align-items-center fixed-top navbar">
+        <span class="botao" onclick="mostrarSidebar()">&#9776;
         </span>
     </div>
     <div id="sidebar" class="sidenav">
@@ -28,7 +28,7 @@
             <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
                 style="color: #ffffff; background-color: none;font-size: 15px;"
                 class="mt-1 d-flex justify-content-center"></span>
-            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f700ff;">ADMIN</span>
+            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;">ADMIN</span>
             <br>
             <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Casa</span></span></a>
             <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
@@ -103,11 +103,11 @@
                     </div>
                 </div>
 
-                <button class="btn btn-lg btn-primary d-flex justify-content-center mt-4" style="width: 100%;"
-                    type="submit">Cadastrar</button>
-
+                <button class="btn btn-lg d-flex justify-content-center mt-4"
+                    style="width: 100%; background-color: #036977; color: white;" type="submit"
+                    onmouseover="this.style.backgroundColor='#0f8191'"
+                    onmouseout="this.style.backgroundColor='#036977'">Cadastrar</button>
             </form>
-
         </div>
 
         <hr class="my-4">
@@ -117,7 +117,6 @@
                 <img src="images/note-task-comment-message-edit-write_108613.png" class="img-fluid" width="80" alt="">
 
             </div>
-
         </div>
         <div class="row ml-4 mb-3">
             <div class="col  d-flex justify-content-center mt-2">
@@ -172,9 +171,11 @@
                 </div>
         </div>
 
-        <div class="row d-flex justify-content-center">
-            <button class="btn btn-lg btn-primary d-flex justify-content-center mt-2 mb-5" style="width: 50%;"
-                type="submit">Cadastrar</button>
+        <div class="row d-flex justify-content-center mb-5">
+            <button class="btn btn-lg d-flex justify-content-center mt-4"
+            style="width: 50%; background-color: #036977; color: white;" type="submit"
+            onmouseover="this.style.backgroundColor='#0f8191'"
+            onmouseout="this.style.backgroundColor='#036977'">Cadastrar</button>
         </div>
         </form>
     </div>
