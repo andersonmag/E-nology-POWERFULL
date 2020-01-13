@@ -95,6 +95,7 @@ public class UserController {
             Usuario usuario2 = userOp.get();
 
             usuario.setSenha(usuario2.getSenha());
+            usuario.setPontuacaoDoAluno(usuario2.getPontuacaoDoAluno());
             rep.save(usuario);
 
             return new ModelAndView("redirect:/perfil");
@@ -106,9 +107,13 @@ public class UserController {
 
                 if (novaSenha != "") {
 
+                    Optional<Usuario> userOp = rep.findById(usuario.getId());
+                    Usuario usuario2 = userOp.get();
+
                     novaSenha = new BCryptPasswordEncoder().encode(novaSenha);
 
                     usuario.setSenha(novaSenha);
+                    usuario.setPontuacaoDoAluno(usuario2.getPontuacaoDoAluno());
                     rep.save(usuario);
 
                     return new ModelAndView("redirect:/perfil");
