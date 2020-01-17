@@ -1,17 +1,22 @@
 package br.edu.ifal.enology.model;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 public class Usuario implements UserDetails {
-
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +25,15 @@ public class Usuario implements UserDetails {
     private String nome;
     private String sobrenome;
     private int pontuacaoDoAluno;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable( 
+	        name = "usuarios_roles", 
+	        joinColumns = @JoinColumn(
+	          name = "usuario_id", referencedColumnName = "id"), 
+	        inverseJoinColumns = @JoinColumn(
+	          name = "role_id", referencedColumnName = "nome")) 
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -61,9 +75,12 @@ public class Usuario implements UserDetails {
         this.sobrenome = sobrenome;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public int getPontuacaoDoAluno() {
+        return pontuacaoDoAluno;
+    }
+
+    public void setPontuacaoDoAluno(int pontuacaoDoAluno) {
+        this.pontuacaoDoAluno = pontuacaoDoAluno;
     }
 
     @Override
@@ -74,6 +91,19 @@ public class Usuario implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return (Collection<? extends GrantedAuthority>) this.roles;
     }
 
     @Override
@@ -94,13 +124,5 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public int getPontuacaoDoAluno() {
-        return pontuacaoDoAluno;
-    }
-
-    public void setPontuacaoDoAluno(int pontuacaoDoAluno) {
-        this.pontuacaoDoAluno = pontuacaoDoAluno;
     }
 }
