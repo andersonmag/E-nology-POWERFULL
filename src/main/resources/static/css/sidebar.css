@@ -8,12 +8,6 @@
       background-color: #011f41;
   }
 
-  .linha {
-    border: 0;
-    height: 2px;
-    background-image: linear-gradient(to right, transparent, #CCC, transparent);
-}
-
   .sidenav {
       height: 100%;
       width: 0;

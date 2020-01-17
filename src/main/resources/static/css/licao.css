@@ -9,6 +9,13 @@ form {
     font-size: 15px;
 }
 
+
+.linha {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, transparent, #CCC, transparent);
+}
+
 .radiobtn {
     position: relative;
     display: block;

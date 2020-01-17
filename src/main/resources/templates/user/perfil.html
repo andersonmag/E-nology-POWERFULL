@@ -22,6 +22,10 @@
 	<div class="row align-items-center fixed-top navbar">
 		<span class="botao" onclick="mostrarSidebar()">&#9776;
 		</span>
+		<div class="direita align-middle">
+            <span class="teste fa fa-diamond " style="font-size: 25px;"></span>
+            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}"></span>
+        </div>
 	</div>
 	<div id="sidebar" class="sidenav">
 		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
@@ -31,7 +35,7 @@
 			<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
 				style="color: #ffffff; background-color: none;font-size: 15px;"
 				class="mt-1 d-flex justify-content-center"></span>
-			<span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;">ADMIN</span>
+			<span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;" th:each="role:${usuario.roles}" th:text="${role.nome}"></span>
 			<br>
 			<a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 			<a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
@@ -40,8 +44,9 @@
 
 		</div>
 		<br>
-		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
-			<a href="/cadastro_tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
+		<div class="ra" style="border-bottom: 1px solid #3a3f48;" sec:authorize="hasRole('ROLE_ADMIN')"> 
+			<a href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+				</span></a>
 			<br>
 		</div>
 		<br>
@@ -102,7 +107,7 @@
 
 							<ul class="list-group mt-3" id="nav2" style="display: none;">
 								<form action="/salvar" method="post" th:object="${usuario}"
-									onsubmit="return verificarCampos()">
+									onsubmit="return verificarCamposPerfil()">
 									<input type="hidden" name="id" th:value="${usuario.id}" />
 
 									<li class="list-group-item form-inline"><b>Nome:</b>
@@ -124,18 +129,18 @@
 										</p>
 
 									<li class="list-group-item form-inline"><b>Senha Atual:</b>
-										<input type="password" class="form-control" name="senhaAtual" />
+										<input type="password" class="form-control" id="senhaAtual" name="senha" />
 										<small th:text="${mensagem}" class="erroCor" id="erroSenhaAtual"></small>
 									</li>
 
 									<p th:text="${message}" style="color: red;"></p>
 									<li class="list-group-item form-inline"><b>Nova Senha:</b>
-										<input type="password" class="form-control" name="novaSenha" />
-										<small th:text="${mensagem2}" class="erroCor" id="erroNovaSenha"></small>
+										<input type="password" class="form-control" name="novaSenha" id="novaSenha" />
+										<small class="erroCor" id="erroNovaSenha"></small>
 									</li>
 									<li class="list-group-item"><b>País</b> BRASIL</li>
 									<div class="d-flex justify-content-center">
-										<button class="btn btn-lg  mt-4"
+										<button class="btn btn-lg  mt-4" onclick="validarNovaSenha()"
 											style="width: 50%; background-color: #036977; color: white;" type="submit"
 											onmouseover="this.style.backgroundColor='#0f8191'"
 											onmouseout="this.style.backgroundColor='#036977'">Atualizar</button>

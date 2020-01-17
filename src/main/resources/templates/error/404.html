@@ -3,6 +3,8 @@
 
 <head>
     <title>Error 404</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,12 +15,26 @@
         <div class="row d-flex justify-content-center">
             <img src="../images/what.gif" class="img-fluid">
         </div>
-    <div class="row">
-        <div class="jumbotron alert-danger col text-center">
-            <h1>Ops... Algo deu errado.</h1>
-            <h2 th:text="${status + ' ' + error}"></h2>
+        <div class="row">
+            <div class="jumbotron alert-danger col text-center">
+                <h1>Ops... Algo deu errado.</h1>
+                <h2 th:text="${status + ' ' + error}"></h2>
+                <br>
+                <br>
+                <span style="color: rgb(65, 61, 61);">Mas não fique ai parado! Aproveite e siga-nos no instagram:
+                </span>
+                <br>
+                <a href="https://www.instagram.com/andersoonmgs/" target="blanck">
+                <span class="fa fa-instagram mt-1" style="font-size: 30px;" title="Insta Anderson"></span>
+            </a>
+            <a href=" https://www.instagram.com/j4ckwho/" target="blanck">
+                <span class="fa fa-instagram mt-1 ml-3" style="font-size: 30px;" title="Insta Jackson" ></span>
+            </a>
+            <p class="mt-4" style="color: #011f41;">Clique e seja feliz ;)</p>
+            </div>
+           
         </div>
-    </div>
+
     </div>
 
 </body>

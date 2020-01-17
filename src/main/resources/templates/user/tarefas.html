@@ -28,7 +28,8 @@
             <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
                 style="color: #ffffff; background-color: none;font-size: 15px;"
                 class="mt-1 d-flex justify-content-center"></span>
-            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;">ADMIN</span>
+            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;"
+                th:each="role:${usuario.roles}" th:text="${role.nome}"></span>
             <br>
             <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
             <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
@@ -36,9 +37,8 @@
             <br>
         </div>
         <br>
-        <div class="ra" style="border-bottom: 1px solid #3a3f48;">
+        <div class="ra" style="border-bottom: 1px solid #3a3f48;" sec:authorize="hasRole('ROLE_ADMIN')">
             <a href="#"><span class="fa fa-file-code-o"><span class="fonte ml-2">Criar Tarefa</span></span></a>
-
             <br>
         </div>
         <br>
@@ -172,16 +172,17 @@
                 <div class="row">
                     <div class="col">
                         <label class="mt-2">Pontuação da Tarefa</label>
-                        <input type="number" value="0" min="0" max="1000" step="1" class="form-control" required name="pontuacao" style="width: 30%;">
+                        <input type="number" value="0" min="0" max="1000" step="1" class="form-control" required
+                            name="pontuacao" style="width: 30%;">
                     </div>
                 </div>
         </div>
 
         <div class="row d-flex justify-content-center mb-5">
             <button class="btn btn-lg d-flex justify-content-center mt-4"
-            style="width: 50%; background-color: #036977; color: white;" type="submit"
-            onmouseover="this.style.backgroundColor='#0f8191'"
-            onmouseout="this.style.backgroundColor='#036977'">Cadastrar</button>
+                style="width: 50%; background-color: #036977; color: white;" type="submit"
+                onmouseover="this.style.backgroundColor='#0f8191'"
+                onmouseout="this.style.backgroundColor='#036977'">Cadastrar</button>
         </div>
         </form>
     </div>
