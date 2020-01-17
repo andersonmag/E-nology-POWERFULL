@@ -8,9 +8,9 @@ function classColor() {
     var elemento = document.getElementById("erroAlert");
 
     if (erroNome.innerHTML == "" && erroSobrenome.innerHTML == ""
-     && erroEmail.innerHTML == "" && erroSenha.innerHTML == "" 
-     && erroRepSenha.innerHTML == "") {
-        
+        && erroEmail.innerHTML == "" && erroSenha.innerHTML == ""
+        && erroRepSenha.innerHTML == "") {
+
         elemento.classList.remove('alert');
         elemento.classList.remove('alert-danger');
     }
@@ -72,7 +72,6 @@ function validarEmail() {
 function validarSenha() {
     var senha = document.getElementById("senha").value;
 
-
     if (verificarSePossuiCincoCaracteres(senha)) {
         erroSenha.innerHTML = "A senha deve ter no mínimo 5 caracteres.";
         return false;
@@ -86,7 +85,6 @@ function validarRepetirSenha() {
     var senha = document.getElementById("senha").value;
     var repSenha = document.getElementById("repSenha").value;
 
-
     if (senha != repSenha) {
         erroRepSenha.innerHTML = "As senhas estão diferentes!";
         return false;
@@ -96,6 +94,27 @@ function validarRepetirSenha() {
     }
 }
 
+function validarNovaSenha() {
+    var novaSenha = document.getElementById("novaSenha").value;
+    var senhaAtual = document.getElementById("senhaAtual").value;
+
+    if (senhaAtual != "" && novaSenha == "") {
+        erroNovaSenha.innerHTML = "Digite a nova Senha!";
+        alert('false')
+        return false;
+    }
+    else if(novaSenha != "" && senhaAtual == ""){
+        erroSenhaAtual.innerHTML = "Digite a Senha!";
+        alert('false')
+        return false;
+    }
+    else {
+        erroNovaSenha.innerHTML = "";
+        alert('true')
+        return true;
+    }
+
+}
 
 function verificarSePossuiTresCaracteres(texto) {
     return texto.trim().length < 3;
@@ -119,4 +138,9 @@ function verificarSePossuiCaracteresInvalidos(texto) {
 
 function verificarCampos() {
     return validarNome() && validarSobrenome() && validarEmail() && validarSenha() && validarRepetirSenha();
+}
+
+
+function verificarCamposPerfil() {
+    return validarNome() && validarSobrenome() && validarEmail() && validarNovaSenha();
 }

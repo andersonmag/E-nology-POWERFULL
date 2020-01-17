@@ -1,8 +1,7 @@
 
 location.href = "#veim";
 
-if (document.getElementById("erroNovaSenha").textContent != "" ||
-    document.getElementById("erroSenhaAtual").textContent != "") {
+if (document.getElementById("erroSenhaAtual").textContent != "") {
 
     document.getElementById("nav1").style.display = "none";
     document.getElementById("nav2").style.display = "block";
