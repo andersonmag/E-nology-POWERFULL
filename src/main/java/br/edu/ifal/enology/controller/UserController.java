@@ -1,6 +1,5 @@
 package br.edu.ifal.enology.controller;
 
-import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,131 +18,73 @@ import br.edu.ifal.enology.repository.UserRepository;
 public class UserController {
 
     @Autowired
-    UserRepository rep;
+    private UserRepository userRepository;
+    private Usuario usuarioLogado;
 
-    @RequestMapping("/cadastro")
-    public ModelAndView cadastro() {
-        return new ModelAndView("user/cadastro");
-    }
-
-    @RequestMapping("/mapa")
-    public ModelAndView mostrarMapa(Authentication authentication) {
-        ModelAndView model = new ModelAndView("map/mapa.html");
-        Usuario usuario = (Usuario) authentication.getPrincipal();
-
-        if (usuario.equals(null)) {
-
-            usuario = new Usuario();
-        }
-
-        model.addObject("usuario", usuario);
-        return model;
-    }
-
-    @RequestMapping("/perfil")
-    public ModelAndView perfil(Authentication authentication, HttpServletRequest redirect) {
-        ModelAndView model = new ModelAndView("user/perfil");
-
-        Usuario usuario = (Usuario) authentication.getPrincipal();
-
-        if (usuario.equals(null)) {
-
-            usuario = new Usuario();
-        }
-
-        Optional<Usuario> UserOp = rep.findById(usuario.getId());
-
-        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(UserOp.get(),
-                authentication.getCredentials(), authentication.getAuthorities());
-
-        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
-
-        usuario = (Usuario) newAuthentication.getPrincipal();
-
-        model.addObject("usuario", usuario);
-        return model;
-    }
-
-    public boolean compararSenha(String email, String senha) {
-
-        Usuario usuario = rep.findByEmail(email);
-
-        if (usuario != null) {
-
-            if (new BCryptPasswordEncoder().matches(senha, usuario.getSenha())) {
-
-                return true;
-            }
-        }
-
+    private boolean compararSenha(String senha) {
+        if (new BCryptPasswordEncoder().matches(senha, usuarioLogado.getSenha()))
+            return true;
         return false;
     }
 
+    private boolean verificarSeEmailExiste(String email) {
+        if (userRepository.findByEmail(email) != null)
+            return true;
+        return false;
+    }
+
+    @RequestMapping("/perfil")
+    public ModelAndView mostrarPerfil(Authentication authentication) {
+        ModelAndView model = new ModelAndView("user/perfil");
+        if (usuarioLogado == null)
+            usuarioLogado = (Usuario) authentication.getPrincipal();
+
+        authentication = new UsernamePasswordAuthenticationToken(usuarioLogado, authentication.getCredentials(),
+                authentication.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        model.addObject("usuario", authentication.getPrincipal());
+        return model;
+    }
+
     @RequestMapping("/salvar")
-    public ModelAndView salvar(Authentication authentication, @Valid Usuario usuario, String senhaAtual,
-            String novaSenha, RedirectAttributes redirect, HttpServletRequest request) {
+    public ModelAndView salvar(@Valid Usuario usuario, String novaSenha, RedirectAttributes redirect,
+            HttpServletRequest request) {
+        // Cadastro
+        if (usuario.getId() == null) {
+            if (verificarSeEmailExiste(usuario.getEmail())) {
+                redirect.addFlashAttribute("mensagem", "Email já cadastrado!");
 
-        if (senhaAtual == "" && novaSenha != "") {
+                return new ModelAndView("redirect:/cadastro");
+            } else {
 
-            redirect.addFlashAttribute("mensagem", "Senha Incorreta.");
-            return new ModelAndView("redirect:/perfil");
-        }
-
-        if (senhaAtual == "") {
-
-            Optional<Usuario> userOp = rep.findById(usuario.getId());
-            Usuario usuario2 = userOp.get();
-
-            usuario.setSenha(usuario2.getSenha());
-            usuario.setPontuacaoDoAluno(usuario2.getPontuacaoDoAluno());
-            rep.save(usuario);
-
-            return new ModelAndView("redirect:/perfil");
-        }
-
-        if (senhaAtual != null) {
-
-            if (compararSenha(usuario.getEmail(), senhaAtual)) {
-
-                if (novaSenha != "") {
-
-                    Optional<Usuario> userOp = rep.findById(usuario.getId());
-                    Usuario usuario2 = userOp.get();
-
-                    novaSenha = new BCryptPasswordEncoder().encode(novaSenha);
-
-                    usuario.setSenha(novaSenha);
-                    usuario.setPontuacaoDoAluno(usuario2.getPontuacaoDoAluno());
-                    rep.save(usuario);
-
-                    return new ModelAndView("redirect:/perfil");
-                }
-
-                else {
-
-                    redirect.addFlashAttribute("mensagem2", "Nova Senha não pode ser vazia!");
-                    return new ModelAndView("redirect:/perfil");
-                }
+                usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+                userRepository.save(usuario);
+                return new ModelAndView("redirect:/login");
             }
+        }
 
-            else {
+        // Atualizar Cadastro
+        if (!usuario.getSenha().equals("")) {
+            if (compararSenha(usuario.getSenha())) {
+
+                usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
+                usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
+                usuarioLogado = usuario;
+                userRepository.save(usuario);
+                return new ModelAndView("redirect:/perfil");
+            } else {
 
                 redirect.addFlashAttribute("mensagem", "Senha Incorreta.");
                 return new ModelAndView("redirect:/perfil");
             }
+        } else {
+
+            usuario.setSenha(usuarioLogado.getSenha());
+            usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
+            usuarioLogado = usuario;
+            userRepository.save(usuario);
+            return new ModelAndView("redirect:/perfil");
         }
-
-        Usuario usuario2 = rep.findByEmail(usuario.getEmail());
-
-        if (usuario2 != null) {
-
-            redirect.addFlashAttribute("mensagem", "Email já existe!");
-            return new ModelAndView("redirect:/cadastro");
-        }
-
-        usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-        rep.save(usuario);
-
-        return new ModelAndView("redirect:/login");
     }
 }
