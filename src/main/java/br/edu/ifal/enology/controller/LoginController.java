@@ -10,13 +10,16 @@ public class LoginController {
 
     @RequestMapping("/")
     public ModelAndView index() {
+        return new ModelAndView("index");
+    }
 
-        return new ModelAndView("index.html");
+    @RequestMapping("/cadastro")
+    public ModelAndView mostrarcadastro() {
+        return new ModelAndView("user/cadastro");
     }
 
     @GetMapping("login")
     public ModelAndView login() {
-
-        return new ModelAndView("user/login.html");
+        return new ModelAndView("user/login");
     }
 }
