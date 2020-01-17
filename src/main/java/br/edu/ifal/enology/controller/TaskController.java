@@ -1,193 +1,71 @@
 package br.edu.ifal.enology.controller;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import br.edu.ifal.enology.model.Licao;
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Tarefa;
 import br.edu.ifal.enology.model.Usuario;
+import br.edu.ifal.enology.repository.ConteudoRepository;
+import br.edu.ifal.enology.repository.PalavraRepository;
 import br.edu.ifal.enology.repository.TarefaRepository;
 import br.edu.ifal.enology.service.SequenciadorService;
 
+@RequestMapping("/licao")
 @RestController
 public class TaskController {
 
     @Autowired
     TarefaRepository tarefaRepository;
     @Autowired
+    PalavraRepository palavraRepository;
+    @Autowired
+    ConteudoRepository conteudoRepository;
+    @Autowired
     SequenciadorService sequenciadorService;
+    Tarefa tarefa;
+    Usuario usuarioLogado;
 
-    // Licao licao = new Licao();
-    // boolean terminouPergunta1 = false;
-    // boolean terminouPergunta2 = false;
-    // boolean terminouPergunta3 = false;
-    // boolean terminouPergunta4 = false;
-    // boolean terminouPergunta5 = false;
-    // int i = 0;
+    @RequestMapping("/cadastrar")
+    public ModelAndView cadastrar(Palavra palavra, Tarefa tarefa) {
+        if (palavra.getIngles() != null) {
+            palavraRepository.save(palavra);
+        } else {
+            tarefaRepository.save(tarefa);
+        }
 
-    // @RequestMapping("/licao")
-    // public ModelAndView licao() {
-    //     ModelAndView pagina = new ModelAndView("task/licao1");
+        return new ModelAndView("redirect:/tarefa");
+    }
 
-    //     switch (i) {
-    //     case 0:
-    //         pagina.addObject("enunciado", licao.getEnunciados().get(i));
-    //         pagina.addObject("palavras", licao.getPalavrasPergunta1());
-    //         terminouPergunta1 = true;
-    //         break;
-    //     case 1:
-    //         pagina.addObject("enunciado", licao.getEnunciados().get(i));
-    //         pagina.addObject("palavras", licao.getPalavrasPergunta2());
-    //         terminouPergunta2 = true;
-    //         break;
-    //     case 2:
-    //         pagina.addObject("enunciado", licao.getEnunciados().get(i));
-    //         pagina.addObject("palavras", licao.getPalavrasPergunta3());
-    //         terminouPergunta3 = true;
-    //         break;
-    //     case 3:
-    //         pagina.addObject("enunciado", licao.getEnunciados().get(i));
-    //         pagina.addObject("palavras", licao.getPalavrasPergunta4());
-    //         terminouPergunta4 = true;
-    //         break;
-    //     case 4:
-    //         pagina.addObject("enunciado", licao.getEnunciados().get(i));
-    //         pagina.addObject("palavras", licao.getPalavrasPergunta5());
-    //         terminouPergunta5 = true;
-    //         break;
-    //     }
+    @RequestMapping("/corrigir")
+    public ModelAndView corrigirResposta(String palavra) {
+        ModelAndView model = new ModelAndView("redirect:/licao/condicionais");
 
-    //     if (i > 4) {
-    //         pagina = new ModelAndView("task/final");
-    //         terminouPergunta1 = false;
-    //         terminouPergunta2 = false;
-    //         terminouPergunta3 = false;
-    //         terminouPergunta4 = false;
-    //         i = 0;
-    //     }
-    //     i++;
-    //     return pagina;
-    // }
-    @RequestMapping("/licao/{conteudo}")
-    public ModelAndView licao(@PathVariable("conteudo") String conteudoTitulo, Authentication authentication) {
-        ModelAndView model = new ModelAndView("task/licao1");
+        if (tarefa.getResposta().getIngles().equals(palavra)) {
+            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());
 
-        Optional<Tarefa> opcao = tarefaRepository.findById((long) 1);
-        Tarefa tarefa = opcao.get();
-        List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo(conteudoTitulo, tarefa.getResposta().getIngles());
-
-            Usuario usuario = (Usuario) authentication.getPrincipal();
-    
-            if (usuario.equals(null)) {
-    
-                usuario = new Usuario();
-            }
-
-        model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas).addObject("usuario", usuario);
+            return model;
+        }
         return model;
     }
 
-    // @RequestMapping("/corrigir")
-    // public ModelAndView verificar(String palavra, RedirectAttributes redirect) {
-    //     ModelAndView pagina;
-    //     System.out.println(palavra);
-    //     if (terminouPergunta1) {
-    //         if (licao.conferirResposta1(palavra)) {
-    //             redirect.addFlashAttribute("respostaC", "Resposta Correta");
-    //             terminouPergunta1 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         } else {
-    //             redirect.addFlashAttribute("respostaR", "Resposta Errada");
-    //             terminouPergunta1 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         }
+    @RequestMapping("/condicionais")
+    public ModelAndView licao(Authentication authentication) {
+        ModelAndView model = new ModelAndView("task/licao1");
+        usuarioLogado = (Usuario) authentication.getPrincipal();
+        Random random = new Random();
+        List<Tarefa> tarefas = tarefaRepository.findAll();
+        int indexSorteio = random.nextInt(tarefas.size());
+        tarefa = tarefas.get(indexSorteio);
+        List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo("condicionais",
+                tarefa.getResposta().getIngles());
 
-    //     } else if (terminouPergunta2) {
-    //         if (licao.conferirResposta2(palavra)) {
-    //             redirect.addFlashAttribute("respostaC", "Resposta Correta");
-    //             terminouPergunta2 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         } else {
-    //             redirect.addFlashAttribute("respostaR", "Resposta Errada");
-    //             terminouPergunta1 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         }
-    //     } else if (terminouPergunta3) {
-    //         if (licao.conferirResposta3(palavra)) {
-    //             redirect.addFlashAttribute("respostaC", "Resposta Correta");
-    //             terminouPergunta3 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         } else {
-    //             redirect.addFlashAttribute("respostaR", "Resposta Errada");
-    //             terminouPergunta3 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         }
-    //     } else if (terminouPergunta4) {
-    //         if (licao.conferirResposta4(palavra)) {
-    //             redirect.addFlashAttribute("respostaC", "Resposta Correta");
-    //             terminouPergunta4 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         } else {
-    //             redirect.addFlashAttribute("respostaR", "Resposta Errada");
-    //             terminouPergunta4 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         }
-    //     } else if (terminouPergunta5) {
-    //         if (licao.conferirResposta5()) {
-    //             redirect.addFlashAttribute("respostaC", "Resposta Correta");
-    //             terminouPergunta4 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         } else {
-    //             redirect.addFlashAttribute("respostaR", "Resposta Errada");
-    //             terminouPergunta4 = false;
-    //             return new ModelAndView("redirect:/licao");
-    //         }
-    //     } else {
-    //         pagina = new ModelAndView("redirect:/mapa");
-    //     }
-
-    //     return pagina;
-    // }
-
-    // @RequestMapping("/cancelar")
-    // public ModelAndView cancelar() {
-    //     i = 0;
-    //     terminouPergunta1 = false;
-    //     terminouPergunta2 = false;
-    //     terminouPergunta3 = false;
-    //     terminouPergunta4 = false;
-    //     return new ModelAndView("redirect:/mapa");
-    // }
-
-
-    // @RequestMapping("/licao2")
-    // public ModelAndView licao2() {
-    // return new ModelAndView("task/licao2.html");
-    // }
-
-    // @RequestMapping("/licao3")
-    // public ModelAndView licao3() {
-    // return new ModelAndView("task/licao3.html");
-    // }
-
-    // @RequestMapping("/aaa/{palavra}")
-    // public String aaaa(@PathVariable("palavra") String palavra){
-
-    // Iterable<Tarefa> tarefas = tar.findByRespostaPortugues(palavra);
-
-    // String rodo = "";
-    // for (Tarefa tarefa : tarefas) {
-
-    // rodo += tarefa + " , ";
-    // }
-
-    // return rodo;
-    // }
+        model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas).addObject("usuario",
+                usuarioLogado);
+        return model;
+    }
 }
