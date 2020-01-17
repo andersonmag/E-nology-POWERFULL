@@ -39,27 +39,29 @@
         </div>
         <div class="row">
             <div class="col">
-                <form method="POST" action="/pegarvalor">
+                <form method="POST" action="/licao/corrigir">
                     <div class="radiobtn">
-                        <input type="radio" th:id="${tarefa.resposta.ingles}" name="drone"
+                        <input type="radio" th:id="${tarefa.resposta.ingles}" name="palavra"
                             th:value="${tarefa.resposta.ingles}" class="" />
                         <label style="color: white;" th:for="${tarefa.resposta.ingles}"
                             th:text="${tarefa.resposta.ingles}"></label>
                     </div>
                     <div class="radiobtn mt-1.5" th:each="palavra:${palavras}">
-                        <input type="radio" th:id="${palavra.ingles}" name="drone" th:value="${palavra.ingles}" />
+                        <input type="radio" th:id="${palavra.ingles}" name="palavra" th:value="${palavra.ingles}" />
                         <label th:for="${palavra.ingles}" style="color: white;" th:text="${palavra.ingles}"></label>
+                    </div>
+                    <br>
+                    <hr class="linha">
+                    <div class="mt-3 text-right">
+                        <button class="btn btn-lg btn-dark mt-5">
+                            < Run />
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
-        <br>
-        <hr class="linha">
-        <div class="mt-3 text-right">
-            <button class="btn btn-lg btn-dark mt-5">
-                < Run /> 
-            </button>
-        </div>
+        
+
     </div>
 
     <script src="../js/licao.js"></script>
