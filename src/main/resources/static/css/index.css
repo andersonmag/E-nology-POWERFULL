@@ -1,0 +1,68 @@
+.nav-index {
+    background-color: #011f41;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: yellow
+}
+
+a:hover span {
+    color: white;
+}
+
+#small{
+    color:black !important;
+}
+
+.barras {
+    color: #95a4a1 !important;
+    font-size: 36px;
+}
+
+.marca {
+    font-family: 'Exo 2', sans-serif;
+}
+
+#topo {
+    background-color: #036977;
+    margin-top: 50px;
+    height: 40%;
+}
+
+.linha {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.imagem {
+    width: 40%;
+}
+
+.letra-frase {
+    color: white;
+    font-size: 38pt;
+}
+
+.icones{
+    font-size: 110pt;
+}
+
+.rodape{
+    background-color: #011f41;
+    height: 30%;
+    color:white;
+}
+
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
