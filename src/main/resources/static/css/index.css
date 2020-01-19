@@ -59,10 +59,22 @@ a:hover span {
 .rodape{
     background-color: #011f41;
     height: 30%;
+    padding-bottom: 30px;
     color:white;
 }
 
 .row{
     margin-left: 0 !important;
     margin-right: 0 !important;
+}
+
+.icones-rodape{
+    font-size: 30pt;
+}
+
+.fundo-do-poco{
+    padding-top: 10px;
+    background-color: #011422;
+    color:white;
+    height: 5%;
 }
