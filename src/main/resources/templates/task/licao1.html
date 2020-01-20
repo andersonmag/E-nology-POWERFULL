@@ -31,37 +31,41 @@
             <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}"></span>
         </div>
     </div>
-    <div class="container mt-5">
-        <div style="color: #00475b; width: 30%; height: 10%;">
-        </div>
-        <div class="d-flex justify-content-center mt-5">
-            <h1 th:text="${tarefa.enunciado}" class="mt-5"></h1>
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-center mt-5">
+                <h1 class="text-muted mt-5"><small th:text="${tarefa.enunciado}"></small></h1>
+            </div>
         </div>
         <div class="row">
             <div class="col">
+                <h6 class="text-secondary d-flex justify-content-center">Escolha a alternativa correta:</h6>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
                 <form method="POST" action="/licao/corrigir">
+                    <div class="radiobtn mt-1" th:each="palavra:${palavras}">
+                        <input type="radio" th:id="${palavra.ingles}" name="palavra" th:value="${palavra.ingles}"
+                            onclick="mudarButao()" />
+                        <label th:for="${palavra.ingles}" style="color: white;" th:text="${palavra.ingles}"></label>
+                    </div>
                     <div class="radiobtn">
                         <input type="radio" th:id="${tarefa.resposta.ingles}" name="palavra"
-                            th:value="${tarefa.resposta.ingles}" class="" />
+                            th:value="${tarefa.resposta.ingles}" onclick="mudarButao()" />
                         <label style="color: white;" th:for="${tarefa.resposta.ingles}"
                             th:text="${tarefa.resposta.ingles}"></label>
-                    </div>
-                    <div class="radiobtn mt-1.5" th:each="palavra:${palavras}">
-                        <input type="radio" th:id="${palavra.ingles}" name="palavra" th:value="${palavra.ingles}" />
-                        <label th:for="${palavra.ingles}" style="color: white;" th:text="${palavra.ingles}"></label>
                     </div>
                     <br>
                     <hr class="linha">
                     <div class="mt-3 text-right">
-                        <button class="btn btn-lg btn-dark mt-5">
+                        <button type="submit" class="btn btn-lg btn-dark mt-5" id="butao" disabled>
                             < Run />
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-        
-
     </div>
 
     <script src="../js/licao.js"></script>
