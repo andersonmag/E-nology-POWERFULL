@@ -4,7 +4,6 @@ var tempo = new Number(60);
 function iniciarCronometro() {
 
     if ((tempo - 1) >= 0) {
-
         tempo = tempo - 1;
 
         if (tempo < 10) {
@@ -17,4 +16,8 @@ function iniciarCronometro() {
 
         }
     }
+}
+
+function mudarButao() {
+    butao.disabled = false;
 }

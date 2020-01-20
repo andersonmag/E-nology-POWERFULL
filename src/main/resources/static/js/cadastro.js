@@ -100,17 +100,14 @@ function validarNovaSenha() {
 
     if (senhaAtual != "" && novaSenha == "") {
         erroNovaSenha.innerHTML = "Digite a nova Senha!";
-        alert('false')
         return false;
     }
-    else if(novaSenha != "" && senhaAtual == ""){
+    else if (novaSenha != "" && senhaAtual == "") {
         erroSenhaAtual.innerHTML = "Digite a Senha!";
-        alert('false')
         return false;
     }
     else {
         erroNovaSenha.innerHTML = "";
-        alert('true')
         return true;
     }
 
