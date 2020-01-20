@@ -20,7 +20,7 @@
 
 <body class="fundo" oncopy="return false" oncut="return false" onpaste="return false">
     <div class="row fixed-top navbar">
-        <span class="botao" onclick="mostrarSidebar()">&#9776;
+        <span class="botao fa fa-bars barras" onclick="mostrarSidebar()">
         </span>
         <div class="direita align-middle">
             <span class="teste fa fa-diamond " style="font-size: 25px;"></span>
@@ -35,7 +35,8 @@
             <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
                 style="color: #ffffff; background-color: none;font-size: 15px;"
                 class="mt-1 d-flex justify-content-center"></span>
-            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;" th:each="role:${usuario.roles}" th:text="${role.nome}"></span>
+            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;"
+                th:each="role:${usuario.roles}" th:text="${role.nome}"></span>
             <br>
             <a href="#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
             <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
@@ -44,7 +45,7 @@
         </div>
         <br>
         <div class="ra" style="border-bottom: 1px solid #3a3f48;" sec:authorize="hasRole('ROLE_ADMIN')">
-            <a  href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
+            <a href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
             <br>
         </div>
         <br>
@@ -57,8 +58,17 @@
             <div class="row mt-5"></div>
             <div class="row mt-5 d-flex justify-content-center">
                 <div class="col-4"></div>
-                <div class="col-4 d-flex justify-content-center"><img id="btn1" class="img-fluid" src="images/btn1.png"
-                        width="80" onclick="location.href = '/licao/condicionais';" style="cursor: hand;"></div>
+                <div class="col-4 d-flex justify-content-center dropright">
+
+                    <img id="dropdownMenuButton" class="img-fluid dropdown-toggle" src="images/btn1.png" width="80"
+                        style="cursor: pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"> <span class="fa fa-wheelchair-alt mr-2"></span>Aprender</a>
+                        <a class="dropdown-item" href="/attention">Praticar</a>
+                        <a class="dropdown-item" href="#">Quiz</a>
+                    </div>
+                </div>
                 <div class="col-4"></div>
             </div>
             <div class="row d-flex justify-content-center mt-5">
@@ -106,10 +116,15 @@
         </div>
     </div>
 
-    <script src="js/sidebar.js"></script>
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+<script src="js/sidebar.js"></script>
+<script src="js/jquery-3.2.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
