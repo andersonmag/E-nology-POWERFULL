@@ -20,6 +20,12 @@ public class AdminController {
     ConteudoRepository conteudoRepository;
     Usuario usuarioLogado;
 
+    @RequestMapping("/attention")
+    public ModelAndView att() {
+        ModelAndView model = new ModelAndView("task/attention");
+        return model;
+    }
+    
     @RequestMapping("/tarefa")
     public ModelAndView cadastro_tarefa(Palavra palavra, Authentication authentication) {
         usuarioLogado = (Usuario) authentication.getPrincipal();
