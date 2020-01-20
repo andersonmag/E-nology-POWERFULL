@@ -11,7 +11,7 @@ body {
     background-color: white;
 }
 body a {
-	color:red;
+	color:#036977;
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
@@ -20,7 +20,8 @@ body a {
 	text-decoration: none;
 }
 body a:hover {
-	text-decoration: none;
+    text-decoration: underline;
+    color: #007bff;
 }
 body a:focus, a:hover {
 	text-decoration: none;
@@ -75,7 +76,7 @@ p.pzinho{
     color: rgb(163, 160, 0);
 }
 body{
-    background: url('../images/fundo6.jpg') no-repeat;
+    background-color: rgb(211, 210, 210);
     /* url('../images/banner1.jpg') */
     /* rgb(58, 156, 185)*/
     background-size: cover;
@@ -144,9 +145,10 @@ label.ola{
     font-weight: 600;
     letter-spacing: 2px;
 }
+
 a.pass {
     font-size: 15px;
-	    color: #ef4242;
+	    color: #036977;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .w3ls-form a {
