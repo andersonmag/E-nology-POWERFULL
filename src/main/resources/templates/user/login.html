@@ -11,43 +11,58 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 	<div class="agile-login">
-		<a href="/">
-			<h1>E-nology</h1>
-		</a>
 		<div class="wrapper">
-			<img src="images/user.png" width="20%">
-			<h2></h2>
+			<div class="container mb-1">
+				<div class="row">
+					<div class="col">
+						<span class="fa fa-user-secret" style="font-size: 80pt; color: #00475b;"><span
+								class="d-flex justify-content-center" style="font-size: 20pt;"><strong>Sign
+									In</strong></span></span>
+					</div>
+				</div>
+			</div>
+
 			<div class="w3ls-form">
+				
 				<form name="f" th:action="@{/login}" method="post">
 
-					<div th:if="${param.error}" class="alert alert-danger">
+					<div th:if="${param.error}" class="alert alert-danger text-center">
 						Email ou Senha Incorreto!
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" >
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 
+
 					<label>Email</label>
 					<input type="email" class="form-control" name="email" id="email" />
 					<label>Senha</label>
-					<input type="password" class="form-control" name="senha" id="senha" />
-					<a href="/kkkk" class="pass">Esqueceu a Senha?</a>
-					<button type="submit" class="btn submit">Login</button>
-
+					<input type="password" class="form-control" name="senha" id="senha" /> <button
+						class="btn btn-lg  mt-4" style="width: 100%; background-color: #036977; color: white;"
+						type="submit" onmouseover="this.style.backgroundColor='#0f8191'"
+						onmouseout="this.style.backgroundColor='#036977'">
+						Login</button>
 				</form>
-				<div class="row d-flex justify-content-center mb-3 mt-2">
-					<h6 href="#" class="pass  mt-4" style="color: black;">Não tem conta
-						ainda?</h6>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<hr class="mt-3 mb-3">
+						<small>Ainda não possui conta no <strong>E-nology</strong>? <a href="/cadastro">Criar
+								Conta</a></small>
+
+					</div>
 				</div>
-				<div class="row  d-flex justify-content-center">
-					<a href="/cadastro">
-						<button type="submit" class="btn btn-outline-success btn-lg">Cadastre-se</button>
-					</a>
+				<div class="row">
+					<div class="col">
+						<a href="/kkkk" class="pass">Esqueceu a Senha?</a>
+					</div>
 				</div>
 			</div>
 		</div>
