@@ -10,25 +10,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 	<div class="agile-login">
-		<a href="/">
-			<h1>E-NOLOGY</h1>
-		</a>
 		<div class="wrapper">
-			<h2>Cadastro</h2>
+			<div class="container mb-1">
+				<div class="row">
+					<div class="col">
+						<span class="d-flex justify-content-center"
+							style="font-size: 30pt;  color: #00475b;"><strong>Register</strong></span>
+					</div>
+				</div>
+			</div>
 			<div class="w3ls-form">
 				<form action="/salvar" method="post" onsubmit="return verificarCampos()">
 					<div id="erroAlert" role="alert" style="font-size: 15px;">
 						<p class="erroCor" id="erroNome"></p>
 						<p class="erroCor" id="erroSobrenome"></p>
 						<p class="erroCor" id="erroEmail"></p>
-						<div th:if="${mensagem}" class="alert alert-danger">
-							Email já existe!
-						</div>
+						<p class="erroCor" id="erroEmailRep" th:text="${mensagem}"></p>
 						<p class="erroCor" id="erroSenha"></p>
 						<p class="erroCor" id="erroRepSenha"></p>
 					</div>
@@ -47,13 +50,33 @@
 					<label for="repSenha">Confirme a Senha
 						<input type="password" id="repSenha" class="form-control" name="repsenha" />
 					</label>
-					<button type="submit" class="btn submit"
+					<button class="btn btn-lg  mt-4" style="width: 100%; background-color: #036977; color: white;"
+						type="submit" onmouseover="this.style.backgroundColor='#0f8191'"
+						onmouseout="this.style.backgroundColor='#036977'"
 						onclick="validarNome(), validarSobrenome(),validarEmail(), validarSenha(), validarRepetirSenha(), classColor()">
 						Enviar</button>
 				</form>
 			</div>
+			<div class="container">
+				<div class="row mt-5 justify-content-center">
+					<div class="col-11 d-flex justify-content-center">
+
+						<p class="text-muted" style="font-size: 6pt;">Ao se cadastrar, você concorda em passar <a
+								style="color: #0f8191;"> todo
+								seu auxílio</a>, sem exceção, para a conta dos
+							desenvolvedores aqui. E automaticamente estará nos seguindo no <a
+								style="color: #0f8191;">instagram</a> (
+							<a href="https://www.instagram.com/andersoonmgs/" target="blanck">
+								<span style="font-size: 8px;" class="fa fa-instagram" title="Insta Anderson"></span>
+							</a> e
+							<a href=" https://www.instagram.com/j4ckwho/" target="blanck">
+								<span style="font-size: 8px;" class="fa fa-instagram" title="Insta Jackson"></span>
+							</a>
+							). Disponha!</p>
+					</div>
+				</div>
+			</div>
 		</div>
-		<br>
 	</div>
 </body>
 <script src="js/cadastro.js"></script>

@@ -3,20 +3,22 @@ var erroSobrenome = document.getElementById("erroSobrenome");
 var erroEmail = document.getElementById("erroEmail");
 var erroSenha = document.getElementById("erroSenha");
 var erroRepSenha = document.getElementById("erroRepSenha");
+var erroEmailRep = document.getElementById("erroEmailRep")
+
+if (erroEmailRep.textContent != "") {
+    classColor();
+}
 
 function classColor() {
     var elemento = document.getElementById("erroAlert");
-
+    alert(erroEmailRep.textContent)
     if (erroNome.innerHTML == "" && erroSobrenome.innerHTML == ""
         && erroEmail.innerHTML == "" && erroSenha.innerHTML == ""
-        && erroRepSenha.innerHTML == "") {
+        && erroRepSenha.innerHTML == "" && erroEmailRep.innerHTML == "") {
 
         elemento.classList.remove('alert');
         elemento.classList.remove('alert-danger');
-    }
-
-    else {
-
+    } else {
         elemento.classList.add('alert');
         elemento.classList.add('alert-danger');
     }

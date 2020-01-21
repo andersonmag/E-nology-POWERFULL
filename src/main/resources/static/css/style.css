@@ -93,14 +93,13 @@ label {
     letter-spacing: 2px;
 }
 .agile-login {
-
 		padding-top: 60px;
 }
 .wrapper {
     width: 450px;
     margin: 2% auto;
     text-align: center;
-    padding: 3% 0px;
+    padding: 1% 0px;
     background-color: #fff;
     border:black;
 }
