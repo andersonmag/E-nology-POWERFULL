@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Tarefa;
 import br.edu.ifal.enology.model.Usuario;
@@ -42,14 +44,13 @@ public class TaskController {
     }
 
     @RequestMapping("/corrigir")
-    public ModelAndView corrigirResposta(String palavra) {
+    public ModelAndView corrigirResposta(Long palavra, RedirectAttributes redirect) {
         ModelAndView model = new ModelAndView("redirect:/licao/condicionais");
-
-        if (tarefa.getResposta().getIngles().equals(palavra)) {
+        System.out.println(palavra);
+        if (tarefa.getResposta().getId().equals(palavra)) {
             usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());
-
-            return model;
         }
+        redirect.addFlashAttribute("resposta", palavra);
         return model;
     }
 
@@ -57,10 +58,10 @@ public class TaskController {
     public ModelAndView licao(Authentication authentication) {
         ModelAndView model = new ModelAndView("task/licao1");
         usuarioLogado = (Usuario) authentication.getPrincipal();
-        Random random = new Random();
+        // Random random = new Random();
         List<Tarefa> tarefas = tarefaRepository.findAll();
-        int indexSorteio = random.nextInt(tarefas.size());
-        tarefa = tarefas.get(indexSorteio);
+        // int indexSorteio = random.nextInt(tarefas.size());
+        tarefa = tarefas.get(1);
         List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo("condicionais",
                 tarefa.getResposta().getIngles());
 
