@@ -1,9 +1,11 @@
+
+
 .fonte {
     font-family: 'Nunito', sans-serif;
 }
 
 form {
-    max-width: 40%;
+    width: 50%;
     position: relative;
     margin: 8% auto 0;
     font-size: 15px;
@@ -11,6 +13,7 @@ form {
 
 
 .linha {
+    width: 100%;
     border: 0;
     height: 2px;
     background-image: linear-gradient(to right, transparent, #CCC, transparent);
@@ -67,7 +70,7 @@ form {
 }
 
 .teste {
-    padding: 6px 6px 6px 6px;
+    padding: 0px 0px 0px 0px;
     text-decoration: none;
     font-size: 15px;
     color: #ffffff;

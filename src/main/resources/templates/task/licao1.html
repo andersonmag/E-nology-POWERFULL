@@ -11,59 +11,232 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/licao.css">
+
+    <style>
+        .modal-dialog {
+
+            width: 100%;
+            top: auto;
+            right: auto;
+            left: auto;
+            bottom: 0;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-family: 'Bebas Neue', cursive;
+        }
+
+        @media (min-width: 700px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 16pt;
+            }
+
+            form {
+                width: 80%;
+            }
+        }
+
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            form {
+                width: 80%;
+            }
+
+            .modal {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 1281px) {
+
+            .modal {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 992px) {
+
+            .modal-lg,
+            .modal-xl {
+                max-width: 100%;
+            }
+        }
+    </style>
+
 </head>
 
-<body onload=iniciarCronometro()>
+<body onload=iniciarCronometro() id="body">
+
     <div class="row fixed-top navbar">
-        <div class="text-left">
-            <a href="/mapa">
-                <span class="teste fa fa-bed ml-4" style="font-size: 25px;"><span
-                        class="teste fonte">Desistir</span></span>
-            </a>
-        </div>
+        <a href="/mapa">
+            <div class="text-left">
+
+                <span class="fa fa-mail-reply-all ml-5" style="font-size: 35px;">
+
+            </div>
+        </a>
+        <span class="fa fa-battery-3 teste" style="font-size: 35px;">
+            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">4/10</span>
+        </span>
+        </span>
         <div class="direita">
+            <span class="teste fa fa-hourglass-1" style="font-size: 25px;" id="ampulheta"></span>
+            <span id="relogioDoFaustao" class="teste mr-3"></span>
 
-            <span class="teste fa fa-clock-o" style="font-size: 25px;"></span>
-            <span id="relogioDoFaustao" class="teste"></span>
-            <span class="teste fa fa-diamond " style="font-size: 25px;"></span>
-
-            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}"></span>
+            <span class="teste fa fa-database" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
+                data-placement="bottom" title="Sua pontuação até aqui">
+            </span>
+            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
+                data-placement="bottom" title="Sua pontuação até aqui"></span>
         </div>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row mt-5">
             <div class="col d-flex justify-content-center mt-5">
-                <h1 class="text-muted mt-5"><small th:text="${tarefa.enunciado}"></small></h1>
+                <h1 class="text-muted" th:text="${tarefa.enunciado}"></h1>
+
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <h6 class="text-secondary d-flex justify-content-center">Escolha a alternativa correta:</h6>
+            <div class="col d-flex justify-content-center">
+                <h6 class="text-secondary d-flex justify-content-center">Escolha a alternativa correta:</h1>
             </div>
         </div>
-        <div class="row mt-2">
-            <div class="col">
-                <form method="POST" action="/licao/corrigir">
+        <form method="POST" action="/licao/corrigir">
+            <div class="row">
+                <div class="col">
                     <div class="radiobtn mt-1" th:each="palavra:${palavras}">
-                        <input type="radio" th:id="${palavra.ingles}" name="palavra" th:value="${palavra.ingles}"
+                        <input type="radio" th:id="${palavra.ingles}" name="palavra" th:value="${palavra.id}"
                             onclick="mudarButao()" />
                         <label th:for="${palavra.ingles}" style="color: white;" th:text="${palavra.ingles}"></label>
                     </div>
                     <div class="radiobtn">
                         <input type="radio" th:id="${tarefa.resposta.ingles}" name="palavra"
-                            th:value="${tarefa.resposta.ingles}" onclick="mudarButao()" />
+                            th:value="${tarefa.resposta.id}" onclick="mudarButao()" />
                         <label style="color: white;" th:for="${tarefa.resposta.ingles}"
                             th:text="${tarefa.resposta.ingles}"></label>
                     </div>
-                    <br>
-                    <hr class="linha">
-                    <div class="mt-3 text-right">
-                        <button type="submit" class="btn btn-lg btn-dark mt-5" id="butao" disabled>
-                            < Run />
-                        </button>
+                </div>
+            </div>
+            <hr class="linha mt-5">
+            <div class="mt-3 text-right">
+                <button type="submit" class="btn btn-lg btn-dark mt-5" id="butao" disabled>
+                    < Run />
+                </button>
+            </div>
+        </form>
+
+
+        <!-- Modal TimeOut -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static"
+            data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <audio id="music" src="../sound/timeout.mp3"></audio>
+                        </audio>
+                        <span class="modal-title fa fa-clock-o text-danger " id="exampleModalCenterTitle"
+                            style="font-size:70px"></span>
+                        <small class="modal-title text-muted" id="exampleModalLabel">TIME OUT</small>
                     </div>
-                </form>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <p>Mas não fique triste! Você ainda poderá<br> responder essa questão mais para frente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/licao/condicionais">
+                            <button class="btn btn-lg" style="width: 100%; background-color: #0f8191; color: white;"
+                                type="submit" onmouseover="this.style.backgroundColor='#036977'"
+                                onmouseout="this.style.backgroundColor='#0f8191'">
+                                Continuar</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Sucess -->
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            th:if="${resposta}" id="modalAc" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
+                <div class="modal-content">
+                    <div class="alert alert-info " role="alert">
+                        <audio src="../sound/acertou.mp3" autoplay></audio>
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="fa fa-check-circle-o float-right text-success" style="font-size: 50pt;">
+                                </span>
+                                <small class="alert-heading d-flex float-right text-success"
+                                    style="font-size: 12pt;">Very Well!</small>
+                            </div>
+                            <div class="col-4 ml-2">
+                                <h5 class="text-secondary">
+                                    " <small class="text-secondary font-weight-normal h5"
+                                        th:text="${tarefa.enunciado}"></small>"
+                                </h5>
+                                <span class="text-secondary"><strong>Resposta: <span class="text-success"
+                                            th:text="${tarefa.resposta.ingles}"> </strong></span>
+                                </span>
+                            </div>
+                            <div class="col-3">
+                                <a href="/licao/condicionais">
+                                    <button class="btn btn-lg float-right"
+                                        style="width: 50%;background-color: #036977; color: white;" type="submit"
+                                        onmouseover="this.style.backgroundColor='#0f8191'"
+                                        onmouseout="this.style.backgroundColor='#036977'">
+                                        Continuar</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Error -->
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            th:if="${resposta}" id="modalError" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
+                <div class="modal-content">
+                    <div class="alert alert-light " role="alert" style="border-bottom: 1px solid rgba(0,0,0,.1);">
+                        <div class="row">
+                            <div class="col-4">
+                                <audio id="music" src="../sound/errou.mp3"></audio></audio>
+                                <span class="fa fa-times-circle-o float-right text-danger" style="font-size: 50pt;">
+                                </span>
+                                <small class="alert-heading d-flex float-right text-danger"
+                                    style="font-size: 12pt;">Ops...</small>
+                            </div>
+                            <div class="col-4 ml-2">
+                                <h5 class="text-secondary">
+                                    " <small class="text-secondary font-weight-normal h5"
+                                        th:text="${tarefa.enunciado}"></small>"
+                                </h5>
+                                <span class="text-secondary"><strong>Resposta correta: <span class="text-danger"
+                                            th:text="${tarefa.resposta.ingles}"> </strong></span>
+                                </span>
+                            </div>
+                            <div class="col-3">
+                                <a href="/licao/condicionais">
+                                    <button class="btn btn-lg float-right bg-danger" style="width: 50%; color: white;"
+                                        type="submit" onmouseover="this.style.backgroundColor='#0f8191'"
+                                        onmouseout="this.style.backgroundColor='#036977'">
+                                        Continuar</button></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -78,6 +251,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+
+        var respostaDaTarefa = /*[[${tarefa.resposta.id}]]*/ 1;
+        var resposta = /*[[${resposta}]]*/ 2;
+        var opcoes = document.getElementsByName("palavra");
+
+        for (var i = 0; i <= opcoes.length; i++) {
+            if (opcoes[i].value == resposta) {
+                if (respostaDaTarefa == resposta) {
+                    opcoes[i].checked = true;
+                    $('#modalAc').modal('show');
+                }
+                else {
+                    opcoes[i].checked = true;
+                    $('#modalError').modal('show');
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
