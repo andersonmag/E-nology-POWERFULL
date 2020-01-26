@@ -1,5 +1,5 @@
 
-var tempo = new Number(5);
+var tempo = new Number(50);
 
 function mudarButao() {
     butao.disabled = false;
