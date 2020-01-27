@@ -102,7 +102,6 @@
         <div class="row mt-5">
             <div class="col d-flex justify-content-center mt-5">
                 <h1 class="text-muted" th:text="${tarefa.enunciado}"></h1>
-
             </div>
         </div>
         <div class="row">
@@ -134,14 +133,13 @@
             </div>
         </form>
 
-
         <!-- Modal TimeOut -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static"
             data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <audio id="music" src="../sound/timeout.mp3"></audio>
+                        <audio id="somTimeout" src="../sound/timeout.mp3"></audio>
                         </audio>
                         <span class="modal-title fa fa-clock-o text-danger " id="exampleModalCenterTitle"
                             style="font-size:70px"></span>
@@ -168,11 +166,12 @@
 
         <!-- Modal Sucess -->
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-            th:if="${resposta}" id="modalAc" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            th:if="${resposta} == ${tarefa.resposta.id}" id="modalAc" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
             <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
                 <div class="modal-content">
                     <div class="alert alert-info " role="alert">
-                        <audio src="../sound/acertou.mp3" autoplay></audio>
+                        <audio id="somAcerto" src="../sound/acertou.mp3"></audio>
                         <div class="row">
                             <div class="col-4">
                                 <span class="fa fa-check-circle-o float-right text-success" style="font-size: 50pt;">
@@ -205,13 +204,14 @@
 
         <!-- Modal Error -->
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-            th:if="${resposta}" id="modalError" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            th:unless="${resposta} == ${tarefa.resposta.id}" id="modalError" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
             <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
                 <div class="modal-content">
                     <div class="alert alert-light " role="alert" style="border-bottom: 1px solid rgba(0,0,0,.1);">
                         <div class="row">
                             <div class="col-4">
-                                <audio id="music" src="../sound/errou.mp3"></audio></audio>
+                                <audio id="somErro" src="../sound/errou.mp3"></audio>
                                 <span class="fa fa-times-circle-o float-right text-danger" style="font-size: 50pt;">
                                 </span>
                                 <small class="alert-heading d-flex float-right text-danger"
@@ -262,10 +262,12 @@
                 if (respostaDaTarefa == resposta) {
                     opcoes[i].checked = true;
                     $('#modalAc').modal('show');
+                    document.getElementById("somAcerto").play();
                 }
                 else {
                     opcoes[i].checked = true;
                     $('#modalError').modal('show');
+                    document.getElementById("somErro").play();
                 }
             }
         }
