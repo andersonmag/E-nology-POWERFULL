@@ -72,9 +72,100 @@ a:hover span {
     font-size: 30pt;
 }
 
+.espaco-icone{
+    padding-left: 220px;
+}
+
 .fundo-do-poco{
     padding-top: 10px;
     background-color: #011422;
     color:white;
     height: 5%;
 }
+
+.btn{
+    margin-top: 30px;
+    margin-left: 25px;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+    padding: 12px;
+}
+
+.btn:hover{
+    background-color: #011422;
+    border-color: #011422 !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .letra-frase {
+        color: white;
+        font-size: 14pt;
+        padding-top: 14px;
+    }
+
+    .fundo-do-poco{
+        padding-top: 10px;
+        background-color: #011422;
+        color:white;
+        height: 5%;
+        font-size: 8pt;
+    }
+
+    .icones-rodape{
+        font-size: 23pt;
+    }
+
+    .espaco-icone{
+        padding-left: 5px;
+    }
+
+    .texto-fundo-do-poco{
+        font-size: 10pt;
+    }
+
+    .btn{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+  }
+
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .letra-frase {
+        color: white;
+        font-size: 16pt;
+        padding-top: 14px;
+    }
+
+    .fundo-do-poco{
+        padding-top: 10px;
+        background-color: #011422;
+        color:white;
+        height: 5%;
+        font-size: 8pt;
+    }
+
+    .icones-rodape{
+        font-size: 23pt;
+    }
+
+    .espaco-icone{
+        padding-left: 120px;
+    }
+
+    .icones{
+        font-size: 80pt;
+    }
+
+    .titulo{
+        font-size: 15pt;
+    }
+
+    .texto{
+        font-size: 12pt;
+    }
+
+    .sub-texto{
+        font-size: 9pt;
+    }
+
+  }
