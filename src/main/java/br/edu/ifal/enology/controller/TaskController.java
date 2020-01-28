@@ -12,9 +12,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Tarefa;
 import br.edu.ifal.enology.model.Usuario;
+import br.edu.ifal.enology.model.Solucao;
 import br.edu.ifal.enology.repository.ConteudoRepository;
 import br.edu.ifal.enology.repository.PalavraRepository;
 import br.edu.ifal.enology.repository.TarefaRepository;
+import br.edu.ifal.enology.repository.SolucaoRepository;
 import br.edu.ifal.enology.service.SequenciadorService;
 
 @RequestMapping("/licao")
@@ -28,7 +30,11 @@ public class TaskController {
     @Autowired
     ConteudoRepository conteudoRepository;
     @Autowired
+    SolucaoRepository solucaoRepository;
+    
+    @Autowired
     SequenciadorService sequenciadorService;
+    
     Tarefa tarefa;
     Usuario usuarioLogado;
     Long resposta;
@@ -48,11 +54,20 @@ public class TaskController {
     public ModelAndView corrigirResposta(Long palavra, RedirectAttributes redirect) {
         ModelAndView model = new ModelAndView("redirect:/licao/condicionais");
         resposta = palavra;
-        if (tarefa.getResposta().getId().equals(palavra)) {
-            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());
+        boolean acertou = tarefa.getResposta().getId().equals(palavra);
+        if (acertou) {
+            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());            
             sequenciadorService.adicionarTarefaJaRespondida(tarefa);
             System.out.println(tarefa.getEnunciado());
-        }        
+        }
+        
+        Solucao solucao = new Solucao();
+        solucao.setAluno(usuarioLogado);
+        solucao.setResposta(tarefa.getResposta());
+        solucao.setAcertou(acertou);
+        solucao.setTarefa(tarefa);
+        solucao.setPontuacao(tarefa.getPontuacao());
+        solucaoRepository.save(solucao);
         
         redirect.addFlashAttribute("resposta", palavra);
         return model;
