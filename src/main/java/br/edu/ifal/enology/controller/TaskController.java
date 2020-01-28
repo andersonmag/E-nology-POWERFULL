@@ -58,12 +58,11 @@ public class TaskController {
         if (acertou) {
             usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());            
             sequenciadorService.adicionarTarefaJaRespondida(tarefa);
-            System.out.println(tarefa.getEnunciado());
         }
         
         Solucao solucao = new Solucao();
         solucao.setAluno(usuarioLogado);
-        solucao.setResposta(tarefa.getResposta());
+        solucao.setResposta(tarefa.getResposta().getIngles());
         solucao.setAcertou(acertou);
         solucao.setTarefa(tarefa);
         solucao.setPontuacao(tarefa.getPontuacao());
