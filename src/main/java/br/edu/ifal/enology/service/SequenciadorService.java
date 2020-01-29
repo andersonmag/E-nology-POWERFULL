@@ -35,8 +35,7 @@ public class SequenciadorService {
         List<Tarefa> tarefasRespondidasCorretamente = new ArrayList<>();
 
         for (Solucao solucao : solucoesDoAluno) {
-
-            if (solucao.isAcertou() && !tarefasRespondidasCorretamente.contains(solucao.getTarefa()))
+            if (solucao.isAcertou())
                 tarefasRespondidasCorretamente.add(solucao.getTarefa());
         }
 
@@ -46,21 +45,24 @@ public class SequenciadorService {
     private Tarefa selecionarTarefa(List<Tarefa> todasTarefas, List<Tarefa> tarefasRespondidasCorretamente) {
         List<Tarefa> tarefasRestantes = new ArrayList<>();
         Random numeroAleatorio = new Random();
-        for (int i = 0; i < todasTarefas.size(); i++) {
+        int indexTarefa;
+
+        for (Tarefa tarefa : todasTarefas) {
             if (tarefasRespondidasCorretamente.size() <= todasTarefas.size()
                     && tarefasRespondidasCorretamente.size() > 0) {
-                for (int j = 0; j < tarefasRespondidasCorretamente.size(); j++) {
-                    if (tarefasRespondidasCorretamente.get(j).getEnunciado() != todasTarefas.get(i).getEnunciado())
-                        tarefasRestantes.add(todasTarefas.get(i));
-                }
+                if (!tarefasRespondidasCorretamente.contains(tarefa))
+                    tarefasRestantes.add(tarefa);
             } else {
                 break;
             }
         }
 
-        if (tarefasRestantes.isEmpty())
+        if (tarefasRespondidasCorretamente.size() == todasTarefas.size())
+            return null;
+        else if (tarefasRestantes.isEmpty())
             tarefasRestantes = todasTarefas;
-        int indexTarefa = numeroAleatorio.nextInt(tarefasRestantes.size());
+
+        indexTarefa = numeroAleatorio.nextInt(tarefasRestantes.size());
 
         return tarefasRestantes.get(indexTarefa);
     }
