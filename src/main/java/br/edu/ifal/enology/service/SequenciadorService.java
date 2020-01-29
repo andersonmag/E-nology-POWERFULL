@@ -3,79 +3,69 @@ package br.edu.ifal.enology.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import br.edu.ifal.enology.model.Palavra;
+import br.edu.ifal.enology.model.Solucao;
 import br.edu.ifal.enology.model.Tarefa;
+import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.PalavraRepository;
+import br.edu.ifal.enology.repository.SolucaoRepository;
 import br.edu.ifal.enology.repository.TarefaRepository;
 
 @Repository
 public class SequenciadorService {
 
     @Autowired
+    PalavraRepository palavraRepository;
+    @Autowired
     TarefaRepository tarefaRepository;
     @Autowired
-    PalavraRepository palavraRepository;
+    SolucaoRepository solucaoRepository;
 
-    List<Tarefa> tarefasRespondidas = new ArrayList<>();
-    List<Tarefa> tarefasSemRepeticao;
+    public Tarefa buscarTarefa(Usuario usuario) {
+        List<Tarefa> todasTarefas = tarefaRepository.findAll();
+        List<Solucao> solucoesDoAluno = solucaoRepository.findByAluno(usuario);
+        List<Tarefa> tarefasRespondidasCorretamente = filtrarTarefasRespondidas(solucoesDoAluno);
 
-    // public List<Tarefa> buscarTarefa(Conteudo conteudo){
+        return selecionarTarefa(todasTarefas, tarefasRespondidasCorretamente);
+    }
 
-    // // List<Tarefa> tarefas = tareafRepository.findAll();
-    // List<Palavra> palavras = conteudo.getPalavras();
-    // List<Tarefa> TarefasFiltradas = tarefaRepository.findByResposta(palavras);
+    private List<Tarefa> filtrarTarefasRespondidas(List<Solucao> solucoesDoAluno) {
+        List<Tarefa> tarefasRespondidasCorretamente = new ArrayList<>();
 
-    // return TarefasFiltradas;
-    // }
+        for (Solucao solucao : solucoesDoAluno) {
 
-    public Tarefa buscarTarefa() {
-        Random random = new Random();
-        List<Tarefa> tarefasSemRepeticao = retirarTarefasJaRespondidas();
-        if (tarefasSemRepeticao.isEmpty()) {
-            return null;
+            if (solucao.isAcertou() && !tarefasRespondidasCorretamente.contains(solucao.getTarefa()))
+                tarefasRespondidasCorretamente.add(solucao.getTarefa());
         }
-        int indexSorteio = random.nextInt(tarefasSemRepeticao.size());
 
-        return tarefasSemRepeticao.get(indexSorteio);
-
+        return tarefasRespondidasCorretamente;
     }
 
-    public void adicionarTarefaJaRespondida(Tarefa tarefa) {
-        tarefasRespondidas.add(tarefa);
-    }
-
-    private void inicializarTarefasSemRepeticao(){
-        if(tarefasSemRepeticao == null){
-            tarefasSemRepeticao = tarefaRepository.findAll();
-        }
-    }
-
-    private List<Tarefa> retirarTarefasJaRespondidas() {
-        inicializarTarefasSemRepeticao();
-
-        for (int i = 0; i < tarefasSemRepeticao.size(); i++) {
-            if (tarefasRespondidas.size() <= tarefasSemRepeticao.size() && tarefasRespondidas.size() > 0) {
-                for (int j = 0; j < tarefasRespondidas.size(); j++) {
-                    String enunciadoRespondido = tarefasRespondidas.get(j).getEnunciado();
-                    String enunciadoTarefa = tarefasSemRepeticao.get(i).getEnunciado();
-
-                    if (enunciadoRespondido.equals(enunciadoTarefa)) {
-                        tarefasSemRepeticao.remove(i);
-                        break;
-                    }
+    private Tarefa selecionarTarefa(List<Tarefa> todasTarefas, List<Tarefa> tarefasRespondidasCorretamente) {
+        List<Tarefa> tarefasRestantes = new ArrayList<>();
+        Random numeroAleatorio = new Random();
+        for (int i = 0; i < todasTarefas.size(); i++) {
+            if (tarefasRespondidasCorretamente.size() <= todasTarefas.size()
+                    && tarefasRespondidasCorretamente.size() > 0) {
+                for (int j = 0; j < tarefasRespondidasCorretamente.size(); j++) {
+                    if (tarefasRespondidasCorretamente.get(j).getEnunciado() != todasTarefas.get(i).getEnunciado())
+                        tarefasRestantes.add(todasTarefas.get(i));
                 }
             } else {
                 break;
             }
         }
-        return tarefasSemRepeticao;
+
+        if (tarefasRestantes.isEmpty())
+            tarefasRestantes = todasTarefas;
+        int indexTarefa = numeroAleatorio.nextInt(tarefasRestantes.size());
+
+        return tarefasRestantes.get(indexTarefa);
     }
 
     public List<Palavra> buscarPalavrasPorConteudo(String conteudoTitulo, String respostaDaTarefa) {
-        System.out.println(conteudoTitulo);
         List<Palavra> palavrasEncontradas = new ArrayList<>();
         List<Palavra> palavras = palavraRepository.findAll();
 

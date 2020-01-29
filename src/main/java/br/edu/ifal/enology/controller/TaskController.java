@@ -1,14 +1,12 @@
 package br.edu.ifal.enology.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Tarefa;
 import br.edu.ifal.enology.model.Usuario;
@@ -31,10 +29,9 @@ public class TaskController {
     ConteudoRepository conteudoRepository;
     @Autowired
     SolucaoRepository solucaoRepository;
-    
     @Autowired
     SequenciadorService sequenciadorService;
-    
+
     Tarefa tarefa;
     Usuario usuarioLogado;
     Long resposta;
@@ -56,10 +53,9 @@ public class TaskController {
         resposta = palavra;
         boolean acertou = tarefa.getResposta().getId().equals(palavra);
         if (acertou) {
-            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());            
-            sequenciadorService.adicionarTarefaJaRespondida(tarefa);
+            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());
         }
-        
+
         Solucao solucao = new Solucao();
         solucao.setAluno(usuarioLogado);
         solucao.setResposta(tarefa.getResposta().getIngles());
@@ -67,7 +63,7 @@ public class TaskController {
         solucao.setTarefa(tarefa);
         solucao.setPontuacao(tarefa.getPontuacao());
         solucaoRepository.save(solucao);
-        
+
         redirect.addFlashAttribute("resposta", palavra);
         return model;
     }
@@ -76,21 +72,16 @@ public class TaskController {
     public ModelAndView licao(Authentication authentication) {
         ModelAndView model = new ModelAndView("task/licao1");
         usuarioLogado = (Usuario) authentication.getPrincipal();
-        // Random random = new Random();
-        // List<Tarefa> tarefas = tarefaRepository.findAll();
-        // int indexSorteio = random.nextInt(tarefas.size());
-        try {      
-          //System.out.println(resposta);
-            if(resposta == null){
-                tarefa = sequenciadorService.buscarTarefa();
+        try {
+            if (resposta == null) {
+                tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
             }
-            
             resposta = null;
-            List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo(
-                                                "condicionais", tarefa.getResposta().getIngles());
-            model.addObject("tarefa", tarefa)
-                 .addObject("palavras", palavrasEncontradas)
-                 .addObject("usuario", usuarioLogado);
+
+            List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo("condicionais",
+                    tarefa.getResposta().getIngles());
+            model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas).addObject("usuario",
+                    usuarioLogado);
         } catch (NullPointerException e) {
             model = new ModelAndView("redirect:/mapa");
         }
