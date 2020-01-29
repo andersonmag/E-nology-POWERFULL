@@ -113,3 +113,127 @@ form {
         background-color: #011f41;
     }
 }
+
+.botao-resultado{
+    width: 50%;
+    background-color: #036977; 
+    color: white;
+}
+
+.icone-resultado{
+    font-size: 45pt;
+    margin-left: 380px;
+}
+
+.texto-resultado{
+    margin-left: 383px;
+    font-size: 12pt;
+}
+
+.texto-acertou{
+    margin-left: 372px !important;
+}
+
+.modal-dialog {
+
+    width: 100%;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: 0;
+}
+
+.icone-grande{
+    font-size: 35px;
+}
+
+.icone-normal{
+    font-size: 25px;
+}
+
+.icone-amarelo{
+    color: #e7f84e;
+}
+
+h1 {
+    font-size: 2.25rem;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.modal {
+    width: 100%;
+}
+
+.modal-lg,
+.modal-xl {
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 16pt;
+    }
+
+    form {
+        width: 80%;
+    }
+
+    .texto-enunciado-resultado{
+        font-size: 12pt;
+    }
+
+    .icone-resultado{
+        font-size: 45pt;
+        margin-left: 150px;
+    }
+    
+    .texto-resultado{
+        margin-left: 151px;
+        font-size: 12pt;
+    }
+    
+    .texto-acertou{
+        margin-left: 140px !important;
+    }
+
+    .icone-grande{
+        font-size: 28px;
+    }
+    
+    .icone-normal{
+        font-size: 18px;
+    }
+    
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    h1 {
+        font-size: 28pt;
+    }
+
+    form {
+        width: 88%;
+    }
+
+    .texto-enunciado-resultado{
+        font-size: 24pt;
+    }
+
+    .icone-resultado{
+        font-size: 45pt;
+        margin-left: 150px;
+    }
+    
+    .texto-resultado{
+        margin-left: 151px;
+        font-size: 12pt;
+    }
+    
+    .texto-acertou{
+        margin-left: 140px !important;
+    }
+
+    .botao-resultado{
+        width: 100% !important;
+    }
+}
