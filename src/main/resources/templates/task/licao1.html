@@ -13,85 +13,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/licao.css">
-
-    <style>
-        .modal-dialog {
-
-            width: 100%;
-            top: auto;
-            right: auto;
-            left: auto;
-            bottom: 0;
-        }
-
-        h1 {
-            font-size: 2.25rem;
-            font-family: 'Bebas Neue', cursive;
-        }
-
-        @media (min-width: 700px) {
-            h1 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 500px) {
-            h1 {
-                font-size: 16pt;
-            }
-
-            form {
-                width: 80%;
-            }
-        }
-
-        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-            form {
-                width: 80%;
-            }
-
-            .modal {
-                width: 100%;
-            }
-        }
-
-        @media (min-width: 1281px) {
-
-            .modal {
-                width: 100%;
-            }
-        }
-
-        @media (min-width: 992px) {
-
-            .modal-lg,
-            .modal-xl {
-                max-width: 100%;
-            }
-        }
-    </style>
-
 </head>
 
 <body onload=iniciarCronometro() id="body">
-
     <div class="row fixed-top navbar">
         <a href="/mapa">
             <div class="text-left">
-
-                <span class="fa fa-mail-reply-all ml-5" style="font-size: 35px;">
-
+                <span class="fa fa-mail-reply-all ml-5 icone-grande">
             </div>
         </a>
-        <span class="fa fa-battery-3 teste" style="font-size: 35px;">
+        <span class="fa fa-battery-3 teste icone-grande">
             <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">4/10</span>
         </span>
         </span>
         <div class="direita">
-            <span class="teste fa fa-hourglass-1" style="font-size: 25px;" id="ampulheta"></span>
+            <span class="teste fa fa-hourglass-1 icone-normal" id="ampulheta"></span>
             <span id="relogioDoFaustao" class="teste mr-3"></span>
 
-            <span class="teste fa fa-database" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
+            <span class="teste fa fa-database icone-normal icone-amarelo" data-toggle="tooltip"
                 data-placement="bottom" title="Sua pontuação até aqui">
             </span>
             <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
@@ -173,25 +112,27 @@
                     <div class="alert alert-info " role="alert">
                         <audio id="somAcerto" src="../sound/acertou.mp3"></audio>
                         <div class="row">
-                            <div class="col-4">
-                                <span class="fa fa-check-circle-o float-right text-success" style="font-size: 50pt;">
-                                </span>
-                                <small class="alert-heading d-flex float-right text-success"
-                                    style="font-size: 12pt;">Very Well!</small>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <span class="fa fa-check-circle-o float-right text-success icone-resultado">
+                                    </span><br>
+                                </div>
+                                <div class="row">
+                                    <small class="alert-heading d-flex float-right text-success texto-resultado texto-acertou">Very Well!</small>
+                                </div>
                             </div>
-                            <div class="col-4 ml-2">
+                            <div class="col-md-4 ml-2">
                                 <h5 class="text-secondary">
-                                    " <small class="text-secondary font-weight-normal h5"
+                                    "<small class="text-secondary font-weight-normal h5 texto-enunciado-resultado"
                                         th:text="${tarefa.enunciado}"></small>"
                                 </h5>
                                 <span class="text-secondary"><strong>Resposta: <span class="text-success"
                                             th:text="${tarefa.resposta.ingles}"> </strong></span>
                                 </span>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3">
                                 <a href="/licao/condicionais">
-                                    <button class="btn btn-lg float-right"
-                                        style="width: 50%;background-color: #036977; color: white;" type="submit"
+                                    <button class="btn btn-lg float-right botao-resultado" type="submit"
                                         onmouseover="this.style.backgroundColor='#0f8191'"
                                         onmouseout="this.style.backgroundColor='#036977'">
                                         Continuar</button></a>
@@ -209,26 +150,28 @@
             <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
                 <div class="modal-content">
                     <div class="alert alert-light " role="alert" style="border-bottom: 1px solid rgba(0,0,0,.1);">
+                        <audio id="somErro" src="../sound/errou.mp3"></audio>
                         <div class="row">
-                            <div class="col-4">
-                                <audio id="somErro" src="../sound/errou.mp3"></audio>
-                                <span class="fa fa-times-circle-o float-right text-danger" style="font-size: 50pt;">
-                                </span>
-                                <small class="alert-heading d-flex float-right text-danger"
-                                    style="font-size: 12pt;">Ops...</small>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <span class="fa fa-times-circle-o float-right text-danger icone-resultado"></span>
+                                </div>
+                                <div class="row">
+                                    <small class="alert-heading d-flex float-right text-danger texto-resultado">Ops...</small>
+                                </div>
                             </div>
-                            <div class="col-4 ml-2">
+                            <div class="col-md-4 ml-2">
                                 <h5 class="text-secondary">
-                                    " <small class="text-secondary font-weight-normal h5"
+                                    "<small class="text-secondary font-weight-normal h5 texto-enunciado-resultad"
                                         th:text="${tarefa.enunciado}"></small>"
                                 </h5>
                                 <span class="text-secondary"><strong>Resposta correta: <span class="text-danger"
                                             th:text="${tarefa.resposta.ingles}"> </strong></span>
                                 </span>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3">
                                 <a href="/licao/condicionais">
-                                    <button class="btn btn-lg float-right bg-danger" style="width: 50%; color: white;"
+                                    <button class="btn btn-lg float-right bg-danger botao-resultado" style="width: 50%; color: white;"
                                         type="submit" onmouseover="this.style.backgroundColor='#0f8191'"
                                         onmouseout="this.style.backgroundColor='#036977'">
                                         Continuar</button></a>
