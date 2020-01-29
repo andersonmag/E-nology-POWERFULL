@@ -10,47 +10,62 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Minha Conta | Enology</title>
-
+	<link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600" rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 	<link href="css/sidebar.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/index.css">
+	<style>
+		.row {
+			padding: 0rem 0rem;
+		}
+	</style>
 </head>
 
 <body oncopy="return false" oncut="return false" onpaste="return false">
-	<div class="row align-items-center fixed-top navbar">
-		<span class="botao" onclick="mostrarSidebar()">&#9776;
+	<div class="row fixed-top navbar">
+		<span class="botao fa fa-bars" onclick="mostrarSidebar()">
 		</span>
+		<a class="navbar-brand marca" style="font-size: 18pt;" href="/"><span>E-nology</span></a>
 		<div class="direita align-middle">
-            <span class="teste fa fa-diamond " style="font-size: 25px;"></span>
-            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}"></span>
-        </div>
+			<span class="teste fa fa-database mr-1" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
+				data-placement="bottom" title="Sua pontuação até aqui">
+			</span>
+			<span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
+				data-placement="bottom" title="Sua pontuação até aqui"></span>
+		</div>
 	</div>
 	<div id="sidebar" class="sidenav">
-		<div class="ra" style="border-bottom: 1px solid #3a3f48;">
-			<div class="d-flex justify-content-center">
-				<img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
+		<div>
+			<div class="d-flex justify-content-center"
+				style="height: 100%; background: repeating-linear-gradient(#011f41, #003572 49.9%, #003572 50.1%, #011f41 100%);">
+				<img id="foto" src="images/titia.png" alt="Minha Foto" width="75"
+					class="img-fluid d-flex justify-content-center" style="border-radius: 20px;">
 			</div>
-			<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
-				style="color: #ffffff; background-color: none;font-size: 15px;"
-				class="mt-1 d-flex justify-content-center"></span>
-			<span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;" th:each="role:${usuario.roles}" th:text="${role.nome}"></span>
+			<strong>
+				<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
+					class="mt-2 d-flex justify-content-center fonte"></span></strong>
+			<span class="fa fa-address-card d-flex justify-content-center text-light">
+				<strong><span class="fonte ml-2">Aluno</span></strong></span>
 			<br>
-			<a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
-			<a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
-			<a href="#"><span class="fa fa-gear"><span class="ml-2 fonte">Configurações</span></span></a>
-			<br>
+		</div>
+		<span></span>
+		<a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 
-		</div>
+		<a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span> </span></a>
+		<a href="/perfil"><span class="fa fa-blind"><span class="ml-2 fonte">Meu Progresso</span></span></a>
 		<br>
-		<div class="ra" style="border-bottom: 1px solid #3a3f48;" sec:authorize="hasRole('ROLE_ADMIN')"> 
-			<a href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
-				</span></a>
+		<div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
+			<a href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
 			<br>
 		</div>
+		<h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
+
+		<a href="#"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
+		<a href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o App</span></span></a>
 		<br>
-		<a href="/sobre"> <span class="fa fa-wheelchair-alt"><span class="ml-2 fonte">Sobre</span></span></a>
 		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
 	</div>
 

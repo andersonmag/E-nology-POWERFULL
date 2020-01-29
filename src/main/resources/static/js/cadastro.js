@@ -11,7 +11,7 @@ if (erroEmailRep.textContent != "") {
 
 function classColor() {
     var elemento = document.getElementById("erroAlert");
-    alert(erroEmailRep.textContent)
+    
     if (erroNome.innerHTML == "" && erroSobrenome.innerHTML == ""
         && erroEmail.innerHTML == "" && erroSenha.innerHTML == ""
         && erroRepSenha.innerHTML == "" && erroEmailRep.innerHTML == "") {
@@ -60,7 +60,6 @@ function validarSobrenome() {
 
 function validarEmail() {
     var email = document.getElementById("email").value;
-
 
     if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
         erroEmail.innerHTML = "Email inválido.";

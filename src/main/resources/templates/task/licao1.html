@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/licao.css">
+
 </head>
 
 <body onload=iniciarCronometro() id="body">
@@ -194,26 +195,27 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script th:inline="javascript">
 
-        var respostaDaTarefa = /*[[${tarefa.resposta.id}]]*/ 1;
-        var resposta = /*[[${resposta}]]*/ 2;
-        var opcoes = document.getElementsByName("palavra");
+        <script th:inline="javascript">
 
+            var respostaDaTarefa = /*[[${tarefa.resposta.id}]]*/ 1;
+             var resposta = /*[[${resposta}]]*/ 2;
+            var opcoes = document.getElementsByName("palavra");
+    
         for (var i = 0; i <= opcoes.length; i++) {
             if (opcoes[i].value == resposta) {
                 if (respostaDaTarefa == resposta) {
-                    opcoes[i].checked = true;
-                    $('#modalAc').modal('show');
-                    document.getElementById("somAcerto").play();
-                }
-                else {
-                    opcoes[i].checked = true;
-                    $('#modalError').modal('show');
-                    document.getElementById("somErro").play();
-                }
-            }
+                opcoes[i].checked = true;
+            $('#modalAc').modal('show');
+            document.getElementById("somAcerto").play();
         }
+                else {
+                opcoes[i].checked = true;
+            $('#modalError').modal('show');
+            document.getElementById("somErro").play();
+        }
+    }
+}
     </script>
 </body>
 

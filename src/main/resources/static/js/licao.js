@@ -7,7 +7,7 @@ function mudarButao() {
 
 function timeout() {
     $('#exampleModalCenter').modal('show');
-    document.getElementById("music").play();
+    document.getElementById("somTimeout").play();
 }
 
 function iniciarCronometro() {

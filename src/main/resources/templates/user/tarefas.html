@@ -11,38 +11,46 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
     <title>Cadastro de Tarefas || ADMIN </title>
     <link href="css/sidebar.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="row align-items-center fixed-top navbar">
-        <span class="botao fa fa-bars barras" onclick="mostrarSidebar()">
+    <div class="row fixed-top navbar">
+        <span class="botao fa fa-bars" onclick="mostrarSidebar()">
         </span>
+    
     </div>
     <div id="sidebar" class="sidenav">
-        <div class="ra" style="border-bottom: 1px solid #3a3f48;">
-            <div class="d-flex justify-content-center">
-                <img src="images/pig.png" alt="" width="55" class="img-fluid d-flex justify-content-center">
+        <div>
+            <div class="d-flex justify-content-center"
+                style="height: 100%; background: repeating-linear-gradient(#011f41, #003572 49.9%, #003572 50.1%, #011f41 100%);">
+                <img id="foto" src="images/titia.png" alt="Minha Foto" width="75"
+                    class="img-fluid d-flex justify-content-center" style="border-radius: 20px;">
             </div>
-            <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
-                style="color: #ffffff; background-color: none;font-size: 15px;"
-                class="mt-1 d-flex justify-content-center"></span>
-            <span class="d-flex justify-content-center mt-2 fonte" style="color: #f67590;"
-                th:each="role:${usuario.roles}" th:text="${role.nome}"></span>
-            <br>
-            <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
-            <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Perfil</span> </span></a>
-            <a href="/perfil"><span class="fa fa-gear"><span class="ml-2 fonte">Configurações</span></span></a>
+            <strong>
+                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
+                    class="mt-2 d-flex justify-content-center fonte"></span></strong>
+            <span class="fa fa-address-card d-flex justify-content-center text-light">
+                <strong><span class="fonte ml-2">Aluno</span></strong></span>
             <br>
         </div>
+        <span></span>
+        <a href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+
+        <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span> </span></a>
+        <a href="/perfil"><span class="fa fa-blind"><span class="ml-2 fonte">Meu Progresso</span></span></a>
         <br>
-        <div class="ra" style="border-bottom: 1px solid #3a3f48;" sec:authorize="hasRole('ROLE_ADMIN')">
-            <a href="#"><span class="fa fa-file-code-o"><span class="fonte ml-2">Criar Tarefa</span></span></a>
+        <div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
             <br>
         </div>
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
+
+        <a href="#"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
+        <a href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o App</span></span></a>
         <br>
-        <a href="/sobre"> <span class="fa fa-wheelchair-alt"><span class="ml-2 fonte">Sobre</span></span></a>
         <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
     </div>
     <div class="container">
@@ -102,7 +110,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-lg d-flex justify-content-center mt-4"
+                <button class=" btn-lg d-flex justify-content-center mt-4"
                     style="width: 100%; background-color: #036977; color: white;" type="submit"
                     onmouseover="this.style.backgroundColor='#0f8191'"
                     onmouseout="this.style.backgroundColor='#036977'">Cadastrar</button>
@@ -179,7 +187,7 @@
         </div>
 
         <div class="row d-flex justify-content-center mb-5">
-            <button class="btn btn-lg d-flex justify-content-center mt-4"
+            <button class=" btn-lg d-flex justify-content-center mt-4"
                 style="width: 50%; background-color: #036977; color: white;" type="submit"
                 onmouseover="this.style.backgroundColor='#0f8191'"
                 onmouseout="this.style.backgroundColor='#036977'">Cadastrar</button>
