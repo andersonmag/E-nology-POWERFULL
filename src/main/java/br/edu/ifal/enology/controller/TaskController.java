@@ -83,8 +83,10 @@ public class TaskController {
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas).addObject("usuario",
                     usuarioLogado);
         } catch (NullPointerException e) {
-            model = new ModelAndView("redirect:/mapa");
+            model = new ModelAndView("task/resultado");
+            model.addObject("usuario", usuarioLogado);
         }
         return model;
     }
+
 }

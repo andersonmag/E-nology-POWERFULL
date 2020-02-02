@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/resultado.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Pacifico|Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <title>It's Game Time | E-nology</title>
+</head>
+<body>
+    <div class="container border border-secondary mt-2 mb-2">
+        <div class="row d-flex justify-content-center mt-3">
+            <img src="../images/ifaldores.png" class="img-fluid imagem">
+        </div>
+        <div class="row d-flex justify-content-center">
+            <h1 class="fonte-titulo">Parabéns!</h1>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="border border-primary p-2">
+                <span class="pontos">Pontos: </span><b th:text="${usuario.pontuacaoDoAluno}" id="pontos" class="pontos"></b> <span id="icone" class="fa fa-star-half pontos icone"></span> 
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-2">
+            <p class="fonte-mensagem">Você finalizou essa lição.</p>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <a href="/mapa">
+                <button type="button" class="btn btn-primary mb-4">
+                    <span class="fa fa-arrow-circle-left"> </span>
+                    Voltar
+                </button>
+            </a>
+        </div>
+    </div>
+    <script src="../js/resultado.js"></script>
+</body>
+</html>
