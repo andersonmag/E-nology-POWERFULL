@@ -1,5 +1,3 @@
-
-
 .fonte {
     font-family: 'Nunito', sans-serif;
 }
@@ -10,7 +8,6 @@ form {
     margin: 8% auto 0;
     font-size: 15px;
 }
-
 
 .linha {
     width: 100%;
@@ -122,16 +119,16 @@ form {
 
 .icone-resultado{
     font-size: 45pt;
-    margin-left: 380px;
+    margin-left: 310px;
 }
 
 .texto-resultado{
-    margin-left: 383px;
+    margin-left: 316px;
     font-size: 12pt;
 }
 
 .texto-acertou{
-    margin-left: 372px !important;
+    margin-left: 300px !important;
 }
 
 .modal-dialog {
@@ -204,6 +201,9 @@ h1 {
         font-size: 18px;
     }
     
+    .botao{
+        width: 85% !important;
+    }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
