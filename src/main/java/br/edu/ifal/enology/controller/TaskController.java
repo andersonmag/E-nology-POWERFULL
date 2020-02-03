@@ -1,8 +1,12 @@
 package br.edu.ifal.enology.controller;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +37,6 @@ public class TaskController {
     SequenciadorService sequenciadorService;
 
     Tarefa tarefa;
-    Usuario usuarioLogado;
     Long resposta;
 
     @RequestMapping("/cadastrar")
@@ -48,10 +51,11 @@ public class TaskController {
     }
 
     @RequestMapping("/corrigir")
-    public ModelAndView corrigirResposta(Long palavra, RedirectAttributes redirect) {
-        ModelAndView model = new ModelAndView("redirect:/licao/condicionais");
+    public ModelAndView corrigirResposta(Long palavra, RedirectAttributes redirect, HttpServletRequest request) {
+        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
         resposta = palavra;
         boolean acertou = tarefa.getResposta().getId().equals(palavra);
+
         if (acertou) {
             usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());
         }
@@ -65,13 +69,13 @@ public class TaskController {
         solucaoRepository.save(solucao);
 
         redirect.addFlashAttribute("resposta", palavra);
-        return model;
+        return new ModelAndView("redirect:/licao/condicionais");
     }
 
     @RequestMapping("/condicionais")
-    public ModelAndView licao(Authentication authentication) {
+    public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("task/licao1");
-        usuarioLogado = (Usuario) authentication.getPrincipal();
+
         try {
             if (resposta == null) {
                 tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
@@ -83,10 +87,9 @@ public class TaskController {
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas).addObject("usuario",
                     usuarioLogado);
         } catch (NullPointerException e) {
-            model = new ModelAndView("task/resultado");
+            model.setViewName("task/resultado");
             model.addObject("usuario", usuarioLogado);
         }
         return model;
     }
-
 }

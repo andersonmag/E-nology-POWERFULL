@@ -1,7 +1,7 @@
 package br.edu.ifal.enology.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,17 +18,15 @@ public class AdminController {
     PalavraRepository palavraRepository;
     @Autowired
     ConteudoRepository conteudoRepository;
-    Usuario usuarioLogado;
 
     @RequestMapping("/attention")
     public ModelAndView att() {
         ModelAndView model = new ModelAndView("task/attention");
         return model;
     }
-    
+
     @RequestMapping("/tarefa")
-    public ModelAndView cadastro_tarefa(Palavra palavra, Authentication authentication) {
-        usuarioLogado = (Usuario) authentication.getPrincipal();
+    public ModelAndView cadastro_tarefa(Palavra palavra, @AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("user/tarefas");
         Iterable<Palavra> palavras = palavraRepository.findAll();
         Iterable<Conteudo> conteudos = conteudoRepository.findAll();
