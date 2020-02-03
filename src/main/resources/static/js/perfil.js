@@ -1,6 +1,4 @@
 
-location.href = "#veim";
-
 if (document.getElementById("erroSenhaAtual").textContent != "") {
 
     document.getElementById("nav1").style.display = "none";
