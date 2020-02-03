@@ -6,3 +6,52 @@
     background-size: cover;
     background-color: white;
 }
+
+.row{
+    padding: 0rem 0rem;
+}
+
+.icon{
+    font-size: 30pt;
+}
+
+
+
+@media (min-width: 700px) {
+    #foto {
+        width: 25%;
+    }
+
+    .btn-lg{
+        font-size: 1rem;
+        padding: 1;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .btn-lg{
+        font-size: 0.9rem;
+        padding: 1;
+    }
+    h1{
+        font-size: 22pt;
+    }
+    .icon{
+        font-size: 22pt;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .btn-lg{
+        font-size: 1.5rem;
+        padding: 1;
+    }
+}
+
+@media (min-width: 1025px) {
+    .btn-lg{
+        font-size: 1.2rem;
+        padding: 0.9rem;
+    }
+}

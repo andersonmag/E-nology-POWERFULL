@@ -6,43 +6,25 @@
     <meta name="viewport" content="width=device-width">
     <title>Home | E-nology</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/mapa.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/licao.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mapa.css">
+    <link href="css/sidebar.css" rel="stylesheet">
 
-    <style>
-        .modal{
-            left: 22%;
-            right: auto;
-            top: auto;
-            bottom: 12%;
-        }
-        .row {
-            padding: 0rem 0rem;
-        }
-
-        @media only screen and (max-width: 600px) {
-            #foto {
-                width: 25%;
-            }
-        }
-    </style>
 </head>
 
 <body class="fundo" oncopy="return false" oncut="return false" onpaste="return false">
     <div class="row fixed-top navbar">
-        <span class="botao fa fa-bars" onclick="mostrarSidebar()">
+        <span class="botao fa fa-bars" onclick="alterarSidebar()">
         </span>
-        <a class="navbar-brand marca" style="font-size: 18pt;" href="/"><span>E-nology</span></a>
+        <a class="navbar-brand marca" style="font-size: 18pt;color: white;" href="/"><span>E-nology</span></a>
         <div class="direita align-middle">
-            <span class="teste fa fa-database mr-1" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
+            <span class="teste fa fa-database" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
                 data-placement="bottom" title="Sua pontuação até aqui">
             </span>
             <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
@@ -53,8 +35,10 @@
         <div>
             <div class="d-flex justify-content-center"
                 style="height: 100%; background: repeating-linear-gradient(#011f41, #003572 49.9%, #003572 50.1%, #011f41 100%);">
-                <img id="foto" src="images/dean.jpg" alt="Minha Foto" width="75"
-                    class="img-fluid d-flex justify-content-center" style="border-radius: 20px;">
+                <img id="foto" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}" alt="Minha Foto"
+                    width="75" class="img-fluid d-flex justify-content-center" style="border-radius: 20px;">
+                <span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
+                    style="font-size: 50pt; color: #011f41;"></span>
             </div>
             <strong>
                 <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
@@ -64,25 +48,26 @@
             <br>
         </div>
         <span></span>
-        <a href="#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+        <a name="link" href="/mapa#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 
-        <a href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span> </span></a>
-        <a href="/perfil"><span class="fa fa-blind"><span class="ml-2 fonte">Meu Progresso</span></span></a>
+        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
+            </span></a>
         <br>
         <div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
-            <a href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span> </span></a>
+            <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+                </span></a>
             <br>
         </div>
         <h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
 
-        <a href="#"> <span class="fa fa-heart"><span
-                    class="ml-2 fonte">Siga-nos</span></span></a>
-        <a href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o App</span></span></a>
+        <a name="link" href="##"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
+        <a name="link" href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o
+                    App</span></span></a>
         <br>
         <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
     </div>
 
-    <div class="container">
+    <div class="container" onclick="esconderSidebar()">
         <div class="container">
             <div class="row mt-5"></div>
             <div class="row mt-5 d-flex justify-content-center">
@@ -90,64 +75,6 @@
                 <div class="col-4 d-flex justify-content-center ">
                     <img class="img-fluid" src="images/btn1.png" width="80" style="cursor: pointer" data-toggle="modal"
                         data-target="#exampleModalCenter">
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body" style="display: block;">
-                                    <div class="row">
-                                        <div class="col-2">
-                                            <span class="fa fa-warning text-danger" style="font-size: 30pt;"></span>
-                                            <small><strong>Nível 1</strong> </small>
-
-                                        </div>
-                                        <div class="col-8">
-                                            <h1 class="marca"> .Introdução</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-body d-flex ml-3">
-                                    <i>
-                                        . Conceitos Iniciais <br>
-                                        . Estruturas de Condição <br>
-                                        . Estruturas de Repetição <br>
-                                    </i>
-                                </div>
-                                <div class="modal-footer" style="justify-content: initial; display: inline;">
-                                    <div class="row">
-                                        <div class="col-4">
-
-                                            <button type="button" class="btn btn-lg" disabled
-                                                style="width: 100%;pointer-events: none;color: white ; background-color: #00475b;">
-                                                Aprender
-                                            </button>
-
-                                        </div>
-                                        <div class="col-3">
-
-                                            <button type="button" class="btn btn-lg" disabled
-                                                style="width: 100%;pointer-events: none;color: white ; background-color: #022640;">
-                                                Quiz
-                                            </button>
-
-                                        </div>
-                                        <div class="col-5">
-                                            <a href="/attention">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                    style=" width: 80%;color: white ;">
-                                                    <span class="fa fa-paw"></span>
-                                                    Praticar
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <div class="col-4"></div>
             </div>
@@ -194,17 +121,73 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <!-- Modal -->
+            <div class="col">
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body" style="display: block;">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <span class="fa fa-warning text-danger icon"></span>
+                                        <br>
+                                        <small><strong>Nível 1</strong> </small>
+    
+                                    </div>
+                                    <div class="col-9">
+                                        <h1 class="marca"> .Introdução</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body d-flex ml-3">
+                                <i>
+                                    . Conceitos Iniciais <br>
+                                    . Estruturas de Condição <br>
+                                    . Estruturas de Repetição <br>
+                                </i>
+                            </div>
+                            <div class="modal-footer" style="display: inline;">
+                                <div class="row ">
+                                    <div class="col-4 ">
+    
+                                        <button type="button" class="btn btn-lg" disabled
+                                            style="pointer-events: none;color: white ; background-color: #00475b;">
+                                            Aprender
+                                        </button>
+    
+                                    </div>
+                                    <div class="col-3">
+    
+                                        <button type="button" class="btn btn-lg" disabled
+                                            style="pointer-events: none;color: white ; background-color: #022640;">
+                                            Quiz
+                                        </button>
+    
+                                    </div>
+                                    <div class="col-5">
+                                        <a href="/attention">
+                                            <button type="button" class="btn btn-primary btn-lg" style="color: white ;">
+                                                Praticar
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-</body>
-
-</html>
-
-<script src="js/sidebar.js"></script>
-<script src="js/jquery-3.2.1.slim.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+    
+    <script src="js/sidebar.js"></script>
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
