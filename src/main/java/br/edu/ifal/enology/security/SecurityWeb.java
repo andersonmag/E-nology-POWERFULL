@@ -40,13 +40,12 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        
         auth.userDetailsService(UserDetails)
         .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     public void configure(WebSecurity web) throws Exception{
 
-        web.ignoring().antMatchers("/h2-console/**", "/salvar/**", "/cadastrar/**", "/licao/corrigir");
+        web.ignoring().antMatchers("/h2-console/**", "/salvar/**", "/cadastrar/**", "/licao/corrigir", "/upload/**");
     }
 }
