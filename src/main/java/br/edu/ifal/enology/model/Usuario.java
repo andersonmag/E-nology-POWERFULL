@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 public class Usuario implements UserDetails {
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,14 +25,10 @@ public class Usuario implements UserDetails {
     private String nome;
     private String sobrenome;
     private int pontuacaoDoAluno;
+    private String caminhoImagem;
 
     @ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable( 
-	        name = "usuarios_roles", 
-	        joinColumns = @JoinColumn(
-	          name = "usuario_id", referencedColumnName = "id"), 
-	        inverseJoinColumns = @JoinColumn(
-	          name = "role_id", referencedColumnName = "nome")) 
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "nome"))
     private List<Role> roles;
 
     public Long getId() {
@@ -93,6 +89,14 @@ public class Usuario implements UserDetails {
         return this.email;
     }
 
+    public String getCaminhoImagem() {
+        return caminhoImagem;
+    }
+
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -125,4 +129,5 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
