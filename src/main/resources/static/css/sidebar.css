@@ -46,10 +46,15 @@
   
   }
 
+  .ativo{
+    background-color: rgb(3, 84, 151);
+  }
+
   .botao{
 
     font-size:30px;cursor:pointer; 
-    margin-left: 5%;color: white;
+    margin-left: 5%;
+    color: white;
 
   }
 

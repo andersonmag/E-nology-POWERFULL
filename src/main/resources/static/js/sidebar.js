@@ -1,12 +1,28 @@
 
-function mostrarSidebar() {
+var links = document.getElementsByName("link");
 
-    if (document.getElementById("sidebar").style.width == "250px") {
+for (var i = 0; i < links.length; i++) {
 
+    if (links[i].href == location.href + "#")
+        links[i].classList.add('ativo');
+}
+
+function esconderSidebar() {
+    if (document.getElementById("sidebar").style.width == "200px") {
+
+        document.getElementById("sidebar").style.width = "0";
+    }
+
+}
+
+function alterarSidebar() {
+
+    if (document.getElementById("sidebar").style.width == "200px") {
         document.getElementById("sidebar").style.width = "0";
     }
     else {
 
-        document.getElementById("sidebar").style.width = "250px";
+        document.getElementById("sidebar").style.width = "200px";
     }
 }
+
