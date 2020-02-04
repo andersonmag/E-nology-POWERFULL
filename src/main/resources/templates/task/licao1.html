@@ -15,23 +15,24 @@
     <link rel="stylesheet" href="../css/licao.css">
 </head>
 
-<body onload=iniciarCronometro() id="body">
+<body>
     <div class="row fixed-top navbar">
         <a href="/mapa">
             <div class="text-left">
                 <span class="fa fa-mail-reply-all ml-5 icone-grande">
             </div>
         </a>
-        <span class="fa fa-battery-3 teste icone-grande">
-            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">4/10</span>
+        <span class="fa fa-battery-0 teste icone-grande">
+            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;"
+            th:if="${tarefasAtual} le ${tarefasTotal}"  th:text="${tarefasAtual} + '/' + ${tarefasTotal}"></span>
         </span>
         </span>
         <div class="direita">
             <span class="teste fa fa-hourglass-1 icone-normal" id="ampulheta"></span>
             <span id="relogioDoFaustao" class="teste mr-3"></span>
 
-            <span class="teste fa fa-database icone-normal icone-amarelo" data-toggle="tooltip"
-                data-placement="bottom" title="Sua pontuação até aqui">
+            <span class="teste fa fa-database icone-normal icone-amarelo" data-toggle="tooltip" data-placement="bottom"
+                title="Sua pontuação até aqui">
             </span>
             <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
                 data-placement="bottom" title="Sua pontuação até aqui"></span>
@@ -56,12 +57,6 @@
                             onclick="mudarButao()" />
                         <label th:for="${palavra.ingles}" style="color: white;" th:text="${palavra.ingles}"></label>
                     </div>
-                    <div class="radiobtn">
-                        <input type="radio" th:id="${tarefa.resposta.ingles}" name="palavra"
-                            th:value="${tarefa.resposta.id}" onclick="mudarButao()" />
-                        <label style="color: white;" th:for="${tarefa.resposta.ingles}"
-                            th:text="${tarefa.resposta.ingles}"></label>
-                    </div>
                 </div>
             </div>
             <hr class="linha mt-5">
@@ -78,7 +73,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <audio id="somTimeout" src="../sound/timeout.mp3"></audio>
+                        <audio id="timeout" src="../sound/timeout.mp3"></audio>
                         </audio>
                         <span class="modal-title fa fa-clock-o text-danger " id="exampleModalCenterTitle"
                             style="font-size:70px"></span>
@@ -110,7 +105,7 @@
             <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
                 <div class="modal-content">
                     <div class="alert alert-info " role="alert">
-                        <audio id="somAcerto" src="../sound/acertou.mp3"></audio>
+                        <audio id="ac" src="../sound/acertou.mp3"></audio>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="row">
@@ -118,7 +113,9 @@
                                     </span><br>
                                 </div>
                                 <div class="row">
-                                    <small class="alert-heading d-flex float-right text-success texto-resultado texto-acertou">Very Well!</small>
+                                    <small
+                                        class="alert-heading d-flex float-right text-success texto-resultado texto-acertou">Very
+                                        Well!</small>
                                 </div>
                             </div>
                             <div class="col-md-4 ml-2">
@@ -145,19 +142,20 @@
 
         <!-- Modal Error -->
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-            th:unless="${resposta} == ${tarefa.resposta.id}" id="modalError" aria-hidden="true" data-backdrop="static"
+            th:unless="${resposta} == ${tarefa.resposta.id}" id="modalEr" aria-hidden="true" data-backdrop="static"
             data-keyboard="false">
             <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
                 <div class="modal-content">
                     <div class="alert alert-light " role="alert" style="border-bottom: 1px solid rgba(0,0,0,.1);">
-                        <audio id="somErro" src="../sound/errou.mp3"></audio>
+                        <audio id="er" src="../sound/errou.mp3"></audio>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="row">
                                     <span class="fa fa-times-circle-o float-right text-danger icone-resultado"></span>
                                 </div>
                                 <div class="row">
-                                    <small class="alert-heading d-flex float-right text-danger texto-resultado">Ops...</small>
+                                    <small
+                                        class="alert-heading d-flex float-right text-danger texto-resultado">Ops...</small>
                                 </div>
                             </div>
                             <div class="col-md-4 ml-2">
@@ -171,11 +169,11 @@
                             </div>
                             <div class="col-md-3">
                                 <a href="/licao/condicionais">
-                                    <button class="btn btn-lg float-right bg-danger botao-resultado" style="width: 50%; color: white;"
-                                        type="submit" onmouseover="this.style.backgroundColor='#0f8191'"
+                                    <button class="btn btn-lg float-right bg-danger botao-resultado"
+                                        style="width: 50%; color: white;" type="submit"
+                                        onmouseover="this.style.backgroundColor='#0f8191'"
                                         onmouseout="this.style.backgroundColor='#036977'">
                                         Continuar</button></a>
-
                             </div>
                         </div>
                     </div>
@@ -191,31 +189,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        window.onload = function () {
+            iniciarCronometro();
+            init(/*[[${tarefa.resposta.id}]]*/0, /*[[${resposta}]]*/0);
+
+        };
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
-        <script th:inline="javascript">
-
-            var respostaDaTarefa = /*[[${tarefa.resposta.id}]]*/ 1;
-             var resposta = /*[[${resposta}]]*/ 2;
-            var opcoes = document.getElementsByName("palavra");
-    
-        for (var i = 0; i <= opcoes.length; i++) {
-            if (opcoes[i].value == resposta) {
-                if (respostaDaTarefa == resposta) {
-                opcoes[i].checked = true;
-            $('#modalAc').modal('show');
-            document.getElementById("somAcerto").play();
-        }
-                else {
-                opcoes[i].checked = true;
-            $('#modalError').modal('show');
-            document.getElementById("somErro").play();
-        }
-    }
-}
-    </script>
 </body>
 
 </html>
