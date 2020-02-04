@@ -1,14 +1,18 @@
 package br.edu.ifal.enology.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import br.edu.ifal.enology.model.Conteudo;
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Solucao;
 import br.edu.ifal.enology.model.Tarefa;
 import br.edu.ifal.enology.model.Usuario;
+import br.edu.ifal.enology.repository.ConteudoRepository;
 import br.edu.ifal.enology.repository.PalavraRepository;
 import br.edu.ifal.enology.repository.SolucaoRepository;
 import br.edu.ifal.enology.repository.TarefaRepository;
@@ -22,6 +26,8 @@ public class SequenciadorService {
     TarefaRepository tarefaRepository;
     @Autowired
     SolucaoRepository solucaoRepository;
+    @Autowired
+    ConteudoRepository conteudoRepository;
 
     public Tarefa buscarTarefa(Usuario usuario) {
         List<Tarefa> todasTarefas = tarefaRepository.findAll();
@@ -67,24 +73,48 @@ public class SequenciadorService {
         return tarefasRestantes.get(indexTarefa);
     }
 
-    public List<Palavra> buscarPalavrasPorConteudo(String conteudoTitulo, String respostaDaTarefa) {
-        List<Palavra> palavrasEncontradas = new ArrayList<>();
-        List<Palavra> palavras = palavraRepository.findAll();
+    public Conteudo pegarConteudoAleatorio(Palavra respostaDaTarefa) {
+        Random numeroAleatorio = new Random();
+        List<Conteudo> todosConteudos = conteudoRepository.findAll();
+        int indexConteudo;
 
-        for (int i = 0; i < palavras.size(); i++) {
-            for (int j = 0; j < palavras.get(i).getConteudos().size(); j++) {
-                if (palavras.get(i).getConteudos().get(j) != null) {
-                    System.out.println(palavras.get(i).getConteudos().get(j).getTitulo());
-                    if (palavras.get(i).getConteudos().get(j).getTitulo().equals(conteudoTitulo)
-                            && !palavras.get(i).getIngles().equals(respostaDaTarefa)) {
-                        palavrasEncontradas.add(palavras.get(i));
-                    }
-                    continue;
-                } else {
-                    break;
-                }
+        for (Conteudo conteudo : todosConteudos) {
+            if (respostaDaTarefa.getConteudos().contains(conteudo)) {
+                return conteudo;
             }
         }
-        return palavrasEncontradas;
+        indexConteudo = numeroAleatorio.nextInt(todosConteudos.size());
+
+        return todosConteudos.get(indexConteudo);
+    }
+
+    // private List<Palavra> pegarRespostasDasTarefasRespondidas(List<Solucao> solucoesDoAluno){
+    //     List<Palavra> respostasDasTarefasRespondidas = new ArrayList<>();
+
+    //     for (Solucao solucao : solucoesDoAluno) {
+    //         respostasDasTarefasRespondidas.add(solucao.getTarefa().getResposta());
+    //     }
+
+    //     return respostasDasTarefasRespondidas;
+    // }
+
+    public List<Palavra> buscarPalavrasPorConteudo(Conteudo conteudo, Palavra respostaDaTarefa) {
+        List<Palavra> palavrasFiltradasPorConteudo = palavraRepository.findByConteudos(conteudo);
+        List<Palavra> palavrasComTamanhoCorreto = new ArrayList<>();
+        int tamanhoMaximoDaLista = 3;
+
+        Collections.shuffle(palavrasFiltradasPorConteudo);
+
+            for (int i = 0; i < palavrasFiltradasPorConteudo.size(); i++) {
+                if (palavrasComTamanhoCorreto.size() < tamanhoMaximoDaLista
+                        && palavrasFiltradasPorConteudo.get(i) != respostaDaTarefa) {
+                    palavrasComTamanhoCorreto.add(palavrasFiltradasPorConteudo.get(i));
+                }
+            }
+            System.out.println("entrou");
+        palavrasComTamanhoCorreto.add(respostaDaTarefa);
+        Collections.shuffle(palavrasComTamanhoCorreto);
+            System.err.println(palavrasComTamanhoCorreto.size());
+        return palavrasComTamanhoCorreto;
     }
 }
