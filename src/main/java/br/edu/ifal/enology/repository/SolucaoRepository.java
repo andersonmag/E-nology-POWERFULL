@@ -1,7 +1,6 @@
 package br.edu.ifal.enology.repository;
 
 import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 import br.edu.ifal.enology.model.Solucao;
 import br.edu.ifal.enology.model.Usuario;
