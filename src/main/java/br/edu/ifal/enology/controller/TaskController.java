@@ -1,9 +1,6 @@
 package br.edu.ifal.enology.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import br.edu.ifal.enology.model.Conteudo;
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Tarefa;
 import br.edu.ifal.enology.model.Usuario;
@@ -22,6 +17,7 @@ import br.edu.ifal.enology.repository.PalavraRepository;
 import br.edu.ifal.enology.repository.TarefaRepository;
 import br.edu.ifal.enology.repository.SolucaoRepository;
 import br.edu.ifal.enology.service.SequenciadorService;
+import br.edu.ifal.enology.service.TarefaService;
 
 @RequestMapping("/licao")
 @RestController
@@ -37,10 +33,8 @@ public class TaskController {
     SolucaoRepository solucaoRepository;
     @Autowired
     SequenciadorService sequenciadorService;
-
-    Tarefa tarefa;
-    Long resposta;
-    List<Palavra> palavrasEncontradas;
+    @Autowired
+    TarefaService tarefaService;
 
     @RequestMapping("/cadastrar")
     public ModelAndView cadastrar(Palavra palavra, Tarefa tarefa) {
@@ -54,21 +48,20 @@ public class TaskController {
     }
 
     @RequestMapping("/corrigir")
-    public ModelAndView corrigirResposta(Long palavra, RedirectAttributes redirect, HttpServletRequest request) {
+    public ModelAndView corrigirResposta(Long palavra, Long id, RedirectAttributes redirect, HttpServletRequest request) {
         Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
-        resposta = palavra;
-        boolean acertou = tarefa.getResposta().getId().equals(palavra);
-
+        Tarefa tarefaAtual = tarefaService.pegarTarefaPorId(id);
+        boolean acertou = tarefaAtual.getResposta().getId().equals(palavra);
         if (acertou) {
-            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefa.getPontuacao());
+            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefaAtual.getPontuacao());
         }
 
         Solucao solucao = new Solucao();
         solucao.setAluno(usuarioLogado);
-        solucao.setResposta(tarefa.getResposta().getIngles());
+        solucao.setResposta(tarefaAtual.getResposta().getIngles());
         solucao.setAcertou(acertou);
-        solucao.setTarefa(tarefa);
-        solucao.setPontuacao(tarefa.getPontuacao());
+        solucao.setTarefa(tarefaAtual);
+        solucao.setPontuacao(tarefaAtual.getPontuacao());
         solucaoRepository.save(solucao);
 
         redirect.addFlashAttribute("resposta", palavra);
@@ -76,21 +69,16 @@ public class TaskController {
     }
 
     @RequestMapping("/condicionais")
-    public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado) {
+    public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado, HttpServletRequest request) {
         ModelAndView model = new ModelAndView("task/licao1");
 
         try {
-            if (resposta == null) {
-                tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
-                    System.err.println("oieee");
-              palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo(
-                        sequenciadorService.pegarConteudoAleatorio(tarefa.getResposta()), tarefa.getResposta());
-            }
-            resposta = null;
+            Tarefa tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
+            List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo(
+                    sequenciadorService.pegarConteudoAleatorio(tarefa.getResposta()), tarefa.getResposta());
 
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas)
-                    .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaRepository.findAll().size())
-                    .addObject("tarefasAtual", solucaoRepository.findByAluno(usuarioLogado).size() + 1);
+                    .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaRepository.findAll().size());
         } catch (NullPointerException e) {
             model.setViewName("task/resultado");
             model.addObject("usuario", usuarioLogado);
