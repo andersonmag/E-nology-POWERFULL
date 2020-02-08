@@ -1,18 +1,16 @@
 
 var tempo = new Number(50);
 
-function init(rt, r) {
+function init(rt) {
     var opcoes = document.getElementsByName("palavra");
 
     for (var i = 0; i <= opcoes.length; i++) {
-        if (opcoes[i].value == r) {
-            if (rt == r) {
-                opcoes[i].checked = true;
+        if (opcoes[i].checked == true) {
+            if (opcoes[i].value == rt) {
                 $('#modalAc').modal('show');
                 document.getElementById("ac").play();
             }
             else {
-                opcoes[i].checked = true;
                 $('#modalEr').modal('show');
                 document.getElementById("er").play();
             }
@@ -30,6 +28,7 @@ function timeout() {
 }
 
 function iniciarCronometro() {
+
     var ampulheta = document.getElementById("ampulheta");
 
     if ((tempo - 1) >= 0) {
@@ -46,17 +45,18 @@ function iniciarCronometro() {
                 break;
         }
 
-        if (tempo < 10) {
-            relogioDoFaustao.innerText = '00:0' + tempo;
-            setTimeout('iniciarCronometro()', 1000);
-        }
-        else {
-            relogioDoFaustao.innerText = '00:' + tempo;
-            setTimeout('iniciarCronometro()', 1000);
+        if (!$('#modalEr').hasClass('show') && !$('#modalAc').hasClass('show')) {
+            if (tempo < 10) {
+                relogioDoFaustao.innerText = '00:0' + tempo;
+                setTimeout('iniciarCronometro()', 1000);
+            }
+            else {
+                relogioDoFaustao.innerText = '00:' + tempo;
+                setTimeout('iniciarCronometro()', 1000);
+            }
         }
     }
     else {
         timeout();
     }
 }
-
