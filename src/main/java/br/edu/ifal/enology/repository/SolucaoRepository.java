@@ -8,4 +8,5 @@ import br.edu.ifal.enology.model.Usuario;
 public interface SolucaoRepository extends CrudRepository<Solucao, Long>{
 
     List<Solucao>findByAluno(Usuario aluno);
+    List<Solucao> findAll();
 }
