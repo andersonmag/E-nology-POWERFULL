@@ -3,7 +3,6 @@ package br.edu.ifal.enology.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,8 +68,9 @@ public class TaskController {
     }
 
     @RequestMapping("/condicionais")
-    public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado, HttpServletRequest request) {
+    public ModelAndView licao(HttpServletRequest request) {
         ModelAndView model = new ModelAndView("task/licao1");
+        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
         try {
             Tarefa tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
@@ -78,7 +78,8 @@ public class TaskController {
                     sequenciadorService.pegarConteudoAleatorio(tarefa.getResposta()), tarefa.getResposta());
 
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas)
-                    .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaRepository.findAll().size());
+                    .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaRepository.findAll().size())
+                    .addObject("tarefasRespondidasAtualmente", sequenciadorService.filtrarTarefasRespondidas(solucaoRepository.findByAluno(usuarioLogado)).size());
         } catch (NullPointerException e) {
             model.setViewName("task/resultado");
             model.addObject("usuario", usuarioLogado);

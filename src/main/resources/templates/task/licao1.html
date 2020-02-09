@@ -22,8 +22,9 @@
                 <span class="fa fa-mail-reply-all ml-5 icone-grande">
             </div>
         </a>
-        <span class="fa fa-battery-0 teste icone-grande">
-            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasTotal}"></span>
+        <span class="fa teste icone-grande" id="bateria">
+            <span id="pontuacao" th:text="${tarefasRespondidasAtualmente}" style="font-family: 'Bebas Neue', cursive; font-size: 10pt;"></span>
+            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">/ </span><span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasTotal}"></span>
         </span>
         </span>
         <div class="direita">
@@ -189,6 +190,7 @@
         document.getElementById("butao").onclick = function() {init(/*[[${tarefa.resposta.id}]]*/0)};
         window.onload = function () {
             iniciarCronometro();
+            alterarIconeBateria();
         };
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"

@@ -1,4 +1,3 @@
-
 var tempo = new Number(50);
 
 function init(rt) {
@@ -15,6 +14,29 @@ function init(rt) {
                 document.getElementById("er").play();
             }
         }
+    }
+}
+
+function alterarIconeBateria() {
+    var pontuacao = document.getElementById("pontuacao").textContent;
+    var bateria = document.getElementById("bateria");
+
+    switch (parseInt(pontuacao)) {
+        case 1:
+            bateria.classList.remove('fa-battery-0');
+            bateria.classList.add('fa-battery-1');
+            break;
+        case 2:
+            bateria.classList.remove('fa-battery-1');
+            bateria.classList.add('fa-battery-2');
+            break;
+        case 3:
+            bateria.classList.remove('fa-battery-2');
+            bateria.classList.add('fa-battery-3');
+            break;
+        default:
+            bateria.classList.add('fa-battery-0');
+            break;
     }
 }
 

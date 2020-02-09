@@ -37,7 +37,7 @@ public class SequenciadorService {
         return selecionarTarefa(todasTarefas, tarefasRespondidasCorretamente);
     }
 
-    private List<Tarefa> filtrarTarefasRespondidas(List<Solucao> solucoesDoAluno) {
+    public List<Tarefa> filtrarTarefasRespondidas(List<Solucao> solucoesDoAluno) {
         List<Tarefa> tarefasRespondidasCorretamente = new ArrayList<>();
 
         for (Solucao solucao : solucoesDoAluno) {
