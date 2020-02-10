@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -39,13 +38,11 @@ public class UserController {
     private String bucketFolder;
 
     @RequestMapping("/perfil")
-    public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado,
-            HttpServletRequest request) {
+    public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("user/perfil");
 
         authentication = pegarNovoAuthentication(authentication, usuarioLogado);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        request.getSession().setAttribute("usuarioLogado", authentication.getPrincipal());
         model.addObject("usuario", authentication.getPrincipal());
 
         return model;
@@ -53,8 +50,7 @@ public class UserController {
 
     @RequestMapping("/upload")
     public ModelAndView upload(@RequestParam(name = "imagem", required = false) MultipartFile imagem,
-            HttpServletRequest request) {
-        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
+            @AuthenticationPrincipal Usuario usuarioLogado) {
 
         if (imagem != null) {
             usuarioLogado.setCaminhoImagem(salvarImagem(imagem, usuarioLogado));
@@ -65,9 +61,8 @@ public class UserController {
     }
 
     @RequestMapping("/salvar")
-    public ModelAndView salvar(@Valid Usuario usuario, String novaSenha, RedirectAttributes redirect,
-            HttpServletRequest request) {
-        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
+    public ModelAndView salvar(@Valid Usuario usuario, @AuthenticationPrincipal Usuario usuarioLogado, String novaSenha,
+            RedirectAttributes redirect) {
 
         // Cadastro
         if (usuario.getId() == null) {
@@ -82,7 +77,7 @@ public class UserController {
                 return new ModelAndView("redirect:/login");
             }
         }
-        
+
         usuario.setCaminhoImagem(usuarioLogado.getCaminhoImagem());
         // Atualizar Cadastro
         if (!usuario.getSenha().equals("")) {

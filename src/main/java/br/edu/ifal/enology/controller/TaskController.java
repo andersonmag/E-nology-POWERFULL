@@ -1,27 +1,23 @@
 package br.edu.ifal.enology.controller;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import br.edu.ifal.enology.model.Palavra;
-import br.edu.ifal.enology.model.Tarefa;
-import br.edu.ifal.enology.model.Usuario;
-import br.edu.ifal.enology.model.Solucao;
-import br.edu.ifal.enology.repository.ConteudoRepository;
-import br.edu.ifal.enology.repository.PalavraRepository;
-import br.edu.ifal.enology.repository.TarefaRepository;
-import br.edu.ifal.enology.repository.SolucaoRepository;
-import br.edu.ifal.enology.service.SequenciadorService;
-import br.edu.ifal.enology.service.TarefaService;
+import br.edu.ifal.enology.model.*;
+import br.edu.ifal.enology.repository.*;
+import br.edu.ifal.enology.service.*;
 
 @RequestMapping("/licao")
 @RestController
 public class TaskController {
 
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     TarefaRepository tarefaRepository;
     @Autowired
@@ -46,31 +42,37 @@ public class TaskController {
         return new ModelAndView("redirect:/tarefa");
     }
 
-    @RequestMapping("/corrigir")
-    public ModelAndView corrigirResposta(Long palavra, Long id, RedirectAttributes redirect, HttpServletRequest request) {
-        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
-        Tarefa tarefaAtual = tarefaService.pegarTarefaPorId(id);
+    @RequestMapping("/corrigir/{id}")
+    public ModelAndView corrigirResposta(@PathVariable("id") Long idTarefa,
+            @AuthenticationPrincipal Usuario usuarioLogado, Long palavra, RedirectAttributes redirect) {
+        Solucao solucao = new Solucao();
+        int pontuacaoResposta;
+        Tarefa tarefaAtual = tarefaService.pegarTarefaPorId(idTarefa);
         boolean acertou = tarefaAtual.getResposta().getId().equals(palavra);
         if (acertou) {
-            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + tarefaAtual.getPontuacao());
+            pontuacaoResposta = usuarioLogado.getPontuacaoDoAluno() + tarefaAtual.getPontuacao();
+            usuarioLogado.setPontuacaoDoAluno(pontuacaoResposta);
+            userRepository.save(usuarioLogado);
+        } else {
+            pontuacaoResposta = tarefaAtual.getPontuacao() / 2;
+            tarefaAtual.setPontuacao(pontuacaoResposta);
+            tarefaRepository.save(tarefaAtual);
         }
 
-        Solucao solucao = new Solucao();
         solucao.setAluno(usuarioLogado);
         solucao.setResposta(tarefaAtual.getResposta().getIngles());
         solucao.setAcertou(acertou);
         solucao.setTarefa(tarefaAtual);
-        solucao.setPontuacao(tarefaAtual.getPontuacao());
+        solucao.setPontuacao(pontuacaoResposta);
         solucaoRepository.save(solucao);
 
-        redirect.addFlashAttribute("resposta", palavra);
+        redirect.addFlashAttribute("pontuacaoNaLIcao", pontuacaoResposta);
         return new ModelAndView("redirect:/licao/condicionais");
     }
 
     @RequestMapping("/condicionais")
-    public ModelAndView licao(HttpServletRequest request) {
+    public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("task/licao1");
-        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
         try {
             Tarefa tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
@@ -79,7 +81,8 @@ public class TaskController {
 
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas)
                     .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaRepository.findAll().size())
-                    .addObject("tarefasRespondidasAtualmente", sequenciadorService.filtrarTarefasRespondidas(solucaoRepository.findByAluno(usuarioLogado)).size());
+                    .addObject("tarefasRespondidasAtualmente", sequenciadorService
+                            .filtrarTarefasRespondidas(solucaoRepository.findByAluno(usuarioLogado)).size());
         } catch (NullPointerException e) {
             model.setViewName("task/resultado");
             model.addObject("usuario", usuarioLogado);

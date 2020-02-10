@@ -6,16 +6,8 @@ import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import br.edu.ifal.enology.model.Conteudo;
-import br.edu.ifal.enology.model.Palavra;
-import br.edu.ifal.enology.model.Solucao;
-import br.edu.ifal.enology.model.Tarefa;
-import br.edu.ifal.enology.model.Usuario;
-import br.edu.ifal.enology.repository.ConteudoRepository;
-import br.edu.ifal.enology.repository.PalavraRepository;
-import br.edu.ifal.enology.repository.SolucaoRepository;
-import br.edu.ifal.enology.repository.TarefaRepository;
+import br.edu.ifal.enology.model.*;
+import br.edu.ifal.enology.repository.*;
 
 @Repository
 public class SequenciadorService {
@@ -44,7 +36,6 @@ public class SequenciadorService {
             if (solucao.isAcertou())
                 tarefasRespondidasCorretamente.add(solucao.getTarefa());
         }
-
         return tarefasRespondidasCorretamente;
     }
 
@@ -88,16 +79,6 @@ public class SequenciadorService {
         return todosConteudos.get(indexConteudo);
     }
 
-    // private List<Palavra> pegarRespostasDasTarefasRespondidas(List<Solucao> solucoesDoAluno){
-    //     List<Palavra> respostasDasTarefasRespondidas = new ArrayList<>();
-
-    //     for (Solucao solucao : solucoesDoAluno) {
-    //         respostasDasTarefasRespondidas.add(solucao.getTarefa().getResposta());
-    //     }
-
-    //     return respostasDasTarefasRespondidas;
-    // }
-
     public List<Palavra> buscarPalavrasPorConteudo(Conteudo conteudo, Palavra respostaDaTarefa) {
         List<Palavra> palavrasFiltradasPorConteudo = palavraRepository.findByConteudos(conteudo);
         List<Palavra> palavrasComTamanhoCorreto = new ArrayList<>();
@@ -105,16 +86,14 @@ public class SequenciadorService {
 
         Collections.shuffle(palavrasFiltradasPorConteudo);
 
-            for (int i = 0; i < palavrasFiltradasPorConteudo.size(); i++) {
-                if (palavrasComTamanhoCorreto.size() < tamanhoMaximoDaLista
-                        && palavrasFiltradasPorConteudo.get(i) != respostaDaTarefa) {
-                    palavrasComTamanhoCorreto.add(palavrasFiltradasPorConteudo.get(i));
-                }
+        for (int i = 0; i < palavrasFiltradasPorConteudo.size(); i++) {
+            if (palavrasComTamanhoCorreto.size() < tamanhoMaximoDaLista
+                    && palavrasFiltradasPorConteudo.get(i) != respostaDaTarefa) {
+                palavrasComTamanhoCorreto.add(palavrasFiltradasPorConteudo.get(i));
             }
-            System.out.println("entrou");
+        }
         palavrasComTamanhoCorreto.add(respostaDaTarefa);
         Collections.shuffle(palavrasComTamanhoCorreto);
-            System.err.println(palavrasComTamanhoCorreto.size());
         return palavrasComTamanhoCorreto;
     }
 }

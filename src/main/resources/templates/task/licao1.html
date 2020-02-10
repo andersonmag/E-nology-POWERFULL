@@ -23,8 +23,10 @@
             </div>
         </a>
         <span class="fa teste icone-grande" id="bateria">
-            <span id="pontuacao" th:text="${tarefasRespondidasAtualmente}" style="font-family: 'Bebas Neue', cursive; font-size: 10pt;"></span>
-            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">/ </span><span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasTotal}"></span>
+            <span id="pontuacao" th:text="${tarefasRespondidasAtualmente}"
+                style="font-family: 'Bebas Neue', cursive; font-size: 10pt;"></span>
+            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">/ </span><span
+                style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasTotal}"></span>
         </span>
         </span>
         <div class="direita">
@@ -49,7 +51,7 @@
                 <h6 class="text-secondary d-flex justify-content-center">Escolha a alternativa correta:</h1>
             </div>
         </div>
-        <form method="POST" action="#" th:action="@{/licao/corrigir}" th:object="${tarefa}">
+        <form method="POST" action="#" th:action="@{'/licao/corrigir/' + ${tarefa.id}}" th:object="${tarefa}">
             <div class="row">
                 <div class="col">
                     <input type="hidden" name="id" th:value="${tarefa.id}">
@@ -113,7 +115,7 @@
                 <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
                     <div class="modal-content">
                         <div class="alert alert-light " role="alert" style="border-bottom: 1px solid rgba(0,0,0,.1);">
-                            <audio id="er" src="../sound/errou.mp3"></audio>
+                            <!-- <audio id="er" src="../sound/errou.mp3"></audio> -->
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="row">
@@ -187,7 +189,9 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script th:inline="javascript">
-        document.getElementById("butao").onclick = function() {init(/*[[${tarefa.resposta.id}]]*/0)};
+        document.getElementById("butao").onclick = function () {
+            init(/*[[${tarefa.resposta.id}]]*/0)
+        };
         window.onload = function () {
             iniciarCronometro();
             alterarIconeBateria();

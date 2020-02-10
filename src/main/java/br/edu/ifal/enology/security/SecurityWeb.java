@@ -22,7 +22,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/mapa", "/perfil", "/editarPerfil", "/licao/**").authenticated()
+                .antMatchers("/mapa", "/perfil", "/editarPerfil", "/licao/**", "/salvar/**", "/upload/**").authenticated()
                 .antMatchers("/", "/cadastro", "/login").anonymous()
                 .antMatchers("/tarefa") .hasRole("ADMIN")
                 .and()
@@ -46,6 +46,6 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
 
     public void configure(WebSecurity web) throws Exception{
 
-        web.ignoring().antMatchers("/h2-console/**", "/salvar/**", "/cadastrar/**", "/licao/corrigir", "/upload/**");
+        web.ignoring().antMatchers("/h2-console/**", "/cadastrar/**");
     }
 }
