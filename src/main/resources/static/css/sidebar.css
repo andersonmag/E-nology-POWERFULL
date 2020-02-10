@@ -1,83 +1,75 @@
 .fonte {
+  font-family: 'Nunito', sans-serif;
+}
 
-    font-family: 'Nunito', sans-serif;
+.navbar {
+  background-color: #011f41;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #011f41;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #ffffff;
+  display: block;
+  transition: 0.3s;
+}
+
+.teste {
+  padding: 8px 0px 8px 8px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  background-color: rgb(3, 84, 151);
+}
+
+.ativo {
+  background-color: rgb(3, 84, 151);
+}
+
+.botao {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 5%;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  #foto {
+    width: 50%;
+    height: 50%;
   }
+}
 
-  .navbar{
-
-      background-color: #011f41;
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  #foto {
+    width: 50%;
+    height: 50%;
   }
+}
 
+@media screen and (max-height: 450px) {
   .sidenav {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #011f41;
-      overflow-x: hidden;
-      transition: 0.5s;
-      padding-top: 60px;
+    padding-top: 15px;
   }
-
   .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 15px;
-    color: #ffffff;
-    display: block;
-    transition: 0.3s;
-
+    font-size: 18px;
   }
-
-  .teste{
-
-    padding: 8px 0px 8px 8px;
-    text-decoration: none;
-    font-size: 15px;
-    color: #ffffff;
-    transition: 0.3s;
-  }
-
-  .sidenav a:hover {
-
-    background-color: rgb(3, 84, 151);
-  
-  }
-
-  .ativo{
-    background-color: rgb(3, 84, 151);
-  }
-
-  .botao{
-
-    font-size:30px;cursor:pointer; 
-    margin-left: 5%;
-    color: white;
-
-  }
-
-  @media only screen and (max-width: 600px) { 
-    #foto{
-      width: 50%;
-      height: 50%;
-  }
-  }
-
-  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    #foto{
-      width: 50%;
-      height: 50%;
-  }
-  }
-
-  @media screen and (max-height: 450px) {
-    .sidenav {
-      padding-top: 15px;
-    }
-
-    .sidenav a {
-      font-size: 18px;
-    }
-  }
+}
