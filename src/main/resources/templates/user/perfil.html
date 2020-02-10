@@ -77,7 +77,7 @@
 				<div class="col-12 mt-5 d-flex justify-content-center">
 					<form action="/upload" method="POST" enctype="multipart/form-data">
 						<div class="upload-imagem">
-							<label for="file-input">
+							<label for="file-input" class="d-flex justify-content-center">
 								<img th:if="${usuario.caminhoImagem}" id="foto" th:src="@{${usuario.caminhoImagem}}"
 									alt="Minha Foto" width="120" class="img-fluid" style="border-radius: 40px;" title="Clique para alterar imagem">
 								<span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"

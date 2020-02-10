@@ -1,4 +1,4 @@
-.fundo{
+.fundo {
     background-image: url('../images/bg_mapa_v2.png');
     background-position: center center;
     background-repeat: no-repeat;
@@ -7,75 +7,64 @@
     background-color: white;
 }
 
-.row{
+.row {
     padding: 0rem 0rem;
 }
 
-.botoes-num{
-    width: 42% !important;
+.botoes-num {
+    width: 9% !important;
 }
 
-.botao-main{
+.botao-main {
     width: 28% !important;
 }
 
-.icon{
+.icon {
     font-size: 30pt;
 }
 
-
-
 @media (min-width: 700px) {
-    #foto {
-        width: 25%;
-    }
-
-    .btn-lg{
+    .btn-lg {
         font-size: 1rem;
         padding: 1;
     }
-
 }
 
-@media only screen and (max-width: 600px) { 
-.botoes-num{
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.botao-main{
-  width: 73% !important;
-  height: 100% !important;
-}
-.btn-lg{
-    font-size: 0.9rem;
-    padding: 1;
-}
-h1{
-    font-size: 22pt;
-}
-.icon{
-    font-size: 22pt;
-}
-
-.embaixo-botao{
-    margin-bottom: 326px;
-}
+@media only screen and (max-width: 600px) {
+    .botoes-num {
+        width: 20% !important;
+        height: 20% !important;
+    }
+    .botao-main {
+        width: 73% !important;
+        height: 100% !important;
+    }
+    .btn-lg {
+        font-size: 0.9rem;
+        padding: 1;
+    }
+    h1 {
+        font-size: 22pt;
+    }
+    .icon {
+        font-size: 22pt;
+    }
+    .embaixo-botao {
+        margin-bottom: 295px;
+    }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    .btn-lg{
+    .btn-lg {
         font-size: 1.5rem;
         padding: 1;
     }
-
-    .botoes-num{
-        width: 80% !important;
-        height: 100% !important;
+    .botoes-num {
+        width: 20% !important;
+        height: 20% !important;
     }
-    
-    .botao-main{
-      width: 60% !important;
-      height: 100% !important;
+    .botao-main {
+        width: 70% !important;
+        height: 100% !important;
     }
 }
