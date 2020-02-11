@@ -60,26 +60,28 @@ public class UserController {
         return new ModelAndView("redirect:/perfil");
     }
 
-    @RequestMapping("/salvar")
+    @RequestMapping("/salvarUsuario")
+    public ModelAndView salvarUsuario(@Valid Usuario usuario, RedirectAttributes redirect) {
+
+        if (verificarSeEmailExiste(usuario.getEmail())) {
+            redirect.addFlashAttribute("mensagem", "Email já cadastrado!");
+
+            return new ModelAndView("redirect:/cadastro");
+        } else {
+
+            usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+            userRepository.save(usuario);
+            return new ModelAndView("redirect:/login");
+        }
+
+    }
+
+    @RequestMapping("/atualizar")
     public ModelAndView salvar(@Valid Usuario usuario, @AuthenticationPrincipal Usuario usuarioLogado, String novaSenha,
             RedirectAttributes redirect) {
 
-        // Cadastro
-        if (usuario.getId() == null) {
-            if (verificarSeEmailExiste(usuario.getEmail())) {
-                redirect.addFlashAttribute("mensagem", "Email já cadastrado!");
-
-                return new ModelAndView("redirect:/cadastro");
-            } else {
-
-                usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-                userRepository.save(usuario);
-                return new ModelAndView("redirect:/login");
-            }
-        }
-
         usuario.setCaminhoImagem(usuarioLogado.getCaminhoImagem());
-        // Atualizar Cadastro
+
         if (!usuario.getSenha().equals("")) {
             if (compararSenha(usuario.getSenha(), usuarioLogado.getSenha())) {
                 usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));

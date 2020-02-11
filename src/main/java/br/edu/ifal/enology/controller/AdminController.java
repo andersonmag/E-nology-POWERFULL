@@ -10,6 +10,8 @@ import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.ConteudoRepository;
 import br.edu.ifal.enology.repository.PalavraRepository;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class AdminController {
@@ -34,4 +36,10 @@ public class AdminController {
         model.addObject("palavras", palavras).addObject("conteudos", conteudos).addObject("usuario", usuarioLogado);
         return model;
     }
+
+    @RequestMapping("/about")
+    public ModelAndView about() {
+        return new ModelAndView("about");
+    }
+
 }

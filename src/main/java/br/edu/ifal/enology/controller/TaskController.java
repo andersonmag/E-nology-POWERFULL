@@ -1,8 +1,11 @@
 package br.edu.ifal.enology.controller;
 
 import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +15,7 @@ import br.edu.ifal.enology.model.*;
 import br.edu.ifal.enology.repository.*;
 import br.edu.ifal.enology.service.*;
 
-@RequestMapping("/licao")
+@RequestMapping("/exercicio")
 @RestController
 public class TaskController {
 
@@ -67,12 +70,20 @@ public class TaskController {
         solucaoRepository.save(solucao);
 
         redirect.addFlashAttribute("pontuacaoNaLIcao", pontuacaoResposta);
-        return new ModelAndView("redirect:/licao/condicionais");
+        return new ModelAndView("redirect:/exercicio/intro");
     }
 
-    @RequestMapping("/condicionais")
-    public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado) {
+    @RequestMapping("/intro")
+    public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado,
+            @CookieValue(defaultValue = "", name = "user") String userAcess, HttpServletResponse response) {
         ModelAndView model = new ModelAndView("task/licao1");
+
+        if (userAcess.equals("")) {
+            Cookie cookie = new Cookie("user", "again");
+            response.addCookie(cookie);
+            model.setViewName("task/attention");
+            return model;
+        }
 
         try {
             Tarefa tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
