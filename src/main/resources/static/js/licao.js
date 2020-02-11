@@ -1,4 +1,4 @@
-var tempo = new Number(50);
+var tempo = new Number(61);
 
 function init(rt) {
     var opcoes = document.getElementsByName("palavra");
@@ -76,8 +76,10 @@ function iniciarCronometro() {
                 relogioDoFaustao.innerText = '00:' + tempo;
                 setTimeout('iniciarCronometro()', 1000);
             }
+            
         }
     }
+
     else {
         timeout();
     }

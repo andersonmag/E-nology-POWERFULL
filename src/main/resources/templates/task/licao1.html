@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="../css/licao.css">
 </head>
 
+<style>
+    div.polaroid {
+        width: 60%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+</style>
+
 <body>
     <div class="row fixed-top navbar">
         <a href="/mapa">
@@ -24,12 +32,14 @@
         </a>
         <span class="fa teste icone-grande" id="bateria">
             <span id="pontuacao" th:text="${tarefasRespondidasAtualmente}"
-                style="font-family: 'Bebas Neue', cursive; font-size: 10pt;"></span>
+                style="font-family: 'Bebas Neue', cursive; font-size: 10pt; "></span>
             <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">/ </span><span
                 style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasTotal}"></span>
         </span>
         </span>
         <div class="direita">
+            <span class="teste fa fa-eye icone-normal mr-3" data-toggle="modal" data-target="#modalLongo"
+                style="font-size: 22pt;cursor: pointer;"></span>
             <span class="teste fa fa-hourglass-1 icone-normal" id="ampulheta"></span>
             <span id="relogioDoFaustao" class="teste mr-3"></span>
 
@@ -51,7 +61,7 @@
                 <h6 class="text-secondary d-flex justify-content-center">Escolha a alternativa correta:</h1>
             </div>
         </div>
-        <form method="POST" action="#" th:action="@{'/licao/corrigir/' + ${tarefa.id}}" th:object="${tarefa}">
+        <form method="POST" action="#" th:action="@{'/exercicio/corrigir/' + ${tarefa.id}}" th:object="${tarefa}">
             <div class="row">
                 <div class="col">
                     <input type="hidden" name="id" th:value="${tarefa.id}">
@@ -150,6 +160,112 @@
             </div>
         </form>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content ">
+
+                    <div class="modal-header ">
+                        <h5 class="modal-title " id="exampleModalLongTitle">Por favor, leia o texto abaixo para
+                            responder as questões a seguir:</h5>
+                    </div>
+                    <div class="container mt-2 d-flex justify-content-center">
+                        <strong class="text-muted">
+                            <p style="font-size: 15pt;">Bill Gates</p>
+                        </strong>
+                    </div>
+                    <a href="#" id="top"></a>
+                    <div class="modal-body d-flex justify-content-center" style="padding-top: 0;">
+                        <div class="polaroid">
+                            <img src="../images/bill.jpg" alt="5 Terre" style="width:100%; border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 5px;">
+                        </div>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <p class="text-muted" style="font-size: 11pt;">Gates in 2014</p>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-10">
+                            <hr style="margin: 0;">
+                            <p>
+                                <strong>William Henry Gates III</strong> (born October 28, 1955) is an American business
+                                magnate,
+                                software
+                                developer, investor, and philanthropist. He is best known as the co-founder of Microsoft
+                                Corporation.[2][3] During his career at Microsoft, Gates held the positions
+                                of chairman, chief
+                                executive officer (CEO), president and chief software architect, while also being the
+                                largest
+                                individual shareholder until May 2014. He is one of the best-known entrepreneurs and
+                                pioneers of
+                                the microcomputer revolution of the 1970s and 1980s.
+                                Born and raised in Seattle, Washington, Gates co-founded Microsoft with childhood
+                                friend Paul
+                                Allen in 1975 in Albuquerque, New Mexico; it went on to become the world's
+                                largest personal
+                                computer software company.[4][a] Gates led the company as chairman and CEO until
+                                stepping
+                                down
+                                as CEO in January 2000, but he remained chairman and became chief software
+                                architect.[7] During
+                                the late 1990s, Gates had been criticized for his business tactics, which have been
+                                considered anti-competitive. This opinion has been upheld by numerous court
+                                rulings.[8] In
+                                June
+                                2006, Gates announced that he would be transitioning to a part-time role at Microsoft
+                                and
+                                full-time work at the Bill & Melinda Gates Foundation, the private charitable foundation
+                                that he
+                                and his wife, Melinda Gates, established in 2000.[9] He gradually transferred his duties
+                                to Ray
+                                Ozzie and Craig Mundie.[10] He stepped down as chairman of Microsoft in February 2014
+                                and
+                                assumed a new post as technology adviser to support the newly appointed CEO Satya
+                                Nadella.[11]
+                                Since 1987, he has been included in the Forbes list of the world's wealthiest documented
+                                individuals.[12][13] From 1995 to 2017, he held the Forbes title of the richest person
+                                in
+                                the
+                                world all but four of those years.[1] In October 2017, he was surpassed
+                                by Amazon founder
+                                and
+                                CEO Jeff Bezos, who had an estimated net worth of US$90.6 billion compared to Gates' net
+                                worth
+                                of US$89.9 billion at the time.[14] As of November 9, 2019, Gates had an estimated net
+                                worth
+                                of
+                                US$107.1 billion, making him the second wealthiest person in the world, behind Bezos.
+                                Later in his career and since leaving day-to-day operations at Microsoft in 2008, Gates
+                                pursued
+                                a number of philanthropic endeavors. He donated large amounts of money to various
+                                charitable
+                                organizations and scientific research programs through the Bill & Melinda Gates
+                                Foundation,
+                                reported to be the world's largest private charity.[15] In 2009, Gates and Warren
+                                Buffett founded The Giving Pledge, whereby they and other billionaires pledge to give at
+                                least
+                                half of their wealth to philanthropy.[16] The foundation works to save lives and improve
+                                global
+                                health, and is working with Rotary International to eliminate polio.[17]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
+                            onclick="window.location.href='#top'" title="Voltar ao Topo">
+                        </button>
+                        <button class="btn btn-lg" data-dismiss="modal" onclick="iniciarCronometro()" type="submit"
+                            style="background-color: #036977; color: white;"
+                            onmouseover="this.style.backgroundColor='#0f8191'"
+                            onmouseout="this.style.backgroundColor='#036977'">
+                            Prosseguir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal TimeOut -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static"
             data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -171,7 +287,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="/licao/condicionais">
+                        <a href="/exercicio/intro">
                             <button class="btn btn-lg" style="width: 100%; background-color: #0f8191; color: white;"
                                 type="submit" onmouseover="this.style.backgroundColor='#036977'"
                                 onmouseout="this.style.backgroundColor='#0f8191'">
@@ -193,8 +309,9 @@
             init(/*[[${tarefa.resposta.id}]]*/0)
         };
         window.onload = function () {
-            iniciarCronometro();
+            // iniciarCronometro();
             alterarIconeBateria();
+            $('#modalLongo').modal('show');
         };
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
