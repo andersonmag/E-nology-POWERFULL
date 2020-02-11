@@ -135,7 +135,7 @@
 							</ul>
 
 							<ul class="list-group mt-3" id="nav2" style="display: none;">
-								<form action="/salvar" method="post" th:object="${usuario}"
+								<form action="/atualizar" method="post" th:object="${usuario}"
 									enctype="multipart/form-data" onsubmit="return verificarCamposPerfil()">
 									<input type="hidden" name="id" th:value="${usuario.id}" />
 
