@@ -21,12 +21,6 @@ public class AdminController {
     @Autowired
     ConteudoRepository conteudoRepository;
 
-    @RequestMapping("/attention")
-    public ModelAndView att() {
-        ModelAndView model = new ModelAndView("task/attention");
-        return model;
-    }
-
     @RequestMapping("/tarefa")
     public ModelAndView cadastro_tarefa(Palavra palavra, @AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("user/tarefas");
