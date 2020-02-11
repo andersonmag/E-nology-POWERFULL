@@ -20,9 +20,9 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/mapa", "/perfil", "/editarPerfil", "/licao/**", "/salvar/**", "/upload/**").authenticated()
+                .antMatchers("/mapa", "/perfil", "/exercicio/**", "/atualizar", "/upload", "/salvarUsuario", "/cadastrar").authenticated()
                 .antMatchers("/", "/cadastro", "/login").anonymous()
                 .antMatchers("/tarefa") .hasRole("ADMIN")
                 .and()
@@ -36,7 +36,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
             .logoutSuccessUrl("/login")
             .and()
             .exceptionHandling().accessDeniedPage("/mapa");
-    }
+        }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,6 +46,6 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
 
     public void configure(WebSecurity web) throws Exception{
 
-        web.ignoring().antMatchers("/h2-console/**", "/cadastrar/**");
+        web.ignoring().antMatchers("/h2-console/**");
     }
 }
