@@ -26,27 +26,28 @@
 <body>
     <div class="row fixed-top navbar">
         <a href="/mapa">
-            <div class="text-left">
-                <span class="fa fa-mail-reply-all ml-5 icone-grande">
+            <div class="text-left ">
+                <span class="fa fa-mail-reply-all seta icone-grande">
             </div>
         </a>
         <span class="fa teste icone-grande" id="bateria">
             <span id="pontuacao" th:text="${tarefasRespondidasAtualmente}"
-                style="font-family: 'Bebas Neue', cursive; font-size: 10pt; "></span>
-            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">/ </span><span
+                style="font-family: 'Bebas Neue', cursive; font-size: 10pt;"></span>
+            <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">/</span><span
                 style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasTotal}"></span>
         </span>
         </span>
         <div class="direita">
             <span class="teste fa fa-eye icone-normal mr-3" data-toggle="modal" data-target="#modalLongo"
-                style="font-size: 22pt;cursor: pointer;"></span>
+                style="font-size: 22pt;cursor: pointer;"><small style="font-size: 6pt;" class="teste">Reler
+                    Material</small></span>
             <span class="teste fa fa-hourglass-1 icone-normal" id="ampulheta"></span>
-            <span id="relogioDoFaustao" class="teste mr-3"></span>
+            <span id="relogioDoFaustao" class="teste"></span>
 
-            <span class="teste fa fa-database icone-normal icone-amarelo" data-toggle="tooltip" data-placement="bottom"
-                title="Sua pontuação até aqui">
+            <span class="ml-1 teste fa fa-database icone-normal icone-amarelo" data-toggle="tooltip"
+                data-placement="bottom" title="Sua pontuação até aqui">
             </span>
-            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
+            <span></span><span class="teste mr-2" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
                 data-placement="bottom" title="Sua pontuação até aqui"></span>
         </div>
     </div>
@@ -161,14 +162,16 @@
         </form>
 
         <!-- Modal -->
-        <div class="modal fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        <div class="modal  fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
             aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content ">
+            <div class="modal-dialog col-xs-8 col-sm-8 modal-dialog-centered" role="document">
+                <div class="modal-content">
 
                     <div class="modal-header ">
-                        <h5 class="modal-title " id="exampleModalLongTitle">Por favor, leia o texto abaixo para
-                            responder as questões a seguir:</h5>
+                        <h5 class="modal-title ml-2 cabecario" id="exampleModalLongTitle"><small
+                                style="font-size: 23pt;" class="fa fa-eye icone-normal text-info"></small> Por favor,
+                            leia o texto abaixo(em inglês) para
+                            responder as questões<strong> 1 à 5 </strong> : </h5>
                     </div>
                     <div class="container mt-2 d-flex justify-content-center">
                         <strong class="text-muted">
@@ -189,7 +192,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-10">
                             <hr style="margin: 0;">
-                            <p>
+                            <p class="texto">
                                 <strong>William Henry Gates III</strong> (born October 28, 1955) is an American business
                                 magnate,
                                 software
@@ -256,19 +259,19 @@
                         <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
                             onclick="window.location.href='#top'" title="Voltar ao Topo">
                         </button>
-                        <button class="btn btn-lg" data-dismiss="modal" onclick="iniciarCronometro()" type="submit"
+                        <button class="btn btn-lg" data-dismiss="modal" type="submit" onclick="continuarCronometro()"
                             style="background-color: #036977; color: white;"
                             onmouseover="this.style.backgroundColor='#0f8191'"
                             onmouseout="this.style.backgroundColor='#036977'">
-                            Prosseguir</button>
+                            Continuar</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modal TimeOut -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static"
-            data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="modalTout" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -307,11 +310,6 @@
     <script th:inline="javascript">
         document.getElementById("butao").onclick = function () {
             init(/*[[${tarefa.resposta.id}]]*/0)
-        };
-        window.onload = function () {
-            // iniciarCronometro();
-            alterarIconeBateria();
-            $('#modalLongo').modal('show');
         };
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
