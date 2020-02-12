@@ -33,14 +33,21 @@ function alterarIconeBateria() {
 
     switch (parseInt(pontuacao)) {
         case 1:
+        case 2:
+        case 3:
             bateria.classList.remove('fa-battery-0');
             bateria.classList.add('fa-battery-1');
             break;
-        case 2:
+        case 4:
+        case 5:
+        case 6:
             bateria.classList.remove('fa-battery-1');
             bateria.classList.add('fa-battery-2');
             break;
-        case 3:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
             bateria.classList.remove('fa-battery-2');
             bateria.classList.add('fa-battery-3');
             break;
