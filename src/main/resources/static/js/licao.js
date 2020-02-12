@@ -1,5 +1,15 @@
 var tempo = new Number(61);
 
+window.onload = function () {
+    alterarIconeBateria();
+    iniciarCronometro();
+};
+
+if (!localStorage.modal) {
+    $('#modalLongo').modal('show');
+}
+localStorage.setItem("modal", "hide");
+
 function init(rt) {
     var opcoes = document.getElementsByName("palavra");
 
@@ -45,12 +55,17 @@ function mudarButao() {
 }
 
 function timeout() {
-    $('#exampleModalCenter').modal('show');
+    $('#modalTout').modal('show');
     document.getElementById("timeout").play();
 }
 
-function iniciarCronometro() {
+function continuarCronometro() {
+    $('#modalLongo').modal('hide');
+    tempo = tempo + 2;
+    iniciarCronometro();
+}
 
+function iniciarCronometro() {
     var ampulheta = document.getElementById("ampulheta");
 
     if ((tempo - 1) >= 0) {
@@ -66,8 +81,7 @@ function iniciarCronometro() {
                 ampulheta.classList.add('fa-hourglass-3');
                 break;
         }
-
-        if (!$('#modalEr').hasClass('show') && !$('#modalAc').hasClass('show')) {
+        if (!$('#modalEr').hasClass('show') && !$('#modalAc').hasClass('show') && !$('#modalLongo').hasClass('show')) {
             if (tempo < 10) {
                 relogioDoFaustao.innerText = '00:0' + tempo;
                 setTimeout('iniciarCronometro()', 1000);
@@ -76,7 +90,6 @@ function iniciarCronometro() {
                 relogioDoFaustao.innerText = '00:' + tempo;
                 setTimeout('iniciarCronometro()', 1000);
             }
-            
         }
     }
 
