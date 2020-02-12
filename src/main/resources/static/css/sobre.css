@@ -1,0 +1,40 @@
+
+.discurso{
+     text-align: center;
+     font-size: 20pt;
+}
+.icone-link{
+    font-size: 40pt;
+}
+
+.row {
+    margin: 0;
+    padding: 0;
+}
+
+svg {
+    width: 5%;
+    margin-right: 2%;
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.16), 2px 2px 0 0 rgba(0, 0, 0, 0.12);
+}
+
+@media only screen and (max-width: 600px) {
+
+.discurso{
+    margin-top: 15%;
+    font-size: 10pt;
+
+}
+svg{
+    width: 10%;
+}
+
+h3{
+    font-size: 12pt;
+}
+
+.icone-link{
+    font-size: 30pt;
+}
+
+}
