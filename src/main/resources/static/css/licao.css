@@ -175,6 +175,19 @@ h1 {
         width: 80%;
     }
 
+    .cabecario{
+     
+        font-size: 10pt;
+    }
+    .texto{
+
+        font-size: 10pt;
+    }
+
+    .modal-content{
+        margin-right: 6%;
+    }
+
     .texto-enunciado-resultado{
         font-size: 12pt;
     }
@@ -194,11 +207,15 @@ h1 {
     }
 
     .icone-grande{
-        font-size: 28px;
+        font-size: 20pt;
+        margin-left: 0;
     }
     
     .icone-normal{
-        font-size: 18px;
+        font-size: 14pt;
+    }
+    .seta{
+        margin-left: 15%;
     }
     
     .botao{
@@ -213,6 +230,9 @@ h1 {
 
     form {
         width: 88%;
+    }
+    .seta{
+        margin-left: 25%;
     }
 
     .texto-enunciado-resultado{
@@ -237,3 +257,19 @@ h1 {
         width: 100% !important;
     }
 }
+
+@media (min-width: 1281px) {
+  
+    .seta{
+        margin-left: 50%;
+    }
+  }
+
+
+@media (min-width: 800px) and (max-width: 1280px) {
+    
+    .texto-enunciado-resultado{
+        font-size: 15pt;
+    }
+  }
+
