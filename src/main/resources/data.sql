@@ -73,7 +73,7 @@ VALUES (1, 1), (2, 1), (3, 1), (4, 1),
 
 INSERT INTO TAREFA(ID, ENUNCIADO, NIVEL, PONTUACAO, TIPO_TAREFA, RESPOSTA_ID)
 VALUES (1, 'Escolha a alternativa que complete apropriadamente a frase: "Get __________ by id."', 1, 30, 5, 3),
-    (2, 'Qual dessas expressões se refere ao comando de jogar na tela um arquivo?', 2, 30, 5, 5),
+    (2, 'Qual desses comandos é um método que exibe informações no arquivo?', 2, 30, 5, 5),
     (3, 'Que comando é usado para solicitar uma pausa/intervalo?', 0, 30, 5, 10),
     (4, 'O que é PROMPT?', 0, 30, 5, 13),
     (5, 'O que significa a sigla "src"?', 0, 30, 5, 20),
