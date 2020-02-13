@@ -62,7 +62,6 @@ public class UserController {
 
     @RequestMapping("/salvarUsuario")
     public ModelAndView salvarUsuario(@Valid Usuario usuario, RedirectAttributes redirect) {
-
         if (verificarSeEmailExiste(usuario.getEmail())) {
             redirect.addFlashAttribute("mensagem", "Email já cadastrado!");
 
