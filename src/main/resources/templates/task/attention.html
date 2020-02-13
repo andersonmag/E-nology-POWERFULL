@@ -36,12 +36,19 @@
         <div class="row mt-5">
             <div class="col d-flex justify-content-center">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><span class="text-secondary">1. </span> São questões de Multipla Escolha
+                    <li class="list-group-item"><span class="text-secondary">1. </span> Todas as questões são de
+                        Múltipla Escolha!
                     </li>
-                    <li class="list-group-item"><span class="text-secondary">2. </span>Cada tarefa tem cerca de 1 minuto
+                    <li class="list-group-item"><span class="text-secondary">2. </span>Cada questão tem cerca de
+                        <strong>1 minuto</strong>
                         para ser respondida!</li>
-                    <li class="list-group-item"><span class="text-secondary">3. </span>Responda sabiamente!</li>
-                    <li class="list-group-item"><span class="text-secondary">4. </span>Pode copiar e colar tranquilo :)
+                    <li class="list-group-item"><span class="text-secondary">3. </span>
+                        Questões sobre o Texto terão o ícone a seguir para abri-lo -->
+                        <span class="fa fa-eye text-info mr-2" style="font-size: 20pt;"></span>
+                    </li>
+                    </li>
+                    <li class="list-group-item"><span class="text-secondary">4. </span> 
+                        Quanto mais acertos, maior sua pontuação ao final da lição! 
                     </li>
                 </ul>
             </div>
@@ -60,14 +67,14 @@
     <script>
         var tempo = new Number(6);
         function iniciarCronometro() {
-                tempo = tempo - 1;
+            tempo = tempo - 1;
 
-                if (tempo < 2) {
-                    butao.disabled = false;
-                    butao.textContent = "Aceito os termos.";
-                    return true;
-                }
-                setTimeout('iniciarCronometro()', 1000);
+            if (tempo < 2) {
+                butao.disabled = false;
+                butao.textContent = "Aceito os termos.";
+                return true;
+            }
+            setTimeout('iniciarCronometro()', 1000);
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
