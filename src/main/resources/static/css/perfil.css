@@ -20,13 +20,6 @@
     font-size: 120pt;
 }
 
-#foto {
-    max-width: 400px;
-    max-height: 350px;
-    width: auto;
-    height: auto;
-}
-
 @media (min-width: 700px) {
     h1 {
         font-size: 30pt;
@@ -45,22 +38,12 @@
     .imagemUser {
         font-size: 80pt;
     }
-    #foto {
-        max-width: 300px;
-        max-height: 250px;
-        width: auto;
-        height: auto;
-    }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     h1 {
         font-size: 25pt;
         margin-bottom: 10%;
-    }
-    #foto {
-        width: 100% !important;
-        height: 70% !important;
     }
 }
 

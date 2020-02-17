@@ -6,6 +6,11 @@
   background-color: #011f41;
 }
 
+#img_perfil{
+  width: 130px;
+  border: 2px solid #ddd;
+}
+
 .sidenav {
   height: 100%;
   width: 0;

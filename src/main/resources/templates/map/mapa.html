@@ -35,7 +35,7 @@
         <div>
             <div class="d-flex justify-content-center"
 				style="height: 100%; background: repeating-linear-gradient(#011f41, #003572 49.9%, #003572 50.1%, #011f41 100%);">
-				<img id="foto" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}" alt="Minha Foto" width="75"
+				<img id="img_perfil" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}" alt="Minha Foto" width="75"
 					class="img-fluid d-flex justify-content-center" style="border-radius: 20px;">
 					<span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
 					style="font-size: 50pt; color: #011f41;"></span>
