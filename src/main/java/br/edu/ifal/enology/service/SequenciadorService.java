@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import br.edu.ifal.enology.model.*;
 import br.edu.ifal.enology.repository.*;
 
-@Repository
+@Service
 public class SequenciadorService {
 
     @Autowired

@@ -8,22 +8,22 @@ import org.springframework.web.servlet.ModelAndView;
 import br.edu.ifal.enology.model.Conteudo;
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Usuario;
-import br.edu.ifal.enology.repository.ConteudoRepository;
-import br.edu.ifal.enology.repository.PalavraRepository;
+import br.edu.ifal.enology.service.ConteudoService;
+import br.edu.ifal.enology.service.PalavraService;
 
 @RestController
 public class AdminController {
 
     @Autowired
-    PalavraRepository palavraRepository;
+    PalavraService palavraService;
     @Autowired
-    ConteudoRepository conteudoRepository;
+    ConteudoService conteudoService;
 
     @RequestMapping("/tarefa")
     public ModelAndView cadastro_tarefa(Palavra palavra, @AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("user/tarefas");
-        Iterable<Palavra> palavras = palavraRepository.findAll();
-        Iterable<Conteudo> conteudos = conteudoRepository.findAll();
+        Iterable<Palavra> palavras = palavraService.findAll();
+        Iterable<Conteudo> conteudos = conteudoService.findAll();
 
         model.addObject("palavras", palavras).addObject("conteudos", conteudos).addObject("usuario", usuarioLogado);
         return model;

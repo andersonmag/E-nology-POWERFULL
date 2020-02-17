@@ -3,7 +3,6 @@ package br.edu.ifal.enology.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Optional;
 import javax.validation.Valid;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -23,19 +22,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.ifal.enology.model.Usuario;
-import br.edu.ifal.enology.repository.UserRepository;
+import br.edu.ifal.enology.service.UsuarioService;
 
 @RestController
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    UsuarioService usuarioService;
     @Autowired
-    private AmazonS3 amazonS3;
+    AmazonS3 amazonS3;
     @Value("${app.awsServices.bucketName}")
-    private String bucketName;
+    String bucketName;
     @Value("${bucket.folder}")
-    private String bucketFolder;
+    String bucketFolder;
 
     @RequestMapping("/perfil")
     public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado) {
@@ -54,7 +53,7 @@ public class UserController {
 
         if (imagem != null) {
             usuarioLogado.setCaminhoImagem(salvarImagem(imagem, usuarioLogado));
-            userRepository.save(usuarioLogado);
+            usuarioService.save(usuarioLogado);
         }
 
         return new ModelAndView("redirect:/perfil");
@@ -69,7 +68,7 @@ public class UserController {
         } else {
 
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-            userRepository.save(usuario);
+            usuarioService.save(usuario);
             return new ModelAndView("redirect:/login");
         }
 
@@ -86,7 +85,7 @@ public class UserController {
                 usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
                 usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
                 usuarioLogado = usuario;
-                userRepository.save(usuario);
+                usuarioService.save(usuario);
 
                 return new ModelAndView("redirect:/perfil");
             } else {
@@ -99,7 +98,7 @@ public class UserController {
             usuario.setSenha(usuarioLogado.getSenha());
             usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
             usuarioLogado = usuario;
-            userRepository.save(usuario);
+            usuarioService.save(usuario);
 
             return new ModelAndView("redirect:/perfil");
         }
@@ -112,14 +111,13 @@ public class UserController {
     }
 
     private boolean verificarSeEmailExiste(String email) {
-        if (userRepository.findByEmail(email) != null)
+        if (usuarioService.findByEmail(email) != null)
             return true;
         return false;
     }
 
     private Authentication pegarNovoAuthentication(Authentication authentication, Usuario usuarioLogado) {
-        Optional<Usuario> opUsuario = userRepository.findById(usuarioLogado.getId());
-        usuarioLogado = opUsuario.get();
+        usuarioLogado = usuarioService.findById(usuarioLogado.getId());
         authentication = new UsernamePasswordAuthenticationToken(usuarioLogado, authentication.getCredentials(),
                 authentication.getAuthorities());
 

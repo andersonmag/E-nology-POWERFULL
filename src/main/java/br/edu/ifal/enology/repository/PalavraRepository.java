@@ -7,7 +7,6 @@ import br.edu.ifal.enology.model.Palavra;
 
 public interface PalavraRepository extends CrudRepository<Palavra, Long> {
 
-    List<Palavra> findByInglesContaining(String q);
     List<Palavra> findByConteudos(Conteudo conteudo);
     List<Palavra> findAll();
 }

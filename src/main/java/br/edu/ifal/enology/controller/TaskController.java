@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.ifal.enology.model.*;
-import br.edu.ifal.enology.repository.*;
 import br.edu.ifal.enology.service.*;
 
 @RequestMapping("/exercicio")
@@ -20,26 +19,22 @@ import br.edu.ifal.enology.service.*;
 public class TaskController {
 
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    TarefaRepository tarefaRepository;
-    @Autowired
-    PalavraRepository palavraRepository;
-    @Autowired
-    ConteudoRepository conteudoRepository;
-    @Autowired
-    SolucaoRepository solucaoRepository;
-    @Autowired
     SequenciadorService sequenciadorService;
     @Autowired
+    PalavraService palavraService;
+    @Autowired
     TarefaService tarefaService;
+    @Autowired
+    UsuarioService usuarioService;
+    @Autowired
+    SolucaoService solucaoService;
 
     @RequestMapping("/cadastrar")
     public ModelAndView cadastrar(Palavra palavra, Tarefa tarefa) {
         if (palavra.getIngles() != null) {
-            palavraRepository.save(palavra);
+            palavraService.save(palavra);
         } else {
-            tarefaRepository.save(tarefa);
+            tarefaService.save(tarefa);
         }
 
         return new ModelAndView("redirect:/tarefa");
@@ -50,16 +45,16 @@ public class TaskController {
             @AuthenticationPrincipal Usuario usuarioLogado, Long palavra, RedirectAttributes redirect) {
         Solucao solucao = new Solucao();
         int pontuacaoResposta;
-        Tarefa tarefaAtual = tarefaService.pegarTarefaPorId(idTarefa);
+        Tarefa tarefaAtual = tarefaService.findById(idTarefa);
         boolean acertou = tarefaAtual.getResposta().getId().equals(palavra);
         if (acertou) {
             pontuacaoResposta = usuarioLogado.getPontuacaoDoAluno() + tarefaAtual.getPontuacao();
             usuarioLogado.setPontuacaoDoAluno(pontuacaoResposta);
-            userRepository.save(usuarioLogado);
+            usuarioService.save(usuarioLogado);
         } else {
             pontuacaoResposta = tarefaAtual.getPontuacao() / 2;
             tarefaAtual.setPontuacao(pontuacaoResposta);
-            tarefaRepository.save(tarefaAtual);
+            tarefaService.save(tarefaAtual);
         }
 
         solucao.setAluno(usuarioLogado);
@@ -67,7 +62,7 @@ public class TaskController {
         solucao.setAcertou(acertou);
         solucao.setTarefa(tarefaAtual);
         solucao.setPontuacao(pontuacaoResposta);
-        solucaoRepository.save(solucao);
+        solucaoService.save(solucao);
 
         redirect.addFlashAttribute("pontuacaoNaLIcao", pontuacaoResposta);
         return new ModelAndView("redirect:/exercicio/intro");
@@ -91,9 +86,9 @@ public class TaskController {
                     sequenciadorService.pegarConteudoAleatorio(tarefa.getResposta()), tarefa.getResposta());
 
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas)
-                    .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaRepository.findAll().size())
+                    .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaService.findAll().size())
                     .addObject("tarefasRespondidasAtualmente", sequenciadorService
-                            .filtrarTarefasRespondidas(solucaoRepository.findByAluno(usuarioLogado)).size());
+                            .filtrarTarefasRespondidas(solucaoService.findByAluno(usuarioLogado)).size());
         } catch (NullPointerException e) {
             model.setViewName("task/resultado");
             model.addObject("usuario", usuarioLogado);
