@@ -11,6 +11,10 @@
   border: 2px solid #ddd;
 }
 
+.gradient{
+  background: repeating-linear-gradient(#011f41, #003572 49.9%, #003572 50.1%, #011f41 100%);
+}
+
 .sidenav {
   height: 100%;
   width: 0;

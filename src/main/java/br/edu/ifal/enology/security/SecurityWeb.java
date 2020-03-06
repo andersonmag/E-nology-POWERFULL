@@ -24,7 +24,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
                 .antMatchers("/mapa", "/perfil", "/exercicio/**", "/atualizar", "/upload", "/cadastrar", "/sobre").authenticated()
                 .antMatchers("/", "/cadastro", "/login").anonymous()
-                .antMatchers("/tarefa") .hasRole("ADMIN")
+                .antMatchers("/tarefa","/adminPage", "/alunos") .hasRole("ADMIN")
                 .and()
             .formLogin()
             .loginPage("/login")
