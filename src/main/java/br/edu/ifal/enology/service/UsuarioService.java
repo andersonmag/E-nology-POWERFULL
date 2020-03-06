@@ -1,5 +1,6 @@
 package br.edu.ifal.enology.service;
 
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class UsuarioService {
 
     public Usuario findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public List<Usuario> findAll() {
+        return userRepository.findAll();
     }
 }
