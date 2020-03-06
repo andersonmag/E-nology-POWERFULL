@@ -26,6 +26,54 @@
 
 <body oncopy="return false" oncut="return false" onpaste="return false">
 
+
+	<div class="row fixed-top navbar" th:if="${usuario.roles}">
+		<span class="botao fa fa-bars" onclick="alterarSidebar()">
+		</span>
+		<a class="navbar-brand marca" style="font-size: 18pt;color: white;" href="/"><span>E-nology</span></a>
+		<div class="direita align-middle">
+			<span class="teste fa fa-database mr-1" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
+				data-placement="bottom" title="Sua pontuação até aqui">
+			</span>
+			<span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
+				data-placement="bottom" title="Sua pontuação até aqui"></span>
+		</div>
+	</div>
+	<div id="sidebar" class="sidenav" th:if="${usuario.roles}">
+		<div>
+			<div class="d-flex justify-content-center gradient">
+				<img id="img_perfil" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}"
+					alt="Minha Foto" class=" d-flex justify-content-center" style="border-radius: 20px;">
+				<span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
+					style="font-size: 50pt; color: #011f41;"></span>
+			</div>
+			<strong>
+				<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
+					class="mt-2 d-flex justify-content-center fonte"></span></strong>
+			<span class="fa fa-address-card d-flex justify-content-center text-light">
+				<strong><span class="fonte ml-2">Aluno</span></strong></span>
+			<br>
+		</div>
+		<span></span>
+		<a name="link" href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+
+		<a name="link" href="/perfil#"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
+			</span></a>
+		<br>
+		<div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
+			<a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+				</span></a>
+			<br>
+		</div>
+		<h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
+
+		<a name="link" href="##"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
+		<a name="link" href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o
+					App</span></span></a>
+		<br>
+		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
+	</div>
+	
 	<div th:each="role:${usuario.roles}" th:if="${role.nome} == ROLE_ADMIN" class="row fixed-top navbar">
 		<a class="navbar-brand marca ml-4" style="font-size: 18pt;color: white;"><span>Admin Home</span></a>
 		<div class="direita align-middle">
@@ -69,52 +117,6 @@
 	</div>
 
 
-	<div class="row fixed-top navbar" th:each="role:${usuario.roles}" th:unless="${role.nome} == ROLE_ADMIN">
-		<span class="botao fa fa-bars" onclick="alterarSidebar()">
-		</span>
-		<a class="navbar-brand marca" style="font-size: 18pt;color: white;" href="/"><span>E-nology</span></a>
-		<div class="direita align-middle">
-			<span class="teste fa fa-database mr-1" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
-				data-placement="bottom" title="Sua pontuação até aqui">
-			</span>
-			<span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
-				data-placement="bottom" title="Sua pontuação até aqui"></span>
-		</div>
-	</div>
-	<div id="sidebar" class="sidenav" th:each="role:${usuario.roles}" th:unless="${role.nome} == ROLE_ADMIN">
-		<div>
-			<div class="d-flex justify-content-center gradient">
-				<img id="img_perfil" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}"
-					alt="Minha Foto" class=" d-flex justify-content-center" style="border-radius: 20px;">
-				<span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
-					style="font-size: 50pt; color: #011f41;"></span>
-			</div>
-			<strong>
-				<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
-					class="mt-2 d-flex justify-content-center fonte"></span></strong>
-			<span class="fa fa-address-card d-flex justify-content-center text-light">
-				<strong><span class="fonte ml-2">Aluno</span></strong></span>
-			<br>
-		</div>
-		<span></span>
-		<a name="link" href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
-
-		<a name="link" href="/perfil#"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
-			</span></a>
-		<br>
-		<div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
-			<a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
-				</span></a>
-			<br>
-		</div>
-		<h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
-
-		<a name="link" href="##"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
-		<a name="link" href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o
-					App</span></span></a>
-		<br>
-		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
-	</div>
 
 	<div class="main-wrapper" onclick="esconderSidebar()">
 		<div class="container">
