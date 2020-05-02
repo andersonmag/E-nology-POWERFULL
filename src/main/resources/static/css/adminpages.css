@@ -31,6 +31,24 @@
   .ativo {
     background-color: #011f41;
   }
+  .marca{
+    font-size: 0pt !important;
+  }
+  .marca-admin{
+    font-family: 'Exo 2', sans-serif;
+    font-weight: bold !important;
+    font-size: 16px !important;
+  }
+  .navbar{
+    justify-content: initial !important;
+  }
+
+  .botao{
+    font-weight: bold !important;
+    font-size: 20px !important;
+    margin-left: 3% !important;
+  }
+ 
 
   @media (min-width: 1200px) {
     .main-wrapper {
