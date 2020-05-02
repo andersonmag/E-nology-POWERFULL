@@ -22,7 +22,8 @@
 <body>
 
   <div class="row fixed-top navbar">
-    <a class="navbar-brand marca ml-4" style="font-size: 18pt;color: white;"><span>Admin Page</span></a>
+    <span class="botao fa fa-bars" onclick="alterarSidebar()"></span>
+    <a class="navbar-brand marca-admin ml-4" style="font-size: 18pt;color: white;"><span>Admin Page</span></a>
     <div class="direita align-middle">
 
     </div>
@@ -65,13 +66,13 @@
 
   <div class="container sessao">
     <div class="row">
-      <div class="col-12">
+      <div class="col-sm-12 col-md-12 mt-2">
         <button type="button" class="btn btn-lg btn-success float-right"><span class="fa fa-users teste"></span> Criar
           Turma</button>
       </div>
     </div>
-    <div class="row d-flex justify-content-center">
-      <div class="listagem">
+    <div class="row pl-5">
+      <div class="col-sm-12 col-md-12 listagem">
         <table class="table">
           <thead>
             <tr>
@@ -110,7 +111,8 @@
     </div>
   </div>
 
-	<script src="js/adminpages.js"></script>
+  <script src="js/adminpages.js"></script>
+  <script src="js/sidebar.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
