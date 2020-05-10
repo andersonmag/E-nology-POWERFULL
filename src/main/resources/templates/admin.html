@@ -66,12 +66,16 @@
     
         <div class="row">
             <div class="col-sm-12 col-md-12 text-center">
-                <h1>Bem vindo(a) admin!</h1>
+                <h1 th:text="'Welcome! ' + ${usuario.nome} + ' ' + ${usuario.sobrenome}"></h1>                  
+
             </div>
+            
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 text-center">
-            <h6 class="">Nesta área você pode criar tarefas, ver a lista de alunos e monitorar suas turmas!</h6>
+            <h6 class="">Nesta área você pode criar tarefas, ver a lista de alunos e monitorar suas turmas!
+                <small class="fas fa-tools" style="color: #0d101b; font-size: 0.8rem;"></small>
+            </h6>
         </div>
         </div>
     
