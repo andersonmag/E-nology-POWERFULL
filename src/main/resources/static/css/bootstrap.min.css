@@ -1880,8 +1880,7 @@ pre code {
 }
 
 .form-control {
-    display: block;
-    width: 100%;
+    display: flex;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;

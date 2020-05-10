@@ -16,3 +16,7 @@ function alterarSidebarr(){
         document.getElementById("sidenav").style.width = "200px";
     }
 }
+
+var ano = document.getElementById("ano");
+
+ano.value = '' + new Date().getFullYear();
