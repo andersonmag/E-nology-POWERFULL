@@ -8,10 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 import br.edu.ifal.enology.model.Conteudo;
 import br.edu.ifal.enology.model.Palavra;
 import br.edu.ifal.enology.model.Usuario;
-import br.edu.ifal.enology.repository.GrupoRepository;
+import br.edu.ifal.enology.repository.TurmaRepository;
 import br.edu.ifal.enology.service.ConteudoService;
 import br.edu.ifal.enology.service.PalavraService;
 import br.edu.ifal.enology.service.UsuarioService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class AdminController {
@@ -21,7 +24,7 @@ public class AdminController {
     @Autowired
     ConteudoService conteudoService;
     @Autowired
-    GrupoRepository grupoRepository;
+    TurmaRepository turmaRepository;
     @Autowired
     UsuarioService usuarioService;
 
@@ -49,4 +52,12 @@ public class AdminController {
         model.addObject("palavras", palavras).addObject("conteudos", conteudos).addObject("usuario", usuarioLogado);
         return model;
     }
+
+    @GetMapping(value="/turma")
+    public ModelAndView criarTurma(@AuthenticationPrincipal Usuario usuario) {
+        ModelAndView model = new ModelAndView("turma/turma-add");
+        model.addObject("usuario", usuario);
+        return model;
+    }
+    
 }
