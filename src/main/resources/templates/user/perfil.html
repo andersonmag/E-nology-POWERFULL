@@ -61,7 +61,8 @@
 			</span></a>
 		<br>
 		<div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
-			<a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+			<a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 
+				">Criar Tarefa</span>
 				</span></a>
 			<br>
 		</div>
@@ -73,7 +74,7 @@
 		<br>
 		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
 	</div>
-	
+
 	<div th:each="role:${usuario.roles}" th:if="${role.nome} == ROLE_ADMIN" class="row fixed-top navbar">
 		<span class="botao fa fa-bars" onclick="alterarSidebarr()"></span>
 		<a class="navbar-brand marca-admin ml-4" style="font-size: 18pt;color: white;"><span>Admin Home</span></a>
@@ -108,11 +109,17 @@
 		<a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
 			</span></a>
 		<br>
+		<h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
+		<a name="link" href="/lista-turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
+			</span></a>
+
+		<a name="link" href="##"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
+					Turmas</span></span></a>
+		<br>
 		<h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
 
 		<a name="link" href="/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
-		<a name="link" href="##"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
-					Turmas</span></span></a>
+
 		<br>
 		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
 	</div>
