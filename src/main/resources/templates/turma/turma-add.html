@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-  <title>Admin Page</title>
+  <title>Cadastro de Turma || ADMIN </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,11 +11,11 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  <link href="css/sidebar.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/adminpages.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="../css/sidebar.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/adminpages.css">
 
   <style>
     .form-control {
@@ -76,47 +76,54 @@
     <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
       </span></a>
     <br>
+    <h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
+    <a name="link" href="/lista-turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
+      </span></a>
+
+    <a name="link" href="##"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
+          Turmas</span></span></a>
+    <br>
     <h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
 
     <a name="link" href="/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
-    <a name="link" href="##"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
-          Turmas</span></span></a>
     <br>
     <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
   </div>
 
   <div class="container ">
 
-    <i class="fas fa-graduation-cap text-primary d-flex justify-content-center mt-5" style="font-size: 10rem;"></i>
+    <i class="fa fa-graduation-cap text-primary d-flex justify-content-center mt-5" style="font-size: 10rem;"></i>
 
     <div class="row justify-content-center ">
       <h2 style="font-family: 'Jost', sans-serif; font-weight: 300; font-size: 3rem;">Criar Turma</h2>
     </div>
 
     <div class="row mt-5 d-flex  mt-5 justify-content-center ">
-      <form>
+      <form action="/salvar-turma" method="POST" th:object=${turma}>
         <div class="col-sm-12 col-md-12">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <input id="nome" name="nome" type="text" class="inputText form-control" required style="width: 250px;">
+              <input id="id" name = "id" type="hidden" th:value="${turma.id}">
+              <input id="nome" name="nome" type="text" class="inputText form-control" th:value="${turma.nome}" required
+                style="width: 250px;">
               <span class="floating-label">Name</span>
             </div>
-            <select name="semestre" class="form-control ml-2 " id="semestre"
-              style="width: 150px;">
-              <option selected disabled>Semestre</option>
-              <option value="1">1° Semestre</option>
-              <option value="2">2° Semestre</option>
+            <select name="semestre" class="form-control ml-2 " id="semestre" style="width: 150px;">
+              <option th:selected="${turma.semestre == '1'}" selected value="1">1° Semestre</option>
+              <option th:selected="${turma.semestre == '2'}" value="2">2° Semestre</option>
             </select>
           </div>
           <div class="d-flex justify-content-center">
             <p for="ano" class="mt-1 mr-1 " style="font-size: 1.5rem; text-decoration: dotted;">Year: </p>
-            <input type="text" name="ano" id="ano" class="form-control" placeholder="Disabled input"
-              style="width: 80px;" disabled>
+            <input th:value="${turma.ano}" type="text" id="ano" name="ano" class="form-control"
+              placeholder="Disabled input" style="width: 80px;">
           </div>
 
           <div class="justify-content-center d-flex">
-            <button type="button" class="btn btn-lg">Cancelar</button>
-            <button type="submit" class="btn btn-lg btn-success ">Cadastrar</button>
+            <a href="/lista-turmas">
+              <button type="button" class="btn btn-lg">Cancelar</button>
+            </a>
+            <input type="submit" class="btn btn-lg btn-success " value="Salvar">
           </div>
         </div>
       </form>
@@ -148,8 +155,8 @@
 
   </div>
 
-  <script src="js/adminpages.js"></script>
-  <script src="js/sidebar.js"></script>
+  <script src="../js/adminpages.js"></script>
+  <script src="../js/sidebar.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
