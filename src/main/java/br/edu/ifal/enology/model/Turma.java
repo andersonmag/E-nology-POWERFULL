@@ -14,6 +14,7 @@ public class Turma {
     private Long id;
     private String semestre;
     private String ano;
+    private String nome;
 
     @ManyToMany
     private List<Usuario> usuarios;
@@ -48,5 +49,13 @@ public class Turma {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
