@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <title>Lista de Turmas || ADMIN </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/adminpages.css">
+</head>
+
+<body>
+
+    <div class="row fixed-top navbar">
+        <span class="botao fa fa-bars" onclick="alterarSidebar()"></span>
+        <a class="navbar-brand marca-admin ml-4" style="font-size: 18pt;color: white;"><span>Admin Page</span></a>
+        <div class="direita align-middle">
+
+        </div>
+    </div>
+    <div id="sidebar" class="sidenav">
+        <div>
+            <div class="d-flex justify-content-center"
+                style="height: 100%; background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);">
+                <img id="img_perfil" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}"
+                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center"
+                    style="border-radius: 20px;">
+                <span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
+                    style="font-size: 50pt; color: #011f41;"></span>
+            </div>
+            <strong>
+                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
+                    class="mt-2 d-flex justify-content-center fonte"></span></strong>
+            <span class="fa fa-address-card d-flex justify-content-center text-light">
+                <strong><span class="fonte ml-2">Professor</span></strong></span>
+            <br>
+        </div>
+        <span></span>
+        <a name="link" href="/adminPage"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+
+        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
+            </span></a>
+        <br>
+
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Sistema</strong></h5>
+        <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+            </span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
+        <a name="link" href="/lista-turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
+            </span></a>
+
+        <a name="link" href="##"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
+                    Turmas</span></span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
+
+        <a name="link" href="/alunos#"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
+        <br>
+        <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
+    </div>
+
+    <div class="container sessao">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 mt-3 mb-2">
+                <a href="/turma">
+                    <button type="button" class="btn btn-lg btn-success float-right"><span
+                            class="fa fa-users teste"></span> Criar
+                        Turma</button>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 mb-3">
+                <h1 class="text-center">Turmas</h1>
+            </div>
+        </div>
+        <div class="row pl-5">
+            <div class="col-sm-12 col-md-12 listagem">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Semestre</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="turma:${turmas}">
+                            <td th:text="${turma.id}"></td>
+                            <td th:text="${turma.nome}"></td>
+                            <td th:text="${turma.ano} + '.' + ${turma.semestre}"></td>
+                            <td>
+                                <div class="dropright">
+                                    <span class="fa fa-ellipsis-v" style="font-size: 15pt; cursor: pointer;"
+                                        data-toggle="dropdown"></span>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" th:href="@{'/editar-turma/' + ${turma.id}}"> Editar Turma</a>
+                                        <a class="dropdown-item" href="#">Adicionar Alunos</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" th:href="@{'/excluir-turma/' + ${turma.id}}">Excluir</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/adminpages.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
