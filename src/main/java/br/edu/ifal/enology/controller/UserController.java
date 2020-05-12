@@ -1,27 +1,23 @@
 package br.edu.ifal.enology.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.validation.Valid;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import br.edu.ifal.enology.model.Imagem;
 import br.edu.ifal.enology.model.Usuario;
+import br.edu.ifal.enology.repository.ImagemRepository;
 import br.edu.ifal.enology.service.UsuarioService;
 
 @RestController
@@ -30,11 +26,7 @@ public class UserController {
     @Autowired
     UsuarioService usuarioService;
     @Autowired
-    AmazonS3 amazonS3;
-    @Value("${app.awsServices.bucketName}")
-    String bucketName;
-    @Value("${bucket.folder}")
-    String bucketFolder;
+    ImagemRepository imagemRepository;
 
     @RequestMapping("/perfil")
     public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado) {
@@ -48,15 +40,20 @@ public class UserController {
     }
 
     @RequestMapping("/upload")
-    public ModelAndView upload(@RequestParam(name = "imagem", required = false) MultipartFile imagem,
-            @AuthenticationPrincipal Usuario usuarioLogado) {
+    public ModelAndView upload(@RequestParam(name = "imagem", required = false) MultipartFile file,
+            @AuthenticationPrincipal Usuario usuarioLogado) throws IOException {
 
-        if (imagem != null) {
-            usuarioLogado.setCaminhoImagem(salvarImagem(imagem, usuarioLogado));
+        if (file != null) {
+            usuarioLogado.setImagem(salvarImagem(file, usuarioLogado));
             usuarioService.save(usuarioLogado);
         }
 
         return new ModelAndView("redirect:/perfil");
+    }
+
+    @RequestMapping("/localCloud/{link}")
+    public byte[] retornarImagem(@PathVariable("link") Long link) {
+        return imagemRepository.findByLink(link).getDados();
     }
 
     @RequestMapping("/salvarUsuario")
@@ -78,7 +75,7 @@ public class UserController {
     public ModelAndView salvar(@Valid Usuario usuario, @AuthenticationPrincipal Usuario usuarioLogado, String novaSenha,
             RedirectAttributes redirect) {
 
-        usuario.setCaminhoImagem(usuarioLogado.getCaminhoImagem());
+        usuario.setImagem(usuarioLogado.getImagem());
 
         if (!usuario.getSenha().equals("")) {
             if (compararSenha(usuario.getSenha(), usuarioLogado.getSenha())) {
@@ -124,21 +121,16 @@ public class UserController {
         return authentication;
     }
 
-    private String salvarImagem(MultipartFile imagem, Usuario usuarioLogado) {
-        File arquivo = new File("imagem");
+    private Imagem salvarImagem(MultipartFile file, Usuario usuarioLogado) throws IOException {
 
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(arquivo);
-            fileOutputStream.write(imagem.getBytes());
-            fileOutputStream.close();
+        Long secretPassword = 666 + usuarioLogado.getId();
+        Imagem imagem = new Imagem();
 
-            amazonS3.putObject(new PutObjectRequest(bucketName, bucketFolder + usuarioLogado.getId() + 665, arquivo)
-                    .withCannedAcl(CannedAccessControlList.PublicRead));
-        } catch (IOException e) {
-            e.getMessage();
-        }
+        imagem.setDados(file.getBytes());
+        imagem.setNome(file.getOriginalFilename());
+        imagem.setTipo(file.getContentType());
+        imagem.setLink(secretPassword);
 
-        S3Object object = amazonS3.getObject(bucketName, bucketFolder + usuarioLogado.getId() + 665);
-        return object.getObjectContent().getHttpRequest().getURI().toString();
+        return imagem;
     }
 }
