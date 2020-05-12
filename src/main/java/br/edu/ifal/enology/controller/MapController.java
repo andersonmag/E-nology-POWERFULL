@@ -15,7 +15,7 @@ public class MapController {
         ModelAndView model = new ModelAndView("map/mapa");
 
         if (request.isUserInRole("ROLE_ADMIN")) {
-            model.setViewName("redirect:/adminPage");
+            model.setViewName("redirect:/admin");
             return model;
         }
 
