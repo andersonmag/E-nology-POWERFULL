@@ -45,6 +45,7 @@ public class UserController {
 
         if (file != null) {
             usuarioLogado.setImagem(salvarImagem(file, usuarioLogado));
+            System.err.println(usuarioLogado.getImagem().getNome() + "kqlkslaksalk");
             usuarioService.save(usuarioLogado);
         }
 
@@ -124,13 +125,26 @@ public class UserController {
     private Imagem salvarImagem(MultipartFile file, Usuario usuarioLogado) throws IOException {
 
         Long secretPassword = 666 + usuarioLogado.getId();
-        Imagem imagem = new Imagem();
 
-        imagem.setDados(file.getBytes());
-        imagem.setNome(file.getOriginalFilename());
-        imagem.setTipo(file.getContentType());
-        imagem.setLink(secretPassword);
+        //Atualização
+        if (usuarioLogado.getImagem() != null) {
+            usuarioLogado.getImagem().setDados(file.getBytes());
+            usuarioLogado.getImagem().setTipo(file.getContentType());
+            usuarioLogado.getImagem().setNome(file.getOriginalFilename());
+            imagemRepository.save(usuarioLogado.getImagem());
 
-        return imagem;
+            return usuarioLogado.getImagem();
+        }
+
+        else {
+            Imagem imagem = new Imagem();
+            imagem.setDados(file.getBytes());
+            imagem.setLink(secretPassword);
+            imagem.setNome(file.getOriginalFilename());
+            imagem.setTipo(file.getContentType());
+            imagemRepository.save(imagem);
+
+            return imagem;
+        }
     }
 }
