@@ -9,13 +9,13 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
+    <link href="/fonts/font-nunito;css" rel="stylesheet">
+    <link href="/fonts/font/exo.css" rel="stylesheet">
     <title>Cadastro de Tarefas || ADMIN </title>
-    <link href="css/sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/adminpages.css">
+    <link href="/css/sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/adminpages.css">
 </head>
 
 <body>
@@ -28,42 +28,40 @@
     </div>
     <div id="sidebar" class="sidenav">
         <div>
-            <div class="d-flex justify-content-center"
-                style="height: 100%; background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);">
-                <img id="img_perfil" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}"
-                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center"
-                    style="border-radius: 20px;">
-                <span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
-                    style="font-size: 50pt; color: #011f41;"></span>
+            <div class="d-flex justify-content-center bg-sidebar-admin">
+                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
             </div>
             <strong>
-                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
-                    class="mt-2 d-flex justify-content-center fonte"></span></strong>
+                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+                    class="mt-2 d-flex justify-content-center fonte user-name"></span></strong>
             <span class="fa fa-address-card d-flex justify-content-center text-light">
                 <strong><span class="fonte ml-2">Professor</span></strong></span>
             <br>
         </div>
         <span></span>
-        <a name="link" href="/adminPage"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+        <a name="link" href="/admin"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 
         <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
             </span></a>
         <br>
 
         <h5 class="ml-3 font-weight-normal text-light"><strong>Sistema</strong></h5>
-        <a name="link" href="/tarefa#"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+        <a name="link" href="/admin/sistema/criar-tarefa#"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar
+                    Tarefa</span>
             </span></a>
-            <br>
-            <h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
-            <a name="link" href="/lista-turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
-                </span></a>
-            
-            <a name="link" href="##"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
-                        Turmas</span></span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
+        <a name="link" href="/admin/turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
+            </span></a>
+
+        <a name="link"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
+                    Turmas</span></span></a>
         <br>
         <h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
 
-        <a name="link" href="/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
+        <a name="link" href="/admin/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
         <br>
         <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
     </div>
@@ -188,7 +186,8 @@
                         <div class="col-sm-12">
                             <label for="exampleFormControlTextarea1">Enunciado da Tarefa</label>
                             <textarea class="form-control" required id="exampleFormControlTextarea1" rows="3"
-                                name="enunciado" placeholder="Digite aqui o Enunciado" style="min-width: 100%;"></textarea>
+                                name="enunciado" placeholder="Digite aqui o Enunciado"
+                                style="min-width: 100%;"></textarea>
                         </div>
                     </div>
 
@@ -248,33 +247,37 @@
         var palavra = document.getElementById('palavra');
 
         function exibirTarefa() {
-        if (palavra.style.display == "block") {
-            palavra.style.display = 'none';
-            document.getElementById("palavraBtn").style.backgroundColor = '#007bff';
+            if (palavra.style.display == "block") {
+                palavra.style.display = 'none';
+                document.getElementById("palavraBtn").style.backgroundColor = '#007bff';
+            }
+            if(tarefa.style.display == "block"){
+                tarefa.style.display = 'none';
+                document.getElementById("tarefaBtn").style.backgroundColor = '#28a745';
+                return true;
+            }
+            tarefa.style.display = 'block';
+            document.getElementById("tarefaBtn").style.backgroundColor = '#011422';
         }
-        tarefa.style.display = 'block';
-        document.getElementById("tarefaBtn").style.backgroundColor = '#011422';
-    }
 
-    function exibirPalavra() {
-        if (tarefa.style.display == "block") {
-            tarefa.style.display = 'none';
-            document.getElementById("tarefaBtn").style.backgroundColor = '#28a745';
+        function exibirPalavra() {
+            if (tarefa.style.display == "block") {
+                tarefa.style.display = 'none';
+                document.getElementById("tarefaBtn").style.backgroundColor = '#28a745';
+            }
+            if(palavra.style.display == "block"){
+                palavra.style.display = 'none';
+                document.getElementById("palavraBtn").style.backgroundColor = '#007bff';
+                return true;
+            }
+            palavra.style.display = 'block';
+            document.getElementById("palavraBtn").style.backgroundColor = '#011422';
         }
-        palavra.style.display = 'block';
-        document.getElementById("palavraBtn").style.backgroundColor = '#011422';
-    }
     </script>
-    <script src="js/adminpages.js"></script>
-    <script src="js/sidebar.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script src="/js/adminpages.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>

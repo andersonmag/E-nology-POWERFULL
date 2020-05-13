@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width">
     <title>Home | E-nology</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="fonts/font-nunito.css" rel="stylesheet">
+    <link href="fonts/font-exo.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mapa.css">
     <link href="css/sidebar.css" rel="stylesheet">
 
@@ -33,13 +31,11 @@
     </div>
     <div id="sidebar" class="sidenav">
         <div>
-            <div class="d-flex justify-content-center"
-				style="height: 100%; background: repeating-linear-gradient(#011f41, #003572 49.9%, #003572 50.1%, #011f41 100%);">
-				<img id="img_perfil" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}" alt="Minha Foto" width="75"
-					class="img-fluid d-flex justify-content-center" style="border-radius: 20px;">
-					<span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
-					style="font-size: 50pt; color: #011f41;"></span>
-			</div>
+            <div class="d-flex justify-content-center bg-sidebar-user">
+                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+            </div>
 			<strong>
 				<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
 					class="mt-2 d-flex justify-content-center fonte"></span></strong>
