@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 import br.edu.ifal.enology.service.LoginDetailsService;
 
 @Configuration
@@ -24,7 +26,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
                 .antMatchers("/mapa", "/perfil", "/exercicio/**", "/atualizar", "/upload", "/cadastrar", "/sobre").authenticated()
                 .antMatchers("/", "/cadastro", "/login").anonymous()
-                .antMatchers("/tarefa","/adminPage", "/alunos") .hasRole("ADMIN")
+                .antMatchers("/admin/**") .hasRole("ADMIN")
                 .and()
             .formLogin()
             .loginPage("/login")
@@ -37,7 +39,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
             .and()
             .exceptionHandling().accessDeniedPage("/mapa");
         }
-
+        
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(UserDetails)
@@ -46,6 +48,11 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
 
     public void configure(WebSecurity web) throws Exception{
 
-        web.ignoring().antMatchers("/h2-console/**");
+        web.ignoring().antMatchers("/h2-console/**", "**/admin/turmas/css/**", "**/admin/turmas/js/**", "**/admin/css/**", "**/admin/js/**");
     }
+
+    //  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    //          registry.addResourceHandler("/resources/**")
+    //                 .addResourceLocations("/resources/");
+    //  }
 }
