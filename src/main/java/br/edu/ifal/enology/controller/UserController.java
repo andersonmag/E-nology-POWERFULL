@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,6 +53,7 @@ public class UserController {
         return new ModelAndView("redirect:/perfil");
     }
 
+    @Transactional(readOnly = true)
     @RequestMapping("/localCloud/{link}")
     public byte[] retornarImagem(@PathVariable("link") Long link) {
         return imagemRepository.findByLink(link).getDados();
