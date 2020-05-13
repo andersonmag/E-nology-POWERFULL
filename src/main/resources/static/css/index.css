@@ -60,6 +60,8 @@ a:hover span {
 }
 
 .rodape{
+    bottom: 0;
+
     background-color: #011f41;
     height: 30%;
     padding-bottom: 30px;
@@ -80,6 +82,7 @@ a:hover span {
 }
 
 .fundo-do-poco{
+        bottom: 0;
     padding-top: 10px;
     background-color: #011422;
     color:white;
@@ -140,11 +143,18 @@ a:hover span {
     }
 
     .fundo-do-poco{
+        position: relative;
         padding-top: 10px;
         background-color: #011422;
         color:white;
         height: 5%;
         font-size: 8pt;
+    }
+
+    .rodape{
+        position: relative;
+
+        height: 20%;
     }
 
     .icones-rodape{
@@ -172,3 +182,20 @@ a:hover span {
     }
 
   }
+
+  @media (min-width: 1024px) and (max-width:1365px) {
+    .fundo-do-poco{
+        position: fixed;
+        padding-top: 10px;
+        background-color: #011422;
+        color:white;
+        height: 5%;
+        font-size: 8pt;
+    }
+
+    .rodape{
+        position: fixed;
+
+        height: 20%;
+    }
+}

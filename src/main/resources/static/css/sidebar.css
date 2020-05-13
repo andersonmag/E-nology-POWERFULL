@@ -28,6 +28,29 @@
   padding-top: 60px;
 }
 
+.bg-sidebar-user {
+  height: 100%;
+  background: repeating-linear-gradient(#011f41, #003572 49.9%, #003572 50.1%, #011f41 100%);
+}
+
+.user-name {
+  font-size: 13pt;
+  color: #74ABDD;
+}
+.img-user {
+  border-radius: 20px;
+}
+
+.img-user-of {
+  font-size: 50pt !important; 
+  color: #011f41;
+}
+
+.img-user-normal-of {
+  font-size: 50pt !important; 
+  color: #011f41;
+}
+
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
