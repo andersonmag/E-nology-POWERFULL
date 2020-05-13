@@ -6,117 +6,94 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="../css/sidebar.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/adminpages.css">
+  <link rel="stylesheet" href="/fonts/font-nunito.css">
+  <link rel="stylesheet" href="/fonts/font-exo.css">
+  <link rel="stylesheet" href="/fonts/font-jost.css">
 
-  <style>
-    .form-control {
-      display: inline;
-    }
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/adminpages.css">
+  <link rel="stylesheet" href="/css/turmapages.css">
 
-    input:focus~.floating-label,
-    input:not(:focus):valid~.floating-label {
-      top: 1px;
-      bottom: 12px;
-      left: 12px;
-      font-size: 6pt;
-      opacity: 25;
-
-    }
-
-    .floating-label {
-      position: absolute;
-      pointer-events: none;
-      left: 20px;
-      top: 6px;
-      transition: 0.2s ease all;
-    }
-  </style>
 </head>
 
 <body>
   <div class="row fixed-top navbar">
     <span class="botao fa fa-bars" onclick="alterarSidebar()"></span>
-    <a class="navbar-brand marca-admin ml-4" style="font-size: 18pt;color: white;"><span>Admin Home</span></a>
+    <a class=" marca-admin navbar-brand ml-4"><span>Admin Home</span></a>
     <div class="direita align-middle">
     </div>
   </div>
   <div id="sidebar" class="sidenav">
     <div>
-      <div class="d-flex justify-content-center"
-        style="height: 100%; background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);">
-        <img id="img_perfil" th:if="${usuario.caminhoImagem}" th:src="@{${usuario.caminhoImagem}}" alt="Minha Foto"
-          width="75" class="img-fluid d-flex justify-content-center" style="border-radius: 20px;">
-        <span th:unless="${usuario.caminhoImagem}" class="imagemUser fa fa-user-circle"
-          style="font-size: 50pt; color: #011f41;"></span>
+      <div class="d-flex justify-content-center bg-sidebar-admin">
+        <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+          alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+        <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
       </div>
       <strong>
-        <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
-          class="mt-2 d-flex justify-content-center fonte"></span></strong>
+        <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+          class="mt-2 d-flex justify-content-center fonte user-name"></span></strong>
       <span class="fa fa-address-card d-flex justify-content-center text-light">
         <strong><span class="fonte ml-2">Professor</span></strong></span>
       <br>
     </div>
     <span></span>
-    <a name="link" href="/adminPage#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+    <a name="link" href="/admin"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 
     <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
       </span></a>
     <br>
 
     <h5 class="ml-3 font-weight-normal text-light"><strong>Sistema</strong></h5>
-    <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+    <a name="link" href="/admin/sistema/criar-tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar
+          Tarefa</span>
       </span></a>
     <br>
     <h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
-    <a name="link" href="/lista-turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
+    <a name="link" href="/admin/turmas#"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
       </span></a>
 
-    <a name="link" href="##"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
+    <a name="link"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
           Turmas</span></span></a>
     <br>
     <h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
 
-    <a name="link" href="/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
+    <a name="link" href="/admin/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
     <br>
     <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
   </div>
 
-  <div class="container ">
+  <div class="container">
 
-    <i class="fa fa-graduation-cap text-primary d-flex justify-content-center mt-5" style="font-size: 10rem;"></i>
+    <i class="fa fa-graduation-cap text-primary d-flex justify-content-center mt-5 icon-turma-add"></i>
 
     <div class="row justify-content-center ">
-      <h2 style="font-family: 'Jost', sans-serif; font-weight: 300; font-size: 3rem;">Criar Turma</h2>
+      <h2 class="title-add-turma">Criar Turma</h2>
     </div>
 
     <div class="row mt-5 d-flex  mt-5 justify-content-center ">
-      <form action="/salvar-turma" method="POST" th:object=${turma}>
+      <form action="/admin/turmas/criar" method="POST" th:object=${turma}>
         <div class="col-sm-12 col-md-12">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <input id="id" name = "id" type="hidden" th:value="${turma.id}">
-              <input id="nome" name="nome" type="text" class="inputText form-control" th:value="${turma.nome}" required
-                style="width: 250px;">
+              <input id="id" name="id" type="hidden" th:value="${turma.id}">
+              <input id="nome" name="nome" type="text" class="inputText form-control turma-add-nome"
+                th:value="${turma.nome}" required>
               <span class="floating-label">Name</span>
             </div>
-            <select name="semestre" class="form-control ml-2 " id="semestre" style="width: 150px;">
+            <select name="semestre" class="form-control ml-2 turma-add-semestre" id="semestre">
               <option th:selected="${turma.semestre == '1'}" selected value="1">1° Semestre</option>
               <option th:selected="${turma.semestre == '2'}" value="2">2° Semestre</option>
             </select>
           </div>
           <div class="d-flex justify-content-center">
-            <p for="ano" class="mt-1 mr-1 " style="font-size: 1.5rem; text-decoration: dotted;">Year: </p>
-            <input th:value="${turma.ano}" type="text" id="ano" name="ano" class="form-control"
-              placeholder="Disabled input" style="width: 80px;">
+            <p for="ano" class="mt-1 mr-1 turma-add-ano ">Year: </p>
+            <input th:value="${turma.ano}" type="text" id="ano" name="ano" class="form-control turma-add-ano-input"
+              placeholder="Disabled input">
           </div>
 
           <div class="justify-content-center d-flex">
@@ -129,43 +106,13 @@
       </form>
     </div>
   </div>
-
-  <!-- <div class="row mt-5  d-flex justify-content-center">
-      <table class="table table-hover" style="width: 800px;">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Email</th>
-            <th scope="col">Adicionar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Naruto Uzuamaki</td>
-            <td>narutinho@hotmail.com</td>
-            <td>
-              <i class="fas fa-user-plus text-primary" style="font-size: 20pt; margin-left: 10%; cursor: pointer;"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
-
   </div>
 
-  <script src="../js/adminpages.js"></script>
-  <script src="../js/sidebar.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+  <script src="/js/adminpages.js"></script>
+  <script src="/js/sidebar.js"></script>
+  <script src="/js/jquery-3.3.1.slim.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
