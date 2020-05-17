@@ -1,4 +1,76 @@
-<h1>Erro interno no sistema!</h1>
-<span>Tente novamente mais tarde!</span>
-<br>
-<a href="/mapa">Home</a>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Error 500</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <style>
+        .container {
+            width: 100vw;
+            height: 80vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center
+        }
+
+        .box {
+            width: 700px;
+            height: 320px;
+        }
+
+        .box h1 {
+            font-size: 160px;
+            font-weight: 900;
+            margin: 0px;
+            text-transform: uppercase;
+            color: #011f416c;
+            flex-direction: column;
+        }
+        .btn {
+            margin-top: 5px;
+            margin-left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="box">
+            <h1 th:text="${status}"></h1>
+            <p class="text-dark pl-2 text-muted" style="font-size: 1.5rem;" th:text="'Oops! ' +${error}"></p>
+
+            <div class="alert alert-danger">
+                <strong>
+                    <span th:text="'Message: ' + ${message}"></span><br>
+                    <span th:text="'Date: ' + ${timestamp}"></span><br>
+                    <span th:text="'Path: ' + ${path}"></span><br>
+                    <p>
+                        <button class="btn btn-sm btn-dark mt-2" type="button" data-toggle="collapse"
+                            data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Show Exception
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseExample" style="font-size: 0.8rem;" th:text="${#strings.abbreviate(trace,500)}"></div>
+                </strong>
+            </div>
+
+            <a href="/mapa" class="mb-5">
+                <button class="btn btn-lg btn-secondary mb-2" type="button">E-nology
+                    <span class="fa fa-home"></span>
+                </button>
+            </a>
+        </div>
+    </div>
+    <script src="/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>

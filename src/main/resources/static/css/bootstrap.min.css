@@ -4675,12 +4675,6 @@ tbody.collapse.show {
     border-radius: .3rem
 }
 
-@media (min-width:576px) {
-    .jumbotron {
-        padding: 4rem 2rem
-    }
-}
-
 .jumbotron-fluid {
     padding-right: 0;
     padding-left: 0;
