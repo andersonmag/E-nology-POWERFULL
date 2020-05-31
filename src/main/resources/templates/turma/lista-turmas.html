@@ -94,7 +94,7 @@
                     <tbody>
                         <tr th:each="turma:${turmas}">
                             <td th:text="${turma.id}"></td>
-                            <td th:text="${turma.nome}"></td>
+                            <td><a th:href="'/admin/turmas/' + ${turma.id} + '/alunos'" th:text="${turma.nome}"></a></td>
                             <td th:text="${turma.ano} + '.' + ${turma.semestre}"></td>
                             <td>
                                 <div class="dropright">
