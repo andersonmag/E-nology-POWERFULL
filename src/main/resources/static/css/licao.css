@@ -172,6 +172,10 @@ h1 {
     max-width: 100%;
 }
 
+.texto{
+    font-size: x-large;
+}
+
 @media only screen and (max-width: 600px) {
     h1 {
         font-size: 16pt;
@@ -182,12 +186,10 @@ h1 {
     }
 
     .cabecario{
-     
         font-size: 9.8pt;
     }
     .texto{
-
-        font-size: 10pt;
+        font-size: 16pt;
     }
 
     .modal-content{
