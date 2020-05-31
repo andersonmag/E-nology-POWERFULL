@@ -57,7 +57,7 @@ public class ClassControler {
     @RequestMapping("/{id}/add-alunos")
     public ModelAndView adicionarAlunosTurma(@PageableDefault(size = 5, page = 0) Pageable pageable, ModelAndView model,
             @AuthenticationPrincipal Usuario usuario, @PathVariable("id") Long id) {
-                
+
         model.addObject("alunos", userRepository.findAll(pageable));
         model.addObject("usuario", usuario);
         model.addObject("turma", turmaRepository.findById(id).get());
@@ -97,6 +97,17 @@ public class ClassControler {
 
         model.setViewName("redirect:/admin/turmas");
         turmaRepository.deleteById(id);
+        return model;
+    }
+
+    @RequestMapping("/{id}/alunos")
+    public ModelAndView exibirAlunosTurma(@PathVariable("id") Long id, @AuthenticationPrincipal Usuario usuario,
+            ModelAndView model) {
+        model.setViewName("turma/lista-alunos");
+        model.addObject("usuario", usuario)
+            .addObject("turma", turmaRepository.findById(id).get())
+            .addObject("alunos", turmaRepository.findById(id).get().getUsuarios());
+
         return model;
     }
 }
