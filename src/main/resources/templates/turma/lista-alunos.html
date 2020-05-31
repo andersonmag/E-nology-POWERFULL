@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <title>Estatísticas da Turma || ADMIN </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/sidebar.css" rel="stylesheet">
+    <link href="/fonts/font-nunito.css" rel="stylesheet">
+    <link href="/fonts/font-exo.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/adminpages.css">
+    <link rel="stylesheet" href="/css/mdb.min.css">
+</head>
+
+<body>
+    <div class="row fixed-top navbar">
+        <span class="botao fa fa-bars" onclick="alterarSidebar()"></span>
+        <a class="navbar-brand marca-admin ml-4" style="font-size: 18pt;color: white;"><span>Admin Page</span></a>
+        <div class="direita align-middle">
+
+        </div>
+    </div>
+    <div id="sidebar" class="sidenav">
+        <div>
+            <div class="d-flex justify-content-center bg-sidebar-admin">
+                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+            </div>
+            <strong>
+                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+                    class="mt-2 d-flex justify-content-center fonte user-name"></span></strong>
+            <span class="fa fa-address-card d-flex justify-content-center text-light">
+                <strong><span class="fonte ml-2">Professor</span></strong></span>
+            <br>
+        </div>
+        <span></span>
+        <a name="link" href="/admin"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+
+        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
+            </span></a>
+        <br>
+
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Sistema</strong></h5>
+        <a name="link" href="/admin/sistema/criar-tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar
+                    Tarefa</span>
+            </span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
+        <a name="link" href="/admin/turmas#"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
+            </span></a>
+
+        <a name="link"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
+                    Turmas</span></span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
+
+        <a name="link" href="/admin/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
+        <br>
+        <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-md-10 mt-3 ml-3 mb-2 pt-5 pl-5">
+                <i class="fa fa-hand-o-right ml-4" aria-hidden="true"></i> <span>admin/ turmas/</span>
+                <span th:text="${turma.nome}"></p>
+            </div>
+        </div>
+        <div class="row mt-5 d-flex justify-content-center">
+            <div class="col-sm-10 mb-3 d-flex justify-content-center">
+                <h1 class="text-center">Estatísticas dos Alunos</h1>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-10 mb-3 d-flex justify-content-center">
+                <p class="text-justify">Aqui você pode visualizar informações sobre o desempenho dos alunos em cada
+                    fase!</p>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-10 mb-3">
+                <select class="form-control">
+                    <option>Fase 1</option>
+                </select>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-10 col-md-10 listagem">
+                <table class="table table-hover table-bordered">
+                    <thead class=" indigo darken-4 white-text">
+                        <tr>
+                            <th scope="col" class="text-center font-weight-bold">Nome <i
+                                    class="fa fa-address-card-o text-white" aria-hidden="true"></i></th>
+                            <th scope="col" class="text-center orange-text font-weight-bold">Tentativas <i
+                                    class="orange-text fa fa-repeat"></i></th>
+                            <th scope="col" class="text-center text-success font-weight-bold">Acertos <span
+                                    class="fa fa-check"></span></th>
+                            <th scope="col" class="text-center text-danger font-weight-bold">Erros <span
+                                    class="fa fa-times"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        <tr th:each="aluno:${alunos}">
+                            <td class="text-center" th:text="${aluno.nome} + ' ' + ${aluno.sobrenome}"></td>
+                            <td class="text-center" th:text="${aluno.id}"></td>
+                            <td class="text-center" th:text="${aluno.pontuacaoDoAluno}"></td>
+                            <td class="text-center" th:text="${aluno.id}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/adminpages.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
