@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import br.edu.ifal.enology.service.LoginDetailsService;
 
@@ -24,7 +23,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/mapa", "/perfil", "/exercicio/**", "/atualizar", "/upload", "/cadastrar", "/sobre").authenticated()
+                .antMatchers("/mapa", "/perfil", "/exercicio/**", "/atualizar", "/upload", "/cadastrar", "/sobre", "/siga-nos").authenticated()
                 .antMatchers("/", "/cadastro", "/login").anonymous()
                 .antMatchers("/admin/**") .hasRole("ADMIN")
                 .and()

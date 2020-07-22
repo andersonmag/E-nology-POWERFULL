@@ -31,4 +31,11 @@ public class LoginController {
         model.addObject("usuario", usuarioLogado);
         return model;
     }
+
+    @RequestMapping("/siga-nos")
+    public ModelAndView seguir(@AuthenticationPrincipal Usuario usuarioLogado) {
+        ModelAndView model = new ModelAndView("siga-nos");
+        model.addObject("usuario", usuarioLogado);
+        return model;
+    }
 }
