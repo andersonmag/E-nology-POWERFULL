@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Error 500</title>
+    <title th:text="${error} + ' | ' + 'E-nology'"></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -41,28 +41,23 @@
 
 <body>
 
-    <div class="container">
+    <div class="container text-center">
         <div class="box">
             <h1 th:text="${status}"></h1>
             <p class="text-dark pl-2 text-muted" style="font-size: 1.5rem;" th:text="'Oops! ' +${error}"></p>
-
-            <div class="alert alert-danger">
+           
+            <div class="alert alert-info" role="alert">
+             
+            <p class="text-dark pl-2 text-muted" style="font-size: 1.2rem;">
                 <strong>
-                    <span th:text="'Message: ' + ${message}"></span><br>
-                    <span th:text="'Date: ' + ${timestamp}"></span><br>
-                    <span th:text="'Path: ' + ${path}"></span><br>
-                    <p>
-                        <button class="btn btn-sm btn-dark mt-2" type="button" data-toggle="collapse"
-                            data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Show Exception
-                        </button>
-                    </p>
-                    <div class="collapse" id="collapseExample" style="font-size: 0.8rem;" th:text="${#strings.abbreviate(trace,500)}"></div>
-                </strong>
+                    A Página que você está tentando <br>
+                         buscar não existe! :(
+                 </strong>
+            </p>
             </div>
 
             <a href="/mapa" class="mb-5">
-                <button class="btn btn-lg btn-secondary mb-2" type="button">E-nology
+                <button class="btn btn-lg btn-info mb-2" type="button">E-nology
                     <span class="fa fa-home"></span>
                 </button>
             </a>
