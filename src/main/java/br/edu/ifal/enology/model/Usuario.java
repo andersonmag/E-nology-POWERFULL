@@ -26,6 +26,8 @@ public class Usuario implements UserDetails {
     private String nome;
     private String sobrenome;
     private int pontuacaoDoAluno;
+    private int codigoVerificacao;
+    private boolean ativouConta;
 
     @OneToOne
     private Imagem imagem;
@@ -133,6 +135,22 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return ativouConta;
+    }
+
+    public int getCodigoVerificacao() {
+        return codigoVerificacao;
+    }
+
+    public void setCodigoVerificacao(int codigoVerificacao) {
+        this.codigoVerificacao = codigoVerificacao;
+    }
+
+    public boolean isAtivouConta() {
+        return ativouConta;
+    }
+
+    public void setAtivouConta(boolean ativouConta) {
+        this.ativouConta = ativouConta;
     }
 }
