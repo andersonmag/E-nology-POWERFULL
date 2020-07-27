@@ -1,7 +1,9 @@
 package br.edu.ifal.enology.controller;
 
 import java.io.IOException;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.edu.ifal.enology.model.Imagem;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.ImagemRepository;
+import br.edu.ifal.enology.service.EmailService;
 import br.edu.ifal.enology.service.UsuarioService;
 
 @RestController
@@ -28,6 +32,8 @@ public class UserController {
     UsuarioService usuarioService;
     @Autowired
     ImagemRepository imagemRepository;
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping("/perfil")
     public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado) {
@@ -66,12 +72,46 @@ public class UserController {
 
             return new ModelAndView("redirect:/cadastro");
         } else {
-
+            usuario.setCodigoVerificacao(usuarioService.gerarCodigoAtivacao());
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+            emailService.enviarEmailConfirmacao(usuario.getEmail(), usuario.getCodigoVerificacao());
             usuarioService.save(usuario);
-            return new ModelAndView("redirect:/login");
+            return new ModelAndView("redirect:/verificacao-email");
         }
+    }
 
+    @RequestMapping("/verificacao-email")
+    public ModelAndView verificarEmail() {
+        return new ModelAndView("user/verificacao-email");
+    }
+
+    @RequestMapping("/ativar-conta/")
+    public ModelAndView verificarEmail(int codigoVerificacao, RedirectAttributes redirect) {
+        if (usuarioService.verificarCodigo(codigoVerificacao)) {
+            usuarioService.ativarConta(codigoVerificacao);
+            redirect.addFlashAttribute("mensagem", "Conta ativada com sucesso.");
+            return new ModelAndView("redirect:/login");
+        }else{
+            redirect.addFlashAttribute("mensagem", "Código Incorreto!");
+            return new ModelAndView("redirect:/verificacao-email");
+        }
+        
+    }
+
+    @RequestMapping("/reenviar-email")
+    public ModelAndView reenviarEmail(String email, RedirectAttributes redirect) {
+        if (verificarSeEmailExiste(email)) {
+            if (usuarioService.findByEmail(email).getCodigoVerificacao() == 0) {
+                redirect.addFlashAttribute("mensagem", "Está conta já está ativada!");
+                return new ModelAndView("redirect:/login");
+            } else {
+                emailService.enviarEmailConfirmacao(email, usuarioService.findByEmail(email).getCodigoVerificacao());
+                redirect.addFlashAttribute("mensagem", "Email reenviado!");
+            }
+        } else {
+            redirect.addFlashAttribute("mensagem", "Erro! Este email não está cadastrado!");
+        }
+        return new ModelAndView("redirect:/verificacao-email");
     }
 
     @RequestMapping("/atualizar")
@@ -128,7 +168,7 @@ public class UserController {
 
         Long secretPassword = 666 + usuarioLogado.getId();
 
-        //Atualização
+        // Atualização
         if (usuarioLogado.getImagem() != null) {
             usuarioLogado.getImagem().setDados(file.getBytes());
             usuarioLogado.getImagem().setTipo(file.getContentType());
