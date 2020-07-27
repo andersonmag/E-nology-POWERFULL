@@ -2,6 +2,8 @@ package br.edu.ifal.enology.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,30 @@ public class UsuarioService {
 
     public List<Usuario> findAll() {
         return userRepository.findAll();
+    }
+
+    public int gerarCodigoAtivacao(){
+        Random random = new Random();
+        int codigo = random.nextInt(99999)+10000;
+
+        return codigo;
+    }
+
+    public boolean verificarCodigo(int codigo){
+        boolean verificado = findAll()
+                            .stream()
+                            .anyMatch(usuario -> usuario.getCodigoVerificacao() == codigo);
+        return verificado;
+    }
+
+    public void ativarConta(int codigo){
+            Usuario user = findAll()
+                        .stream()
+                        .filter(usuario -> usuario.getCodigoVerificacao() == codigo)
+                        .findFirst()
+                        .get();
+            user.setCodigoVerificacao(0);
+            user.setAtivouConta(true);
+            save(user);
     }
 }
