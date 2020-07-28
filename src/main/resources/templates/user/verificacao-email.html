@@ -23,9 +23,9 @@
 						</div>
 						<h1 class="text-center">Verificação de email</h1>
 						<p class="mb-4 text-center">Digite o código enviado para seu email para ativar sua conta.</p>
-						<div class="alert alert-warning alert-dismissible fade show" th:if="${mensagem != null}"
+						<div class="alert alert-danger fade show text-center" th:if="${mensagem != null}"
 							id="mensagem" role="alert">
-							<label th:text="${mensagem}"></label>
+							<span th:text="${mensagem}"></span>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
