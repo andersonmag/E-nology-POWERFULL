@@ -1,9 +1,9 @@
 package br.edu.ifal.enology.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.UserRepository;
@@ -15,12 +15,11 @@ public class LoginDetailsService implements UserDetailsService {
     UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
         Usuario usuario = userRepository.findByEmail(email);
 
         if (usuario != null)
             return usuario;
-
-        throw new UsernameNotFoundException("Usuario não encontrado!");
+        throw new AuthenticationServiceException("Este email não está cadastrado!");
     }
 }
