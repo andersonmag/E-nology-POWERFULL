@@ -1,7 +1,6 @@
 package br.edu.ifal.enology.service;
 
 import java.util.Properties;
-
 import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -10,9 +9,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import br.edu.ifal.enology.model.Usuario;
 
 @Service
 public class EmailService{
@@ -41,17 +41,17 @@ public class EmailService{
         message.setFrom(adressSender);
         message.addRecipients(Message.RecipientType.TO, adressDestination);
         message.setSubject(assunto);
-        //message.setContent(pageContent, "text/html; charset=utf-8");
          message.setText(mensagem);
 
         Transport.send(message);
     }
 
-    public void enviarEmailConfirmacao(String emailDestino, int codigoVerificacao){
+    public void enviarEmailConfirmacao(Usuario usuario){
         try {
-        enviarEmail("E-nology - Verificação de Email", emailDestino, "Bem vindo ao E-nology!"+
-                    "\nPara ativar sua conta, use o código: \n" + codigoVerificacao + 
-                    ".\nOu, clique no link: https://e-nology.herokuapp.com/ativar-conta/?codigoVerificacao=" + codigoVerificacao+ "\n\nSe você não se cadastrou em nosso sistema, pedimos que desconsidere este email.");
+        enviarEmail("E-nology - Verificação de Email", usuario.getEmail(), "Bem vindo ao E-nology, " + usuario.getNome() + "! " +
+                    "\nPara ativar sua conta, use o código: \n" + usuario.getCodigoVerificacao() + 
+                    ".\nOu, clique no link: https://e-nology.herokuapp.com/ativar-conta/?codigoVerificacao=" + 
+                    usuario.getCodigoVerificacao() + "\n\nSe você não se cadastrou em nosso sistema, pedimos que desconsidere este email.");
         }catch(Exception e){
             System.err.println(e);
         }

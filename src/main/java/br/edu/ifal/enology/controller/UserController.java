@@ -1,6 +1,7 @@
 package br.edu.ifal.enology.controller;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -74,7 +75,7 @@ public class UserController {
         } else {
             usuario.setCodigoVerificacao(usuarioService.gerarCodigoAtivacao());
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-            emailService.enviarEmailConfirmacao(usuario.getEmail(), usuario.getCodigoVerificacao());
+            emailService.enviarEmailConfirmacao(usuario);
             usuarioService.save(usuario);
             return new ModelAndView("redirect:/verificacao-email");
         }
@@ -92,7 +93,7 @@ public class UserController {
             redirect.addFlashAttribute("mensagem", "Conta ativada com sucesso.");
             return new ModelAndView("redirect:/login");
         }else{
-            redirect.addFlashAttribute("mensagem", "Código Incorreto!");
+            redirect.addFlashAttribute("mensagem", "Código Incorreto ou Já Utilizado!");
             return new ModelAndView("redirect:/verificacao-email");
         }
         
@@ -105,7 +106,7 @@ public class UserController {
                 redirect.addFlashAttribute("mensagem", "Está conta já está ativada!");
                 return new ModelAndView("redirect:/login");
             } else {
-                emailService.enviarEmailConfirmacao(email, usuarioService.findByEmail(email).getCodigoVerificacao());
+                emailService.enviarEmailConfirmacao(usuarioService.findByEmail(email));
                 redirect.addFlashAttribute("mensagem", "Email reenviado!");
             }
         } else {
