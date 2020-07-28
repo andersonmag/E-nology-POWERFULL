@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title th:text="${error} + ' | ' + 'E-nology'"></title>
+    <title>Não encontrado | E-nology</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -32,6 +32,7 @@
             color: #011f416c;
             flex-direction: column;
         }
+
         .btn {
             margin-top: 5px;
             margin-left: 0;
@@ -43,24 +44,23 @@
 
     <div class="container text-center">
         <div class="box">
-            <h1 th:text="${status}"></h1>
-            <p class="text-dark pl-2 text-muted" style="font-size: 1.5rem;" th:text="'Oops! ' +${error}"></p>
-           
+            <h1 th:text="404"></h1>
+            <p class="text-dark pl-2 text-muted" style="font-size: 1.5rem;" th:text="'Oops! ' + 'Não encontrado'"></p>
+
             <div class="alert alert-info" role="alert">
-             
-            <p class="text-dark pl-2 text-muted" style="font-size: 1.2rem;">
-                <strong>
-                    A Página que você está tentando <br>
-                         buscar não existe! :(
-                 </strong>
-            </p>
+
+                <p class="text-dark pl-2 text-muted" style="font-size: 1.2rem;">
+                    <strong>
+                        A Página que você está tentando <br>
+                        buscar não existe! :(
+                    </strong>
+
+                </p>
             </div>
 
-            <a href="/mapa" class="mb-5">
-                <button class="btn btn-lg btn-info mb-2" type="button">E-nology
-                    <span class="fa fa-home"></span>
-                </button>
-            </a>
+            <button class="btn btn-lg btn-info mb-2 mb-5" type="button" onclick="history.back()">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+            </button>
         </div>
     </div>
     <script src="/js/jquery-3.3.1.slim.min.js"></script>
