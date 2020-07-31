@@ -1,10 +1,9 @@
 package br.edu.ifal.enology.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,10 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import br.edu.ifal.enology.model.Imagem;
+import br.edu.ifal.enology.model.RedefinicaoSenha;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.ImagemRepository;
+import br.edu.ifal.enology.repository.RedefinicaoSenhaRepository;
 import br.edu.ifal.enology.service.EmailService;
 import br.edu.ifal.enology.service.UsuarioService;
 
@@ -30,11 +30,16 @@ import br.edu.ifal.enology.service.UsuarioService;
 public class UserController {
 
     @Autowired
-    UsuarioService usuarioService;
+    private UsuarioService usuarioService;
+
     @Autowired
-    ImagemRepository imagemRepository;
+    private ImagemRepository imagemRepository;
+
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private RedefinicaoSenhaRepository redefinicaoSenhaRepository;
 
     @RequestMapping("/perfil")
     public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado) {
@@ -53,7 +58,6 @@ public class UserController {
 
         if (file != null) {
             usuarioLogado.setImagem(salvarImagem(file, usuarioLogado));
-            System.err.println(usuarioLogado.getImagem().getNome() + "kqlkslaksalk");
             usuarioService.save(usuarioLogado);
         }
 
@@ -81,6 +85,68 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/envio-email-redefinir-senha")
+    public ModelAndView mandarEmailRedefinirSenha(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+        Usuario usuario = usuarioService.findByEmail(email);
+        String resultado = "Este email não está cadastrado!";
+
+        if (Optional.ofNullable(usuario).isPresent()) {
+
+            RedefinicaoSenha redefinicaoSenha = new RedefinicaoSenha();
+            redefinicaoSenha.setTimeout(LocalDateTime.now());
+            redefinicaoSenha.setUsuario(usuario);
+            redefinicaoSenhaRepository.save(redefinicaoSenha);
+
+            resultado = emailService.enviarEmailRedefinirSenha(redefinicaoSenha.getToken(), usuario);
+            redirectAttributes.addFlashAttribute("teveSucesso", true);
+            redirectAttributes.addFlashAttribute("resultado", resultado);
+
+            return new ModelAndView("redirect:/login");
+        }
+
+        redirectAttributes.addFlashAttribute("teveSucesso", false);
+        redirectAttributes.addFlashAttribute("resultado", resultado);
+
+        return new ModelAndView("redirect:/login");
+    }
+
+    @RequestMapping("/redefinir-senha")
+    public ModelAndView mostrarPaginaRedefinirSenha(@RequestParam(name = "tk", required = false) String tokenUsuario) {
+        ModelAndView model = new ModelAndView("user/alteracao-senha");
+        Optional<RedefinicaoSenha> recuperarOptional = redefinicaoSenhaRepository
+                                                            .findByToken(tokenUsuario);
+
+        if (recuperarOptional.isPresent()) {
+            if (recuperarOptional.get().getTimeout().isAfter(LocalDateTime.now())) {
+                model.addObject("tk", recuperarOptional.get().getToken());
+                return model;
+            }
+        }
+
+        model.setViewName("error");
+        model.addObject("msgErro", "O Link ou Recurso que você está buscando não existe, "
+                                     + "ou pode estar expirado!");
+        return model;
+    }
+
+    @RequestMapping("/salvar-nova-senha")
+    public ModelAndView salvarRedefinicaoSenha(@RequestParam("tk") String tokenUsuario,
+                                               @RequestParam("senha") String novaSenha) {
+        Optional<RedefinicaoSenha> recuperarOptional = redefinicaoSenhaRepository
+                                                            .findByToken(tokenUsuario);
+                                                
+        if (recuperarOptional.isPresent()) {        
+                Usuario usuario = recuperarOptional.get().getUsuario();
+                usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
+                redefinicaoSenhaRepository.delete(recuperarOptional.get());
+                usuarioService.save(usuario);
+
+                return new ModelAndView("redirect:/login");
+        }
+
+        return new ModelAndView("redirect:/redefinir-senha");
+    }
+
     @RequestMapping("/verificacao-email")
     public ModelAndView verificarEmail() {
         return new ModelAndView("user/verificacao-email");
@@ -92,11 +158,11 @@ public class UserController {
             usuarioService.ativarConta(codigoVerificacao);
             redirect.addFlashAttribute("mensagem", "Conta ativada com sucesso.");
             return new ModelAndView("redirect:/login");
-        }else{
+        } else {
             redirect.addFlashAttribute("mensagem", "Código Incorreto ou Já Utilizado!");
             return new ModelAndView("redirect:/verificacao-email");
         }
-        
+
     }
 
     @RequestMapping("/reenviar-email")
