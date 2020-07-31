@@ -77,21 +77,98 @@
 					<div class="col">
 						<hr class="mt-3 mb-3">
 						<small>Ainda não possui conta no <strong>E-nology</strong>?
-							 <a href="/cadastro">Criar
+							<a href="/cadastro">Criar
 								Conta</a></small>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<a href="/kkkk" class="pass">Esqueceu a Senha?</a>
+						<a href class="pass" data-toggle="modal" data-target="#informarEmailModal">Esqueceu a Senha?</a>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- Modal de resultado ao tentar enviar e-mail para troca de senha -->
+
+		<div class="modal show fade" id="sucessoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true" th:if="${teveSucesso} != null">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<div class="row d-flex justify-content-center ">
+							<i class="" aria-hidden="true" style="font-size: 6rem;" th:classappend="${teveSucesso} ? 'fa fa-check-circle text-success'
+																												   : 'fa fa-window-close text-danger'"></i>
+						</div>															
+						<small class="text-black" id="resultado" th:text="${resultado}"></small>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal com campo para digitar senha -->
+
+		<div class="modal fade" id="informarEmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-muted" id="exampleModalLabel">Esqueceu sua senha?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form method="POST" action="/envio-email-redefinir-senha" onsubmit="alterarBtn()">
+							<div>
+
+								<div class="row d-flex justify-content-center">
+
+									<strong>
+										<small>
+											<p class="pzinho text-center p-4">
+												Digite seu endereço de e-mail cadastrado no <b>E-nology</b> para
+												enviarmos instruçoes de como
+												redefinir a sua senha.
+											</p>
+										</small>
+									</strong>
+								</div>
+
+								<div class="row d-flex justify-content-center">
+
+									<div class="form-group">
+										<label for="email">Digite seu email aqui</label>
+										<input type="text" name="email" id="Email" class="form-control"
+											onkeyup="validarEmail()">
+									</div>
+								</div>
+								<div class="row d-flex justify-content-center">
+									<button id="myBtn" disabled type="submit" style="vertical-align: middle;"
+										class="btn btn-primary">Confirmar
+										<div id="spi" class="" role="status">
+										</div>
+									</button>
+								</div>
+
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
-
-
 </body>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -101,5 +178,33 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+
+<script>
+
+	if(document.getElementById("resultado").textContent != "" && 
+		document.getElementById("resultado").textContent != null) {
+		$('#sucessoModal').modal('show')
+	}
+
+
+	function validarEmail() {
+		var email = document.getElementById("Email").value;
+
+		if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
+			document.getElementById("myBtn").disabled = true;
+		} else {
+			document.getElementById("myBtn").disabled = false;
+		}
+	}
+
+	function alterarBtn() {
+		var butt = document.getElementById("myBtn")
+
+		butt.innerHTML = "Enviando ."
+		butt.disabled = true
+		butt.innerHTML = butt.innerHTML + "."
+	}
+
+</script>
 
 </html>
