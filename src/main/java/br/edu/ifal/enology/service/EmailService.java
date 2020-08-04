@@ -64,8 +64,8 @@ public class EmailService{
 
         String mensagem = "Olá, " + usuario.getNome() + "! Te ajudaremos a alterar sua senha.\n\n" + 
                           "Para realizar a alteração de senha, basta clicar no link abaixo e redefini-la logo a seguir.\n" +
-                          "Segue o link para você alterar sua senha: " + "https://https://e-nology.herokuapp.com/redefinir-senha?tk=" + token +
-                          "\nNota: Este link espirará em 12 horas, ou caso efetue a mudança de senha." +
+                          "Segue o link para você alterar sua senha: " + "https://e-nology.herokuapp.com/redefinir-senha?tk=" + token +
+                          "\nNota: Este link expirará em 12 horas, ou caso efetue a mudança de senha." +
                           "\n\nSe você não solicitou alteração de senha, pedimos que desconsidere este email.";
 
         try {
