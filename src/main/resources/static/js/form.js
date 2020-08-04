@@ -1,17 +1,17 @@
-var erroNome = document.getElementById("erroNome");
-var erroSobrenome = document.getElementById("erroSobrenome");
-var erroEmail = document.getElementById("erroEmail");
-var erroSenha = document.getElementById("erroSenha");
-var erroRepSenha = document.getElementById("erroRepSenha");
-var erroEmailRep = document.getElementById("erroEmailRep")
+let erroNome = document.getElementById("erroNome");
+let erroSobrenome = document.getElementById("erroSobrenome");
+let erroEmail = document.getElementById("erroEmail");
+let erroSenha = document.getElementById("erroSenha");
+let erroRepSenha = document.getElementById("erroRepSenha");
+let erroEmailRep = document.getElementById("erroEmailRep");
 
 if (erroEmailRep.textContent != "") {
     classColor();
 }
 
 function classColor() {
-    var elemento = document.getElementById("erroAlert");
-    
+    let elemento = document.getElementById("erroAlert");
+
     if (erroNome.innerHTML == "" && erroSobrenome.innerHTML == ""
         && erroEmail.innerHTML == "" && erroSenha.innerHTML == ""
         && erroRepSenha.innerHTML == "" && erroEmailRep.innerHTML == "") {
@@ -25,7 +25,7 @@ function classColor() {
 }
 
 function validarNome() {
-    var nome = document.getElementById("nome").value;
+    const nome = document.getElementById("nome").value;
 
     if (verificarSePossuiCaracteresInvalidos(nome)) {
         erroNome.innerHTML = "O nome não pode ter caracteres inválidos."
@@ -42,7 +42,7 @@ function validarNome() {
 }
 
 function validarSobrenome() {
-    var sobrenome = document.getElementById("sobrenome").value;
+    const sobrenome = document.getElementById("sobrenome").value;
 
     if (verificarSePossuiCaracteresInvalidos(sobrenome)) {
         erroSobrenome.innerHTML = "O sobrenome não pode ter caracteres inválidos."
@@ -59,7 +59,7 @@ function validarSobrenome() {
 }
 
 function validarEmail() {
-    var email = document.getElementById("email").value;
+    const email = document.getElementById("email").value;
 
     if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
         erroEmail.innerHTML = "Email inválido.";
@@ -71,9 +71,9 @@ function validarEmail() {
 }
 
 function validarSenha() {
-    var senha = document.getElementById("senha").value;
+    const senha = document.getElementById("senha").value;
 
-    if (verificarSePossuiCincoCaracteres(senha)) {
+    if (verificarSePossuiMenosQueCincoCaracteres(senha)) {
         erroSenha.innerHTML = "A senha deve ter no mínimo 5 caracteres.";
         return false;
     } else {
@@ -83,8 +83,8 @@ function validarSenha() {
 }
 
 function validarRepetirSenha() {
-    var senha = document.getElementById("senha").value;
-    var repSenha = document.getElementById("repSenha").value;
+    const senha = document.getElementById("senha").value;
+    const repSenha = document.getElementById("repSenha").value;
 
     if (senha != repSenha) {
         erroRepSenha.innerHTML = "As senhas estão diferentes!";
@@ -96,8 +96,8 @@ function validarRepetirSenha() {
 }
 
 function validarNovaSenha() {
-    var novaSenha = document.getElementById("novaSenha").value;
-    var senhaAtual = document.getElementById("senhaAtual").value;
+    const novaSenha = document.getElementById("novaSenha").value;
+    const senhaAtual = document.getElementById("senhaAtual").value;
 
     if (senhaAtual != "" && novaSenha == "") {
         erroNovaSenha.innerHTML = "Digite a nova Senha!";
@@ -105,6 +105,10 @@ function validarNovaSenha() {
     }
     else if (novaSenha != "" && senhaAtual == "") {
         erroSenhaAtual.innerHTML = "Digite a Senha!";
+        return false;
+    }
+    else if(verificarSePossuiMenosQueCincoCaracteres){
+        erroNovaSenha.innerHTML = "A nova senha precisa ter 5 caracteres!";
         return false;
     }
     else {
@@ -118,12 +122,12 @@ function verificarSePossuiTresCaracteres(texto) {
     return texto.trim().length < 3;
 }
 
-function verificarSePossuiCincoCaracteres(texto) {
+function verificarSePossuiMenosQueCincoCaracteres(texto) {
     return texto.trim().length < 5;
 }
 
 function verificarSePossuiCaracteresInvalidos(texto) {
-    var caracteresPermitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ";
+    const caracteresPermitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ";
 
     for (i = 0; i < texto.length; i++) {
         if (caracteresPermitidos.indexOf(texto.charAt(i)) == -1) {
@@ -141,4 +145,48 @@ function verificarCampos() {
 
 function verificarCamposPerfil() {
     return validarNome() && validarSobrenome() && validarEmail() && validarNovaSenha();
+}
+
+function validaFormVerificacaoEmail(frm) {
+    const codigo = document.getElementById("codigoVerificacao").value;
+    let msgErroCod = document.getElementById("msgErroCod");
+    const caracteresPermitidos = "0123456789";
+
+    for (i = 0; i < codigo.length; i++) {
+        if (caracteresPermitidos.indexOf(codigo.charAt(i)) == -1) {
+            return false;
+        }
+    }
+
+    if (codigo.trim().length < 5) {
+        msgErroCod.innerHTML = "Código Inválido!";
+        return false;
+    }
+}
+
+function validaFormAlteracaoSenha(frm) {
+    const senha = document.getElementById("senha").value;
+    const repSenha = document.getElementById("repSenha").value;
+
+    if (verificarSePossuiMenosQueCincoCaracteres(senha) || senha != repSenha) {
+        return false;
+    }
+
+}
+
+function liberarBotaoFormAlteracaoSenha() {
+    const senha = document.getElementById("senha").value;
+    const repSenha = document.getElementById("repSenha").value;
+
+    if (senha == repSenha && !verificarSePossuiMenosQueCincoCaracteres(senha)) {
+        document.getElementById("btnConfirmar").disabled = false;
+    }
+}
+
+function alterarBtnModalEsqueciSenha() {
+    let myBtn = document.getElementById("myBtn")
+
+    myBtn.innerHTML = "Enviando .";
+    myBtn.disabled = true;
+    myBtn.innerHTML += ".";
 }
