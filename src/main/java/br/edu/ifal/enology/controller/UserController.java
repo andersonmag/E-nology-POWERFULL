@@ -110,6 +110,7 @@ public class UserController {
         return new ModelAndView("redirect:/login");
     }
 
+    @Transactional(readOnly = true)
     @RequestMapping("/redefinir-senha")
     public ModelAndView mostrarPaginaRedefinirSenha(@RequestParam(name = "tk", required = false) String tokenUsuario) {
         ModelAndView model = new ModelAndView("user/alteracao-senha");
@@ -129,6 +130,7 @@ public class UserController {
         return model;
     }
 
+    @Transactional
     @RequestMapping("/salvar-nova-senha")
     public ModelAndView salvarRedefinicaoSenha(@RequestParam("tk") String tokenUsuario,
                                                @RequestParam("senha") String novaSenha) {
