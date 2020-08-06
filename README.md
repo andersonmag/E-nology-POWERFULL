@@ -15,28 +15,30 @@
 
 							Already Inside the System 
 							    Dentro do Sistema
->-  Map of System 
-<small>Mapa do Sistema contendo todas as fases e atividades feitas com o aluno. 
+>- Map of System 
+<p>Mapa do Sistema contendo todas as fases e atividades feitas com o aluno. 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/48331431/89482473-5fb18580-d770-11ea-9c5d-0d658c1129e3.png" width="600" title="hover text">
-
 </p>
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/48331431/89482474-604a1c00-d770-11ea-820d-d137f8e1906d.png" width="450" height="300" title="hover text">
 </p>
 
-<h3 align="center"> Um pouco sobre o aprendizado:
 
->-  Time of Reading
-<small> Um exemplo de texto existente em nosso sistema para treinar a leitura do inglês.
+<h3 align="center"> Um pouco sobre o aprendizado:</h3>
+
+
+>- Time of Reading
+<p> Um exemplo de texto existente em nosso sistema para treinar a leitura do inglês.</p>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/48331431/89482923-4b21bd00-d771-11ea-8cea-1516f5b56bd7.png" width="600" title="hover text">
 </p>
 
+
 >- Time of Practice
-<small> Respondendo lições para praticar novos conhecimentos
+<p> Respondendo lições para praticar novos conhecimentos</p>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/48331431/89482920-4a892680-d771-11ea-9eb5-db18238c8b89.png" width="250" title="hover text">
@@ -48,8 +50,6 @@
   <img src="https://user-images.githubusercontent.com/48331431/89483720-1d3d7800-d773-11ea-81cf-a3a43b5352ee.png" width="600" title="hover text">
   <img src="https://user-images.githubusercontent.com/48331431/89452180-a0d77480-d733-11ea-92c4-e8c929750210.png" width="600" title="hover text">
 </p>
-
-
 
 
 ## Description
@@ -94,5 +94,9 @@
 
 	Com ajuda, orientação e supervisão das Professoras: 
 		 Priscylla Silva([@priscyllaifal](https://github.com/priscyllaifal)) e Marici Lopes ([@maricilopes](https://www.instagram.com/maricilopes/))
+		 
+
+`Seja livre para deixar uma estrela e fazer um Fork desse projeto. Aceitamos críticas e sugestões sobre o mesmo.`
+
 >**made with ❤️(😠)** 
 	
