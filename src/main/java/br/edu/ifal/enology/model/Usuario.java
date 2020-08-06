@@ -2,6 +2,8 @@ package br.edu.ifal.enology.model;
 
 import java.util.Collection;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,7 +31,7 @@ public class Usuario implements UserDetails {
     private int codigoVerificacao;
     private boolean ativouConta;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Imagem imagem;
 
     @ManyToMany(fetch = FetchType.EAGER)
