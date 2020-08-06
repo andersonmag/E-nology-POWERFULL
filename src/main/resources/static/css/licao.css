@@ -118,23 +118,16 @@ form {
 }
 
 .botao-resultado{
-    width: 50%;
     background-color: #036977; 
     color: white;
 }
 
 .icone-resultado{
     font-size: 45pt;
-    margin-left: 310px;
 }
 
 .texto-resultado{
-    margin-left: 316px;
     font-size: 12pt;
-}
-
-.texto-acertou{
-    margin-left: 300px !important;
 }
 
 .modal-dialog {
@@ -200,20 +193,6 @@ h1 {
         font-size: 12pt;
     }
 
-    .icone-resultado{
-        font-size: 45pt;
-        margin-left: 150px;
-    }
-    
-    .texto-resultado{
-        margin-left: 151px;
-        font-size: 12pt;
-    }
-    
-    .texto-acertou{
-        margin-left: 140px !important;
-    }
-
     .icone-grande{
         font-size: 20pt;
         margin-left: 0;
@@ -245,20 +224,6 @@ h1 {
 
     .texto-enunciado-resultado{
         font-size: 24pt;
-    }
-
-    .icone-resultado{
-        font-size: 45pt;
-        margin-left: 150px;
-    }
-    
-    .texto-resultado{
-        margin-left: 151px;
-        font-size: 12pt;
-    }
-    
-    .texto-acertou{
-        margin-left: 140px !important;
     }
 
     .botao-resultado{

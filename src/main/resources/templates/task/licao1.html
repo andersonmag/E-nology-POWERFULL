@@ -3,8 +3,7 @@
 
 <head>
     <title>Lição N° 1 | Programação</title>
-    <meta name="keywords" content="Apps Login Form Responsive widget, Flat Web Templates, Android Compatible web template, 
-	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <meta name="keywords" content="e-nology, english, ingles, informatica" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,219 +93,202 @@
                     <div class="modal-content">
                         <div class="alert alert-info " role="alert">
                             <audio id="ac" src="../sound/acertou.mp3"></audio>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="row">
+                            <div class="container d-flex justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="row d-flex justify-content-center">
                                         <span class="fa fa-check-circle-o float-right text-success icone-resultado">
                                         </span><br>
                                     </div>
-                                    <div class="row">
+                                    <div class="row d-flex justify-content-center">
                                         <small
-                                            class="alert-heading d-flex float-right text-success texto-resultado texto-acertou">Very
+                                            class="alert-heading d-flex float-right text-success mb-2 texto-resultado">Very
                                             Well!</small>
                                     </div>
-                                </div>
-                                <div class="col-md-4 ml-2">
-                                    <h5 class="text-secondary">
-                                        "<small class="text-secondary font-weight-normal h5 texto-enunciado-resultado"
-                                            th:text="${tarefa.enunciado}"></small>"
-                                    </h5>
-                                    <span class="text-secondary"><strong>Resposta: <span class="text-success"
-                                                th:text="${tarefa.resposta.ingles}"> </strong></span>
-                                    </span>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-lg float-right botao-resultado" type="submit"
+                                
+                                <div class="row d-flex justify-content-center">
+                                    <button class="btn btn-lg btn-block botao-resultado mr-2" type="submit"
                                         onmouseover="this.style.backgroundColor='#0f8191'"
                                         onmouseout="this.style.backgroundColor='#036977'">
                                         Continuar</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Error -->
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                id="modalEr" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
-                    <div class="modal-content">
-                        <div class="alert alert-light " role="alert" style="border-bottom: 1px solid rgba(0,0,0,.1);">
-                            <audio id="er" src="../sound/marioer.mp3"></audio>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <span
-                                            class="fa fa-times-circle-o float-right text-danger icone-resultado"></span>
-                                    </div>
-                                    <div class="row">
-                                        <small
-                                            class="alert-heading d-flex float-right text-danger texto-resultado">Ops...</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 ml-2">
-                                    <h5 class="text-secondary">
-                                        "<small class="text-secondary font-weight-normal h5 texto-enunciado-resultad"
-                                            th:text="${tarefa.enunciado}"></small>"
-                                    </h5>
-                                    <span class="text-secondary"><strong>Resposta correta: <span class="text-danger"
-                                                th:text="${tarefa.resposta.ingles}"> </strong></span>
-                                    </span>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-lg float-right bg-danger botao-resultado"
-                                        style="width: 50%; color: white;" type="submit"
-                                        onmouseover="this.style.backgroundColor='#0f8191'"
-                                        onmouseout="this.style.backgroundColor='#036977'">
-                                        Continuar</button>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+    </div>
 
-        <!-- Modal -->
-        <div class="modal  fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-            aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog col-xs-8 col-sm-8 modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
+    <!-- Modal Error -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        id="modalEr" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" style="position: fixed; margin: 0;">
+            <div class="modal-content">
+                <div class="alert alert-light " role="alert" style="border-bottom: 1px solid rgba(0,0,0,.1);">
+                    <audio id="er" src="../sound/marioer.mp3"></audio>
+                    <div class="container d-flex justify-content-center">
+                        <div class="col-md-6">
+                            <div class="row d-flex justify-content-center">
+                                <span class="fa fa-times-circle-o float-right text-danger icone-resultado"></span>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <small
+                                    class="alert-heading d-flex float-right text-danger text-center texto-resultado mb-2">Ops...</small>
+                            </div>
 
-                    <div class="modal-header ">
-                        <h5 class="modal-title ml-2 cabecario" id="exampleModalLongTitle"><small
-                                style="font-size: 23pt;" class="fa fa-eye icone-normal text-info"></small> Por favor,
-                            leia o texto abaixo(em inglês) para
-                            responder algumas das questões: </h5>
+                            <div class="row d-flex justify-content-center">
+                                <button class="btn btn-lg btn-block bg-danger botao-resultado mr-2 text-white"
+                                    type="submit" onmouseover="this.style.backgroundColor='#0f8191'"
+                                    onmouseout="this.style.backgroundColor='#036977'">
+                                    Continuar</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="container mt-2 d-flex justify-content-center">
-                        <strong class="text-muted">
-                            <p style="font-size: 15pt;">Bill Gates</p>
-                        </strong>
-                    </div>
-                    <a href="#" id="top"></a>
-                    <div class="modal-body d-flex justify-content-center" style="padding-top: 0;">
-                        <div class="polaroid">
-                            <img src="../images/bill.jpg" alt="5 Terre" style="width:100%; border: 1px solid #ddd;
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal  fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog col-xs-8 col-sm-8 modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header ">
+                    <h5 class="modal-title ml-2 cabecario" id="exampleModalLongTitle"><small style="font-size: 23pt;"
+                            class="fa fa-eye icone-normal text-info"></small> Por favor,
+                        leia o texto abaixo(em inglês) para
+                        responder algumas das questões: </h5>
+                </div>
+                <div class="container mt-2 d-flex justify-content-center">
+                    <strong class="text-muted">
+                        <p style="font-size: 15pt;">Bill Gates</p>
+                    </strong>
+                </div>
+                <a href="#" id="top"></a>
+                <div class="modal-body d-flex justify-content-center" style="padding-top: 0;">
+                    <div class="polaroid">
+                        <img src="../images/bill.jpg" alt="5 Terre" style="width:100%; border: 1px solid #ddd;
                             border-radius: 4px;
                             padding: 5px;">
-                        </div>
                     </div>
-                    <div class="container d-flex justify-content-center">
-                        <p class="text-muted" style="font-size: 11pt;">Gates in 2014</p>
+                </div>
+                <div class="container d-flex justify-content-center">
+                    <p class="text-muted" style="font-size: 11pt;">Gates in 2014</p>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-10">
+                        <hr style="margin: 0;">
+                        <p class="texto text-justify">
+                            <strong>William Henry Gates III</strong> (born October 28, 1955) is an American business
+                            magnate,
+                            software
+                            developer, investor, and philanthropist. He is best known as the co-founder of Microsoft
+                            Corporation.[2][3] During his career at Microsoft, Gates held the positions
+                            of chairman, chief
+                            executive officer (CEO), president and chief software architect, while also being the
+                            largest
+                            individual shareholder until May 2014. He is one of the best-known entrepreneurs and
+                            pioneers of
+                            the microcomputer revolution of the 1970s and 1980s.
+                            Born and raised in Seattle, Washington, Gates co-founded Microsoft with childhood
+                            friend Paul
+                            Allen in 1975 in Albuquerque, New Mexico; it went on to become the world's
+                            largest personal
+                            computer software company.[4][a] Gates led the company as chairman and CEO until
+                            stepping
+                            down
+                            as CEO in January 2000, but he remained chairman and became chief software
+                            architect.[7] During
+                            the late 1990s, Gates had been criticized for his business tactics, which have been
+                            considered anti-competitive. This opinion has been upheld by numerous court
+                            rulings.[8] In
+                            June
+                            2006, Gates announced that he would be transitioning to a part-time role at Microsoft
+                            and
+                            full-time work at the Bill & Melinda Gates Foundation, the private charitable foundation
+                            that he
+                            and his wife, Melinda Gates, established in 2000.[9] He gradually transferred his duties
+                            to Ray
+                            Ozzie and Craig Mundie.[10] He stepped down as chairman of Microsoft in February 2014
+                            and
+                            assumed a new post as technology adviser to support the newly appointed CEO Satya
+                            Nadella.[11]
+                            Since 1987, he has been included in the Forbes list of the world's wealthiest documented
+                            individuals.[12][13] From 1995 to 2017, he held the Forbes title of the richest person
+                            in
+                            the
+                            world all but four of those years.[1] In October 2017, he was surpassed
+                            by Amazon founder
+                            and
+                            CEO Jeff Bezos, who had an estimated net worth of US$90.6 billion compared to Gates' net
+                            worth
+                            of US$89.9 billion at the time.[14] As of November 9, 2019, Gates had an estimated net
+                            worth
+                            of
+                            US$107.1 billion, making him the second wealthiest person in the world, behind Bezos.
+                            Later in his career and since leaving day-to-day operations at Microsoft in 2008, Gates
+                            pursued
+                            a number of philanthropic endeavors. He donated large amounts of money to various
+                            charitable
+                            organizations and scientific research programs through the Bill & Melinda Gates
+                            Foundation,
+                            reported to be the world's largest private charity.[15] In 2009, Gates and Warren
+                            Buffett founded The Giving Pledge, whereby they and other billionaires pledge to give at
+                            least
+                            half of their wealth to philanthropy.[16] The foundation works to save lives and improve
+                            global
+                            health, and is working with Rotary International to eliminate polio.[17]
+                        </p>
+                        <small>Disponível em: https://en.wikipedia.org/wiki/Bill_Gates</small>
                     </div>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-10">
-                            <hr style="margin: 0;">
-                            <p class="texto text-justify">
-                                <strong>William Henry Gates III</strong> (born October 28, 1955) is an American business
-                                magnate,
-                                software
-                                developer, investor, and philanthropist. He is best known as the co-founder of Microsoft
-                                Corporation.[2][3] During his career at Microsoft, Gates held the positions
-                                of chairman, chief
-                                executive officer (CEO), president and chief software architect, while also being the
-                                largest
-                                individual shareholder until May 2014. He is one of the best-known entrepreneurs and
-                                pioneers of
-                                the microcomputer revolution of the 1970s and 1980s.
-                                Born and raised in Seattle, Washington, Gates co-founded Microsoft with childhood
-                                friend Paul
-                                Allen in 1975 in Albuquerque, New Mexico; it went on to become the world's
-                                largest personal
-                                computer software company.[4][a] Gates led the company as chairman and CEO until
-                                stepping
-                                down
-                                as CEO in January 2000, but he remained chairman and became chief software
-                                architect.[7] During
-                                the late 1990s, Gates had been criticized for his business tactics, which have been
-                                considered anti-competitive. This opinion has been upheld by numerous court
-                                rulings.[8] In
-                                June
-                                2006, Gates announced that he would be transitioning to a part-time role at Microsoft
-                                and
-                                full-time work at the Bill & Melinda Gates Foundation, the private charitable foundation
-                                that he
-                                and his wife, Melinda Gates, established in 2000.[9] He gradually transferred his duties
-                                to Ray
-                                Ozzie and Craig Mundie.[10] He stepped down as chairman of Microsoft in February 2014
-                                and
-                                assumed a new post as technology adviser to support the newly appointed CEO Satya
-                                Nadella.[11]
-                                Since 1987, he has been included in the Forbes list of the world's wealthiest documented
-                                individuals.[12][13] From 1995 to 2017, he held the Forbes title of the richest person
-                                in
-                                the
-                                world all but four of those years.[1] In October 2017, he was surpassed
-                                by Amazon founder
-                                and
-                                CEO Jeff Bezos, who had an estimated net worth of US$90.6 billion compared to Gates' net
-                                worth
-                                of US$89.9 billion at the time.[14] As of November 9, 2019, Gates had an estimated net
-                                worth
-                                of
-                                US$107.1 billion, making him the second wealthiest person in the world, behind Bezos.
-                                Later in his career and since leaving day-to-day operations at Microsoft in 2008, Gates
-                                pursued
-                                a number of philanthropic endeavors. He donated large amounts of money to various
-                                charitable
-                                organizations and scientific research programs through the Bill & Melinda Gates
-                                Foundation,
-                                reported to be the world's largest private charity.[15] In 2009, Gates and Warren
-                                Buffett founded The Giving Pledge, whereby they and other billionaires pledge to give at
-                                least
-                                half of their wealth to philanthropy.[16] The foundation works to save lives and improve
-                                global
-                                health, and is working with Rotary International to eliminate polio.[17]
-                            </p>
-                            <small>Disponível em: https://en.wikipedia.org/wiki/Bill_Gates</small>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
-                            onclick="window.location.href='#top'" title="Voltar ao Topo">
-                        </button>
-                        <button class="btn btn-lg" data-dismiss="modal" type="submit" onclick="continuarCronometro()"
-                            style="background-color: #036977; color: white;"
-                            onmouseover="this.style.backgroundColor='#0f8191'"
-                            onmouseout="this.style.backgroundColor='#036977'">
-                            Continuar</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
+                        onclick="window.location.href='#top'" title="Voltar ao Topo">
+                    </button>
+                    <button class="btn btn-lg" data-dismiss="modal" type="submit" onclick="continuarCronometro()"
+                        style="background-color: #036977; color: white;"
+                        onmouseover="this.style.backgroundColor='#0f8191'"
+                        onmouseout="this.style.backgroundColor='#036977'">
+                        Continuar</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal TimeOut -->
-        <div class="modal fade" id="modalTout" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <audio id="timeout" src="../sound/timeout.mp3"></audio>
-                        </audio>
-                        <span class="modal-title fa fa-clock-o text-danger " id="exampleModalCenterTitle"
-                            style="font-size:70px"></span>
-                        <small class="modal-title text-muted" id="exampleModalLabel">TIME OUT</small>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col d-flex justify-content-center">
-                                <p>Mas não fique triste! Você ainda poderá<br> responder essa questão mais para frente.
-                                </p>
-                            </div>
+    <!-- Modal TimeOut -->
+    <div class="modal fade" id="modalTout" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <audio id="timeout" src="../sound/timeout.mp3"></audio>
+                    </audio>
+                    <span class="modal-title fa fa-clock-o text-danger " id="exampleModalCenterTitle"
+                        style="font-size:70px"></span>
+                    <small class="modal-title text-muted" id="exampleModalLabel">TIME OUT</small>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center">
+                            <p>Mas não fique triste! Você ainda poderá<br> responder essa questão mais para frente.
+                            </p>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <a href="/exercicio/intro">
-                            <button class="btn btn-lg" style="width: 100%; background-color: #0f8191; color: white;"
-                                type="submit" onmouseover="this.style.backgroundColor='#036977'"
-                                onmouseout="this.style.backgroundColor='#0f8191'">
-                                Continuar</button></a>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="/exercicio/intro">
+                        <button class="btn btn-lg" style="width: 100%; background-color: #0f8191; color: white;"
+                            type="submit" onmouseover="this.style.backgroundColor='#036977'"
+                            onmouseout="this.style.backgroundColor='#0f8191'">
+                            Continuar</button></a>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
