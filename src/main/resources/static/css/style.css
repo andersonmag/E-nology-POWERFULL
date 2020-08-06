@@ -38,7 +38,6 @@ input[type="button"], input[type="submit"] {
 }
 h1, h2, h3, h4, h5, h6 {
     color: rgb(0, 0, 0);
-    font-weight: bold;
 	margin: 0;
 	padding: 0;
     font-family: 'Raleway', sans-serif;
@@ -76,7 +75,7 @@ p.pzinho{
     color: rgb(163, 160, 0);
 }
 body{
-    background-color: rgb(211, 210, 210);
+    
     /* url('../images/banner1.jpg') */
     /* rgb(58, 156, 185)*/
     background-size: cover;
@@ -274,7 +273,6 @@ span.fa.fa-pinterest-p:hover {
 @media screen and (max-width: 568px){
 	.agile-login h1 {
 		    font-size: 40px;
-			
 	}
 }
 
