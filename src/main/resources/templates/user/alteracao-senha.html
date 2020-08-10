@@ -7,63 +7,46 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/sobre.css">
-    <link href="css/index.css" rel="stylesheet">
-
-    <style>
-        input {
-            width: 60%;
-
-        }
-    </style>
-
+    <link rel="stylesheet" href="css/style.css">
+    <link href="fonts/font-exo.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container d-flex justify-content-center">
-        <div class="col-sm-2"></div>
+    <nav class="navbar navbar-expand-lg bg-white fixed-top d-flex justify-content-center border-bottom">
+        <a class="navbar-brand" href="/">
+            <h2 class="text-dark" style="font-family: 'Exo 2';">E-nology</h2>
+        </a>
+    </nav>
+    <div class="agile-login">
+        <div class="wrapper mt-5 p-5 shadow-lg p-3 mb-5 rounded">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <form action="/salvar-nova-senha" method="POST" onsubmit="return validaFormAlteracaoSenha(this)">
+                        <div class="row d-flex justify-content-center">
+                            <span class="fa fa-magic" style="font-size:69px; color: #00475b;"></span>
+                        </div>
+                        <h3 class="text-center" style="color: #00475b;"><b>Redefinir Senha</b></h3>
+                        <div class="row mt-1">
 
-        <div class="col-sm-8 mt-5">
-            <strong>
-                <h3 class="text-center text-center text-muted marca">E-nology | Redefinir minha Senha</h3>
-
-            </strong>
-            <form action="/salvar-nova-senha" method="POST" onsubmit="return validaFormAlteracaoSenha(this)">
-
-                <div class="row bg-light text-center mt-5  d-flex justify-content-center">
-                    <div class="col-12 mt-5 text-center">
-
-                        <input type="hidden" name="tk" th:value="${tk}">
-
-                        <p for="exampleInputEmail1">Digite a nova Senha</p>
-                        <input type="password" id="senha" name="senha" required class="mb-2">
-                        <small id="emailHelp" class="form-text text-muted">Senha deve ter no minimo 5
-                            caracteres.</small>
-
-                        <br>
-
-                        <p for="exampleInputEmail1">Confirme a nova Senha</p>
-                        <input type="password" id="repSenha" onkeyup="liberarBotaoFormAlteracaoSenha()" required class="mb-2">
-
-                    </div>
-
-                    <button id="btnConfirmar" class="btn btn-lg btn-primary mb-5 mr-2" disabled type="submit">
-                        Confirmar
-                    </button>
-
+                            <input type="hidden" name="tk" th:value="${tk}">
+                            <label for="senha">Digite a nova Senha</label>
+                            <input type="password" id="senha" name="senha" required class="mb-2 form-control w-100">
+                            <small id="emailHelp" class="form-text text-muted">Senha deve ter no minimo 5
+                                caracteres.</small>
+                            <label for="repSenha">Confirme a nova Senha</label>
+                            <input type="password" id="repSenha" onkeyup="liberarBotaoFormAlteracaoSenha()" required
+                                class="mb-2  form-control w-100">
+                            <button id="btnConfirmar" class="btn btn-lg btn-block btn-primary mt-4 mb-2 mr-2" disabled
+                                type="submit">
+                                Confirmar
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-
-        </div>
-        <div class="col-sm-2"></div>
-    </div>
-
-    <div class="container-fluid fundo-do-poco d-flex justify-content-center">
-        <div class="row p-5">
-            Copyright 2020 E-nology Project
+            </div>
         </div>
     </div>
 </body>
