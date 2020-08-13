@@ -2,9 +2,14 @@ package br.edu.ifal.enology.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -82,6 +87,18 @@ public class UserController {
             emailService.enviarEmailConfirmacao(usuario);
             usuarioService.save(usuario);
             return new ModelAndView("redirect:/verificacao-email");
+        }
+    }
+
+    @Scheduled(cron = "0 0 12 1/1 * *")
+    @Transactional
+    public void deletarRedefinicaoSenhaExpirada() {
+        
+        List<RedefinicaoSenha> expirados = redefinicaoSenhaRepository.findAll().stream()
+                    .filter(expirado -> expirado.getTimeout().isBefore(LocalDateTime.now())).collect(Collectors.toList());
+
+        if(!expirados.isEmpty()) {
+            redefinicaoSenhaRepository.deleteAll(expirados);
         }
     }
 
