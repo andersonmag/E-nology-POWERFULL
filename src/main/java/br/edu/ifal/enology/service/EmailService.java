@@ -1,6 +1,9 @@
 package br.edu.ifal.enology.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+
 import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -9,9 +12,15 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+
 import br.edu.ifal.enology.model.Usuario;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 
 @Service
 public class EmailService{
@@ -20,8 +29,11 @@ public class EmailService{
     private String meuEmail;
     @Value("${spring.mail.password}")
     private String senha;
+    @Autowired
+    private Configuration config;
 
-    public void enviarEmail(String assunto, String emailDestino, String mensagem) throws Exception {
+
+    public void enviarEmail(String assunto, String emailDestino, String html, Map<String, Object> templateData) throws Exception {
         Session session = Session.getInstance(getProperties(), new Authenticator() {
 
             @Override
@@ -37,24 +49,33 @@ public class EmailService{
         adressSender.setAddress(meuEmail);
 
         Message message = new MimeMessage(session);
+        String pageContent = convertTemplatePageIntoString(html, templateData);
         message.setFrom(adressSender);
         message.addRecipients(Message.RecipientType.TO, adressDestination);
         message.setSubject(assunto);
-         message.setText(mensagem);
+        message.setContent(pageContent, "text/html; charset=utf-8");
+         //message.setText(mensagem);
 
         Transport.send(message);
     }
 
+    private String convertTemplatePageIntoString(String html, Map<String, Object> templateData) throws Exception {
+        Template pageTemplate = config.getTemplate(html);
+        String pageContent = FreeMarkerTemplateUtils.processTemplateIntoString(pageTemplate, templateData);
+
+        return pageContent;
+    }
+
     public void enviarEmailConfirmacao(Usuario usuario){
 
-        String mensagem = "Bem vindo ao E-nology, " + usuario.getNome() + "! " +
-                          "\nPara ativar sua conta, use o código: \n" + usuario.getCodigoVerificacao() + 
-                          ".\nOu, clique no link: https://e-nology.herokuapp.com/ativar-conta/?codigoVerificacao=" + 
-                           usuario.getCodigoVerificacao() + "\n\nSe você não se cadastrou em nosso sistema, pedimos que desconsidere este email.";
-
         try {
-            enviarEmail("E-nology - Verificação de Email", usuario.getEmail(), mensagem);
-
+            Map<String, Object> templateData = new HashMap<>();
+            templateData.put("bv", "Welcome to E-nology, " + usuario.getNome() + "! ");
+            templateData.put("cod", ""+usuario.getCodigoVerificacao());
+            templateData.put("link", "https://e-nology.herokuapp.com/ativar-conta/?codigoVerificacao=" + 
+            usuario.getCodigoVerificacao());
+            
+            enviarEmail("E-nology - Verificação de Email", usuario.getEmail(),"mails/confirmacao.html",templateData);
         }catch(Exception e){
             System.err.println(e);
         }
@@ -70,7 +91,7 @@ public class EmailService{
 
         try {
             enviarEmail("E-nology - Tudo Pronto para Você Redefinir Sua Senha!",
-                         usuario.getEmail(),mensagem);
+                         usuario.getEmail(),mensagem, new HashMap<>());
 
                 return "E-mail Enviado! Verifique seu e-mail, por favor.";
             }catch(Exception e){
