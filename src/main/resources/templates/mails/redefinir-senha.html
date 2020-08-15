@@ -2,7 +2,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Confirmação de E-mail</title>
+    <title>Redefinição de Senha</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
@@ -15,31 +15,42 @@
                     style="border-collapse: collapse;">
                     <tr>
                         <td align="center" bgcolor="#262626" style="padding: 0;">
-                            <img src="https://i.imgur.com/m7k9It0.png" alt="Criando Mágica de E-mail"
-                                style="display: block;" />
+                            <img src=" https://i.imgur.com/vripxUt.png " alt="logo"
+                            style="display: block;" />
                         </td>
                     </tr>
                     <tr>
                         <td bgcolor="#ffffff" style="padding: 30px 30px 20px 30px;">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
-                                    <td style="font-family: Arial, sans-serif; font-size: 24px;">
-                                        ${bv}
+                                    <td style="font-family: Arial, sans-serif;">
+                                      <h1>  ${title} 👋 </h1>
+                                      <h3 style="color: #6c757d;">We'll help you to change your password!</h3>
+                                      
                                     </td>
                                 </tr>
+
                                 <tr>
+                                    <td  style="padding: 15px 0 10px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+                                        Para realizar a alteração de senha, basta clicar no botão abaixo e redefini-la logo a seguir. <br>
+                                       </td>
+                                </tr>
+                                
+                                <tr>
+
+                                   
                                     <td
-                                        style="padding: 15px 0 10px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                        Para ativar sua conta, use o código: <br>
-                                        <h2>${cod}</h2> Ou, clique no botão abaixo: <br>
-                                        <a href="${link}" style="
+                                        style="padding: 15px 0 10px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; text-justify: auto; text-align: center;">
+                                        <a align="center" href="${link}" style="
                                             box-shadow:inset 0px 1px 0px 0px #54a3f7;
                                             background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
                                             background-color:#007dc1;
                                             border-radius:6px;
                                             margin-top: 20px;
+                                            margin-bottom: 20px;
                                             border:1px solid #124d77;
                                             display:inline-block;
+                                            width: 60%;
                                             cursor:pointer;
                                             color:#ffffff !important;
                                             font-family:Arial;
@@ -47,10 +58,17 @@
                                             padding:12px 24px;
                                             text-decoration:none;
                                             text-shadow:0px 1px 0px #154682;">
-                                            Ativar Conta
+                                            Redefinir Senha
                                         </a>
-                                        <br><br><br><small style="font-family: Arial, sans-serif;">Se você não se
-                                            cadastrou em nosso sistema, pedimos que desconsidere este email.</small>
+                                        <br>
+                                        <strong align="center">
+                                            <small  style="background-color: #f8f9fa;">
+                                                Nota: Este link expirará em 12 horas, ou caso efetue a mudança de senha.
+                                            </small>
+                                        </strong>
+    
+                                       <br><small style="font-family: Arial, sans-serif;">Se você não solicitou alteração de senha,
+                                             pedimos que desconsidere este email.</small>
                                     </td>
                                 </tr>
                             </table>
