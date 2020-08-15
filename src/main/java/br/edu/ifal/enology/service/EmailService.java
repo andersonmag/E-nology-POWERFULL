@@ -3,7 +3,6 @@ package br.edu.ifal.enology.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -12,12 +11,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-
 import br.edu.ifal.enology.model.Usuario;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -31,7 +28,6 @@ public class EmailService{
     private String senha;
     @Autowired
     private Configuration config;
-
 
     public void enviarEmail(String assunto, String emailDestino, String html, Map<String, Object> templateData) throws Exception {
         Session session = Session.getInstance(getProperties(), new Authenticator() {
@@ -83,15 +79,14 @@ public class EmailService{
     
 	public String enviarEmailRedefinirSenha(String token, Usuario usuario) {
 
-        String mensagem = "Olá, " + usuario.getNome() + "! Te ajudaremos a alterar sua senha.\n\n" + 
-                          "Para realizar a alteração de senha, basta clicar no link abaixo e redefini-la logo a seguir.\n" +
-                          "Segue o link para você alterar sua senha: " + "https://e-nology.herokuapp.com/redefinir-senha?tk=" + token +
-                          "\nNota: Este link expirará em 12 horas, ou caso efetue a mudança de senha." +
-                          "\n\nSe você não solicitou alteração de senha, pedimos que desconsidere este email.";
-
         try {
+
+            Map<String, Object> templateData = new HashMap<>();
+            templateData.put("title", "Hello, " + usuario.getNome());
+            templateData.put("link", "https://e-nology.herokuapp.com/redefinir-senha?tk=" + token);
+
             enviarEmail("E-nology - Tudo Pronto para Você Redefinir Sua Senha!",
-                         usuario.getEmail(),mensagem, new HashMap<>());
+                         usuario.getEmail(), "mails/redefinir-senha.html", templateData);
 
                 return "E-mail Enviado! Verifique seu e-mail, por favor.";
             }catch(Exception e){
