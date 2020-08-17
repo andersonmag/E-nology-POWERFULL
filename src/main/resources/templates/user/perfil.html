@@ -82,41 +82,41 @@
 	<div th:each="role:${usuario.roles}" th:if="${role.nome} == ROLE_ADMIN" id="sidenav" class="sidenav">
 		<div>
 			<div class="d-flex justify-content-center bg-sidebar-admin">
-                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
-                  alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
-                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
-              </div>
-              <strong>
-                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
-                  class="mt-2 d-flex justify-content-center fonte user-name"></span></strong>
-              <span class="fa fa-address-card d-flex justify-content-center text-light">
-                <strong><span class="fonte ml-2">Professor</span></strong></span>
-              <br>
-            </div>
-            <span></span>
-            <a name="link" href="/admin"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
-        
-            <a name="link" href="/perfil#"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
-              </span></a>
-            <br>
-        
-            <h5 class="ml-3 font-weight-normal text-light"><strong>Sistema</strong></h5>
-            <a name="link" href="/admin/sistema/criar-tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar
-                  Tarefa</span>
-              </span></a>
-            <br>
-            <h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
-            <a name="link" href="/admin/turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
-              </span></a>
-        
-            <a name="link"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
-                  Turmas</span></span></a>
-            <br>
-            <h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
-        
-            <a name="link" href="/admin/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
-            <br>
-            <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
+				<img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+					alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+				<span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+			</div>
+			<strong>
+				<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+					class="mt-2 d-flex justify-content-center fonte user-name"></span></strong>
+			<span class="fa fa-address-card d-flex justify-content-center text-light">
+				<strong><span class="fonte ml-2">Professor</span></strong></span>
+			<br>
+		</div>
+		<span></span>
+		<a name="link" href="/admin"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+
+		<a name="link" href="/perfil#"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
+			</span></a>
+		<br>
+
+		<h5 class="ml-3 font-weight-normal text-light"><strong>Sistema</strong></h5>
+		<a name="link" href="/admin/sistema/criar-tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar
+					Tarefa</span>
+			</span></a>
+		<br>
+		<h5 class="ml-3 font-weight-normal text-light"><strong>Turma</strong></h5>
+		<a name="link" href="/admin/turmas"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Lista</span>
+			</span></a>
+
+		<a name="link"> <span class="fa fa-low-vision"><span class="ml-2 fonte">Monitorar
+					Turmas</span></span></a>
+		<br>
+		<h5 class="ml-3 font-weight-normal text-light"><strong>Alunos</strong></h5>
+
+		<a name="link" href="/admin/alunos"> <span class="fa fa-users"><span class="ml-2 fonte">Lista</span></span></a>
+		<br>
+		<a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
 	</div>
 
 
@@ -201,29 +201,27 @@
 											onkeyup="validarSobrenome()" th:value="${sobrenome}" />
 										<small class="erroCor" id="erroSobrenome"></small>
 									</li>
-									<li class="list-group-item form-inline"><b>E-mail: </b>
-										<input type="email" class="form-control" name="email" th:field="*{email}"
-											onkeyup="validarEmail()" th:value="${email}" />
-										<small id="erroEmail" class="erroCor"></small>
-										<p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
-											confirmação!
-										</p>
-
-									<li class="list-group-item form-inline"><b>Senha Atual:</b>
-										<input type="password" class="form-control" id="senhaAtual" name="senha" />
-										<small th:text="${mensagem}" class="erroCor" id="erroSenhaAtual"></small>
-									</li>
-
-									<p th:text="${message}" style="color: red;"></p>
-									<li class="list-group-item form-inline"><b>Nova Senha:</b>
-										<input type="password" class="form-control" name="novaSenha" id="novaSenha" />
-										<small class="erroCor" id="erroNovaSenha"></small>
+									<li class="list-group-item ">
+										<div class="row">
+											<b>Outros</b>
+										</div>
+										<div class="row">
+											<button type="button" class="btn"
+												style="background-color: #f67590; color: white;"
+												data-target="#alt-email" data-toggle="modal"><span
+													class="fa fa-plus"></span> Alterar
+												Email</button>
+											<button type="button" class="btn"
+												style="background-color: #f67590; color: white;"
+												data-target="#alt-senha" data-toggle="modal"><span
+													class="fa fa-plus"></span> Alterar Senha</button>
+										</div>
 									</li>
 									<div class="d-flex justify-content-center">
 										<button class="btn btn-lg  mt-4" onclick="validarNovaSenha()"
 											style="width: 50%; background-color: #036977; color: white;" type="submit"
 											onmouseover="this.style.backgroundColor='#0f8191'"
-											onmouseout="this.style.backgroundColor='#036977'">Atualizar</button>
+											onmouseout="this.style.backgroundColor='#036977'">Salvar Alterações</button>
 									</div>
 								</form>
 							</ul>
@@ -243,15 +241,67 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
-	<script src="js/perfil.js"></script>
-	<script src="js/sidebar.js"></script>
-	<script src="js/form.js"></script>
-	<script src="js/adminpages.js"></script>
-	<script src="js/jquery-3.3.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+		<div class="row">
+			<div class="modal fade" id="alt-email" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header d-flex justify-content-center">
+							<h5 class="modal-title" id="exampleModalLongTitle">Alteração de Email</h5>
+						</div>
+						<div class="modal-body">
+							<li class="list-group-item form-inline"><label for="email"><b>Novo E-mail: </b></label>
+								<input type="email" class="form-control w-100" name="email"/>
+								<small id="erroEmail" class="erroCor"></small>
+								<p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
+									confirmação!
+								</p>
+							</li>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="modal fade" id="alt-senha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header d-flex justify-content-center">
+								<h5 class="modal-title" id="exampleModalLongTitle">Alteração de Senha</h5>
+							</div>
+							<div class="modal-body">
+								<li class="list-group-item form-inline"><b>Senha Atual:</b>
+									<input type="password" class="form-control" id="senhaAtual" name="senha" />
+									<small th:text="${mensagem}" class="erroCor" id="erroSenhaAtual"></small>
+								</li>
+
+								<p th:text="${message}" style="color: red;"></p>
+								<li class="list-group-item form-inline"><b>Nova Senha:</b>
+									<input type="password" class="form-control" name="novaSenha" id="novaSenha" />
+									<small class="erroCor" id="erroNovaSenha"></small>
+								</li>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+
+
+		<script src="js/perfil.js"></script>
+		<script src="js/sidebar.js"></script>
+		<script src="js/form.js"></script>
+		<script src="js/adminpages.js"></script>
+		<script src="js/jquery-3.3.1.slim.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
