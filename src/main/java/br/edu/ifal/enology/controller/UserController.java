@@ -2,11 +2,9 @@ package br.edu.ifal.enology.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -203,8 +201,6 @@ public class UserController {
         return new ModelAndView("redirect:/verificacao-email");
     }
 
-  
-
     @RequestMapping("/atualizar")
     public ModelAndView salvar(@Valid Usuario usuario, @AuthenticationPrincipal Usuario usuarioLogado,
             RedirectAttributes redirect) {
@@ -213,15 +209,11 @@ public class UserController {
         usuario.setSenha(usuarioLogado.getSenha());
         usuario.setEmail(usuarioLogado.getEmail());
         usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
+        usuario.setRoles(usuarioLogado.getRoles());
+        usuario.setAtivouConta(usuarioLogado.isAtivouConta());
        
         usuarioService.save(usuario);
         return new ModelAndView("redirect:/perfil");
-    }
-
-    private boolean compararSenha(String senha, String senhaUsuarioLogado) {
-        if (new BCryptPasswordEncoder().matches(senha, senhaUsuarioLogado))
-            return true;
-        return false;
     }
 
     private boolean verificarSeEmailExiste(String email) {
