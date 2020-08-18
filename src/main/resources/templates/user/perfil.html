@@ -190,6 +190,7 @@
 								<form action="/atualizar" method="post" th:object="${usuario}"
 									enctype="multipart/form-data" onsubmit="return verificarCamposPerfil()">
 									<input type="hidden" name="id" th:value="${usuario.id}" />
+									<input type="hidden" name="id" th:value="${usuario.id}" />
 
 									<li class="list-group-item form-inline"><b>Nome:</b>
 										<input type="text" class="form-control" name="nome" th:field="*{nome}"
@@ -206,19 +207,17 @@
 											<b>Outros</b>
 										</div>
 										<div class="row">
-											<button type="button" class="btn"
-												style="background-color: #f67590; color: white;"
+											<button type="button" class="btn btn-info text-white"
 												data-target="#alt-email" data-toggle="modal"><span
 													class="fa fa-plus"></span> Alterar
 												Email</button>
-											<button type="button" class="btn"
-												style="background-color: #f67590; color: white;"
+											<button type="button" class="btn btn-info text-white"
 												data-target="#alt-senha" data-toggle="modal"><span
 													class="fa fa-plus"></span> Alterar Senha</button>
 										</div>
 									</li>
 									<div class="d-flex justify-content-center">
-										<button class="btn btn-lg  mt-4" onclick="validarNovaSenha()"
+										<button class="btn btn-lg  mt-4"
 											style="width: 50%; background-color: #036977; color: white;" type="submit"
 											onmouseover="this.style.backgroundColor='#0f8191'"
 											onmouseout="this.style.backgroundColor='#036977'">Salvar Alterações</button>
@@ -251,7 +250,7 @@
 						</div>
 						<div class="modal-body">
 							<li class="list-group-item form-inline"><label for="email"><b>Novo E-mail: </b></label>
-								<input type="email" class="form-control w-100" name="email"/>
+								<input type="email" class="form-control w-100" name="email" />
 								<small id="erroEmail" class="erroCor"></small>
 								<p class="pzinho">Caso mude o seu endereço de e-mail lhe enviaremos um e-mail de
 									confirmação!
@@ -265,43 +264,83 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="modal fade" id="alt-senha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-					aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header d-flex justify-content-center">
-								<h5 class="modal-title" id="exampleModalLongTitle">Alteração de Senha</h5>
-							</div>
-							<div class="modal-body">
-								<li class="list-group-item form-inline"><b>Senha Atual:</b>
-									<input type="password" class="form-control" id="senhaAtual" name="senha" />
-									<small th:text="${mensagem}" class="erroCor" id="erroSenhaAtual"></small>
-								</li>
 
-								<p th:text="${message}" style="color: red;"></p>
-								<li class="list-group-item form-inline"><b>Nova Senha:</b>
-									<input type="password" class="form-control" name="novaSenha" id="novaSenha" />
-									<small class="erroCor" id="erroNovaSenha"></small>
-								</li>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save changes</button>
-							</div>
+			<!-- Modal com campo para digitar senha -->
+
+			<div class="modal fade" id="alt-senha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header d-flex justify-content-center">
+							<h5 class="modal-title" id="exampleModalLongTitle">Alteração de Senha</h5>
+						</div>
+						<div class="modal-body">
+							<form method="POST" action="/envio-email-redefinir-senha"
+								onsubmit="alterarBtnModalEsqueciSenha()">
+								<div>
+									<div class="row d-flex justify-content-center">
+
+										<strong>
+											<small>
+												<p class="pzinho text-center p-4">
+													Você está quase lá. Clique no botão "prosseguir" para
+													receber um email de redefinição de senha.
+												</p>
+											</small>
+										</strong>
+									</div>
+
+									<div class="row d-flex justify-content-center">
+										<input type="hidden" th:value="${usuario.email}" name="email" id="Email"
+											class="form-control">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button id="myBtn" type="submit" style="vertical-align: middle;"
+										class="btn btn-primary">Prosseguir
+										<div id="spi" class="" role="status">
+										</div>
+									</button>
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Cancelar</button>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="text-center" th:if="${resultado} != null" id="toast"
+				style="position: absolute; right: 0; top: 0; margin-top: 5%; margin-right: 2%; font-size: 0.9rem;">
+				<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+					<div class="toast-header">
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<strong>
+								<span id="resultado" th:text="${resultado}" class="text-dark"></span>
+							</strong>
 						</div>
 					</div>
 				</div>
+			</div>
 		</div>
+	</div>
+	</div>
+	<script src="js/perfil.js"></script>
+	<script src="js/sidebar.js"></script>
+	<script src="js/form.js"></script>
+	<script src="js/adminpages.js"></script>
+	<script src="js/jquery-3.3.1.slim.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+		if (document.getElementById("resultado").textContent != "" &&
+			document.getElementById("resultado").textContent != null) {
 
-
-		<script src="js/perfil.js"></script>
-		<script src="js/sidebar.js"></script>
-		<script src="js/form.js"></script>
-		<script src="js/adminpages.js"></script>
-		<script src="js/jquery-3.3.1.slim.min.js"></script>
-		<script src="js/popper.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+			setTimeout(() => {
+				$('.toast .alert').alert('close')
+			}, 5000);
+		}
+	</script>
 </body>
 
 </html>

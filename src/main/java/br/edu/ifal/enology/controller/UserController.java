@@ -93,19 +93,25 @@ public class UserController {
     @Scheduled(cron = "0 0 12 1/1 * *")
     @Transactional
     public void deletarRedefinicaoSenhaExpirada() {
-        
-        List<RedefinicaoSenha> expirados = redefinicaoSenhaRepository.findAll().stream()
-                    .filter(expirado -> expirado.getTimeout().isBefore(LocalDateTime.now())).collect(Collectors.toList());
 
-        if(!expirados.isEmpty()) {
+        List<RedefinicaoSenha> expirados = redefinicaoSenhaRepository.findAll().stream()
+                .filter(expirado -> expirado.getTimeout().isBefore(LocalDateTime.now())).collect(Collectors.toList());
+
+        if (!expirados.isEmpty()) {
             redefinicaoSenhaRepository.deleteAll(expirados);
         }
     }
 
     @RequestMapping("/envio-email-redefinir-senha")
-    public ModelAndView mandarEmailRedefinirSenha(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+    public ModelAndView mandarEmailRedefinirSenha(@AuthenticationPrincipal Usuario usuarioLogado, @RequestParam("email") String email,
+            RedirectAttributes redirectAttributes) {
         Usuario usuario = usuarioService.findByEmail(email);
         String resultado = "Este email não está cadastrado!";
+        ModelAndView model = new ModelAndView("redirect:/login");
+
+        if(Optional.ofNullable(usuarioLogado).isPresent()){
+            model.setViewName("redirect:/perfil");
+        }
 
         if (Optional.ofNullable(usuario).isPresent()) {
 
@@ -118,21 +124,20 @@ public class UserController {
             redirectAttributes.addFlashAttribute("teveSucesso", true);
             redirectAttributes.addFlashAttribute("resultado", resultado);
 
-            return new ModelAndView("redirect:/login");
+            return model;
         }
 
         redirectAttributes.addFlashAttribute("teveSucesso", false);
         redirectAttributes.addFlashAttribute("resultado", resultado);
 
-        return new ModelAndView("redirect:/login");
+        return model;
     }
 
     @Transactional(readOnly = true)
     @RequestMapping("/redefinir-senha")
     public ModelAndView mostrarPaginaRedefinirSenha(@RequestParam(name = "tk", required = false) String tokenUsuario) {
         ModelAndView model = new ModelAndView("user/alteracao-senha");
-        Optional<RedefinicaoSenha> recuperarOptional = redefinicaoSenhaRepository
-                                                            .findByToken(tokenUsuario);
+        Optional<RedefinicaoSenha> recuperarOptional = redefinicaoSenhaRepository.findByToken(tokenUsuario);
 
         if (recuperarOptional.isPresent()) {
             if (recuperarOptional.get().getTimeout().isAfter(LocalDateTime.now())) {
@@ -142,25 +147,23 @@ public class UserController {
         }
 
         model.setViewName("error");
-        model.addObject("msgErro", "O Link ou Recurso que você está buscando não existe, "
-                                     + "ou pode estar expirado!");
+        model.addObject("msgErro", "O Link ou Recurso que você está buscando não existe, " + "ou pode estar expirado!");
         return model;
     }
 
     @Transactional
     @RequestMapping("/salvar-nova-senha")
     public ModelAndView salvarRedefinicaoSenha(@RequestParam("tk") String tokenUsuario,
-                                               @RequestParam("senha") String novaSenha) {
-        Optional<RedefinicaoSenha> recuperarOptional = redefinicaoSenhaRepository
-                                                            .findByToken(tokenUsuario);
-                                                
-        if (recuperarOptional.isPresent()) {        
-                Usuario usuario = recuperarOptional.get().getUsuario();
-                usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
-                redefinicaoSenhaRepository.delete(recuperarOptional.get());
-                usuarioService.save(usuario);
+            @RequestParam("senha") String novaSenha) {
+        Optional<RedefinicaoSenha> recuperarOptional = redefinicaoSenhaRepository.findByToken(tokenUsuario);
 
-                return new ModelAndView("redirect:/login");
+        if (recuperarOptional.isPresent()) {
+            Usuario usuario = recuperarOptional.get().getUsuario();
+            usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
+            redefinicaoSenhaRepository.delete(recuperarOptional.get());
+            usuarioService.save(usuario);
+
+            return new ModelAndView("redirect:/login");
         }
 
         return new ModelAndView("redirect:/redefinir-senha");
@@ -200,34 +203,19 @@ public class UserController {
         return new ModelAndView("redirect:/verificacao-email");
     }
 
+  
+
     @RequestMapping("/atualizar")
-    public ModelAndView salvar(@Valid Usuario usuario, @AuthenticationPrincipal Usuario usuarioLogado, String novaSenha,
+    public ModelAndView salvar(@Valid Usuario usuario, @AuthenticationPrincipal Usuario usuarioLogado,
             RedirectAttributes redirect) {
 
         usuario.setImagem(usuarioLogado.getImagem());
-
-        if (!usuario.getSenha().equals("")) {
-            if (compararSenha(usuario.getSenha(), usuarioLogado.getSenha())) {
-                usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
-                usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
-                usuarioLogado = usuario;
-                usuarioService.save(usuario);
-
-                return new ModelAndView("redirect:/perfil");
-            } else {
-                redirect.addFlashAttribute("mensagem", "Senha Incorreta.");
-
-                return new ModelAndView("redirect:/perfil");
-            }
-        } else {
-
-            usuario.setSenha(usuarioLogado.getSenha());
-            usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
-            usuarioLogado = usuario;
-            usuarioService.save(usuario);
-
-            return new ModelAndView("redirect:/perfil");
-        }
+        usuario.setSenha(usuarioLogado.getSenha());
+        usuario.setEmail(usuarioLogado.getEmail());
+        usuario.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno());
+       
+        usuarioService.save(usuario);
+        return new ModelAndView("redirect:/perfil");
     }
 
     private boolean compararSenha(String senha, String senhaUsuarioLogado) {

@@ -103,12 +103,16 @@ function validarNovaSenha() {
         erroNovaSenha.innerHTML = "Digite a nova Senha!";
         return false;
     }
-    else if (novaSenha != "" && senhaAtual == "") {
+    if (novaSenha != "" && senhaAtual == "") {
         erroSenhaAtual.innerHTML = "Digite a Senha!";
         return false;
     }
-    else if(verificarSePossuiMenosQueCincoCaracteres){
-        erroNovaSenha.innerHTML = "A nova senha precisa ter 5 caracteres!";
+    if(verificarSePossuiMenosQueCincoCaracteres(senhaAtual)){
+        erroSenhaAtual.innerHTML = "A senha tem no mínimo 5 caracteres!";
+        return false;
+    }
+    if(verificarSePossuiMenosQueCincoCaracteres(novaSenha)){
+        erroNovaSenha.innerHTML = "A nova senha deve ter 5 caracteres!";
         return false;
     }
     else {
