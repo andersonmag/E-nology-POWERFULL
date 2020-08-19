@@ -7,7 +7,8 @@
 }
 
 #img_perfil{
-  width: 130px;
+  min-width: 130px;
+  height: 130px;
   border: 2px solid #ddd;
 }
 
@@ -83,10 +84,35 @@
   color: white;
 }
 
-@media only screen and (max-width: 600px) {
+.dd:hover {
+  border-radius: 20px;
+}
+
+.dd {
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  #img_perfil {
+      width:80px !important; 
+      height: 100px;
+  }
+  #nome-user-icon {
+      display: none;
+  }
+  #img-user-icon {
+      width: 60px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   #foto {
     width: 50%;
     height: 50%;
+  }
+
+  .sidenav {
+    max-width: 150px;
   }
 }
 

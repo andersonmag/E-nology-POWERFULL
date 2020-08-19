@@ -9,59 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/sidebar.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link href="css/index.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="row fixed-top navbar p-0">
-        <span class="botao fa fa-bars" onclick="alterarSidebar()">
-        </span>
-        <a class="navbar-brand marca" style="font-size: 18pt;color: white;" href="/"><span>E-nology</span></a>
-        <div class="direita align-middle">
-            <span class="teste fa fa-database" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
-                data-placement="bottom" title="Sua pontuação até aqui">
-            </span>
-            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
-                data-placement="bottom" title="Sua pontuação até aqui"></span>
-        </div>
-    </div>
-    <div id="sidebar" class="sidenav">
-        <div>
-            <div class="d-flex justify-content-center bg-sidebar-user">
-                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
-                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center"
-                    style="border-radius: 20px;">
-                <span th:unless="${usuario.imagem}" class="imagemUser fa fa-user-circle"
-                    style="font-size: 50pt; color: #011f41;"></span>
-            </div>
-            <strong>
-                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
-                    class="mt-2 d-flex justify-content-center fonte"></span></strong>
-            <span class="fa fa-address-card d-flex justify-content-center text-light">
-                <strong><span class="fonte ml-2">Aluno</span></strong></span>
-            <br>
-        </div>
-        <span></span>
-        <a name="link" href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
-
-        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
-            </span></a>
-        <br>
-        <div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
-            <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
-                </span></a>
-            <br>
-        </div>
-        <h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
-
-        <a name="link" href="/siga-nos#"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
-        <a name="link" href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o
-                    App</span></span></a>
-        <br>
-        <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
-    </div>
+    <th:block th:include="navbar"></th:block>
 
     <div class="main-wrapper" onclick="esconderSidebar()">
         <div class="container">
@@ -119,7 +72,6 @@
         <p id="mensagem"></p>
     </div>
 
-    <script src="js/sidebar.js"></script>
     <script src="js/index.js"></script>
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>

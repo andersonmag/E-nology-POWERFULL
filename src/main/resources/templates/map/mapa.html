@@ -13,56 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/mapa.css">
-    <link href="css/sidebar.css" rel="stylesheet">
 
 </head>
 
 <body class="fundo" oncopy="return false" oncut="return false" onpaste="return false">
-    <div class="row fixed-top navbar">
-        <span class="botao fa fa-bars" onclick="alterarSidebar()">
-        </span>
-        <a class="navbar-brand marca" style="font-size: 18pt;color: white;" href="/"><span>E-nology</span></a>
-        <div class="direita align-middle">
-            <span class="teste fa fa-database" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
-                data-placement="bottom" title="Sua pontuação até aqui">
-            </span>
-            <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
-                data-placement="bottom" title="Sua pontuação até aqui"></span>
-        </div>
-    </div>
-    <div id="sidebar" class="sidenav">
-        <div>
-            <div class="d-flex justify-content-center bg-sidebar-user">
-                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
-                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
-                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
-            </div>
-			<strong>
-				<span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
-					class="mt-2 d-flex justify-content-center fonte"></span></strong>
-			<span class="fa fa-address-card d-flex justify-content-center text-light">
-				<strong><span class="fonte ml-2">Aluno</span></strong></span>
-			<br>
-		</div>
-        <span></span>
-        <a name="link" href="/mapa#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 
-        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
-            </span></a>
-        <br>
-        <div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
-            <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
-                </span></a>
-            <br>
-        </div>
-        <h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
-
-        <a name="link" href="/siga-nos"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
-        <a name="link" href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o
-                    App</span></span></a>
-        <br>
-        <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
-    </div>
+    <th:block th:include="navbar"></th:block>
 
     <div class="container" onclick="esconderSidebar()">
         <div class="container">
@@ -78,81 +34,80 @@
             <div class="row d-flex justify-content-center mt-5">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
-                            <img class="img-fluid botoes-num mr-4" src="images/btn2.png">
-                            <img class="img-fluid botoes-num ml-4" src="images/btn3.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                            <img class="img-fluid botoes-num mr-4" src="images/btn4.png">
-                            <img class="img-fluid botoes-num ml-4" src="images/btn5.png">
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <div class="container">
-                    <div class="row embaixo-botao d-flex justify-content-center">
-                            <img class="img-fluid botoes-num mr-4" src="images/btnMg1.png">
-                            <img class="img-fluid botoes-num ml-4" src="images/btnMg2.png">
+                        <img class="img-fluid botoes-num mr-4" src="images/btn2.png">
+                        <img class="img-fluid botoes-num ml-4" src="images/btn3.png">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <!-- Modal -->
-            <div class="col">
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body" style="display: block;">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <span class="fa fa-warning text-danger icon"></span>
-                                        <br>
-                                        <small><strong>Nível 1</strong> </small>
-    
-                                    </div>
-                                    <div class="col-9">
-                                        <h1 class="marca"> .Introdução</h1>
-                                    </div>
+        <div class="row d-flex justify-content-center mt-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <img class="img-fluid botoes-num mr-4" src="images/btn4.png">
+                    <img class="img-fluid botoes-num ml-4" src="images/btn5.png">
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-5">
+            <div class="container">
+                <div class="row embaixo-botao d-flex justify-content-center">
+                    <img class="img-fluid botoes-num mr-4" src="images/btnMg1.png">
+                    <img class="img-fluid botoes-num ml-4" src="images/btnMg2.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Modal -->
+        <div class="col">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body" style="display: block;">
+                            <div class="row">
+                                <div class="col-3">
+                                    <span class="fa fa-warning text-danger icon"></span>
+                                    <br>
+                                    <small><strong>Nível 1</strong> </small>
+
+                                </div>
+                                <div class="col-9">
+                                    <h1 class="marca"> .Introdução</h1>
                                 </div>
                             </div>
-                            <div class="modal-body d-flex ml-3">
-                                <i>
-                                    . Conceitos Iniciais <br>
-                                    . Estruturas de Condição <br>
-                                    . Estruturas de Repetição <br>
-                                </i>
-                            </div>
-                            <div class="modal-footer" style="display: inline;">
-                                <div class="row ">
-                                    <div class="col-4 ">
-    
-                                        <button type="button" class="btn btn-lg" disabled
-                                            style="pointer-events: none;color: white ; background-color: #00475b;">
-                                            Aprender
+                        </div>
+                        <div class="modal-body d-flex ml-3">
+                            <i>
+                                . Conceitos Iniciais <br>
+                                . Estruturas de Condição <br>
+                                . Estruturas de Repetição <br>
+                            </i>
+                        </div>
+                        <div class="modal-footer" style="display: inline;">
+                            <div class="row ">
+                                <div class="col-4 ">
+
+                                    <button type="button" class="btn btn-lg" disabled
+                                        style="pointer-events: none;color: white ; background-color: #00475b;">
+                                        Aprender
+                                    </button>
+
+                                </div>
+                                <div class="col-3">
+
+                                    <button type="button" class="btn btn-lg" disabled
+                                        style="pointer-events: none;color: white ; background-color: #022640;">
+                                        Quiz
+                                    </button>
+
+                                </div>
+                                <div class="col-5">
+                                    <a href="/exercicio/intro">
+                                        <button type="button" class="btn btn-primary btn-lg" style="color: white ;">
+                                            Praticar
                                         </button>
-    
-                                    </div>
-                                    <div class="col-3">
-    
-                                        <button type="button" class="btn btn-lg" disabled
-                                            style="pointer-events: none;color: white ; background-color: #022640;">
-                                            Quiz
-                                        </button>
-    
-                                    </div>
-                                    <div class="col-5">
-                                        <a href="/exercicio/intro">
-                                            <button type="button" class="btn btn-primary btn-lg" style="color: white ;">
-                                                Praticar
-                                            </button>
-                                        </a>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -161,10 +116,8 @@
             </div>
         </div>
     </div>
-
-
+    </div>
     
-    <script src="js/sidebar.js"></script>
     <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
