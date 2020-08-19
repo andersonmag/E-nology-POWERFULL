@@ -3,7 +3,6 @@ package br.edu.ifal.enology.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +21,15 @@ public class UsuarioService {
 
     public Usuario findById(Long id) {
         Optional<Usuario> opUser = userRepository.findById(id);
-
-        if (opUser.isPresent())
-            return opUser.get();
-        return null;
+            return opUser.orElse(null);
     }
 
     public Usuario findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
     public List<Usuario> findAll() {

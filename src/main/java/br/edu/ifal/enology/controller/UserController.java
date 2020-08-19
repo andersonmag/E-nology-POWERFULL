@@ -75,7 +75,7 @@ public class UserController {
 
     @RequestMapping("/salvarUsuario")
     public ModelAndView salvarUsuario(@Valid Usuario usuario, RedirectAttributes redirect) {
-        if (verificarSeEmailExiste(usuario.getEmail())) {
+        if (usuarioService.existsByEmail(usuario.getEmail())) {
             redirect.addFlashAttribute("mensagem", "Email já cadastrado!");
 
             return new ModelAndView("redirect:/cadastro");
@@ -213,12 +213,11 @@ public class UserController {
             redirect.addFlashAttribute("mensagem", "Código Incorreto ou Já Utilizado!");
             return new ModelAndView("redirect:/verificacao-email");
         }
-
     }
 
     @RequestMapping("/reenviar-email")
     public ModelAndView reenviarEmail(String email, RedirectAttributes redirect) {
-        if (verificarSeEmailExiste(email)) {
+        if (usuarioService.existsByEmail(email)) {
             if (usuarioService.findByEmail(email).getCodigoVerificacao() == 0) {
                 redirect.addFlashAttribute("mensagem", "Está conta já está ativada!");
                 return new ModelAndView("redirect:/login");
@@ -245,12 +244,6 @@ public class UserController {
        
         usuarioService.save(usuario);
         return new ModelAndView("redirect:/perfil");
-    }
-
-    private boolean verificarSeEmailExiste(String email) {
-        if (usuarioService.findByEmail(email) != null)
-            return true;
-        return false;
     }
 
     private Authentication pegarNovoAuthentication(Authentication authentication, Usuario usuarioLogado) {
