@@ -100,6 +100,38 @@ public class UserController {
         }
     }
 
+    @Transactional
+    @RequestMapping("/redefinir-email")
+    public ModelAndView redefinirEmail(@RequestParam("tk") String token, @RequestParam("email") String novoEmail) {
+        Optional<RedefinicaoSenha> redefinirOptional = redefinicaoSenhaRepository.findByToken(token);
+
+        if(redefinirOptional.isPresent()) {
+            Usuario usuario = redefinirOptional.get().getUsuario();
+            usuario.setEmail(novoEmail);
+
+            usuarioService.save(usuario);
+            redefinicaoSenhaRepository.delete(redefinirOptional.get());
+        }
+
+        return new ModelAndView("redirect:/perfil");
+    }
+
+    @RequestMapping("/envio-email-redefinir-email")
+    public ModelAndView mandarEmailRedefinirEmail(@AuthenticationPrincipal Usuario usuarioLogado, 
+                                                  @RequestParam("email") String novoEmail, RedirectAttributes redirect) {
+        
+        RedefinicaoSenha redefinir = new RedefinicaoSenha();
+        redefinir.setTimeout(LocalDateTime.now());
+        redefinir.setUsuario(usuarioLogado);
+        redefinicaoSenhaRepository.save(redefinir);
+        usuarioLogado.setEmail(novoEmail);
+
+        emailService.enviarEmailRedefinirEmail(redefinir.getToken(), usuarioLogado);
+        redirect.addFlashAttribute("resultado", "E-mail Enviado! Verifique seu e-mail, por favor.");
+
+        return new ModelAndView("redirect:/perfil");
+    }
+
     @RequestMapping("/envio-email-redefinir-senha")
     public ModelAndView mandarEmailRedefinirSenha(@AuthenticationPrincipal Usuario usuarioLogado, @RequestParam("email") String email,
             RedirectAttributes redirectAttributes) {
@@ -107,9 +139,8 @@ public class UserController {
         String resultado = "Este email não está cadastrado!";
         ModelAndView model = new ModelAndView("redirect:/login");
 
-        if(Optional.ofNullable(usuarioLogado).isPresent()){
+        if(Optional.ofNullable(usuarioLogado).isPresent())
             model.setViewName("redirect:/perfil");
-        }
 
         if (Optional.ofNullable(usuario).isPresent()) {
 

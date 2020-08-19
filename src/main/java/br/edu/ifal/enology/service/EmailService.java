@@ -62,6 +62,19 @@ public class EmailService{
         return pageContent;
     }
 
+    public void enviarEmailRedefinirEmail(String token, Usuario usuario) {
+        try {
+            Map<String, Object> templateData = new HashMap<>();
+            templateData.put("title", "Hello, " + usuario.getNome() + "! ");
+            templateData.put("email", usuario.getEmail());
+            templateData.put("link", "https://e-nology.herokuapp.com/redefinir-email?tk=" + token +"&email=" + usuario.getEmail());
+            
+            enviarEmail("E-nology - Redefinição de endereço de e-mail", usuario.getEmail(), "mails/redefinir-email.html", templateData);
+        }catch(Exception e){
+            System.err.println(e);
+        }
+    }
+
     public void enviarEmailConfirmacao(Usuario usuario){
 
         try {
