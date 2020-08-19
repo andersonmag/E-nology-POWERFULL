@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link href="css/sidebar.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row fixed-top navbar">
+        <div class="col-4">
+            <span class="botao fa fa-bars" onclick="alterarSidebar()">
+        </div>
+        </span>
+        <div class="col-4 text-center">
+            <a class="navbar-brand marca" style="font-size: 18pt;color: white;" href="/"><span>E-nology</span></a>
+        </div>
+        <div class="col-4 text-right pr-4">
+            <div class="dropdown ">
+
+                <a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="dd">
+
+                        <!-- <span class="teste fa fa-database" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
+                        data-placement="bottom" title="Sua pontuação até aqui">
+                    </span>
+                    <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
+                        data-placement="bottom" title="Sua pontuação até aqui"></span> -->
+                        <span th:unless="${usuario.imagem}" class=" fa fa-user-circle text-success"
+                            style="font-size: 28pt;"></span>
+                        <img id="img-user-icon" th:if="${usuario.imagem}"
+                            th:src="@{'/localCloud/' + ${usuario.imagem.link}}" alt="Minha Foto" width="50"
+                            class="img-fluid"
+                            style="border-radius: 20px; object-fit: cover; max-width: 100%; width: 40px; height: 40px;">
+                        <span id="nome-user-icon"
+                            style="font-size: 9pt; vertical-align: super; color: white; margin-top: 5px; margin-left: 5px;"
+                            th:text="'Olá, ' + ${usuario.nome}"></span>
+
+                    </div>
+                </a>
+
+                <div class="dropdown-menu align-left" aria-labelledby="dropdownMenuButton"
+                    style="min-width: 0; padding: 0; right: 0; left: auto !important;">
+                    <h6 class="dropdown-header">Aluno</h6>
+                    <a class="dropdown-item" href="/perfil">Ver Perfil</a>
+                    <a class="dropdown-item" href="#">Meu Progresso</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="sidebar" class="sidenav">
+        <div>
+            <div class="d-flex justify-content-center bg-sidebar-user">
+                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user"
+                    style=" object-fit: cover; max-width: 100%; ">
+                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+            </div>
+            <strong>
+                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}" style="font-size: 13pt; color: #74ABDD;"
+                    class="mt-2 d-flex justify-content-center fonte"></span></strong>
+            <span class="fa fa-address-card d-flex justify-content-center text-light">
+                <strong><span class="fonte ml-2">Aluno</span></strong></span>
+            <br>
+        </div>
+        <span></span>
+        <a name="link" href="/mapa#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+
+        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
+            </span></a>
+        <br>
+        <div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>
+                </span></a>
+            <br>
+        </div>
+        <h5 class="ml-3 font-weight-normal text-light"><strong>Sobre</strong></h5>
+
+        <a name="link" href="/siga-nos"> <span class="fa fa-heart"><span class="ml-2 fonte">Siga-nos</span></span></a>
+        <a name="link" href="/sobre"> <span class="fa fa-info-circle"><span class="ml-2 fonte">Sobre o
+                    App</span></span></a>
+        <br>
+        <a href="/logout"><span class="fa fa-sign-out"><span class="ml-2 fonte">Sair</span></span></a>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+</body>
+
+</html>
