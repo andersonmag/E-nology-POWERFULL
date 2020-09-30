@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class GameController {
 
     @RequestMapping("/games/yamato-s-future")
-    public ModelAndView criarTurma() {
+    public ModelAndView jogarYamatosFuture() {
         return new ModelAndView("games/yamato");
     }
 }

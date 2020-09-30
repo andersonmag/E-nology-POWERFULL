@@ -112,10 +112,6 @@ function showStory(story) {
     screen.changeText(cardText, story.cardTxt);
 }
 
-function showQuestion(choice) {
-    alert('your choice was: ' + choice)
-}
-
 function showMessage(acertou) {
     let result = document.querySelector("#result");
     screen.show(result);
