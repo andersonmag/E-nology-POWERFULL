@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Mingle-ng The Game | E-nology</title>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mingle.css">
+
+    <style>
+        .w3-animate-fading {
+            animation: fading 2s
+        }
+
+        .animation-invert {
+
+            animation: fadout 1s normal;
+
+        }
+
+        @keyframes fadout {
+
+            0% {
+                opacity: 0
+            }
+
+            100% {
+                opacity: 1
+            }
+        }
+
+        @keyframes fading {
+            0% {
+                opacity: 0
+            }
+
+            50% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 0
+            }
+        }
+    </style>
+
+</head>
+
+<bod>
+
+    <div class="container mb-3">
+
+        <!--   NAVBAR DA GAME   -->
+        <div class="row mt-4 d-flex">
+
+            <div class="col-3">
+                <i class="fa fa-times text-muted float-right" style="cursor: pointer;;font-size: 30pt;"
+                    onclick="kaka()"></i>
+            </div>
+
+            <div class="col-6 text-center" style="vertical-align: sub;">
+                <small style="font-size: 18pt; color: gray; " id="time">0.0 seconds</small>
+            </div>
+
+            <div class="col-3 text-muted float-left" style="vertical-align: sub; font-size: 20pt;">
+                <i class="fa fa-level-up"></i> 1
+            </div>
+
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <small class="text-muted text-center">
+
+                            <div class="row d-flex justify-content-center d-inline">
+                                <h5 class="text-center text-muted">Lv. 1 Concluido com sucesso</h5>
+                            </div>
+
+                            <div class="row d-flex justify-content-center d-inline">
+                                <i class="fa fa-check-square-o text-success" aria-hidden="true"
+                                    style="font-size: 6rem;"></i>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <strong>
+                                    <span class="v-super text-muted">Seu tempo foi:
+                                        <span class="text-success" id="mytime"></span> </span>
+                                </strong>
+                                <br>
+
+                            </div>
+                            <span id="msg" class="d-flex justify-content-center"></span>
+
+                        </small>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/games/mingle-ng/rank">
+                            <button type="button" class="btn btn-secondary">Rank</button>
+                        </a>
+                        <a href="/games/mingle-ng/play">
+                            <button type="button" class="btn btn-primary">Reiniciar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- QUADROS DO GAME -->
+
+        <div id="words" class="row mt-5 d-flex justify-content-center animation-invert"
+            style="padding-bottom: 5px; padding-top: 5px;">
+
+            <div id="word" onclick="main(this)"
+                class="col-2 border text-muted shadow-sm p-3 mb-5 bg-white rounded d-none"
+                style="font-family: Verdana, Geneva, Tahoma, sans-serif ;
+                    height: 100px; max-height: 100px ; cursor: pointer; justify-content: center; vertical-align: middle; margin-right: 8px;">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="text-center" style="bottom: 0; position: absolute; width: 100%; background-color: transparent;">
+        <div class="card-footer text-muted" style="font-size: 0.9rem;">
+            E-nology |
+            <a href="/games/mingle-ng" style="text-decoration: none;">Mingle<span style="font-family: 'Exo 2', sans-serif;">-ng The
+                    Game</span></a>
+            <b>v0.1</b>
+        </div>
+    </div>
+
+    <script src="/js/mingleData.js"></script>
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/mingle.js"></script>
+    <script>
+        setTimeout(() => {
+            window.addEventListener("load", countTime())
+        }, 500);
+    </script>
+    </body>
+
+</html>
