@@ -23,7 +23,7 @@ public class SecurityWeb extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/mapa", "/perfil", "/exercicio/**", "/atualizar", "/upload", "/cadastrar", "/sobre", "/siga-nos").authenticated()
+                .antMatchers("/mapa", "/perfil", "/exercicio/**", "/atualizar", "/upload", "/cadastrar", "/sobre", "/siga-nos", "/games/**").authenticated()
                 .antMatchers("/", "/cadastro", "/login").anonymous()
                 .antMatchers("/admin/**") .hasRole("ADMIN")
                 .and()
