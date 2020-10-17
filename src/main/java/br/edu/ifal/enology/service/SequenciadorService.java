@@ -40,15 +40,21 @@ public class SequenciadorService {
     }
 
     private Tarefa selecionarTarefa(List<Tarefa> todasTarefas, List<Tarefa> tarefasRespondidasCorretamente) {
-        List<Tarefa> tarefasRestantes = new ArrayList<>();
+        List<Tarefa> tarefasRestantesTexto = new ArrayList<>();
+        List<Tarefa> tarefasRestantesGeral = new ArrayList<>();
+
         Random numeroAleatorio = new Random();
         int indexTarefa;
 
         for (Tarefa tarefa : todasTarefas) {
-            if (tarefasRespondidasCorretamente.size() <= todasTarefas.size()
-                    && tarefasRespondidasCorretamente.size() > 0) {
-                if (!tarefasRespondidasCorretamente.contains(tarefa))
-                    tarefasRestantes.add(tarefa);
+            if (tarefasRespondidasCorretamente.size() <= todasTarefas.size()) {
+                if (tarefasRespondidasCorretamente.isEmpty() || !tarefasRespondidasCorretamente.contains(tarefa)){
+                    if(tarefa.geTipoTarefa() == TipoTarefa.MULTIPLA_ESCOLHA_TEXTO){
+                        tarefasRestantesTexto.add(tarefa);
+                    }else{
+                        tarefasRestantesGeral.add(tarefa);
+                    }
+                }
             } else {
                 break;
             }
@@ -56,12 +62,15 @@ public class SequenciadorService {
 
         if (tarefasRespondidasCorretamente.size() == todasTarefas.size())
             return null;
-        else if (tarefasRestantes.isEmpty())
-            tarefasRestantes = todasTarefas;
 
-        indexTarefa = numeroAleatorio.nextInt(tarefasRestantes.size());
-
-        return tarefasRestantes.get(indexTarefa);
+        if(tarefasRestantesTexto.size() > 0){
+            indexTarefa = numeroAleatorio.nextInt(tarefasRestantesTexto.size());
+            return tarefasRestantesTexto.get(indexTarefa);
+        }
+        else{
+            indexTarefa = numeroAleatorio.nextInt(tarefasRestantesGeral.size());
+            return tarefasRestantesGeral.get(indexTarefa);
+        }
     }
 
     public Conteudo pegarConteudoAleatorio(Palavra respostaDaTarefa) {
