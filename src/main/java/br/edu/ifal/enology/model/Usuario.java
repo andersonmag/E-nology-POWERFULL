@@ -2,7 +2,6 @@ package br.edu.ifal.enology.model;
 
 import java.util.Collection;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,6 +29,7 @@ public class Usuario implements UserDetails {
     private int pontuacaoDoAluno;
     private int codigoVerificacao;
     private boolean ativouConta;
+    private int faseAtual = 1;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Imagem imagem;
@@ -119,6 +119,14 @@ public class Usuario implements UserDetails {
 
     public void setAtivouConta(boolean ativouConta) {
         this.ativouConta = ativouConta;
+    }
+    
+    public int getFaseAtual() {
+        return faseAtual;
+    }
+
+    public void setFaseAtual(int faseAtual) {
+        this.faseAtual = faseAtual;
     }
 
     @Override

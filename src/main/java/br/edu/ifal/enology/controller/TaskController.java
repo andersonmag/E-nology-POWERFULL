@@ -92,6 +92,8 @@ public class TaskController {
                     .addObject("tarefasRespondidasAtualmente", sequenciadorService
                             .filtrarTarefasRespondidas(solucaoService.findByAluno(usuarioLogado)).size());
         } catch (NullPointerException e) {
+            usuarioLogado.setFaseAtual(usuarioLogado.getFaseAtual() + 1);
+            usuarioService.save(usuarioLogado);
             model.setViewName("task/resultado");
             model.addObject("usuario", usuarioLogado);
         }
