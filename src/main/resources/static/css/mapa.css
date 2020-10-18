@@ -7,6 +7,10 @@
     background-color: white;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .row {
     padding: 0rem 0rem;
 }

@@ -26,7 +26,7 @@
             <div class="row mt-5 d-flex justify-content-center">
                 <div class="col-4"></div>
                 <div class="col-4 d-flex justify-content-center ">
-                    <img class="img-fluid botao-main" src="images/btn1.png" style="cursor: pointer" data-toggle="modal"
+                    <img class="img-fluid botao-main cursor-pointer" src="images/btn1.png" data-toggle="modal"
                         data-target="#exampleModalCenter">
                 </div>
                 <div class="col-4"></div>
@@ -34,8 +34,12 @@
             <div class="row d-flex justify-content-center mt-5">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
-                        <img class="img-fluid botoes-num mr-4" src="images/btn2L.png">
-                        <img class="img-fluid botoes-num ml-4" src="images/btn3L.png">
+                        <img th:classappend="${(usuario.faseAtual > 1) ? 
+                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 1) ?
+                                     'images/btn2.png' : 'images/btn2L.png'}" th:alt="${usuario.faseAtual}" />
+                        <img th:classappend="${(usuario.faseAtual > 2) ? 
+                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 2) ?
+                                             'images/btn3.png' : 'images/btn3L.png'}" th:alt="${usuario.faseAtual}" />
                     </div>
                 </div>
             </div>
@@ -43,16 +47,26 @@
         <div class="row d-flex justify-content-center mt-5">
             <div class="container">
                 <div class="row d-flex justify-content-center">
-                    <img class="img-fluid botoes-num mr-4" src="images/btn4L.png">
-                    <img class="img-fluid botoes-num ml-4" src="images/btn5L.png">
+                    <img th:classappend="${(usuario.faseAtual > 3) ? 
+                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 3) ?
+                                     'images/btn4.png' : 'images/btn4L.png'}" th:alt="${usuario.faseAtual}" />
+                    <img th:classappend="${(usuario.faseAtual > 4) ? 
+                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 4) ?
+                                             'images/btn5.png' : 'images/btn5L.png'}" th:alt="${usuario.faseAtual}" />
                 </div>
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-5">
             <div class="container">
                 <div class="row embaixo-botao d-flex justify-content-center">
-                    <img class="img-fluid botoes-num mr-4" src="images/btnMg1L.png">
-                    <img class="img-fluid botoes-num ml-4" src="images/btnMg2L.png">
+                    <img th:classappend="${(usuario.faseAtual > 5) ? 
+                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 5) ?
+                                     'images/btnMg1.png' : 'images/btnMg1L.png'}" th:alt="${usuario.faseAtual}" />
+                    <img th:classappend="${(usuario.faseAtual > 5) ? 
+                                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}"
+                        th:src="${(usuario.faseAtual > 5) ?
+                                                     'images/btnMg2.png' : 'images/btnMg2L.png'}"
+                        th:alt="${usuario.faseAtual}" />
                 </div>
             </div>
         </div>
@@ -117,7 +131,7 @@
         </div>
     </div>
     </div>
-    
+
     <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
