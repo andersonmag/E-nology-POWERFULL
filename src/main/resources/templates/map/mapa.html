@@ -59,14 +59,20 @@
         <div class="row d-flex justify-content-center mt-5">
             <div class="container">
                 <div class="row embaixo-botao d-flex justify-content-center">
-                    <img th:classappend="${(usuario.faseAtual > 5) ? 
-                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 5) ?
-                                     'images/btnMg1.png' : 'images/btnMg1L.png'}" th:alt="${usuario.faseAtual}" />
+                    <a th:href="@{${usuario.faseAtual} > 5 ? '/games/mingle-ng' : ''}" style="
+                        display: contents;">
+                        <img th:classappend="${(usuario.faseAtual > 5) ? 
+                            'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 5) ?
+                                         'images/btnMg1.png' : 'images/btnMg1L.png'}" th:alt="${usuario.faseAtual}" />
+                    </a>
+                    <a th:href="@{${usuario.faseAtual} > 5 ? '/games/yamato-s-future' : ''}" style="
+                        display: contents;">
                     <img th:classappend="${(usuario.faseAtual > 5) ? 
                                         'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}"
                         th:src="${(usuario.faseAtual > 5) ?
                                                      'images/btnMg2.png' : 'images/btnMg2L.png'}"
                         th:alt="${usuario.faseAtual}" />
+                    </a>
                 </div>
             </div>
         </div>
