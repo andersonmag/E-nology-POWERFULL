@@ -2,145 +2,116 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="Apps, Ingles, English, Informatica" />
-    <meta name="viewport" content="width=device-width">
-    <title>Home | E-nology</title>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="Apps, Ingles, English, Informatica" />
+  <meta name="viewport" content="width=device-width">
+  <title>Home | E-nology</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="fonts/font-nunito.css" rel="stylesheet">
-    <link href="fonts/font-exo.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/mapa.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="fonts/font-nunito.css" rel="stylesheet">
+  <link href="fonts/font-exo.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/mapa.css">
 
 </head>
 
 <body class="fundo" oncopy="return false" oncut="return false" onpaste="return false">
 
-    <th:block th:include="navbar"></th:block>
+  <th:block th:include="navbar"></th:block>
 
-    <div class="container" onclick="esconderSidebar()">
+  <div class="container" onclick="esconderSidebar()">
+    <div class="container">
+      <div class="row mt-5"></div>
+      <div class="row mt-5 d-flex justify-content-center">
+        <div class="col-4"></div>
+        <div class="col-4 d-flex justify-content-center ">
+          <img class="img-fluid botao-main cursor-pointer" src="images/btn1.png" onclick="changeContent(true, 1)">
+        </div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row d-flex justify-content-center mt-5">
         <div class="container">
-            <div class="row mt-5"></div>
-            <div class="row mt-5 d-flex justify-content-center">
-                <div class="col-4"></div>
-                <div class="col-4 d-flex justify-content-center ">
-                    <img class="img-fluid botao-main cursor-pointer" src="images/btn1.png" data-toggle="modal"
-                        data-target="#exampleModalCenter">
-                </div>
-                <div class="col-4"></div>
-            </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <img th:classappend="${(usuario.faseAtual > 1) ? 
-                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 1) ?
-                                     'images/btn2.png' : 'images/btn2L.png'}" th:alt="${usuario.faseAtual}" />
-                        <img th:classappend="${(usuario.faseAtual > 2) ? 
-                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 2) ?
-                                             'images/btn3.png' : 'images/btn3L.png'}" th:alt="${usuario.faseAtual}" />
-                    </div>
-                </div>
-            </div>
+          <div class="row d-flex justify-content-center" th:with="parame=${'str'}">
+            <a style="display: contents;" href="/"></a>
+
+            <img th:classappend="${(conteudos[0].praticado) ? 
+                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[0].praticado) ?
+                                     'images/btn2.png' : 'images/btn2L.png'}"
+              th:onclick="|changeContent(${(conteudos[0].praticado)}, 2)|" />
+
+
+            <img th:classappend="${(conteudos[1].praticado) ? 
+                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[1].praticado) ?
+                                             'images/btn3.png' : 'images/btn3L.png'}"
+              th:onclick="|changeContent(${(conteudos[1].praticado)}, 3)|" />
+          </div>
         </div>
-        <div class="row d-flex justify-content-center mt-5">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <img th:classappend="${(usuario.faseAtual > 3) ? 
-                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 3) ?
-                                     'images/btn4.png' : 'images/btn4L.png'}" th:alt="${usuario.faseAtual}" />
-                    <img th:classappend="${(usuario.faseAtual > 4) ? 
-                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 4) ?
-                                             'images/btn5.png' : 'images/btn5L.png'}" th:alt="${usuario.faseAtual}" />
-                </div>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center mt-5">
-            <div class="container">
-                <div class="row embaixo-botao d-flex justify-content-center">
-                    <a th:href="@{${usuario.faseAtual} > 5 ? '/games/mingle-ng' : ''}" style="
-                        display: contents;">
-                        <img th:classappend="${(usuario.faseAtual > 5) ? 
-                            'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(usuario.faseAtual > 5) ?
-                                         'images/btnMg1.png' : 'images/btnMg1L.png'}" th:alt="${usuario.faseAtual}" />
-                    </a>
-                    <a th:href="@{${usuario.faseAtual} > 5 ? '/games/yamato-s-future' : ''}" style="
-                        display: contents;">
-                    <img th:classappend="${(usuario.faseAtual > 5) ? 
-                                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}"
-                        th:src="${(usuario.faseAtual > 5) ?
-                                                     'images/btnMg2.png' : 'images/btnMg2L.png'}"
-                        th:alt="${usuario.faseAtual}" />
-                    </a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <div class="row">
-        <!-- Modal -->
-        <div class="col">
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body" style="display: block;">
-                            <div class="row">
-                                <div class="col-3">
-                                    <span class="fa fa-warning text-danger icon"></span>
-                                    <br>
-                                    <small><strong>Nível 1</strong> </small>
-
-                                </div>
-                                <div class="col-9">
-                                    <h1 class="marca"> .Introdução</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-body d-flex ml-3">
-                            <i>
-                                . Conceitos Iniciais <br>
-                                . Estruturas de Condição <br>
-                                . Estruturas de Repetição <br>
-                            </i>
-                        </div>
-                        <div class="modal-footer" style="display: inline;">
-                            <div class="row ">
-                                <div class="col-4 ">
-
-                                    <button type="button" class="btn btn-lg" disabled
-                                        style="pointer-events: none;color: white ; background-color: #00475b;">
-                                        Aprender
-                                    </button>
-
-                                </div>
-                                <div class="col-3">
-
-                                    <button type="button" class="btn btn-lg" disabled
-                                        style="pointer-events: none;color: white ; background-color: #022640;">
-                                        Quiz
-                                    </button>
-
-                                </div>
-                                <div class="col-5">
-                                    <a href="/exercicio/intro">
-                                        <button type="button" class="btn btn-primary btn-lg" style="color: white ;">
-                                            Praticar
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <img th:classappend="${(conteudos[2].praticado) ? 
+                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[2].praticado) ?
+                                     'images/btn4.png' : 'images/btn4L.png'}"
+            th:onclick="|changeContent(${(conteudos[2].praticado)}, 4)|" />
+          <img th:classappend="${(conteudos[3].praticado) ? 
+                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[3].praticado) ?
+                                             'images/btn5.png' : 'images/btn5L.png'}"
+            th:onclick="|changeContent(${(conteudos[3].praticado)}, 5)|" />
         </div>
+      </div>
     </div>
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="container">
+        <div class="row embaixo-botao d-flex justify-content-center">
+          <a th:onclick="|acessarJogo(${(conteudos[4].praticado)}, 'game1')|" id="game1" style="display: contents;">
+            <img th:classappend="${(conteudos[4].praticado) ? 
+                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[4].praticado) ?
+                             'images/btnMg1.png' : 'images/btnMg1L.png'}" />
+          </a>
+          <a th:onclick="|acessarJogo(${(conteudos[4].praticado)}, 'game2')|" id="game2" style="display: contents;">
+            <img th:classappend="${(conteudos[4].praticado) ? 
+                            'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[4].praticado) ?
+                                         'images/btnMg2.png' : 'images/btnMg2L.png'}" />
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body" style="display: block;">
+              <div class="row d-flex justify-content-center">
+                <h1 class="marca" id="txtLevel"></h1>
+              </div>
 
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+              <div class="row d-flex justify-content-center">
+                <i class="fa fa-linux" aria-hidden="true"></i>
+                <small id="txtTitle"> </small>
+              </div>
+            </div>
+            <div class="modal-body d-flex">
+              <div class="jumbotron" style="padding: 1rem 1rem;">
+                <small class="lead mb-2 text-justify text-justify" id="txtContent"></small>
+                <a class="mt-5 ml-0 btn btn-primary btn-lg d-block" id="lessonId" role="button">Aprender</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-3.3.1.slim.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/mapa.js"></script>
 </body>
 
 </html>
