@@ -11,7 +11,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/licao.css">
+    <link rel="stylesheet" href="../../css/licao.css">
 </head>
 
 <style>
@@ -33,17 +33,13 @@
             <span id="pontuacao" th:text="${tarefasRespondidasAtualmente}"
                 style="font-family: 'Bebas Neue', cursive; font-size: 10pt;"></span>
             <span style="font-family: 'Bebas Neue', cursive; font-size: 10pt;">/</span><span
-                style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasTotal}"></span>
+                style="font-family: 'Bebas Neue', cursive; font-size: 10pt;" th:text="${tarefasConteudo}"></span>
         </span>
         </span>
         <div class="direita">
-            <span th:each="conteudo:${tarefa.resposta.conteudos}" th:if="${conteudo.titulo} != javascript1 
-                AND ${conteudo.titulo} != javascript2 
-                AND ${conteudo.titulo} != S.O. 
-                AND ${conteudo.titulo} != programação 
-                AND ${conteudo.titulo} != geral" class="teste fa fa-eye icone-normal mr-3" data-toggle="modal"
-                data-target="#modalLongo" style="font-size: 22pt;cursor: pointer;"><small style="font-size: 12pt;"
-                    class="teste">
+            <span th:if="${tarefa.tipoTarefa == T(br.edu.ifal.enology.model.TipoTarefa).MULTIPLA_ESCOLHA_TEXTO}"
+                class="teste fa fa-eye icone-normal mr-3" data-toggle="modal" data-target="#modalLongo"
+                style="font-size: 22pt;cursor: pointer;"><small style="font-size: 12pt;" class="teste">
                     Texto
                 </small>
             </span>
@@ -68,7 +64,9 @@
                 <h6 class="text-secondary d-flex justify-content-center">Escolha a alternativa correta:</h1>
             </div>
         </div>
-        <form method="POST" action="#" th:action="@{'/exercicio/corrigir/' + ${tarefa.id}}" th:object="${tarefa}">
+        <form method="POST" action="#"
+            th:action="@{'/studies/corrigir/' + ${tarefa.id} + '/' + ${tarefa.conteudo.id}}"
+            th:object="${tarefa}">
             <div class="row">
                 <div class="col">
                     <input type="hidden" name="id" th:value="${tarefa.id}">
@@ -104,14 +102,14 @@
                                             class="alert-heading d-flex float-right text-success mb-2 texto-resultado">Very
                                             Well!</small>
                                     </div>
-                                
-                                <div class="row d-flex justify-content-center">
-                                    <button class="btn btn-lg btn-block botao-resultado mr-2" type="submit"
-                                        onmouseover="this.style.backgroundColor='#0f8191'"
-                                        onmouseout="this.style.backgroundColor='#036977'">
-                                        Continuar</button>
+
+                                    <div class="row d-flex justify-content-center">
+                                        <button class="btn btn-lg btn-block botao-resultado mr-2" type="submit"
+                                            onmouseover="this.style.backgroundColor='#0f8191'"
+                                            onmouseout="this.style.backgroundColor='#036977'">
+                                            Continuar</button>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -151,12 +149,11 @@
     </form>
 
     <!-- Modal -->
-    <div class="modal  fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog col-xs-8 col-sm-8 modal-dialog-centered modal-lg" role="document">
+    <div class="modal fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-scrollable " role="document">
             <div class="modal-content">
-
-                <div class="modal-header ">
+                <div class="modal-header">
                     <h5 class="modal-title ml-2 cabecario" id="exampleModalLongTitle"><small style="font-size: 23pt;"
                             class="fa fa-eye icone-normal text-info"></small> Por favor,
                         leia o texto abaixo(em inglês) para
@@ -167,83 +164,86 @@
                         <p style="font-size: 15pt;">Bill Gates</p>
                     </strong>
                 </div>
-                <a href="#" id="top"></a>
-                <div class="modal-body d-flex justify-content-center" style="padding-top: 0;">
-                    <div class="polaroid">
-                        <img src="../images/bill.jpg" alt="5 Terre" style="width:100%; border: 1px solid #ddd;
-                            border-radius: 4px;
-                            padding: 5px;">
+                <div class="modal-body d-flex justify-content-center pt-0">
+                    <div class="row d-flex justify-content-center">
+                        <a href="#" id="top"></a>
+                        <div class="row d-flex justify-content-center">
+                            <div class="polaroid">
+                                <figure class="figure">
+                                    <img src="../../images/bill.jpg" alt="5 Terre" style="width:100%; border: 1px solid #ddd;
+                                    border-radius: 4px;
+                                    padding: 5px;">
+                                    <figcaption class="figure-caption text-center">Gates in 2014</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-10 mt-4 mb-4">
+                            <hr style="margin: 0;">
+                            <p class="texto text-justify">
+                                <strong>William Henry Gates III</strong> (born October 28, 1955) is an American business
+                                magnate,
+                                software
+                                developer, investor, and philanthropist. He is best known as the co-founder of Microsoft
+                                Corporation.[2][3] During his career at Microsoft, Gates held the positions
+                                of chairman, chief
+                                executive officer (CEO), president and chief software architect, while also being the
+                                largest
+                                individual shareholder until May 2014. He is one of the best-known entrepreneurs and
+                                pioneers of
+                                the microcomputer revolution of the 1970s and 1980s.
+                                Born and raised in Seattle, Washington, Gates co-founded Microsoft with childhood
+                                friend Paul
+                                Allen in 1975 in Albuquerque, New Mexico; it went on to become the world's
+                                largest personal
+                                computer software company.[4][a] Gates led the company as chairman and CEO until
+                                stepping
+                                down
+                                as CEO in January 2000, but he remained chairman and became chief software
+                                architect.[7] During
+                                the late 1990s, Gates had been criticized for his business tactics, which have been
+                                considered anti-competitive. This opinion has been upheld by numerous court
+                                rulings.[8] In
+                                June
+                                2006, Gates announced that he would be transitioning to a part-time role at Microsoft
+                                and
+                                full-time work at the Bill & Melinda Gates Foundation, the private charitable foundation
+                                that he
+                                and his wife, Melinda Gates, established in 2000.[9] He gradually transferred his duties
+                                to Ray
+                                Ozzie and Craig Mundie.[10] He stepped down as chairman of Microsoft in February 2014
+                                and
+                                assumed a new post as technology adviser to support the newly appointed CEO Satya
+                                Nadella.[11]
+                                Since 1987, he has been included in the Forbes list of the world's wealthiest documented
+                                individuals.[12][13] From 1995 to 2017, he held the Forbes title of the richest person
+                                in
+                                the
+                                world all but four of those years.[1] In October 2017, he was surpassed
+                                by Amazon founder
+                                and
+                                CEO Jeff Bezos, who had an estimated net worth of US$90.6 billion compared to Gates' net
+                                worth
+                                of US$89.9 billion at the time.[14] As of November 9, 2019, Gates had an estimated net
+                                worth
+                                of
+                                US$107.1 billion, making him the second wealthiest person in the world, behind Bezos.
+                                Later in his career and since leaving day-to-day operations at Microsoft in 2008, Gates
+                                pursued
+                                a number of philanthropic endeavors. He donated large amounts of money to various
+                                charitable
+                                organizations and scientific research programs through the Bill & Melinda Gates
+                                Foundation,
+                                reported to be the world's largest private charity.[15] In 2009, Gates and Warren
+                                Buffett founded The Giving Pledge, whereby they and other billionaires pledge to give at
+                                least
+                                half of their wealth to philanthropy.[16] The foundation works to save lives and improve
+                                global
+                                health, and is working with Rotary International to eliminate polio.[17]
+                            </p>
+                            <small>Disponível em: https://en.wikipedia.org/wiki/Bill_Gates</small>
+                        </div>
                     </div>
-                </div>
-                <div class="container d-flex justify-content-center">
-                    <p class="text-muted" style="font-size: 11pt;">Gates in 2014</p>
-                </div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-10">
-                        <hr style="margin: 0;">
-                        <p class="texto text-justify">
-                            <strong>William Henry Gates III</strong> (born October 28, 1955) is an American business
-                            magnate,
-                            software
-                            developer, investor, and philanthropist. He is best known as the co-founder of Microsoft
-                            Corporation.[2][3] During his career at Microsoft, Gates held the positions
-                            of chairman, chief
-                            executive officer (CEO), president and chief software architect, while also being the
-                            largest
-                            individual shareholder until May 2014. He is one of the best-known entrepreneurs and
-                            pioneers of
-                            the microcomputer revolution of the 1970s and 1980s.
-                            Born and raised in Seattle, Washington, Gates co-founded Microsoft with childhood
-                            friend Paul
-                            Allen in 1975 in Albuquerque, New Mexico; it went on to become the world's
-                            largest personal
-                            computer software company.[4][a] Gates led the company as chairman and CEO until
-                            stepping
-                            down
-                            as CEO in January 2000, but he remained chairman and became chief software
-                            architect.[7] During
-                            the late 1990s, Gates had been criticized for his business tactics, which have been
-                            considered anti-competitive. This opinion has been upheld by numerous court
-                            rulings.[8] In
-                            June
-                            2006, Gates announced that he would be transitioning to a part-time role at Microsoft
-                            and
-                            full-time work at the Bill & Melinda Gates Foundation, the private charitable foundation
-                            that he
-                            and his wife, Melinda Gates, established in 2000.[9] He gradually transferred his duties
-                            to Ray
-                            Ozzie and Craig Mundie.[10] He stepped down as chairman of Microsoft in February 2014
-                            and
-                            assumed a new post as technology adviser to support the newly appointed CEO Satya
-                            Nadella.[11]
-                            Since 1987, he has been included in the Forbes list of the world's wealthiest documented
-                            individuals.[12][13] From 1995 to 2017, he held the Forbes title of the richest person
-                            in
-                            the
-                            world all but four of those years.[1] In October 2017, he was surpassed
-                            by Amazon founder
-                            and
-                            CEO Jeff Bezos, who had an estimated net worth of US$90.6 billion compared to Gates' net
-                            worth
-                            of US$89.9 billion at the time.[14] As of November 9, 2019, Gates had an estimated net
-                            worth
-                            of
-                            US$107.1 billion, making him the second wealthiest person in the world, behind Bezos.
-                            Later in his career and since leaving day-to-day operations at Microsoft in 2008, Gates
-                            pursued
-                            a number of philanthropic endeavors. He donated large amounts of money to various
-                            charitable
-                            organizations and scientific research programs through the Bill & Melinda Gates
-                            Foundation,
-                            reported to be the world's largest private charity.[15] In 2009, Gates and Warren
-                            Buffett founded The Giving Pledge, whereby they and other billionaires pledge to give at
-                            least
-                            half of their wealth to philanthropy.[16] The foundation works to save lives and improve
-                            global
-                            health, and is working with Rotary International to eliminate polio.[17]
-                        </p>
-                        <small>Disponível em: https://en.wikipedia.org/wiki/Bill_Gates</small>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
@@ -280,7 +280,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="/exercicio/intro">
+                    <a th:href="@{'/studies/' + ${tarefa.conteudo.id} + '/practice'}">
                         <button class="btn btn-lg" style="width: 100%; background-color: #0f8191; color: white;"
                             type="submit" onmouseover="this.style.backgroundColor='#036977'"
                             onmouseout="this.style.backgroundColor='#0f8191'">
@@ -305,7 +305,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="../js/licao.js"></script>
+    <script src="../../js/licao.js"></script>
 </body>
 
 </html>
