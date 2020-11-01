@@ -13,61 +13,119 @@ import br.edu.ifal.enology.repository.*;
 public class SequenciadorService {
 
     @Autowired
-    PalavraRepository palavraRepository;
+    private PalavraRepository palavraRepository;
     @Autowired
-    TarefaRepository tarefaRepository;
+    private TarefaService tarefaService;
     @Autowired
-    SolucaoRepository solucaoRepository;
+    private SolucaoService solucaoService;
     @Autowired
-    ConteudoRepository conteudoRepository;
+    private ConteudoService conteudoService;
 
-    public Tarefa buscarTarefa(Usuario usuario) {
-        List<Tarefa> todasTarefas = tarefaRepository.findAll();
-        List<Solucao> solucoesDoAluno = solucaoRepository.findByAluno(usuario);
-        List<Tarefa> tarefasRespondidasCorretamente = filtrarTarefasRespondidas(solucoesDoAluno);
-
-        return selecionarTarefa(todasTarefas, tarefasRespondidasCorretamente);
+    public boolean verificarConclusaoConteudo(List<Tarefa> tarefasRespondidasCorretamente,
+            List<Tarefa> tarefasConteudo) {
+        return tarefasRespondidasCorretamente.containsAll(tarefasConteudo);
     }
 
-    public List<Tarefa> filtrarTarefasRespondidas(List<Solucao> solucoesDoAluno) {
+    public boolean verificarSolucaoExistenteComConteudo(Conteudo conteudo,
+            List<Tarefa> tarefasRespondidasCorretamente) {
+        return tarefasRespondidasCorretamente.stream()
+                .anyMatch(tarefa -> tarefa.getConteudo().equals(conteudo));
+    }
+
+    public boolean isProximoConteudo(Conteudo conteudo, List<Tarefa> tarefasRespondidasCorretamente, List<Tarefa> tarefasConteudo) {
+
+        if(tarefasRespondidasCorretamente.isEmpty() && conteudo.getId() == 1L) {
+            return true;
+        }
+
+        else if(verificarSolucaoExistenteComConteudo(conteudo, tarefasRespondidasCorretamente))
+            return true;
+
+        Long proximoConteudo = conteudo.getId();
+        
+        Long conteudoInicial = 1L;
+        Long maiorConteudo = conteudoInicial;
+
+        for (Tarefa tarefa : tarefasRespondidasCorretamente) {
+            Long proximoLista = conteudoInicial;
+
+            proximoLista = tarefa.getConteudo().getId();
+
+            if (proximoLista > maiorConteudo) {
+                maiorConteudo = proximoLista;
+            }
+        }
+        boolean anteriorJaPraticado = conteudoService.findById(maiorConteudo).isPraticado();
+        maiorConteudo ++;
+        boolean proximoSolicitado = maiorConteudo == proximoConteudo;
+
+        boolean isProximo = anteriorJaPraticado
+                && proximoSolicitado;
+
+        return isProximo;
+    }
+
+    public Tarefa buscarTarefa(Usuario usuario, Conteudo conteudo) {
+        List<Solucao> solucoesDoAluno = solucaoService.buscarPorUsuario(usuario);
+        List<Tarefa> tarefasRespondidasCorretamente = filtrarTarefasRespondidas(solucoesDoAluno);
+        List<Tarefa> tarefasConteudo = tarefaService.buscarPorConteudo(conteudo);
+
+        if (solucoesDoAluno.isEmpty()) {
+            if (!conteudo.getId().equals(1L)) {
+                conteudo = conteudoService.findById(1L);
+                tarefasConteudo = tarefaService.buscarPorConteudo(conteudo);
+            }
+        }
+        
+        return selecionarTarefa(tarefasConteudo, tarefasRespondidasCorretamente);
+    }
+
+    public List<Tarefa> filtrarTarefasRespondidas(List<Solucao> solucoesDoAlunoDoConteudo) {
         List<Tarefa> tarefasRespondidasCorretamente = new ArrayList<>();
 
-        for (Solucao solucao : solucoesDoAluno) {
+        for (Solucao solucao : solucoesDoAlunoDoConteudo) {
             if (solucao.isAcertou())
                 tarefasRespondidasCorretamente.add(solucao.getTarefa());
         }
         return tarefasRespondidasCorretamente;
     }
 
-    private Tarefa selecionarTarefa(List<Tarefa> todasTarefas, List<Tarefa> tarefasRespondidasCorretamente) {
+    public List<Tarefa> filtrarTarefasRespondidasPorConteudo(List<Solucao> solucoesDoAlunoDoConteudo, Conteudo conteudo) {
+        List<Tarefa> tarefasRespondidasCorretamente = new ArrayList<>();
+
+        for (Solucao solucao : solucoesDoAlunoDoConteudo) {
+            if (solucao.isAcertou() && 
+                    solucao.getTarefa().getConteudo().equals(conteudo))
+                tarefasRespondidasCorretamente.add(solucao.getTarefa());
+        }
+        return tarefasRespondidasCorretamente;
+    }
+
+
+    private Tarefa selecionarTarefa(List<Tarefa> tarefasConteudo, List<Tarefa> tarefasRespondidasCorretamente) {
         List<Tarefa> tarefasRestantesTexto = new ArrayList<>();
         List<Tarefa> tarefasRestantesGeral = new ArrayList<>();
 
         Random numeroAleatorio = new Random();
-        int indexTarefa;
+        int indexTarefa = 0;
 
-        for (Tarefa tarefa : todasTarefas) {
-            if (tarefasRespondidasCorretamente.size() <= todasTarefas.size()) {
-                if (tarefasRespondidasCorretamente.isEmpty() || !tarefasRespondidasCorretamente.contains(tarefa)){
-                    if(tarefa.geTipoTarefa() == TipoTarefa.MULTIPLA_ESCOLHA_TEXTO){
+        for (Tarefa tarefa : tarefasConteudo) {
+                if (tarefasRespondidasCorretamente.isEmpty() || !tarefasRespondidasCorretamente.contains(tarefa)) {
+                    if (tarefa.getTipoTarefa() == TipoTarefa.MULTIPLA_ESCOLHA_TEXTO) {
                         tarefasRestantesTexto.add(tarefa);
-                    }else{
+                    } else {
                         tarefasRestantesGeral.add(tarefa);
                     }
                 }
-            } else {
-                break;
             }
-        }
 
-        if (tarefasRespondidasCorretamente.size() == todasTarefas.size())
+        if (verificarConclusaoConteudo(tarefasRespondidasCorretamente, tarefasConteudo))
             return null;
 
-        if(tarefasRestantesTexto.size() > 0){
+        if (tarefasRestantesTexto.size() > 0) {
             indexTarefa = numeroAleatorio.nextInt(tarefasRestantesTexto.size());
             return tarefasRestantesTexto.get(indexTarefa);
-        }
-        else{
+        } else {
             indexTarefa = numeroAleatorio.nextInt(tarefasRestantesGeral.size());
             return tarefasRestantesGeral.get(indexTarefa);
         }
@@ -75,7 +133,7 @@ public class SequenciadorService {
 
     public Conteudo pegarConteudoAleatorio(Palavra respostaDaTarefa) {
         Random numeroAleatorio = new Random();
-        List<Conteudo> todosConteudos = conteudoRepository.findAll();
+        List<Conteudo> todosConteudos = conteudoService.findAll();
         int indexConteudo;
 
         for (Conteudo conteudo : todosConteudos) {
