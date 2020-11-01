@@ -32,19 +32,18 @@
       </div>
       <div class="row d-flex justify-content-center mt-5">
         <div class="container">
-          <div class="row d-flex justify-content-center" th:with="parame=${'str'}">
+          <div class="row d-flex justify-content-center">
             <a style="display: contents;" href="/"></a>
 
-            <img th:classappend="${(conteudos[0].praticado) ? 
-                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[0].praticado) ?
+            <img th:classappend="${conteudo_atual > 0 ? 
+                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 0 ?
                                      'images/btn2.png' : 'images/btn2L.png'}"
-              th:onclick="|changeContent(${(conteudos[0].praticado)}, 2)|" />
+              th:onclick="|changeContent(${conteudo_atual > 0}, 2)|" />
 
-
-            <img th:classappend="${(conteudos[1].praticado) ? 
-                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[1].praticado) ?
+            <img th:classappend="${conteudo_atual > 1 ? 
+                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 1 ?
                                              'images/btn3.png' : 'images/btn3L.png'}"
-              th:onclick="|changeContent(${(conteudos[1].praticado)}, 3)|" />
+              th:onclick="|changeContent(${conteudo_atual > 1}, 3)|" />
           </div>
         </div>
       </div>
@@ -52,28 +51,28 @@
     <div class="row d-flex justify-content-center mt-5">
       <div class="container">
         <div class="row d-flex justify-content-center">
-          <img th:classappend="${(conteudos[2].praticado) ? 
-                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[2].praticado) ?
+          <img th:classappend="${conteudo_atual > 2 ? 
+                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 2 ?
                                      'images/btn4.png' : 'images/btn4L.png'}"
-            th:onclick="|changeContent(${(conteudos[2].praticado)}, 4)|" />
-          <img th:classappend="${(conteudos[3].praticado) ? 
-                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[3].praticado) ?
+            th:onclick="|changeContent(${conteudo_atual > 2}, 4)|" />
+          <img th:classappend="${conteudo_atual > 3 ? 
+                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 3 ?
                                              'images/btn5.png' : 'images/btn5L.png'}"
-            th:onclick="|changeContent(${(conteudos[3].praticado)}, 5)|" />
+            th:onclick="|changeContent(${conteudo_atual > 3}, 5)|" />
         </div>
       </div>
     </div>
     <div class="row d-flex justify-content-center mt-5">
       <div class="container">
         <div class="row embaixo-botao d-flex justify-content-center">
-          <a th:onclick="|acessarJogo(${(conteudos[4].praticado)}, 'game1')|" id="game1" style="display: contents;">
-            <img th:classappend="${(conteudos[4].praticado) ? 
-                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[4].praticado) ?
+          <a th:onclick="|acessarJogo(${conteudo_atual > 4}, 'game1')|" id="game1" style="display: contents;">
+            <img th:classappend="${conteudo_atual > 4 ? 
+                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 4 ?
                              'images/btnMg1.png' : 'images/btnMg1L.png'}" />
           </a>
-          <a th:onclick="|acessarJogo(${(conteudos[4].praticado)}, 'game2')|" id="game2" style="display: contents;">
-            <img th:classappend="${(conteudos[4].praticado) ? 
-                            'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${(conteudos[4].praticado) ?
+          <a th:onclick="|acessarJogo(${conteudo_atual > 4}, 'game2')|" id="game2" style="display: contents;">
+            <img th:classappend="${conteudo_atual > 4 ? 
+                            'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 4 ?
                                          'images/btnMg2.png' : 'images/btnMg2L.png'}" />
           </a>
         </div>

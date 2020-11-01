@@ -53,7 +53,7 @@ const changeContent = (pode, id) => {
                 break;
         }
 
-        lessonId.href = `/exercicio/intro/${id}`;
+        lessonId.href = `/studies/${id}/practice`;
         mostrarModal();
     }
 }
