@@ -20,7 +20,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 @Service
-public class EmailService{
+public class EmailService {
 
     @Value("${spring.mail.username}")
     private String meuEmail;
@@ -29,7 +29,8 @@ public class EmailService{
     @Autowired
     private Configuration config;
 
-    public void enviarEmail(String assunto, String emailDestino, String html, Map<String, Object> templateData) throws Exception {
+    public void enviarEmail(String assunto, String emailDestino, String html, Map<String, Object> templateData)
+            throws Exception {
         Session session = Session.getInstance(getProperties(), new Authenticator() {
 
             @Override
@@ -50,7 +51,7 @@ public class EmailService{
         message.addRecipients(Message.RecipientType.TO, adressDestination);
         message.setSubject(assunto);
         message.setContent(pageContent, "text/html; charset=utf-8");
-         //message.setText(mensagem);
+        // message.setText(mensagem);
 
         Transport.send(message);
     }
@@ -67,30 +68,32 @@ public class EmailService{
             Map<String, Object> templateData = new HashMap<>();
             templateData.put("title", "Hello, " + usuario.getNome() + "! ");
             templateData.put("email", usuario.getEmail());
-            templateData.put("link", "https://e-nology.herokuapp.com/redefinir-email?tk=" + token +"&email=" + usuario.getEmail());
-            
-            enviarEmail("E-nology - Redefinição de endereço de e-mail", usuario.getEmail(), "mails/redefinir-email.html", templateData);
-        }catch(Exception e){
+            templateData.put("link",
+                    "https://e-nology.herokuapp.com/redefinir-email?tk=" + token + "&email=" + usuario.getEmail());
+
+            enviarEmail("E-nology - Redefinição de endereço de e-mail", usuario.getEmail(),
+                    "mails/redefinir-email.html", templateData);
+        } catch (Exception e) {
             System.err.println(e);
         }
     }
 
-    public void enviarEmailConfirmacao(Usuario usuario){
+    public void enviarEmailConfirmacao(Usuario usuario) {
 
         try {
             Map<String, Object> templateData = new HashMap<>();
             templateData.put("bv", "Welcome to E-nology, " + usuario.getNome() + "! ");
-            templateData.put("cod", ""+usuario.getCodigoVerificacao());
-            templateData.put("link", "https://e-nology.herokuapp.com/ativar-conta/?codigoVerificacao=" + 
-            usuario.getCodigoVerificacao());
-            
-            enviarEmail("E-nology - Verificação de Email", usuario.getEmail(),"mails/confirmacao.html",templateData);
-        }catch(Exception e){
+            templateData.put("cod", "" + usuario.getCodigoVerificacao());
+            templateData.put("link",
+                    "https://e-nology.herokuapp.com/ativar-conta/?codigoVerificacao=" + usuario.getCodigoVerificacao());
+
+            enviarEmail("E-nology - Verificação de Email", usuario.getEmail(), "mails/confirmacao.html", templateData);
+        } catch (Exception e) {
             System.err.println(e);
         }
     }
-    
-	public String enviarEmailRedefinirSenha(String token, Usuario usuario) {
+
+    public String enviarEmailRedefinirSenha(String token, Usuario usuario) {
 
         try {
 
@@ -98,15 +101,15 @@ public class EmailService{
             templateData.put("title", "Hello, " + usuario.getNome());
             templateData.put("link", "https://e-nology.herokuapp.com/redefinir-senha?tk=" + token);
 
-            enviarEmail("E-nology - Tudo Pronto para Você Redefinir Sua Senha!",
-                         usuario.getEmail(), "mails/redefinir-senha.html", templateData);
+            enviarEmail("E-nology - Tudo Pronto para Você Redefinir Sua Senha!", usuario.getEmail(),
+                    "mails/redefinir-senha.html", templateData);
 
-                return "E-mail Enviado! Verifique seu e-mail, por favor.";
-            }catch(Exception e){
-                System.err.println(e);
-                return "Não foi possivel concluir o envio de e-mail.";
-            }
-	}
+            return "E-mail Enviado! Verifique seu e-mail, por favor.";
+        } catch (Exception e) {
+            System.err.println(e);
+            return "Não foi possivel concluir o envio de e-mail.";
+        }
+    }
 
     private Properties getProperties() {
 
@@ -114,7 +117,9 @@ public class EmailService{
 
         properties.put("mail.smtp.ssl.trust", "*");
         properties.put("mail.smtp.auth", true);
+        properties.put("mail.debug", true);
         properties.put("mail.smtp.starttls", true);
+        properties.put("mail.smtp.socketFactory.fallback", true);
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.socketFactory.port", "465");
