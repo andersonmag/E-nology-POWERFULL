@@ -15,34 +15,37 @@ import org.springframework.transaction.annotation.Transactional;
 import br.edu.ifal.enology.model.*;
 import br.edu.ifal.enology.service.*;
 
-@RequestMapping("/exercicio")
+@RequestMapping("/studies")
 @RestController
 public class TaskController {
 
     @Autowired
-    SequenciadorService sequenciadorService;
+    private SequenciadorService sequenciadorService;
     @Autowired
-    PalavraService palavraService;
+    private PalavraService palavraService;
     @Autowired
-    TarefaService tarefaService;
+    private TarefaService tarefaService;
     @Autowired
-    UsuarioService usuarioService;
+    private UsuarioService usuarioService;
     @Autowired
-    SolucaoService solucaoService;
+    private SolucaoService solucaoService;
+    @Autowired
+    private ConteudoService conteudoService;
 
     @RequestMapping("/cadastrar")
     public ModelAndView cadastrar(Palavra palavra, Tarefa tarefa) {
         if (palavra.getIngles() != null) {
             palavraService.save(palavra);
         } else {
+            tarefa.setConteudo(tarefa.getResposta().getConteudos().get(0));
             tarefaService.save(tarefa);
         }
 
         return new ModelAndView("redirect:/tarefa");
     }
 
-    @RequestMapping("/corrigir/{id}")
-    public ModelAndView corrigirResposta(@PathVariable("id") Long idTarefa,
+    @RequestMapping("/corrigir/{id}/{contId}")
+    public ModelAndView corrigirResposta(@PathVariable("id") Long idTarefa, @PathVariable("contId") Long contId,
             @AuthenticationPrincipal Usuario usuarioLogado, Long palavra, RedirectAttributes redirect) {
         Solucao solucao = new Solucao();
         int pontuacaoResposta;
@@ -65,38 +68,73 @@ public class TaskController {
         solucao.setPontuacao(pontuacaoResposta);
         solucaoService.save(solucao);
 
+        Conteudo conteudo = conteudoService.findById(contId);
+        List<Solucao> solucoesDoAluno = solucaoService.buscarPorUsuario(usuarioLogado);
+        List<Tarefa> tarefasRespondidasCorretamente = sequenciadorService
+                .filtrarTarefasRespondidas(solucoesDoAluno);
+        List<Tarefa> tarefasConteudo = tarefaService.buscarPorConteudo(conteudo);
+
+        boolean concluiu = sequenciadorService
+        .verificarConclusaoConteudo(tarefasRespondidasCorretamente, tarefasConteudo);
+
+        if(concluiu) {
+            solucao.getTarefa().getConteudo().setPraticado(concluiu);
+            solucaoService.save(solucao);
+        }
+
         redirect.addFlashAttribute("pontuacaoNaLIcao", pontuacaoResposta);
-        return new ModelAndView("redirect:/exercicio/intro");
+        return new ModelAndView("redirect:/studies/" + contId + "/practice");
     }
 
     @Transactional
-    @RequestMapping("/intro")
+    @RequestMapping("/{id}/practice")
     public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado,
-            @CookieValue(defaultValue = "", name = "user") String userAcess, HttpServletResponse response) {
+            @CookieValue(defaultValue = "", name = "user") String userAcess, HttpServletResponse response,
+            @PathVariable("id") String contId) {
         ModelAndView model = new ModelAndView("task/licao1");
+
+        Conteudo conteudo = conteudoService.findById(Long.parseLong(contId));
+        List<Solucao> solucoesDoAluno = solucaoService.buscarPorUsuario(usuarioLogado);
+        List<Tarefa> tarefasRespondidasCorretamente = sequenciadorService
+                .filtrarTarefasRespondidas(solucoesDoAluno);
+        List<Tarefa> tarefasConteudo = tarefaService.buscarPorConteudo(conteudo);
+
+        if (conteudo == null) {
+            model.setViewName("redirect:/mapa");
+            return model;
+        }
+
+        boolean isProximo = sequenciadorService.isProximoConteudo(conteudo, tarefasRespondidasCorretamente,
+                tarefasConteudo);
+
+        if (!isProximo) {
+            model.setViewName("redirect:/mapa");
+            return model;
+        }
 
         if (userAcess.equals("")) {
             Cookie cookie = new Cookie("user", "again");
             response.addCookie(cookie);
             model.setViewName("task/attention");
+            model.addObject("conteudo", contId);
             return model;
         }
 
         try {
-            Tarefa tarefa = sequenciadorService.buscarTarefa(usuarioLogado);
+            Tarefa tarefa = sequenciadorService.buscarTarefa(usuarioLogado, conteudo);
             List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo(
                     sequenciadorService.pegarConteudoAleatorio(tarefa.getResposta()), tarefa.getResposta());
 
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas)
-                    .addObject("usuario", usuarioLogado).addObject("tarefasTotal", tarefaService.findAll().size())
-                    .addObject("tarefasRespondidasAtualmente", sequenciadorService
-                            .filtrarTarefasRespondidas(solucaoService.findByAluno(usuarioLogado)).size());
+                    .addObject("usuario", usuarioLogado).addObject("tarefasConteudo", tarefasConteudo.size())
+                    .addObject("tarefasRespondidasAtualmente", sequenciadorService.
+                                    filtrarTarefasRespondidasPorConteudo(solucoesDoAluno, conteudo).size());
+
         } catch (NullPointerException e) {
-            usuarioLogado.setFaseAtual(usuarioLogado.getFaseAtual() + 1);
-            usuarioService.save(usuarioLogado);
             model.setViewName("task/resultado");
             model.addObject("usuario", usuarioLogado);
         }
         return model;
     }
+
 }
