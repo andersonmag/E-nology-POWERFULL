@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.transaction.annotation.Transactional;
 import br.edu.ifal.enology.model.*;
 import br.edu.ifal.enology.service.*;
 
@@ -86,7 +85,6 @@ public class TaskController {
         return new ModelAndView("redirect:/studies/" + contId + "/practice");
     }
 
-    @Transactional
     @RequestMapping("/{id}/practice")
     public ModelAndView licao(@AuthenticationPrincipal Usuario usuarioLogado,
             @CookieValue(defaultValue = "", name = "user") String userAcess, HttpServletResponse response,

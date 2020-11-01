@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,7 +66,6 @@ public class UserController {
         return new ModelAndView("redirect:/perfil");
     }
 
-    @Transactional(readOnly = true)
     @RequestMapping("/localCloud/{link}")
     public byte[] retornarImagem(@PathVariable("link") Long link) {
         return imagemRepository.findByLink(link).getDados();
@@ -89,7 +87,6 @@ public class UserController {
     }
 
     @Scheduled(cron = "0 0 12 1/1 * *")
-    @Transactional
     public void deletarRedefinicaoSenhaExpirada() {
 
         List<RedefinicaoSenha> expirados = redefinicaoSenhaRepository.findAll().stream()
@@ -100,7 +97,6 @@ public class UserController {
         }
     }
 
-    @Transactional
     @RequestMapping("/redefinir-email")
     public ModelAndView redefinirEmail(@RequestParam("tk") String token, @RequestParam("email") String novoEmail) {
         Optional<RedefinicaoSenha> redefinirOptional = redefinicaoSenhaRepository.findByToken(token);
@@ -162,7 +158,6 @@ public class UserController {
         return model;
     }
 
-    @Transactional(readOnly = true)
     @RequestMapping("/redefinir-senha")
     public ModelAndView mostrarPaginaRedefinirSenha(@RequestParam(name = "tk", required = false) String tokenUsuario) {
         ModelAndView model = new ModelAndView("user/alteracao-senha");
@@ -180,7 +175,6 @@ public class UserController {
         return model;
     }
 
-    @Transactional
     @RequestMapping("/salvar-nova-senha")
     public ModelAndView salvarRedefinicaoSenha(@RequestParam("tk") String tokenUsuario,
             @RequestParam("senha") String novaSenha) {

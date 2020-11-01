@@ -3,8 +3,8 @@ package br.edu.ifal.enology.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "imagem_usuario")
@@ -14,7 +14,7 @@ public class Imagem {
     @GeneratedValue
     private Long id;
 
-    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] dados;
     private String nome;
     private String tipo;
