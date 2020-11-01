@@ -14,8 +14,11 @@ public class Tarefa{
     private Long id;
     private int pontuacao;
     private Nivel nivel;
-    private TipoTarefa tipoTarefa;
+    public TipoTarefa tipoTarefa;
     private String enunciado;
+
+    @ManyToOne
+    private Conteudo conteudo;
 
     @ManyToOne
     private Palavra resposta;
@@ -56,7 +59,7 @@ public class Tarefa{
         this.tipoTarefa = tipoTarefa;
     }
 
-    public TipoTarefa geTipoTarefa(){
+    public TipoTarefa getTipoTarefa(){
         return tipoTarefa;
     }
 
@@ -66,5 +69,13 @@ public class Tarefa{
 
     public void setEnunciado(String enunciado) {
         this.enunciado = enunciado;
+    }
+
+    public void setConteudo(Conteudo conteudo) {
+        this.conteudo = conteudo;
+    }
+
+    public Conteudo getConteudo() {
+        return conteudo;
     }
 }
