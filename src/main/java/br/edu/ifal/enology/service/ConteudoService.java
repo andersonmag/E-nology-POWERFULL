@@ -20,4 +20,8 @@ public class ConteudoService {
     public List<Conteudo> findAll() {
         return conteudoRepository.findAll();
     }
+
+    public Conteudo findById(Long id) {
+        return conteudoRepository.findById(id).orElse(null);
+    }
 }
