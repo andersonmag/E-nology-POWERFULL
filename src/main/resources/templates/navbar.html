@@ -42,7 +42,7 @@
                     style="min-width: 0; padding: 0; right: 0; left: auto !important;">
                     <h6 class="dropdown-header">Aluno</h6>
                     <a class="dropdown-item" href="/perfil">Ver Perfil</a>
-                    <a class="dropdown-item" href="#">Meu Progresso</a>
+                    <a class="dropdown-item" href="/progresso">Meu Progresso</a>
                 </div>
             </div>
 
@@ -67,8 +67,11 @@
         <span></span>
         <a name="link" href="/mapa#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 
-        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span>
-            </span></a>
+        <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span></span></a>
+
+        <a name="link" href="/rank"><span class="fa fa-trophy"><span class="ml-2 fonte">Ranking</span></span></a>
+
+        <a name="link" href="/progresso"><span class="fa fa-bar-chart"><span class="ml-2 fonte">Progresso</span></span></a>
         <br>
         <div class="ra" sec:authorize="hasRole('ROLE_ADMIN')">
             <a name="link" href="/tarefa"><span class="fa fa-file-code-o"><span class="ml-2 fonte">Criar Tarefa</span>

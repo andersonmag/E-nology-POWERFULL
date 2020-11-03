@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Progresso | E-nology</title>
+    <meta name="keywords" content="Apps, Ingles, English, Informatica" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="css/index.css" rel="stylesheet">
+    <style>
+        #banner {
+            background-image: linear-gradient(120deg, #91C4FF 0%, #F0F7FF 87%);
+            position: relative;
+            width: 100%;
+            height: 270px;
+            min-height: 20vh;
+        }
+
+        #cloud-scroll {
+            background: url(http://9a2e1a2047765d2a004e-e6d2db425d8d4f2619e5cee56a48bcef.r55.cf2.rackcdn.com/clouds.png) repeat-x;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            position: absolute;
+            -webkit-animation: 900000s backgroundScroll infinite linear;
+            -moz-animation: 900000s backgroundScroll infinite linear;
+            -o-animation: 900000s backgroundScroll infinite linear;
+            -ms-animation: 900000s backgroundScroll infinite linear;
+            animation: 900000s backgroundScroll infinite linear;
+        }
+
+        @-webkit-keyframes backgroundScroll {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -99999999px 0;
+            }
+        }
+
+        @keyframes backgroundScroll {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -99999999px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <th:block th:include="navbar"></th:block>
+
+    <div class="container-fluid" onclick="esconderSidebar()">
+        <div class="row text-center">
+            <div class="col-12 mt-5 p-0">
+                <div id="banner">
+                    <div id="cloud-scroll">
+                        <h1 class="display-4 mt-5 pt-5">Progresso</h1>
+                        <span>Nesta página você pode acompanhar seu progresso ao utilizar o E-nology!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            <div class="container mt-3">
+                <div class="row justify-content-center">
+                    <img th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+									alt="Minha Foto" width="133" class="img-fluid rounded-circle">
+								<span th:unless="${usuario.imagem}" class="imagemUser fa fa-user-circle"
+									style="color:darkcyan; font-size: 100pt !important;"></span>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-6 mt-5 mb-4 p-0">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Quantidade</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">Total de Pontos</th>
+                                <td th:text="${usuario.pontuacaoDoAluno}"></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Respostas Corretas</th>
+                                <td th:text="${quantidadeAcertos}"></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Respostas Erradas</th>
+                                <td th:text=${quantidadeErros}></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Total de fases concluidas</th>
+                                <td th:text="${quantidadeFasesConcluidas}"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+
+    <br>
+    <div class="container-fluid espaco-rodape fundo-do-poco d-flex justify-content-center">
+        <div class="row"></div>
+        <p id="mensagem"></p>
+    </div>
+    <script src="js/index.js"></script>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
