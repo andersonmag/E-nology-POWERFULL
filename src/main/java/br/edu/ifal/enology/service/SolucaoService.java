@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,19 @@ public class SolucaoService {
             .distinct().filter(conteudo -> conteudo.isPraticado()).collect(Collectors.toList());
         return conteudosPraticados;
 
+    }
+
+    public Long getQuantidadeRespostasErradas(Usuario aluno) {
+        List<Solucao> solucoesUsuario = buscarPorUsuario(aluno);
+        Long totalErros = solucoesUsuario.stream().filter(solucao -> !solucao.isAcertou()).count();
+
+        return totalErros;
+    }
+
+    public Long getQuantidadeRespostasCertas(Usuario aluno){
+        List<Solucao> solucoesUsuario = buscarPorUsuario(aluno);
+        Long totalErros = solucoesUsuario.stream().filter(solucao -> solucao.isAcertou()).count();
+
+        return totalErros;
     }
 }

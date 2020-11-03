@@ -25,7 +25,9 @@ import br.edu.ifal.enology.model.RedefinicaoSenha;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.ImagemRepository;
 import br.edu.ifal.enology.repository.RedefinicaoSenhaRepository;
+import br.edu.ifal.enology.repository.SolucaoRepository;
 import br.edu.ifal.enology.service.EmailService;
+import br.edu.ifal.enology.service.SolucaoService;
 import br.edu.ifal.enology.service.UsuarioService;
 
 @RestController
@@ -42,6 +44,9 @@ public class UserController {
 
     @Autowired
     private RedefinicaoSenhaRepository redefinicaoSenhaRepository;
+
+    @Autowired
+    private SolucaoService solucaoService;
 
     @RequestMapping("/perfil")
     public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado) {
@@ -238,6 +243,17 @@ public class UserController {
        
         usuarioService.save(usuario);
         return new ModelAndView("redirect:/perfil");
+    }
+
+    @RequestMapping("/progresso")
+    public ModelAndView mostrarProgresso(@AuthenticationPrincipal Usuario usuarioLogado) {
+        ModelAndView model = new ModelAndView("user/progresso");
+
+        model.addObject("usuario", usuarioLogado)
+            .addObject("quantidadeErros", solucaoService.getQuantidadeRespostasErradas(usuarioLogado)).
+            addObject("quantidadeAcertos", solucaoService.getQuantidadeRespostasCertas(usuarioLogado))
+            .addObject("quantidadeFasesConcluidas", solucaoService.buscarConteudosPraticadosPorUsuario(usuarioLogado).size());
+        return model;
     }
 
     private Authentication pegarNovoAuthentication(Authentication authentication, Usuario usuarioLogado) {
