@@ -256,6 +256,22 @@ public class UserController {
         return model;
     }
 
+    @RequestMapping("/ranking")
+    public ModelAndView mostrarPaginaRanking(@AuthenticationPrincipal Usuario usuarioLogado) {
+        ModelAndView model = new ModelAndView("user/ranking");
+        
+        List<Usuario> usuarios = usuarioService.findAll().stream().filter(
+                usuario -> usuario.getRoles().isEmpty()).collect(Collectors.toList());
+
+        List<Usuario> usuariosComMaioresPontuacoes = usuarioService.getUsuariosComMaioresPontuacoes(usuarios);
+        double mediaPontuacoes = usuarioService.getMediaPontuacaoUsuarios(usuarios);
+
+        model.addObject("usuario", usuarioLogado)
+             .addObject("usuarios", usuariosComMaioresPontuacoes)
+             .addObject("media", mediaPontuacoes);
+        return model;
+    }
+
     private Authentication pegarNovoAuthentication(Authentication authentication, Usuario usuarioLogado) {
         usuarioLogado = usuarioService.findById(usuarioLogado.getId());
         authentication = new UsernamePasswordAuthenticationToken(usuarioLogado, authentication.getCredentials(),

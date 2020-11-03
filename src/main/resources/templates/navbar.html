@@ -19,12 +19,6 @@
 
                 <a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="dd">
-
-                        <!-- <span class="teste fa fa-database" style="font-size: 25px; color: #e7f84e;" data-toggle="tooltip"
-                        data-placement="bottom" title="Sua pontuação até aqui">
-                    </span>
-                    <span></span><span class="teste mr-4" th:text="${usuario.pontuacaoDoAluno}" data-toggle="tooltip"
-                        data-placement="bottom" title="Sua pontuação até aqui"></span> -->
                         <span th:unless="${usuario.imagem}" class=" fa fa-user-circle text-success"
                             style="font-size: 28pt;"></span>
                         <img id="img-user-icon" th:if="${usuario.imagem}"
@@ -34,7 +28,6 @@
                         <span id="nome-user-icon"
                             style="font-size: 9pt; vertical-align: super; color: white; margin-top: 5px; margin-left: 5px;"
                             th:text="'Olá, ' + ${usuario.nome}"></span>
-
                     </div>
                 </a>
 
@@ -69,7 +62,7 @@
 
         <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span></span></a>
 
-        <a name="link" href="/rank"><span class="fa fa-trophy"><span class="ml-2 fonte">Ranking</span></span></a>
+        <a name="link" href="/ranking"><span class="fa fa-trophy"><span class="ml-2 fonte">Ranking</span></span></a>
 
         <a name="link" href="/progresso"><span class="fa fa-bar-chart"><span class="ml-2 fonte">Progresso</span></span></a>
         <br>
