@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ranking | E-nology</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="fonts/font-exo.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <style>
+        .media {
+            width: 150px;
+            height: 150px;
+            border-radius: 200px;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 2px solid darkcyan;
+        }
+
+        .row {
+            padding: 0rem 0rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <th:block th:include="navbar"></th:block>
+
+    <div class="container mt-5 " onclick="esconderSidebar()" style="margin-top: 100px !important;">
+
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="media bg-light">
+                    <span class="h1 m-0" style="color: darkcyan;" th:text="${#numbers.formatDecimal(media,2,1)}"></span>
+                    <small style="font-size: 0.6rem;">Média de pontuações</small>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row d-flex justify-content-center mb-5">
+            <div class="row d-flex ">
+                <div class="col-md-12 col-sm-10 text-center">
+                    <h3 class="text-dark" style="font-weight: 300;">Ranking de Melhores Pontuações - TOP 5
+                        <i class="fa fa-flag text-info" aria-hidden="true"></i>
+                    </h3>
+                    <small class="text-muted" style="max-width: 70%;">
+                        Veja quem são os melhores pontuadores das lições do E-nology!
+                    </small>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-10 mt-5">
+
+                <div class="form-group">
+                    <select class="form-control text-center" id="exampleFormControlSelect1" disabled>
+                        <option class="text-center">Ranking Geral</option>
+                    </select>
+                </div>
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Aluno</th>
+                            <th scope="col">Pontuação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="aluno:${usuarios}">
+                            <th scope="row" th:text="${alunoStat.count}"></th>
+                            <td>
+                                <div class="row" style="align-items: center;">
+                                    <img style="border-radius: 30px;" th:if="${aluno.imagem}"
+                                        th:src="@{'/localCloud/' + ${aluno.imagem.link}}" width="65" height="65"
+                                        alt="Imagem do aluno" class="mr-3">
+                                    <span th:unless="${aluno.imagem}" class="fa fa-user-circle mr-3"
+                                        style="color: darkcyan !important; font-size: 4rem;"></span>
+                                    <small th:text="${aluno.nome} + ' ' +${aluno.sobrenome}"></small>
+                                </div>
+                            </td>
+                            <td th:text="${aluno.pontuacaoDoAluno}"></td>
+                            <td><i class="fa fa-trophy  text-warning" style="font-size: 2rem;" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid fundo-do-poco d-flex justify-content-center">
+        <div class="row"></div>
+        <p id="mensagem"></p>
+    </div>
+    <script src="js/index.js"></script>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
