@@ -55,9 +55,9 @@ public class TaskController {
             usuarioLogado.setPontuacaoDoAluno(pontuacaoResposta);
             usuarioService.save(usuarioLogado);
         } else {
-            pontuacaoResposta = tarefaAtual.getPontuacao() / 2;
-            tarefaAtual.setPontuacao(pontuacaoResposta);
-            tarefaService.save(tarefaAtual);
+            pontuacaoResposta = usuarioLogado.getPontuacaoDoAluno() - 5;
+            usuarioLogado.setPontuacaoDoAluno(pontuacaoResposta);
+            usuarioService.save(usuarioLogado);
         }
 
         solucao.setAluno(usuarioLogado);
