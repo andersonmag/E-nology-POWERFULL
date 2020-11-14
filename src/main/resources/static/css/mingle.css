@@ -23,3 +23,143 @@ font-weight: 300;
     border: 3px solid #018513 !important;
     border-radius: 20px;
 }
+
+@media (min-width: 320px ) and (max-width: 767px) {
+        
+    .container:nth-child(1) {
+        justify-content: center !important;
+    }
+
+    .footer {
+        padding-top: 60px;
+    }
+    .container {
+        text-align: center !important;
+    }
+
+    .rank-icon {
+        display: none !important;
+    }
+
+    .info-icon {
+        display: none !important;
+    }
+
+    .container-secondary {
+        padding: 10px !important;
+        width: 100% !important;
+        margin-left: 20px !important;
+    }
+
+    .navbar {
+     
+        justify-content: left !important;
+    }
+}
+
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        overflow-x: hidden;
+    }
+
+    .container-secondary {
+        width: 100vw;
+        height: 80vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .box {
+        width: 700px;
+        height: 400px;
+    }
+
+    .navbar h4 {
+        font-weight: 900;
+        margin: 0px;
+        color: #0062cc;
+    }
+
+    .box h1 {
+        font-size: 160px;
+        font-weight: 900;
+        margin: 0px;
+        text-transform: uppercase;
+        color: #011f416c;
+        flex-direction: column;
+    }
+
+    .btn {
+        margin-top: 5px;
+        margin-left: 0;
+    }
+
+    .jumbotron {
+        padding: 15pt;
+    }
+
+    .icons {
+        color: #0f7cf0;
+        font-size: 1.3rem;
+    }
+
+    .list-group-item:hover {
+        background-color: #e7e7e7;
+    }
+
+    .btn {
+        border-radius: 10px;
+    }
+
+    .btn:hover {
+        background-color: #0f7cf0 !important;
+    }
+
+    .navbar {
+        bottom: 0;
+        top: auto;
+        height: 80px;
+    }
+
+    .rank-icon:hover {
+        background-color: hsla(211, 82%, 35%, 0.048);
+    }
+
+    .rank-icon {
+        color: #0062cc;
+        width: 120px;
+        height: 60px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .info-icon {
+        padding-left: 15px !important;
+        width: 120px;
+        height: 60px;
+        border-radius: 5px;
+    }
+
+    .info-icon:hover {
+        background-color: hsla(211, 82%, 35%, 0.048);
+    }
+
+    .icon {
+        background: linear-gradient(to right, #0062cc 50%, #6c757d 50%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .icon-title {
+        background: linear-gradient(to left, #0062cc 50%, #6c757d 50%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }

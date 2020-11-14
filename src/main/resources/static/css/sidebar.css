@@ -42,6 +42,10 @@
   border-radius: 20px;
 }
 
+.row {
+  padding: 0.2rem 0rem;
+}
+
 .img-user-of {
   font-size: 50pt !important; 
   color: #011f41;

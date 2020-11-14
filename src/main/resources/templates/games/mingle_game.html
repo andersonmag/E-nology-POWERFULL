@@ -10,8 +10,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/mingle.css">
+    <link href="/fonts/font-exo.css" rel="stylesheet">
+
 
     <style>
+
+    @media (min-width: 280px ) and (max-width: 767px) {
+
+        .footer {
+         margin-top: 50px !important;
+            position: relative !important;
+        }
+
+        #word h4 {
+         font-size: 0.9rem;
+        }
+
+        .col-2 {
+            max-width: 60% !important;
+        }
+
+        .navbar {
+         
+         justify-content: left !important;
+     }
+
+    }
         .w3-animate-fading {
             animation: fading 2s
         }
@@ -53,8 +77,11 @@
 <bod>
 
     <div class="container mb-3">
+        <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom">
+            <a class="navbar-brand" href="/"><h2 style="font-family: 'Exo 2'; color: #005cbf">E-nology <span class="fa fa-gamepad"></span></h2></a>
+        </nav>
 
-        <!--   NAVBAR DA GAME   -->
+        <!--   NAVBAR DO GAME   -->
         <div class="row mt-4 d-flex">
 
             <div class="col-3">
@@ -113,8 +140,6 @@
             </div>
         </div>
 
-        <hr>
-
         <!-- QUADROS DO GAME -->
 
         <div id="words" class="row mt-5 d-flex justify-content-center animation-invert"
@@ -129,7 +154,7 @@
         </div>
     </div>
 
-    <div class="text-center" style="bottom: 0; position: absolute; width: 100%; background-color: transparent;">
+    <div class="footer text-center" style="bottom: 0; position: absolute; width: 100%; background-color: transparent;">
         <div class="card-footer text-muted" style="font-size: 0.9rem;">
             E-nology |
             <a href="/games/mingle-ng" style="text-decoration: none;">Mingle<span style="font-family: 'Exo 2', sans-serif;">-ng The

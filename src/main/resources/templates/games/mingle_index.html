@@ -10,139 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> 
     <link href="../fonts/font-exo.css" rel="stylesheet">
+    <link href="../css/mingle.css" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        .container-secondary {
-            width: 100vw;
-            height: 80vh;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center
-        }
-
-        .box {
-            width: 700px;
-            height: 400px;
-        }
-
-        .navbar h4 {
-            font-weight: 900;
-            margin: 0px;
-            color: #0062cc;
-        }
-
-        .box h1 {
-            font-size: 160px;
-            font-weight: 900;
-            margin: 0px;
-            text-transform: uppercase;
-            color: #011f416c;
-            flex-direction: column;
-        }
-
-        .btn {
-            margin-top: 5px;
-            margin-left: 0;
-        }
-
-        .jumbotron {
-            padding: 15pt;
-        }
-
-        .icons {
-            color: #0f7cf0;
-            font-size: 1.3rem;
-        }
-
-        .list-group-item:hover {
-            background-color: #e7e7e7;
-        }
-
-        .btn {
-            border-radius: 10px;
-        }
-
-        .btn:hover {
-            background-color: #0f7cf0 !important;
-        }
-
-        .navbar {
-            bottom: 0;
-            top: auto;
-            width: 100%;
-            height: 80px;
-        }
-
-        .rank-icon:hover {
-            background-color: hsla(211, 82%, 35%, 0.048);
-        }
-
-        .rank-icon {
-            color: #0062cc;
-            width: 120px;
-            height: 60px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .info-icon {
-            padding-left: 15px !important;
-            width: 120px;
-            height: 60px;
-            border-radius: 5px;
-        }
-
-        .info-icon:hover {
-            background-color: hsla(211, 82%, 35%, 0.048);
-        }
-
-        .icon {
-            background: linear-gradient(to right, #0062cc 50%, #6c757d 50%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .icon-title {
-            background: linear-gradient(to left, #0062cc 50%, #6c757d 50%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
 </head>
 
 <body>
-
-    <div class="navbar text-center border-bottom">
-        <div class="container">
-            <a href="/games/mingle-ng" style="text-decoration: none;">
-                <h4>
-                    <i class="icon-title fa fa-clone text-secondary d-inline mr-1" aria-hidden="true"
-                        style="font-size: 2rem;"></i>
-                    Mingle<span style="font-family: 'Exo 2', sans-serif;">-ng</span>
-                </h4>
-            </a>
-            <div class="float-right d-inline" style="width: 160px;">
-                <div class="rank-icon d-inline">
-                    <a href="/games/mingle-ng/rank">
-                        <i class="fa fa-list-alt" aria-hidden="true" style="font-size: 2rem;"></i>
-                    </a>
-                    <span style="vertical-align: super;">Rank</span>
-                </div>
-
-                <div class="info-icon d-inline pl-2 text-muted">
-                    <i class="fa fa-info" aria-hidden="true" style="font-size: 2rem;"></i>
-                    <span style="vertical-align: super;">Info</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom">
+        <a class="navbar-brand" href="/"><h2 style="font-family: 'Exo 2'; color: #005cbf">E-nology <span class="fa fa-gamepad"></span></h2></a>
+    </nav>
 
     <div class="container-secondary text-center">
         <div class="box">
@@ -161,8 +36,8 @@
             </p>
 
 
-            <div class="d-flex justify-content-center mt-5">
-                <ul class="list-group list-group-horizontal text-center">
+            <div class="container mt-5">
+                <ul class="list-group list-group-horizontal text-center justify-content-center">
                     <li class="list-group-item" title="Faça seu melhor tempo!"><i class="fa fa-tachometer icons"
                             aria-hidden="true"></i>
                         Timer
@@ -180,23 +55,21 @@
                         Practice
                     </li>
                 </ul>
-            </div>
 
-            <p class="text-black pl-2 m-5 text-justify" style="font-size: 0.9rem;">
+            <p class="text-black m-5 text-justify" style="font-size: 0.9rem;">
                 "Mingle-ng" é um game de associação/combinação de palavras com mesmo significado em Inglês/Português.
                 Desenvolvido para pratica de
                 conhecimentos obtidos no "E-nology Project".
             </p>
 
-            </a>
-
             <a href="/games/mingle-ng/play" class="btn btn-block btn-primary btn-lg active" role="button"
                 aria-pressed="true">Start Game</a>
+            </div>
 
         </div>
     </div>
 
-    <div class=" text-center" style="bottom: 0; position: absolute; width: 100%; background-color: transparent;">
+    <div class="footer text-center" style="bottom: 0; width: 100%; background-color: transparent;">
 
         <div class="card-footer text-muted" style="font-size: 0.9rem;">
             E-nology |
@@ -206,7 +79,7 @@
         </div>
     </div>
 
-    <script src="../js/jquery-3.2.1.slim.min.js"></script>
+    <script src="../js/jquery-3.5.1.slim.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </body>
 
