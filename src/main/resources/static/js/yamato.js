@@ -4,6 +4,7 @@ const gameScreen = document.querySelector("#game_question");
 const resumeScreen = document.querySelector("#resume");
 const questionScreen = document.querySelector("#question");
 const gameChoiceScreen = document.querySelector("#game_choice");
+const attentionScreen = document.querySelector("#attention");
 
 let currentChoice = '';
 let i = 0;
@@ -26,6 +27,11 @@ const screen = {
     changeButtonValue: (btn, txt) => {
         btn.value = txt;
     }
+}
+
+function hideAttention() {
+    screen.hide(attentionScreen);
+    screen.show(startScreen);
 }
 
 function showTutorial() {

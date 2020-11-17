@@ -8,18 +8,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="../fonts/font-exo.css" rel="stylesheet">
     <link href="../css/mingle.css" rel="stylesheet">
 
 </head>
 
-<body>
+<body onload="iniciarCronometro()"  >
     <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom">
-        <a class="navbar-brand" href="/"><h2 style="font-family: 'Exo 2'; color: #005cbf">E-nology <span class="fa fa-gamepad"></span></h2></a>
+        <a class="navbar-brand" href="/">
+            <h2 style="font-family: 'Exo 2'; color: #005cbf">E-nology <span class="fa fa-gamepad"></span></h2>
+        </a>
     </nav>
 
-    <div class="container-secondary text-center">
+
+    <div id="principal">
+        <div class="jumbotron">
+            <div class="container ">
+                <div class="row">
+                    <div class="col col d-flex justify-content-center">
+                        <h1 class="display-3 text-info">Mingle-ng</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col d-flex justify-content-center">
+                        <small class="text-muted">adwdwdwdw</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col d-flex justify-content-center">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><span class="text-secondary">1. </span>
+                            
+                        </li>
+                        <li class="list-group-item"><span class="text-secondary">2. </span>Cada questão tem cerca de
+                            <strong>1 minuto</strong>
+                            para ser respondida!</li>
+                        <li class="list-group-item"><span class="text-secondary">3. </span>
+                            Questões sobre o Texto terão o ícone a seguir para abri-lo -->
+                            <span class="fa fa-eye text-info mr-2" style="font-size: 20pt;"></span>
+                        </li>
+                        </li>
+                        <li class="list-group-item"><span class="text-secondary">4. </span>
+                            Quanto mais acertos, maior sua pontuação ao final da lição!
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row float-right mt-2">
+                    <button class="btn btn-lg botao mt-4" style="width: 100%; background-color: #036977; color: white;"
+                        type="button" disabled id="butao" onmouseover="this.style.backgroundColor='#0f8191'"
+                        onmouseout="this.style.backgroundColor='#036977'" onclick="mudarDiv()">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game"  class="d-none">
+     <div class="container-secondary text-center ">
         <div class="box">
 
             <p class="text-muted text-center d-inline" style="font-size: 2rem; margin-bottom: 0 !important;">
@@ -34,7 +86,6 @@
                 <small style="font-size: 0.9rem;">"Combinando/Associando conhecimentos"</small>
 
             </p>
-
 
             <div class="container mt-5">
                 <ul class="list-group list-group-horizontal text-center justify-content-center">
@@ -56,29 +107,33 @@
                     </li>
                 </ul>
 
-            <p class="text-black m-5 text-justify" style="font-size: 0.9rem;">
-                "Mingle-ng" é um game de associação/combinação de palavras com mesmo significado em Inglês/Português.
-                Desenvolvido para pratica de
-                conhecimentos obtidos no "E-nology Project".
-            </p>
+                <p class="text-black m-5 text-justify" style="font-size: 0.9rem;">
+                    "Mingle-ng" é um game de associação/combinação de palavras com mesmo significado em
+                    Inglês/Português.
+                    Desenvolvido para pratica de
+                    conhecimentos obtidos no "E-nology Project".
+                </p>
 
-            <a href="/games/mingle-ng/play" class="btn btn-block btn-primary btn-lg active" role="button"
-                aria-pressed="true">Start Game</a>
+                <a href="/games/mingle-ng/play" class="btn btn-block btn-primary btn-lg active" role="button"
+                    aria-pressed="true">Start Game</a>
             </div>
 
         </div>
     </div>
 
+    
     <div class="footer text-center" style="bottom: 0; width: 100%; background-color: transparent;">
 
         <div class="card-footer text-muted" style="font-size: 0.9rem;">
             E-nology |
-            <a href="/games/mingle-ng" style="text-decoration: none;">Mingle<span style="font-family: 'Exo 2', sans-serif;">-ng The
+            <a href="/games/mingle-ng" style="text-decoration: none;">Mingle<span
+                    style="font-family: 'Exo 2', sans-serif;">-ng The
                     Game</span></a>
             <strong>v0.1</strong>
         </div>
     </div>
-
+</div>
+    <script src="../js/attention.js"></script>
     <script src="../js/jquery-3.5.1.slim.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </body>
