@@ -1,10 +1,10 @@
-body{
+.body-background{
     position: relative;
     height: 100vh;
     background-color: black;
 }
 
-body:after {
+.body-background:after {
     content : "";
     display: block;
     position: absolute;
@@ -18,6 +18,11 @@ body:after {
     z-index: -1;
 }
 
+.attention-background {
+    background-color: #fff;
+}
+
+
 .hide {
     display: none;
 }
@@ -26,9 +31,12 @@ body:after {
     display: block;
 }
 
+.title-blue {
+    color: #0056b3
+}
+
 .navbar-brand{
     font-family: 'Exo 2'; 
-    color: #fff !important;
 }
 
 .card-img-top {
@@ -37,6 +45,11 @@ body:after {
 
 .btn {
     transform: scale(0.8);
+}
+
+.btn:hover {
+    transform: scale(1);
+    transition: all ease 0.2s;
 }
 
 .btn-continue {
@@ -55,9 +68,21 @@ body:after {
     padding-bottom: 12px;
 }
 
-.btn:hover {
+.jumbotron {
+    padding: 25pt;
+}
+
+.btn-attention {
+    width: 100%; 
+    background-color: #036977; 
+    color: white;
     transform: scale(1);
-    transition: all ease 0.2s;
+    border-radius: 10px;
+}
+
+.btn-attention:hover {
+    background-color: #0f7cf0; 
+    color: white;
 }
 
 @media (max-width: 760px) {
@@ -88,5 +113,14 @@ body:after {
 
     .space {
         margin-top: 0 !important;
+    }
+
+    .attention-jumbotron {
+        font-size: 35pt;
+    }
+
+    .btn-attention {
+        margin-right: 10px;
+        margin-bottom: 15px;
     }
 }

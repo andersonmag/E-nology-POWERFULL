@@ -5,18 +5,16 @@ const resumeScreen = document.querySelector("#resume");
 const questionScreen = document.querySelector("#question");
 const gameChoiceScreen = document.querySelector("#game_choice");
 const attentionScreen = document.querySelector("#attention");
+const background = document.querySelector("#background");
+const navbar = document.querySelector("#nav");
 
 let currentChoice = '';
 let i = 0;
 
 const screen = {
-    show: (item) => {
-        item.classList.remove("hide");
-        item.classList.add("show");
-    },
-    hide: (item) => {
-        item.classList.remove("show");
-        item.classList.add("hide");
+    changeClassList: (item, prev, cur) => {
+        item.classList.remove(prev);
+        item.classList.add(cur);
     },
     changeCardImage: (item, img) => {
         item.src = img;
@@ -29,24 +27,28 @@ const screen = {
     }
 }
 
+window.onload = iniciarCronometro();
+
 function hideAttention() {
-    screen.hide(attentionScreen);
-    screen.show(startScreen);
+    screen.changeClassList(attentionScreen, 'show', 'hide');
+    screen.changeClassList(background, 'attention-background', 'body-background');
+    screen.changeClassList(navbar, 'title-blue', 'text-white')
+    screen.changeClassList(startScreen, 'hide', 'show');
 }
 
 function showTutorial() {
     const startTxt = document.querySelector("#startTxt").value;
 
     if (startTxt.toLowerCase().includes("start")) {
-        screen.hide(startScreen);
-        screen.show(tutorialScreen);
+        screen.changeClassList(startScreen, 'show', 'hide');
+        screen.changeClassList(tutorialScreen, 'hide', 'show');
     }
 }
 
 function startGame() {
-    screen.hide(tutorialScreen);
+    screen.changeClassList(tutorialScreen, 'show', 'hide');
     continueStory(choices.get('start'));
-    screen.show(gameScreen);
+    screen.changeClassList(gameScreen, 'hide', 'show');
 }
 
 function checkAnswer() {
@@ -54,7 +56,7 @@ function checkAnswer() {
 
     if (answer.value.toLowerCase().includes(questions[i].questionAnswer)) {
         showMessage(true)
-        screen.hide(questionScreen);
+        screen.changeClassList(questionScreen, 'show', 'hide');
         screen.changeButtonValue(answer, '[Hack@Har ~]$ ')
 
         showStory(choices.get(currentChoice))
@@ -68,12 +70,12 @@ function checkAnswer() {
 function chooseOption(opt) {
     if (choices.get(opt).continueTitle === 'exit') {
         window.history.back();
-    } else if (choices.get(opt), continueTitle === 'restart') {
+    } else if (choices.get(opt).continueTitle === 'restart') {
         location.reload();
     } else {
         continueStory(choices.get(opt));
-        screen.hide(gameChoiceScreen);
-        screen.show(resumeScreen)
+        screen.changeClassList(gameChoiceScreen, 'show', 'hide');
+        screen.changeClassList(resumeScreen, 'hide', 'show')
         currentChoice = opt;
     }
 }
@@ -99,7 +101,7 @@ function showStory(story) {
     const btn1 = document.querySelector("#btn1");
     const btn2 = document.querySelector("#btn2");
 
-    screen.show(gameChoiceScreen)
+    screen.changeClassList(gameChoiceScreen, 'hide', 'show')
     screen.changeCardImage(cardImage, story.cardImg);
     screen.changeText(cardTitle, story.cardTitle);
     screen.changeButtonValue(btn1, story.opt1);
@@ -111,15 +113,15 @@ function showMessage(acertou) {
     const result = document.querySelector("#result");
     const message = acertou ? 'Acertou! xD' : 'Errou! :P';
 
-    screen.show(result);
+    screen.changeClassList(result, 'hide', 'show');
     screen.changeText(result, message);
 
-    setTimeout(screen.hide, 2000, result)
+    setTimeout(screen.changeClassList, 2000, result, 'show', 'hide');
 }
 
 function hideResume() {
-    screen.hide(resumeScreen);
-    screen.show(questionScreen);
+    screen.changeClassList(resumeScreen, 'show', 'hide');
+    screen.changeClassList(questionScreen, 'hide', 'show');
 }
 
 function subir() {

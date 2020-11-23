@@ -1,151 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <title>Yamato's Future</title>
-        <link rel="stylesheet" href="../css/yamato.css">
-        <link href="../fonts/font-exo.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    
-    <body>
-        <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom p-0">
-            <a class="navbar-brand" href="/mapa"><h2>E-nology <span class="fa fa-gamepad"></span></h2></a>
-        </nav>
-        <div class="container show mt-1" id="start">
-            <div class="col align-self-center">
-                <div class=" row mt-3 d-flex justify-content-center">
-                    <img src="https://i.imgur.com/MIToynR.gif" class="img-fluid">
-                </div>
-                <div class="row mt-4 d-flex justify-content-center">
-                    <p class="mb-3 text-monospace text-danger">Digite 'start' abaixo para jogar.</p>
-                </div>
-                <div class="row mt-4 d-flex justify-content-center">
-                    <input type="text" id="startTxt" class="bg-dark text-white w-75 text-monospace" value="[Hacker@Har ~]$ "
-                        onkeyup="showTutorial()">
-                </div>
-            </div>
-        </div>
-        <div class="container mt-5 hide" id="tutorial">
-            <div class="row d-flex justify-content-md-center">
-                <h1 class="text-warning text-center mt-4">Welcome to Yamato's Future</h1>
-            </div>
-            <div class="row mt-3 d-flex justify-content-center">
-                <img src="https://i.imgur.com/q9bFY2X.png" class="img-fluid">
-            </div>
-            <div class="container mt-5">
-                <div class="row d-flex justify-content-center">
-                    <p class="text-white text-justify">
-                        Neste jogo você decide as ações de Yamato, um hacker
-                        iniciante que sonha em ser lembrado como uma lenda.
-                    </p>
-                    <p class="text-white text-justify">
-                        Antes de cada decisão, você deve responder corretamente a uma pergunta
-                        sobre 'programação' ou 'inglês na informática'.
-                    </p>
-                </div>
-                <div class="container">
-                    <div class="row d-flex justify-content-center mt-3 mb-5">
-                        <input type="button" value="</Continuar>" class="btn btn-light w-75 btn-continue"
-                            onclick="startGame(), subir()">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Yamato's Future - An Interactive Story Game | E-nology</title>
+    <link rel="stylesheet" href="../css/yamato.css">
+    <link href="../fonts/font-exo.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body id="background" class="attention-background">
+    <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom p-0">
+        <a class="navbar-brand title-blue" id="nav" href="/mapa">
+            <h2>E-nology <span class="fa fa-gamepad"></span></h2>
+        </a>
+    </nav>
+    <div id="attention">
+        <div class="jumbotron">
+            <div class="container ">
+                <div class="row">
+                    <div class="col col d-flex justify-content-center">
+                        <h1 class="display-3 text-center text-info attention-jumbotron">Yamato's Future</h1>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="container mt-5 hide" id="game_question">
-            <div class="container">
-                <div id="resume">
-                    <div class="row d-flex justify-content-center mb-5">
-                        <h6 class="text-danger text-center mt-4">RESUMO</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 text-center">
-                            <img class="card-img-top" src="" alt="Card image cap" id="continueImage">
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="container d-flex h-100 bg-text">
-                                <div class="row justify-content-center align-self-center">
-                                    <h5 class="card-title text-center" id="continueTitle"></h5>
-                                    <p class="card-text text-justify" id="continueText"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4 d-flex justify-content-center space">
-                        <input class="btn btn-outline-info w-50" id="btn-resume" type="button" value="Continuar"
-                            onclick="hideResume(), subir()">
-                    </div>
-                </div>
-                <div id="question" class="hide">
-                    <div class="row d-flex justify-content-center">
-                        <h6 class="text-danger text-center mt-4">PERGUNTA</h6>
-                    </div>
-                    <div class="row d-flex justify-content-center mt-5">
-                        <h5 class="text-white text-justify" id="questionMessage"></h5>
-                    </div>
-                    <div class="row mt-3 d-flex justify-content-center">
-                        <figure>
-                            <figcaption class="text-center text-muted">Exemplo</figcaption>
-                            <img src="" class="img-fluid" id="questionImage">
-                        </figure>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="container">
-                            <div class="col-sm-12 d-flex justify-content-center mt-2">
-                                <span class="hide text-center text-warning" id="result"></span>
-                            </div>
-                            <div class="col-sm-12 d-flex justify-content-center mt-2">
-                                <input type="text" id="answerTxt" class="bg-dark text-white w-50 text-monospace"
-                                    value="[Hack@Har ~]$ ">
-                            </div>
-                            <div class="col-sm-12 d-flex justify-content-center mt-2 mb-5">
-                                <input class="btn btn-outline-info w-50 btn-continue" type="button" id="btnContinue"
-                                    value="Continuar" onclick="checkAnswer(), subir()">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <div class="container mt-5 hide mb-4" id="game_choice">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <h6 class="text-danger text-center mt-4">HORA DE ESCOLHER!</h6>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-12 col-md-6 text-center">
-                        <img class="card-img-top" src="" alt="Card image cap" id="card-image">
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="container d-flex h-100 bg-text text-center">
-                            <div class="row justify-content-center align-self-center">
-                                <h5 class="card-title text-center" id="card-title"></h5>
-                                <p class="card-text text-justify" id="card-text"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-center mt-5 space">
-                    <h5 class="text-white text-justify">Qual sua decisão?</h5>
                 </div>
                 <div class="row">
+                    <div class="col col d-flex justify-content-center">
+                        <small class="text-muted attention">An Interactive Story Game</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col d-flex justify-content-center">
+                    <ul class="list-group list-group-flush text-justify text-secondary">
+                        <li class="list-group-item">
+                            <span>1. Agora que você acabou as lições, pode
+                                jogar esse minigame quantas vezes quiser!
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>2. Tente responder as perguntas sem pesquisar,
+                                usando apenas do seu próprio conhecimento.
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>3. As decisões influenciam diretamente no
+                                futuro do personagem, então escolha com sabedoria.
+                            </span>
+                        </li>
+                        </li>
+                        <li class="list-group-item">
+                            <span>4. Explore as opções! Atualmente, 10 finais já estão disponíveis!
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row float-right mt-2">
+                <button class="btn btn-lg botao mt-4 mb-3 btn-attention" type="button" disabled id="butao"
+                    onclick="hideAttention(), subir()">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container hide mt-1" id="start">
+        <div class="col align-self-center">
+            <div class=" row mt-3 d-flex justify-content-center">
+                <img src="https://i.imgur.com/MIToynR.gif" class="img-fluid">
+            </div>
+            <div class="row mt-4 d-flex justify-content-center">
+                <p class="mb-3 text-monospace text-danger">Digite 'start' abaixo para jogar.</p>
+            </div>
+            <div class="row mt-4 d-flex justify-content-center">
+                <input type="text" id="startTxt" class="bg-dark mb-3 text-white w-75 text-monospace"
+                    value="[Hacker@Har ~]$ " onkeyup="showTutorial()">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 hide" id="tutorial">
+        <div class="row d-flex justify-content-md-center">
+            <h1 class="text-warning text-center mt-4">Welcome to Yamato's Future</h1>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center">
+            <img src="https://i.imgur.com/q9bFY2X.png" class="img-fluid">
+        </div>
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <p class="text-white text-justify">
+                    Neste jogo você decide as ações de Yamato, um hacker
+                    iniciante que sonha em ser lembrado como uma lenda.
+                </p>
+                <p class="text-white text-justify">
+                    Antes de cada decisão, você deve responder corretamente a uma pergunta
+                    sobre 'programação' ou 'inglês na informática'.
+                </p>
+            </div>
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-3 mb-5">
+                    <input type="button" value="</Continuar>" class="btn btn-light mb-5 w-75 btn-continue"
+                        onclick="startGame(), subir()">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 hide" id="game_question">
+        <div class="container">
+            <div id="resume">
+                <div class="row d-flex justify-content-center mb-5">
+                    <h6 class="text-danger text-center mt-4">RESUMO</h6>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 text-center">
+                        <img class="card-img-top" src="" alt="Card image cap" id="continueImage">
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="container d-flex h-100 bg-text">
+                            <div class="row justify-content-center align-self-center">
+                                <h5 class="card-title text-center" id="continueTitle"></h5>
+                                <p class="card-text text-justify" id="continueText"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 d-flex justify-content-center space">
+                    <input class="btn btn-outline-info w-50 mb-5" id="btn-resume" type="button" value="Continuar"
+                        onclick="hideResume(), subir()">
+                </div>
+            </div>
+            <div id="question" class="hide">
+                <div class="row d-flex justify-content-center">
+                    <h6 class="text-danger text-center mt-4">PERGUNTA</h6>
+                </div>
+                <div class="row d-flex justify-content-center mt-5">
+                    <h5 class="text-white text-justify" id="questionMessage"></h5>
+                </div>
+                <div class="row mt-3 d-flex justify-content-center">
+                    <figure>
+                        <figcaption class="text-center text-muted">Exemplo</figcaption>
+                        <img src="" class="img-fluid" id="questionImage">
+                    </figure>
+                </div>
+                <div class="row mt-4">
                     <div class="container">
-                        <div class="col-sm-12 d-flex justify-content-center mt-2 mb-4">
-                            <input class="btn btn-outline-info w-75" type="button" id="btn1"
-                                onclick="chooseOption(this.value), subir()">
-                            <input class="btn btn-outline-info w-75" type="button" id="btn2"
-                                onclick="chooseOption(this.value), subir()">
+                        <div class="col-sm-12 d-flex justify-content-center mt-2">
+                            <span class="hide text-center text-warning" id="result"></span>
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-center mt-2">
+                            <input type="text" id="answerTxt" class="bg-dark text-white w-50 text-monospace"
+                                value="[Hack@Har ~]$ ">
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-center mt-2 mb-5">
+                            <input class="btn btn-outline-info w-50 btn-continue mb-3" type="button" id="btnContinue"
+                                value="Continuar" onclick="checkAnswer(), subir()">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="../js/yamato.js"></script>
-        <script src="../js/yamatosContent.js"></script>
-    </body>
-    
-    </html>
+    </div>
+
+    <div class="container mt-5 hide mb-4" id="game_choice">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <h6 class="text-danger text-center mt-4">HORA DE ESCOLHER!</h6>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-12 col-md-6 text-center">
+                    <img class="card-img-top" src="" alt="Card image cap" id="card-image">
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="container d-flex h-100 bg-text text-center">
+                        <div class="row justify-content-center align-self-center">
+                            <h5 class="card-title text-center" id="card-title"></h5>
+                            <p class="card-text text-justify" id="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-5 space">
+                <h5 class="text-white text-justify">Qual sua decisão?</h5>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="col-sm-12 d-flex justify-content-center mt-2 mb-4">
+                        <input class="btn btn-outline-info w-75 mb-3" type="button" id="btn1"
+                            onclick="chooseOption(this.value), subir()">
+                        <input class="btn btn-outline-info w-75 mb-3" type="button" id="btn2"
+                            onclick="chooseOption(this.value), subir()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/attention.js"></script>
+    <script src="../js/yamato.js"></script>
+    <script src="../js/yamatosContent.js"></script>
+</body>
+
+</html>
