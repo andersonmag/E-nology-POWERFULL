@@ -10,6 +10,8 @@ const blueTitles = document.querySelectorAll(".title-blue");
 const sidebar = document.querySelector("#sidebar");
 const sidebarItens = document.querySelectorAll(".fonte");
 const textPrimary = document.querySelectorAll(".text-primary");
+const audioIcon = document.querySelector("#audioIcon");
+const audio = document.querySelector("#audio");
 
 let currentChoice = '';
 let currentQuestion = 0;
@@ -130,6 +132,16 @@ function hideResume() {
     screen.changeClassList(questionScreen, 'hide', 'show');
 }
 
-function subir() {
+function playSong() {
+    if(audioIcon.classList.contains("fa-volume-off")){
+        screen.changeClassList(audioIcon, "fa-volume-off", "fa-volume-up");
+        audio.play();
+    } else{
+        screen.changeClassList(audioIcon, "fa-volume-up", "fa-volume-off");
+        audio.pause();
+    }
+}
+
+function up() {
     window.scrollTo(0, 0);
 };

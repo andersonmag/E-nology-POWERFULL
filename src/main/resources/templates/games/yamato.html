@@ -14,6 +14,9 @@
 </head>
 
 <body id="background" class="attention-background">
+    <audio id="audio" src="../sound/matrix.mp3" loop hidden>
+        <p>Seu navegador não suporta o elemento audio </p>
+    </audio>
     <nav class="navbar navbar-expand-lg d-flex mb-3 border-bottom p-0">
         <div class="row nav-row">
             <div class="col-4 col-space col-style">
@@ -29,24 +32,24 @@
             </div>
             <div class="col-4 text-right col-style col-space pr-0 mr-0">
                 <div class="navbar-brand title-blue">
-                    <h2 class="font-nav"><span class="fa fa-volume-off cursor-pointer"
-                            title="Clique para ativar o som"></span></h2>
+                    <h2 class="font-nav" onclick="playSong();"><span id="audioIcon"
+                            class="fa fa-volume-off cursor-pointer" title="Clique para ativar/desativar o som"></span></h2>
                 </div>
             </div>
         </div>
     </nav>
     <div id="sidebar" class="sidenav vh-100 bg-white">
-            <div class="d-flex justify-content-center bg-sidebar-user">
-                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
-                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
-                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
-            </div>
-            <strong>
-                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
-                    class="mt-2 d-flex justify-content-center fonte user-name text-primary"></span></strong>
-            <span class="fa fa-address-card d-flex justify-content-center text-primary">
-                <strong><span class="fonte ml-2 text-primary">Aluno</span></strong></span>
-            <br>
+        <div class="d-flex justify-content-center bg-sidebar-user">
+            <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+            <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+        </div>
+        <strong>
+            <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+                class="mt-2 d-flex justify-content-center fonte user-name text-primary"></span></strong>
+        <span class="fa fa-address-card d-flex justify-content-center text-primary">
+            <strong><span class="fonte ml-2 text-primary">Aluno</span></strong></span>
+        <br>
         <span></span>
         <a name="link" href="/mapa#"><span class="fa fa-home fonte"><span class="ml-2 fonte">Home</span></span></a>
 
@@ -113,7 +116,7 @@
             </div>
             <div class="row float-right mt-2">
                 <button class="btn btn-lg botao mt-4 mb-3 btn-attention" type="button" disabled id="butao"
-                    onclick="hideAttention(), subir()">
+                    onclick="hideAttention(), up()">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
                 </button>
@@ -157,12 +160,12 @@
             <div class="container">
                 <div class="row d-flex justify-content-center mt-3 mb-5">
                     <input type="button" value="</Continuar>" class="btn btn-light mb-5 w-75 btn-continue"
-                        onclick="startGame(), subir()">
+                        onclick="startGame(), up()">
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="container mt-5 hide" id="game_question" onclick="esconderSidebar()">
         <div class="container">
             <div id="resume">
@@ -184,7 +187,7 @@
                 </div>
                 <div class="row mt-4 d-flex justify-content-center space">
                     <input class="btn btn-outline-info w-50 mb-5" id="btn-resume" type="button" value="Continuar"
-                        onclick="hideResume(), subir()">
+                        onclick="hideResume(), up()">
                 </div>
             </div>
             <div id="question" class="hide">
@@ -211,7 +214,7 @@
                         </div>
                         <div class="col-sm-12 d-flex justify-content-center mt-2 mb-5">
                             <input class="btn btn-outline-info w-50 btn-continue mb-3" type="button" id="btnContinue"
-                                value="Continuar" onclick="checkAnswer(), subir()">
+                                value="Continuar" onclick="checkAnswer(), up()">
                         </div>
                     </div>
                 </div>
@@ -244,9 +247,9 @@
                 <div class="container">
                     <div class="col-sm-12 d-flex justify-content-center mt-2 mb-4">
                         <input class="btn btn-outline-info w-75 mb-3" type="button" id="btn1"
-                            onclick="chooseOption(this.value), subir()">
+                            onclick="chooseOption(this.value), up()">
                         <input class="btn btn-outline-info w-75 mb-3" type="button" id="btn2"
-                            onclick="chooseOption(this.value), subir()">
+                            onclick="chooseOption(this.value), up()">
                     </div>
                 </div>
             </div>
