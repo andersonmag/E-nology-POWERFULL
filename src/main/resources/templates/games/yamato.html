@@ -4,21 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yamato's Future - An Interactive Story Game | E-nology</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Yamato's Future - An Interactive Story Game | E-nology</title>
     <link rel="stylesheet" href="../css/yamato.css">
     <link href="../fonts/font-exo.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body id="background" class="attention-background">
-    <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom p-0">
-        <a class="navbar-brand title-blue" id="nav" href="/mapa">
-            <h2>E-nology <span class="fa fa-gamepad"></span></h2>
-        </a>
+    <nav class="navbar navbar-expand-lg d-flex mb-3 border-bottom p-0">
+        <div class="row nav-row">
+            <div class="col-4 col-space col-style">
+                <div class="navbar-brand">
+                    <h2 class="font-nav"><span class="title-blue cursor-pointer fa fa-bars"
+                            onclick="alterarSidebar()"></span></h2>
+                </div>
+            </div>
+            <div class="col-4 text-center pl-0 col-style text-margin-left">
+                <a class="navbar-brand title-blue" id="nav" href="/mapa">
+                    <h2 class="font-nav">E-nology <span class="fa fa-gamepad"></span></h2>
+                </a>
+            </div>
+            <div class="col-4 text-right col-style col-space pr-0 mr-0">
+                <div class="navbar-brand title-blue">
+                    <h2 class="font-nav"><span class="fa fa-volume-off cursor-pointer"
+                            title="Clique para ativar o som"></span></h2>
+                </div>
+            </div>
+        </div>
     </nav>
-    <div id="attention">
+    <div id="sidebar" class="sidenav vh-100 bg-white">
+            <div class="d-flex justify-content-center bg-sidebar-user">
+                <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                    alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+                <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+            </div>
+            <strong>
+                <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+                    class="mt-2 d-flex justify-content-center fonte user-name text-primary"></span></strong>
+            <span class="fa fa-address-card d-flex justify-content-center text-primary">
+                <strong><span class="fonte ml-2 text-primary">Aluno</span></strong></span>
+            <br>
+        <span></span>
+        <a name="link" href="/mapa#"><span class="fa fa-home fonte"><span class="ml-2 fonte">Home</span></span></a>
+
+        <a name="link" href="/perfil"><span class="fa fa-user-circle fonte"><span class="ml-2 fonte">Meu
+                    Perfil</span></span></a>
+
+        <a name="link" href="/ranking"><span class="fa fa-trophy fonte"><span
+                    class="ml-2 fonte">Ranking</span></span></a>
+
+        <a name="link" href="/progresso"><span class="fa fa-bar-chart fonte"><span
+                    class="ml-2 fonte">Progresso</span></span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-primary"><strong>Sobre</strong></h5>
+
+        <a name="link" href="/siga-nos"> <span class="fa fa-heart fonte"><span
+                    class="ml-2 fonte">Siga-nos</span></span></a>
+        <a name="link" href="/sobre"> <span class="fa fa-info-circle fonte"><span class="ml-2 fonte">Sobre o
+                    App</span></span></a>
+        <br>
+        <a href="/logout"><span class="fa fa-sign-out fonte"><span class="ml-2 fonte">Sair</span></span></a>
+    </div>
+
+    <div id="attention" onclick="esconderSidebar()">
         <div class="jumbotron">
             <div class="container ">
                 <div class="row">
@@ -69,7 +120,8 @@
             </div>
         </div>
     </div>
-    <div class="container hide mt-1" id="start">
+
+    <div class="container hide mt-1" id="start" onclick="esconderSidebar()">
         <div class="col align-self-center">
             <div class=" row mt-3 d-flex justify-content-center">
                 <img src="https://i.imgur.com/MIToynR.gif" class="img-fluid">
@@ -83,7 +135,8 @@
             </div>
         </div>
     </div>
-    <div class="container mt-5 hide" id="tutorial">
+
+    <div class="container mt-5 hide" id="tutorial" onclick="esconderSidebar()">
         <div class="row d-flex justify-content-md-center">
             <h1 class="text-warning text-center mt-4">Welcome to Yamato's Future</h1>
         </div>
@@ -109,7 +162,8 @@
             </div>
         </div>
     </div>
-    <div class="container mt-5 hide" id="game_question">
+    
+    <div class="container mt-5 hide" id="game_question" onclick="esconderSidebar()">
         <div class="container">
             <div id="resume">
                 <div class="row d-flex justify-content-center mb-5">
@@ -165,7 +219,7 @@
         </div>
     </div>
 
-    <div class="container mt-5 hide mb-4" id="game_choice">
+    <div class="container mt-5 hide mb-4" id="game_choice" onclick="esconderSidebar()">
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <h6 class="text-danger text-center mt-4">HORA DE ESCOLHER!</h6>
@@ -198,7 +252,9 @@
             </div>
         </div>
     </div>
+
     <script src="../js/attention.js"></script>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/yamato.js"></script>
     <script src="../js/yamatosContent.js"></script>
 </body>

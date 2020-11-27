@@ -6,10 +6,13 @@ const questionScreen = document.querySelector("#question");
 const gameChoiceScreen = document.querySelector("#game_choice");
 const attentionScreen = document.querySelector("#attention");
 const background = document.querySelector("#background");
-const navbar = document.querySelector("#nav");
+const blueTitles = document.querySelectorAll(".title-blue");
+const sidebar = document.querySelector("#sidebar");
+const sidebarItens = document.querySelectorAll(".fonte");
+const textPrimary = document.querySelectorAll(".text-primary");
 
 let currentChoice = '';
-let i = 0;
+let currentQuestion = 0;
 
 const screen = {
     changeClassList: (item, prev, cur) => {
@@ -32,7 +35,10 @@ window.onload = iniciarCronometro();
 function hideAttention() {
     screen.changeClassList(attentionScreen, 'show', 'hide');
     screen.changeClassList(background, 'attention-background', 'body-background');
-    screen.changeClassList(navbar, 'title-blue', 'text-white')
+    blueTitles.forEach(e => screen.changeClassList(e, 'title-blue', 'text-white'));
+    sidebarItens.forEach(item => item.classList.add("txt-light-blue"));
+    textPrimary.forEach(item => screen.changeClassList(item, "text-primary", "text-white"));
+    screen.changeClassList(sidebar, "bg-white", "bg-black");
     screen.changeClassList(startScreen, 'hide', 'show');
 }
 
@@ -54,13 +60,13 @@ function startGame() {
 function checkAnswer() {
     const answer = document.querySelector("#answerTxt");
 
-    if (answer.value.toLowerCase().includes(questions[i].questionAnswer)) {
+    if (answer.value.toLowerCase().includes(questions[currentQuestion].questionAnswer)) {
         showMessage(true)
         screen.changeClassList(questionScreen, 'show', 'hide');
         screen.changeButtonValue(answer, '[Hack@Har ~]$ ')
 
         showStory(choices.get(currentChoice))
-        i++;
+        currentQuestion++;
     }
     else {
         showMessage(false)
@@ -87,8 +93,8 @@ function continueStory(story) {
     const questionMessage = document.querySelector("#questionMessage");
     const questionImage = document.querySelector("#questionImage");
 
-    screen.changeText(questionMessage, questions[i].questionMessage);
-    screen.changeCardImage(questionImage, questions[i].questionImage);
+    screen.changeText(questionMessage, questions[currentQuestion].questionMessage);
+    screen.changeCardImage(questionImage, questions[currentQuestion].questionImage);
     screen.changeCardImage(continueImage, story.continueImage);
     screen.changeText(continueTitle, story.continueTitle);
     screen.changeText(continueText, story.continueText)
