@@ -20,17 +20,18 @@ public class GameController {
     }
 
     @RequestMapping("/mingle-ng")
-    public ModelAndView acessarMingleNG() {
-        return new ModelAndView("games/mingle_index");
+    public ModelAndView acessarMingleNG(@AuthenticationPrincipal Usuario usuarioLogado, ModelAndView model) {
+        model.setViewName("games/mingle_index");
+        model.addObject("usuario", usuarioLogado);
+
+        return model;
     }
 
     @RequestMapping("/mingle-ng/play")
-    public ModelAndView jogarMingleNG() {
-        return new ModelAndView("games/mingle_game");
-    }
+    public ModelAndView jogarMingleNG(@AuthenticationPrincipal Usuario usuarioLogado, ModelAndView model) {
+        model.setViewName("games/mingle_game");
+        model.addObject("usuario", usuarioLogado);
 
-    @RequestMapping("/mingle-ng/rank")
-    public ModelAndView verRankMingleNG() {
-        return new ModelAndView("games/mingle_rank");
+        return model;
     }
 }

@@ -1,9 +1,180 @@
 
-body {
-font-family: Verdana, Geneva, Tahoma, sans-serif;
-font-weight: 300;
 
+.attention-background {
+    background-color: #fff;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.title-blue {
+    color: #0056b3
+}
+
+.navbar {
+    z-index: 2;
+}
+
+.navbar-brand {
+    font-family: 'Exo 2';
+}
+
+.nav-row {
+    margin: 0;
+    width: 100%;
+}
+
+.card-img-top {
+    width: 90%;
+}
+
+.btn-continue {
+    transform: scale(1);
+}
+
+.bg-text {
+    background: linear-gradient(to right, #111 5%, transparent 95%);
+    background-color: #1d2124;
+    color: white;
+    padding: 45px;
+}
+
+.jumbotron {
+    padding: 25pt;
+}
+
+.btn-attention {
+    width: 100%;
+    background-color: #036977;
+    color: white;
+    transform: scale(1);
+    border-radius: 10px;
+}
+
+.btn-attention:hover {
+    background-color: #0f7cf0;
+    color: white;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.fa-bars {
+    font-size: 30px !important;
+    margin-left: 5%;
+}
+
+.col-space {
+    padding-left: 2%;
+}
+
+.col-style {
+    margin-top: .3125rem;
+}
+
+.font-nav {
+    font-size: 18pt;
+    font-weight: 400;
+}
+
+#img_perfil {
+    min-width: 130px;
+    height: 130px;
+    border: 2px solid #ddd;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #036977;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #fff;
+    background-color: rgb(3, 84, 151);
+}
+
+.fonte {
+    font-family: 'Nunito', sans-serif;
+}
+
+.img-user {
+    border-radius: 20px;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+.img-user-of {
+    font-size: 50pt !important;
+    color: #011f41;
+}
+
+.img-user-normal-of {
+    font-size: 50pt !important;
+    color: #011f41;
+}
+
+.user-name {
+    font-size: 13pt;
+    color: #74ABDD;
+}
+
+.ativo {
+    background-color: rgb(3, 84, 151);
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.txt-light-blue {
+    color: #74ABDD;
+}
+
+.txt-light-blue:hover {
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .col-3 {
     max-width: 30% !important;
@@ -57,11 +228,6 @@ font-weight: 300;
     }
 }
 
-    body {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        overflow-x: hidden;
-    }
-
     .container-secondary {
         width: 100vw;
         height: 80vh;
@@ -109,22 +275,13 @@ font-weight: 300;
         font-size: 1.3rem;
     }
 
-    .list-group-item:hover {
-        background-color: #e7e7e7;
-    }
-
     .btn {
         border-radius: 10px;
-    }
-
-    .btn:hover {
-        background-color: #0f7cf0 !important;
     }
 
     .navbar {
         bottom: 0;
         top: auto;
-        height: 80px;
     }
 
     .rank-icon:hover {
@@ -163,3 +320,77 @@ font-weight: 300;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
+    #btnStart {
+        max-width: 50%;
+    }
+
+    @media (min-width: 250px ) and (max-width: 540px) {
+        .title{
+            font-size: 3rem;
+        }
+    }
+    
+    @media (min-width: 541px ) and (max-width: 767px) {
+
+        .title{
+            font-size: 4rem;
+        }
+
+        ul{
+            max-width: 40% !important;
+        }
+
+        .footer {
+         margin-top: 50px !important;
+            position: relative !important;
+        }
+
+        #word h4 {
+         font-size: 0.9rem;
+        }
+
+        .col-2 {
+            max-width: 60% !important;
+        }
+
+        .navbar {
+         
+         justify-content: left !important;
+     }
+
+    }
+        .w3-animate-fading {
+            animation: fading 2s
+        }
+
+        .animation-invert {
+
+            animation: fadout 1s normal;
+
+        }
+
+        @keyframes fadout {
+
+            0% {
+                opacity: 0
+            }
+
+            100% {
+                opacity: 1
+            }
+        }
+
+        @keyframes fading {
+            0% {
+                opacity: 0
+            }
+
+            50% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 0
+            }
+        }

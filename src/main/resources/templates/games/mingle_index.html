@@ -7,87 +7,127 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="../fonts/font-exo.css" rel="stylesheet">
     <link href="../css/mingle.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body onload="iniciarCronometro()"  >
-    <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom">
-        <a class="navbar-brand" href="/">
-            <h2 style="font-family: 'Exo 2'; color: #005cbf">E-nology <span class="fa fa-gamepad"></span></h2>
-        </a>
+<body>
+    <nav class="navbar navbar-expand-lg d-flex mb-3 border-bottom p-0">
+        <div class="row nav-row">
+            <div class="col-4 col-space col-style">
+                <div class="navbar-brand">
+                    <h2 class="font-nav"><span class="title-blue cursor-pointer fa fa-bars"
+                            onclick="alterarSidebar()"></span></h2>
+                </div>
+            </div>
+            <div class="col-4 text-center pl-0 col-style text-margin-left">
+                <a class="navbar-brand title-blue" id="nav" href="/mapa">
+                    <h2 class="font-nav">E-nology <span class="fa fa-gamepad"></span></h2>
+                </a>
+            </div>
+        </div>
     </nav>
+    <div id="sidebar" class="sidenav vh-100 bg-white">
+        <div class="d-flex justify-content-center bg-sidebar-user">
+            <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+            <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+        </div>
+        <strong>
+            <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+                class="mt-2 d-flex justify-content-center fonte user-name text-primary"></span></strong>
+        <span class="fa fa-address-card d-flex justify-content-center text-primary">
+            <strong><span class="fonte ml-2 text-primary">Aluno</span></strong></span>
+        <br>
+        <span></span>
+        <a name="link" href="/mapa#"><span class="fa fa-home fonte"><span class="ml-2 fonte">Home</span></span></a>
+
+        <a name="link" href="/perfil"><span class="fa fa-user-circle fonte"><span class="ml-2 fonte">Meu
+                    Perfil</span></span></a>
+
+        <a name="link" href="/ranking"><span class="fa fa-trophy fonte"><span
+                    class="ml-2 fonte">Ranking</span></span></a>
+
+        <a name="link" href="/progresso"><span class="fa fa-bar-chart fonte"><span
+                    class="ml-2 fonte">Progresso</span></span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-primary"><strong>Sobre</strong></h5>
+
+        <a name="link" href="/siga-nos"> <span class="fa fa-heart fonte"><span
+                    class="ml-2 fonte">Siga-nos</span></span></a>
+        <a name="link" href="/sobre"> <span class="fa fa-info-circle fonte"><span class="ml-2 fonte">Sobre o
+                    App</span></span></a>
+        <br>
+        <a href="/logout"><span class="fa fa-sign-out fonte"><span class="ml-2 fonte">Sair</span></span></a>
+    </div>
 
 
-    <div id="principal">
+    <div id="principal" onclick="esconderSidebar()" class="d-none">
         <div class="jumbotron">
             <div class="container ">
                 <div class="row">
                     <div class="col col d-flex justify-content-center">
-                        <h1 class="display-3 text-info">Mingle-ng</h1>
+                        <h1 class="title display-3 text-info">Mingle-ng</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col col d-flex justify-content-center">
-                        <small class="text-muted">adwdwdwdw</small>
+                        <small class="text-muted">Combinando Pares de Palavras</small>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row mt-5">
-                <div class="col d-flex justify-content-center">
+                <div class="col d-flex justify-content-center text-muted">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><span class="text-secondary">1. </span>
-                            
+                        <li class="list-group-item text-center"><span class="text-secondary ">Parabéns por chegar até
+                                aqui! <i class="fa fa-flag text-info" aria-hidden="true"></i></span>
                         </li>
-                        <li class="list-group-item"><span class="text-secondary">2. </span>Cada questão tem cerca de
-                            <strong>1 minuto</strong>
-                            para ser respondida!</li>
-                        <li class="list-group-item"><span class="text-secondary">3. </span>
-                            Questões sobre o Texto terão o ícone a seguir para abri-lo -->
-                            <span class="fa fa-eye text-info mr-2" style="font-size: 20pt;"></span>
+                        <li class="list-group-item"><span class="text-secondary">1. O Minigame a seguir, trata-se de um
+                                desafio de combinações de palavras.</span></li>
+                        <li class="list-group-item"><span class="text-secondary">2. Utilize os conhecimentos obtidos
+                                para praticar e escolher as traduções de palavras equivalentes.</span></li>
+                        <li class="list-group-item"><span class="text-secondary">3. Associe palavras em português às
+                                suas traduções aprendidas em inglês.</span></li>
+                        <li class="list-group-item"><span class="text-secondary">4. Contém
+                                '<i class="fa fa-clock-o text-info" aria-hidden="true"></i>'
+                                então seja o mais rapido que conseguir.
+                            </span>
                         </li>
-                        </li>
-                        <li class="list-group-item"><span class="text-secondary">4. </span>
-                            Quanto mais acertos, maior sua pontuação ao final da lição!
-                        </li>
+
                     </ul>
                 </div>
             </div>
             <div class="row float-right mt-2">
-                    <button class="btn btn-lg botao mt-4" style="width: 100%; background-color: #036977; color: white;"
-                        type="button" disabled id="butao" onmouseover="this.style.backgroundColor='#0f8191'"
-                        onmouseout="this.style.backgroundColor='#036977'" onclick="mudarDiv()">
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Loading...
-                    </button>
+                <button class="btn btn-lg botao mt-4" style="width: 100%; background-color: #036977; color: white;"
+                    type="button" disabled id="butao" onmouseover="this.style.backgroundColor='#0f8191'"
+                    onmouseout="this.style.backgroundColor='#036977'" onclick="mudarDiv()">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
             </div>
         </div>
     </div>
 
-    <div id="game"  class="d-none">
-     <div class="container-secondary text-center ">
-        <div class="box">
+    <div id="game" class="animation-invert mt-5" onclick="esconderSidebar()">
+        <div class="container text-center mt-5">
+            <div class="row d-flex justify-content-center mt-5">
+                <p class="text-muted text-center d-inline" style="font-size: 2rem; margin-bottom: 0 !important;">
+                    <i class="icon fa fa-clone text-secondary d-inline" aria-hidden="true"
+                        style="font-size: 4.5rem;"></i>
+                    <span style=" vertical-align: super">
+                        Mingle<span style="font-family: 'Exo 2', sans-serif;">-ng</span>
+                    </span>
+                    <br>
+                    <small style="font-size: 1rem;">"Combinando/Associando conhecimentos"</small>
 
-            <p class="text-muted text-center d-inline" style="font-size: 2rem; margin-bottom: 0 !important;">
-
-                <i class="icon fa fa-clone text-secondary d-inline" aria-hidden="true" style="font-size: 4.5rem;"></i>
-
-                <strong style=" vertical-align: super">
-                    Mingle<span style="font-family: 'Exo 2', sans-serif;">-ng</span>
-
-                </strong>
-                <br>
-                <small style="font-size: 0.9rem;">"Combinando/Associando conhecimentos"</small>
-
-            </p>
-
-            <div class="container mt-5">
+                </p>
+            </div>
+            <div class="row mt-5 d-flex justify-content-center">
                 <ul class="list-group list-group-horizontal text-center justify-content-center">
                     <li class="list-group-item" title="Faça seu melhor tempo!"><i class="fa fa-tachometer icons"
                             aria-hidden="true"></i>
@@ -97,31 +137,30 @@
                             aria-hidden="true"></i>
                         Combine
                     </li>
-                    <li class="list-group-item" title="Esteja entre os melhores desse game!"><i
-                            class="fa fa-users icons" aria-hidden="true"></i>
-                        Rank
-                    </li>
                     <li class="list-group-item" title="Pratique o que aprendeu!"><i class="fa fa-grav icons"
                             aria-hidden="true"></i>
                         Practice
                     </li>
                 </ul>
-
-                <p class="text-black m-5 text-justify" style="font-size: 0.9rem;">
-                    "Mingle-ng" é um game de associação/combinação de palavras com mesmo significado em
+            </div>
+            <div class="row d-flex justify-content-center">
+                <p class="text-black m-5 text-justify " style="font-size: 1rem;max-width: 50%;">
+                    "Mingle-ng" é um game de associação/combinação de palavras com mesma tradução em
                     Inglês/Português.
                     Desenvolvido para pratica de
                     conhecimentos obtidos no "E-nology Project".
                 </p>
+            </div>
 
-                <a href="/games/mingle-ng/play" class="btn btn-block btn-primary btn-lg active" role="button"
-                    aria-pressed="true">Start Game</a>
+            <div class="d-flex justify-content-center mb-5">
+                <a id="btnStart" href="/games/mingle-ng/play" class="btn btn-block btn-primary btn-lg active " role="button"
+                aria-pressed="true">Start Game</a>
             </div>
 
         </div>
     </div>
 
-    
+
     <div class="footer text-center" style="bottom: 0; width: 100%; background-color: transparent;">
 
         <div class="card-footer text-muted" style="font-size: 0.9rem;">
@@ -132,8 +171,11 @@
             <strong>v0.1</strong>
         </div>
     </div>
-</div>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/attention.js"></script>
+    <script>
+        window.onload = iniciarCronometro();
+    </script>
     <script src="../js/jquery-3.5.1.slim.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </body>

@@ -6,80 +6,72 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/mingle.css">
     <link href="/fonts/font-exo.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <style>
 
-    @media (min-width: 280px ) and (max-width: 767px) {
-
-        .footer {
-         margin-top: 50px !important;
-            position: relative !important;
-        }
-
-        #word h4 {
-         font-size: 0.9rem;
-        }
-
-        .col-2 {
-            max-width: 60% !important;
-        }
-
-        .navbar {
-         
-         justify-content: left !important;
-     }
-
-    }
-        .w3-animate-fading {
-            animation: fading 2s
-        }
-
-        .animation-invert {
-
-            animation: fadout 1s normal;
-
-        }
-
-        @keyframes fadout {
-
-            0% {
-                opacity: 0
-            }
-
-            100% {
-                opacity: 1
-            }
-        }
-
-        @keyframes fading {
-            0% {
-                opacity: 0
-            }
-
-            50% {
-                opacity: 1
-            }
-
-            100% {
-                opacity: 0
-            }
-        }
     </style>
 
 </head>
 
 <bod>
 
-    <div class="container mb-3">
-        <nav class="navbar navbar-expand-lg d-flex mb-3 justify-content-center border-bottom">
-            <a class="navbar-brand" href="/"><h2 style="font-family: 'Exo 2'; color: #005cbf">E-nology <span class="fa fa-gamepad"></span></h2></a>
-        </nav>
+    <nav class="navbar navbar-expand-lg d-flex mb-3 border-bottom p-0">
+        <div class="row nav-row">
+            <div class="col-4 col-space col-style">
+                <div class="navbar-brand">
+                    <h2 class="font-nav"><span class="title-blue cursor-pointer fa fa-bars"
+                            onclick="alterarSidebar()"></span></h2>
+                </div>
+            </div>
+            <div class="col-4 text-center pl-0 col-style text-margin-left">
+                <a class="navbar-brand title-blue" id="nav" href="/mapa">
+                    <h2 class="font-nav">E-nology <span class="fa fa-gamepad"></span></h2>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar" class="sidenav vh-100 bg-white">
+        <div class="d-flex justify-content-center bg-sidebar-user">
+            <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+                alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
+            <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
+        </div>
+        <strong>
+            <span th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"
+                class="mt-2 d-flex justify-content-center fonte user-name text-primary"></span></strong>
+        <span class="fa fa-address-card d-flex justify-content-center text-primary">
+            <strong><span class="fonte ml-2 text-primary">Aluno</span></strong></span>
+        <br>
+        <span></span>
+        <a name="link" href="/mapa#"><span class="fa fa-home fonte"><span class="ml-2 fonte">Home</span></span></a>
+
+        <a name="link" href="/perfil"><span class="fa fa-user-circle fonte"><span class="ml-2 fonte">Meu
+                    Perfil</span></span></a>
+
+        <a name="link" href="/ranking"><span class="fa fa-trophy fonte"><span
+                    class="ml-2 fonte">Ranking</span></span></a>
+
+        <a name="link" href="/progresso"><span class="fa fa-bar-chart fonte"><span
+                    class="ml-2 fonte">Progresso</span></span></a>
+        <br>
+        <h5 class="ml-3 font-weight-normal text-primary"><strong>Sobre</strong></h5>
+
+        <a name="link" href="/siga-nos"> <span class="fa fa-heart fonte"><span
+                    class="ml-2 fonte">Siga-nos</span></span></a>
+        <a name="link" href="/sobre"> <span class="fa fa-info-circle fonte"><span class="ml-2 fonte">Sobre o
+                    App</span></span></a>
+        <br>
+        <a href="/logout"><span class="fa fa-sign-out fonte"><span class="ml-2 fonte">Sair</span></span></a>
+    </div>
+
+    <div class="container mb-3" onclick="esconderSidebar()">
 
         <!--   NAVBAR DO GAME   -->
         <div class="row mt-4 d-flex">
@@ -100,7 +92,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" 
             data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -129,8 +121,8 @@
                         </small>
                     </div>
                     <div class="modal-footer">
-                        <a href="/games/mingle-ng/rank">
-                            <button type="button" class="btn btn-secondary">Rank</button>
+                        <a href="/games/mingle-ng">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
                         </a>
                         <a href="/games/mingle-ng/play">
                             <button type="button" class="btn btn-primary">Reiniciar</button>
@@ -164,9 +156,11 @@
     </div>
 
     <script src="/js/mingleData.js"></script>
-    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/attention.js"></script>
+    <script src="/js/jquery-3.3.1.slim.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/mingle.js"></script>
+    <script src="/js/sidebar.js"></script>
     <script>
         setTimeout(() => {
             window.addEventListener("load", countTime())

@@ -1,6 +1,6 @@
 
 var links = document.getElementsByName("link");
-for (var i = 0; i < links.length; i++) {
+for (var it = 0; it < links.length; it++) {
     if (links[i].href == location.href){
         links[i].classList.add('ativo');
         break;
