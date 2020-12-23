@@ -1,8 +1,8 @@
 
 var links = document.getElementsByName("link");
 for (var it = 0; it < links.length; it++) {
-    if (links[i].href == location.href){
-        links[i].classList.add('ativo');
+    if (links[it].href == location.href){
+        links[it].classList.add('ativo');
         break;
     }
         
