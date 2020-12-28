@@ -29,6 +29,7 @@ public class Usuario implements UserDetails {
     private int pontuacaoDoAluno;
     private int codigoVerificacao;
     private boolean ativouConta;
+    private boolean jogouAteFinalYamato;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Imagem imagem;
@@ -129,7 +130,7 @@ public class Usuario implements UserDetails {
     public String getUsername() {
         return this.email;
     }
-    
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return (Collection<? extends GrantedAuthority>) this.roles;
@@ -155,4 +156,11 @@ public class Usuario implements UserDetails {
         return true;
     }
 
+    public boolean isJogouAteFinalYamato() {
+        return jogouAteFinalYamato;
+    }
+
+    public void setJogouAteFinalYamato(boolean jogouAteFinalYamato) {
+        this.jogouAteFinalYamato = jogouAteFinalYamato;
+    }
 }
