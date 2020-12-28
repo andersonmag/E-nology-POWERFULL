@@ -12,6 +12,7 @@ const sidebarItens = document.querySelectorAll(".fonte");
 const textPrimary = document.querySelectorAll(".text-primary");
 const audioIcon = document.querySelector("#audioIcon");
 const audio = document.querySelector("#audio");
+const alreadyPlayed = document.querySelector("#alreadyPlayed");
 
 let currentChoice = '';
 let currentQuestion = 0;
@@ -76,16 +77,25 @@ function checkAnswer() {
 }
 
 function chooseOption(opt) {
-    if (choices.get(opt).continueTitle === 'exit') {
-        window.history.back();
-    } else if (choices.get(opt).continueTitle === 'restart') {
-        location.reload();
+    const played = alreadyPlayed.innerText == 'false' ? false : true;
+    
+    if (!played) {
+        if (choices.get(opt).continueTitle === 'exit') {
+            window.location.href = `/games/yamato-s-future/exit/check/`;
+        } else if (choices.get(opt).continueTitle === 'restart') {
+            window.location.href = `/games/yamato-s-future/restart/check/`;
+        }
     } else {
-        continueStory(choices.get(opt));
-        screen.changeClassList(gameChoiceScreen, 'show', 'hide');
-        screen.changeClassList(resumeScreen, 'hide', 'show')
-        currentChoice = opt;
+        if (choices.get(opt).continueTitle === 'exit') {
+            window.history.back();
+        } else if (choices.get(opt).continueTitle === 'restart') {
+            location.reload();
+        }
     }
+    continueStory(choices.get(opt));
+    screen.changeClassList(gameChoiceScreen, 'show', 'hide');
+    screen.changeClassList(resumeScreen, 'hide', 'show')
+    currentChoice = opt;
 }
 
 function continueStory(story) {
@@ -133,10 +143,10 @@ function hideResume() {
 }
 
 function playSong() {
-    if(audioIcon.classList.contains("fa-volume-off")){
+    if (audioIcon.classList.contains("fa-volume-off")) {
         screen.changeClassList(audioIcon, "fa-volume-off", "fa-volume-up");
         audio.play();
-    } else{
+    } else {
         screen.changeClassList(audioIcon, "fa-volume-up", "fa-volume-off");
         audio.pause();
     }

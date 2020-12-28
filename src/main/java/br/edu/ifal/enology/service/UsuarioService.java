@@ -36,15 +36,13 @@ public class UsuarioService {
 
     public List<Usuario> getUsuariosComMaioresPontuacoes(List<Usuario> usuarios) {
 
-        usuarios = usuarios.stream().sorted(Comparator.comparingInt(Usuario::getPontuacaoDoAluno)
-            .reversed()).collect(Collectors.toList())
-            .subList(0, usuarios.size() > 4 ? 5 : usuarios.size());
+        usuarios = usuarios.stream().sorted(Comparator.comparingInt(Usuario::getPontuacaoDoAluno).reversed())
+                .collect(Collectors.toList()).subList(0, usuarios.size() > 4 ? 5 : usuarios.size());
         return usuarios;
     }
 
     public double getMediaPontuacaoUsuarios(List<Usuario> usuarios) {
-        return usuarios.stream().mapToDouble(Usuario::getPontuacaoDoAluno)
-            .average().orElse(Double.NaN);
+        return usuarios.stream().mapToDouble(Usuario::getPontuacaoDoAluno).average().orElse(Double.NaN);
     }
 
     public List<Usuario> findAll() {
@@ -59,17 +57,23 @@ public class UsuarioService {
     }
 
     public boolean verificarCodigo(int codigo) {
-        boolean verificado = findAll().stream()
-                                      .anyMatch(usuario -> usuario.getCodigoVerificacao() == codigo);
+        boolean verificado = findAll().stream().anyMatch(usuario -> usuario.getCodigoVerificacao() == codigo);
         return verificado;
     }
 
     public void ativarConta(int codigo) {
-        Usuario user = findAll().stream()
-                                .filter(usuario -> usuario.getCodigoVerificacao() == codigo)
-                                .findFirst().get();
+        Usuario user = findAll().stream().filter(usuario -> usuario.getCodigoVerificacao() == codigo).findFirst().get();
         user.setCodigoVerificacao(0);
         user.setAtivouConta(true);
         save(user);
+    }
+
+    public void pontuarPeloYamato(Usuario usuarioLogado) {
+        if (!usuarioLogado.isJogouAteFinalYamato()) {
+            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + 50);
+            usuarioLogado.setJogouAteFinalYamato(true);
+
+            save(usuarioLogado);
+        }
     }
 }
