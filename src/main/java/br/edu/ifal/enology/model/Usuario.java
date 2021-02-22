@@ -20,7 +20,7 @@ public class Usuario implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String email;
     private String senha;
@@ -30,6 +30,7 @@ public class Usuario implements UserDetails {
     private int codigoVerificacao;
     private boolean ativouConta;
     private boolean jogouAteFinalYamato;
+    private boolean jogouAteFinalMingle;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Imagem imagem;
@@ -163,4 +164,13 @@ public class Usuario implements UserDetails {
     public void setJogouAteFinalYamato(boolean jogouAteFinalYamato) {
         this.jogouAteFinalYamato = jogouAteFinalYamato;
     }
+
+    public boolean isJogouAteFinalMingle() {
+        return jogouAteFinalMingle;
+    }
+
+    public void setJogouAteFinalMingle(boolean jogouAteFinalMingle) {
+        this.jogouAteFinalMingle = jogouAteFinalMingle;
+    }
+
 }

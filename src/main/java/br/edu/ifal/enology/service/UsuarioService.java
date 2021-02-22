@@ -68,11 +68,18 @@ public class UsuarioService {
         save(user);
     }
 
-    public void pontuarPeloYamato(Usuario usuarioLogado) {
-        if (!usuarioLogado.isJogouAteFinalYamato()) {
+    public void pontuarPorMiniGame(Usuario usuarioLogado, String miniGame) {
+        if(miniGame.equals("yamato") && !usuarioLogado.isJogouAteFinalYamato()) {
             usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + 50);
             usuarioLogado.setJogouAteFinalYamato(true);
 
+            save(usuarioLogado);
+        }
+        
+        if(miniGame.equals("mingle") && !usuarioLogado.isJogouAteFinalMingle()) {
+            usuarioLogado.setPontuacaoDoAluno(usuarioLogado.getPontuacaoDoAluno() + 50);
+            usuarioLogado.setJogouAteFinalMingle(true);
+    
             save(usuarioLogado);
         }
     }

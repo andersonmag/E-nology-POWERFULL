@@ -33,8 +33,27 @@ public class GameController {
         } else {
             model.setViewName("redirect:/games/yamato-s-future");
         }
+        
+        String miniGame = "yamato";
 
-        usuarioService.pontuarPeloYamato(usuarioLogado);
+        usuarioService.pontuarPorMiniGame(usuarioLogado, miniGame);
+        model.addObject("usuario", usuarioLogado);
+
+        return model;
+    }
+
+    @RequestMapping("/mingle/{option}/check/")
+    public ModelAndView pontuarMingle(@AuthenticationPrincipal Usuario usuarioLogado, ModelAndView model,
+            @PathVariable("option") String option) {
+        if (option.equals("exit")) {
+            model.setViewName("redirect:/");
+        } else {
+            model.setViewName("redirect:/games/mingle-ng/play");
+        }
+
+        String miniGame = "mingle";
+
+        usuarioService.pontuarPorMiniGame(usuarioLogado, miniGame);
         model.addObject("usuario", usuarioLogado);
 
         return model;
