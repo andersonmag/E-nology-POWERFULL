@@ -84,10 +84,10 @@
             <div class="col-6 text-center" style="vertical-align: sub;">
                 <small style="font-size: 18pt; color: gray; " id="time">0.0 seconds</small>
             </div>
-
+<!-- 
             <div class="col-3 text-muted float-left" style="vertical-align: sub; font-size: 20pt;">
                 <i class="fa fa-level-up"></i> 1
-            </div>
+            </div> -->
 
         </div>
 
@@ -121,12 +121,8 @@
                         </small>
                     </div>
                     <div class="modal-footer">
-                        <a href="/games/mingle-ng">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-                        </a>
-                        <a href="/games/mingle-ng/play">
-                            <button type="button" class="btn btn-primary">Reiniciar</button>
-                        </a>
+                            <button value="exit" onclick="realizarAcao(this.value)" type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                            <button value="restart" onclick="realizarAcao(this.value)" type="button" class="btn btn-primary">Reiniciar</button>
                     </div>
                 </div>
             </div>
@@ -138,27 +134,18 @@
             style="padding-bottom: 5px; padding-top: 5px;">
 
             <div id="word" onclick="main(this)"
-                class="col-2 border text-muted shadow-sm p-3 mb-5 bg-white rounded d-none"
+                class="col-3 border text-muted shadow-sm p-3 mb-5 bg-white rounded d-none"
                 style="font-family: Verdana, Geneva, Tahoma, sans-serif ;
-                    height: 100px; max-height: 100px ; cursor: pointer; justify-content: center; vertical-align: middle; margin-right: 8px;">
+                    height: 100px; max-width: 100%; max-height: 100px ; cursor: pointer; justify-content: center; vertical-align: middle; margin-right: 8px;">
             </div>
 
         </div>
     </div>
 
-    <div class="footer text-center" style="bottom: 0; position: absolute; width: 100%; background-color: transparent;">
-        <div class="card-footer text-muted" style="font-size: 0.9rem;">
-            E-nology |
-            <a href="/games/mingle-ng" style="text-decoration: none;">Mingle<span style="font-family: 'Exo 2', sans-serif;">-ng The
-                    Game</span></a>
-            <b>v0.1</b>
-        </div>
-    </div>
-
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/mingleData.js"></script>
     <script src="/js/attention.js"></script>
-    <script src="/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/mingle.js"></script>
     <script src="/js/sidebar.js"></script>
     <script>

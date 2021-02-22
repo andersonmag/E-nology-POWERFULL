@@ -14,7 +14,7 @@ function kaka() {
     this.pauseTime = Date.now()
 
     if (confirm("Seu progresso será perdido. Deseja mesmo sair?")) {
-        window.location.href = "/";
+        window.location.href = "/games/mingle-ng";
     }
     else {
         this.pauseTime = Date.now()
@@ -35,6 +35,9 @@ function countTime(e) {
         if (this.elapsedTime >= 59999) {
             clearInterval(this.interval)
             alert("Timeout, você excedeu o tempo limite: de 1 minuto")
+
+            location.reload()
+
         }
 
 
@@ -136,7 +139,6 @@ function main(element) {
                             document.getElementById("msg").textContent = "Continue tentando fazer tempos melhores!"
                         }
 
-
                         $('#exampleModal').modal('show')
                     }
                 }, 400);
@@ -175,6 +177,14 @@ function main(element) {
 
 function removerElemento(element) {
     element.remove()
+}
+
+function realizarAcao(opc) {
+    if(opc === 'exit') {
+        window.location.href = `/games/mingle/exit/check/`;
+    } else {
+        window.location.href = `/games/mingle/restart/check/`;
+    }
 }
 
 

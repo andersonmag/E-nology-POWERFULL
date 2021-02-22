@@ -296,6 +296,11 @@
         cursor: pointer;
     }
 
+    .texto-mingle {
+        font-size: 1rem;
+        max-width: 50%;
+    }
+
     .info-icon {
         padding-left: 15px !important;
         width: 120px;
@@ -325,10 +330,19 @@
         max-width: 50%;
     }
 
-    @media (min-width: 250px ) and (max-width: 540px) {
+    @media (max-width: 540px) {
         .title{
             font-size: 3rem;
         }
+
+        .texto-mingle {
+            max-width: 100%;
+        }
+
+        #words #word h4 {
+            font-size: 1rem !important;
+        }
+
     }
     
     @media (min-width: 541px ) and (max-width: 767px) {
@@ -342,7 +356,7 @@
         }
 
         .footer {
-         margin-top: 50px !important;
+            margin-top: 50px !important;
             position: relative !important;
         }
 
