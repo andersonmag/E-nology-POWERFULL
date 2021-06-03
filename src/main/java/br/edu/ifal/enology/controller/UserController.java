@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.edu.ifal.enology.model.Imagem;
 import br.edu.ifal.enology.model.RedefinicaoSenha;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.ImagemRepository;
 import br.edu.ifal.enology.repository.RedefinicaoSenhaRepository;
-import br.edu.ifal.enology.repository.SolucaoRepository;
 import br.edu.ifal.enology.service.EmailService;
 import br.edu.ifal.enology.service.SolucaoService;
 import br.edu.ifal.enology.service.UsuarioService;
