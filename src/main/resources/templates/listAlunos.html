@@ -86,7 +86,7 @@
           <tbody>
             <tr th:each="aluno:${usuarios}">
               <td>
-                <img th:if="${aluno.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}" width="150" class="img-fluid"
+                <img th:if="${aluno.imagem}" th:src="@{'/localCloud/' + ${aluno.imagem.link}}" width="150" class="img-fluid"
                   style="border-radius: 40px;">
                 <span th:unless="${aluno.imagem}" class="imagemUser fa fa-user-circle"
                   style="color: #011f4177; font-size: 50pt;"></span>
