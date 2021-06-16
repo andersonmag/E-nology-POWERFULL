@@ -68,49 +68,86 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-10 col-md-10 mt-3 ml-3 mb-2 pt-5 pl-5">
-                <i class="fa fa-hand-o-right ml-4" aria-hidden="true"></i> <span>admin/ turmas/</span>
+                <i class="fa fa-hand-o-right ml-4" aria-hidden="true"></i> <span><a href="/">admin</a>/ <a
+                        href="/admin/turmas">turmas</a>/</span>
                 <span th:text="${turma.nome}"></p>
             </div>
         </div>
         <div class="row mt-5 d-flex justify-content-center">
             <div class="col-sm-10 mb-3 d-flex justify-content-center">
-                <h1 class="text-center">Estatísticas dos Alunos</h1>
+                <h1 class="text-center">Progresso dos Alunos</h1>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
             <div class="col-sm-10 mb-3 d-flex justify-content-center">
-                <p class="text-justify">Aqui você pode visualizar informações sobre o desempenho dos alunos em cada
-                    fase!</p>
+                <p class="text-justify">
+                    Aqui você pode visualizar os status e ranking dos alunos da turma!
+                </p>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
-            <div class="col-sm-10 mb-3">
-                <select class="form-control">
-                    <option>Fase 1</option>
+            <div class="col-sm-10 mb-3 d-flex justify-content-left">
+                <select class="form-control" onchange="changeSelection()" id="selection">
+                    <option value="fases">Status Fases</option>
+                    <option value="ranking">Ranking alunos</option>
                 </select>
             </div>
         </div>
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center show mb-5" id="fases">
             <div class="col-sm-10 col-md-10 listagem">
                 <table class="table table-hover table-bordered">
                     <thead class=" indigo darken-4 white-text">
                         <tr>
-                            <th scope="col" class="text-center font-weight-bold">Nome <i
+                            <th scope="col" class="text-center font-weight-bold">Aluno(a) <i
                                     class="fa fa-address-card-o text-white" aria-hidden="true"></i></th>
-                            <th scope="col" class="text-center orange-text font-weight-bold">Tentativas <i
-                                    class="orange-text fa fa-repeat"></i></th>
-                            <th scope="col" class="text-center text-success font-weight-bold">Acertos <span
-                                    class="fa fa-check"></span></th>
-                            <th scope="col" class="text-center text-danger font-weight-bold">Erros <span
-                                    class="fa fa-times"></span></th>
+                            <th scope="col" class="text-center text-white font-weight-bold">Fase Atual <i
+                                    class=" text-white fa fa-newspaper-o"></i></th>
+                            <th scope="col" class="text-center text-white font-weight-bold">Status Fase <span
+                                    class="fa fa-newspaper-o"></span></th>
+                            <th scope="col" class="text-center text-white font-weight-bold">Status Minigames <span
+                                    class="fa fa-gamepad"></span></th>
                         </tr>
                     </thead>
                     <tbody class="">
                         <tr th:each="aluno:${alunos}">
                             <td class="text-center" th:text="${aluno.nome} + ' ' + ${aluno.sobrenome}"></td>
-                            <td class="text-center" th:text="${aluno.id}"></td>
+                            <td class="text-center" th:if="${aluno.faseAtual < 6}">
+                                <span th:text="${aluno.faseAtual}"></span>
+                            </td>
+                            <td class="text-center" th:unless="${aluno.faseAtual < 6}">Tarefas finalizadas</td>
+                            <td class="text-center" th:if="${aluno.faseAtual < 6}">Em progresso</td>
+                            <td class="text-center" th:unless="${aluno.faseAtual < 6}">Concluido</td>
+                            <td class="text-center" th:if="${!aluno.jogouAteFinalYamato || !aluno.jogouAteFinalMingle}">
+                                Pendente:
+                                <span th:if="${!aluno.jogouAteFinalYamato}">Yamato </span>
+                                <span th:if="${!aluno.jogouAteFinalYamato && !aluno.jogouAteFinalMingle}">e </span>
+                                <span th:if="${!aluno.jogouAteFinalMingle}"> Mingle</span>
+                            </td>
+                            <td class="text-center" th:if="${aluno.jogouAteFinalYamato && aluno.jogouAteFinalMingle}">
+                                Minigames finalizados!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center hide mb-5" id="ranking">
+            <div class="col-sm-10 col-md-10 listagem">
+                <table class="table table-hover table-bordered">
+                    <thead class=" indigo darken-4 white-text">
+                        <tr>
+                            <th scope="col" class="text-center font-weight-bold">Posição <i
+                                class="fa fa-trophy  text-white" aria-hidden="true"></i></th>
+                            <th scope="col" class="text-center font-weight-bold">Aluno(a) <i
+                                    class="fa fa-address-card-o text-white" aria-hidden="true"></i></th>
+                            <th scope="col" class="text-center text-white font-weight-bold">Pontuação Total <i
+                                    class=" text-white fa fa-database"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        <tr th:each="aluno:${rankingAlunos}">
+                            <td class="text-center" th:text="'#' + ${alunoStat.count}"></th>
+                            <td class="text-center" th:text="${aluno.nome} + ' ' + ${aluno.sobrenome}"></td>
                             <td class="text-center" th:text="${aluno.pontuacaoDoAluno}"></td>
-                            <td class="text-center" th:text="${aluno.id}"></td>
                         </tr>
                     </tbody>
                 </table>

@@ -1,119 +1,126 @@
 .sessao {
-    margin: 3% 0 0 13%;
-  }
+  margin: 3% 0 0 13%;
+}
 
-  .listagem {
-    background-color: #ffffff;
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: flex !important;
+}
+
+.listagem {
+  background-color: #ffffff;
+  width: 60%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.bg-sidebar-admin {
+  height: 100%;
+  background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);
+}
+
+.turma-add-ano-input {
+  width: 80px;
+}
+
+.turma-add-ano {
+  font-size: 1.5rem;
+  text-decoration: dotted;
+}
+
+.turma-add-semestre {
+  width: 150px;
+}
+
+.turma-add-nome {
+  width: 250px;
+}
+
+.title-add-turma {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 3rem;
+}
+
+.icon-turma-add {
+  font-size: 10rem;
+}
+
+.sidenav {
+  width: 200px;
+  background-color: #0d101b;
+}
+
+.gradient {
+  background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);
+}
+
+.navbar {
+  background-color: #0d101b;
+  padding: 0;
+}
+
+.sidenav a:hover {
+  background-color: #011f41;
+}
+
+.ativo {
+  background-color: #011f41;
+}
+
+.marca {
+  font-size: 0pt !important;
+}
+
+.marca-admin {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: bold !important;
+  font-size: 12pt !important;
+  color: white !important;
+}
+
+.navbar {
+  justify-content: initial !important;
+}
+
+.botao {
+  font-weight: bold !important;
+  font-size: 20px !important;
+  margin-left: 3% !important;
+}
+
+.form-control {
+  display: inline;
+}
+
+input:focus~.floating-label, input:not(:focus):valid~.floating-label {
+  top: 1px;
+  bottom: 12px;
+  left: 12px;
+  font-size: 6pt;
+  opacity: 25;
+}
+
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  left: 20px;
+  top: 6px;
+  transition: 0.2s ease all;
+}
+
+@media (min-width: 1200px) {
+  .main-wrapper {
     width: 60%;
-    height: 100%;
-    justify-content: center;
-    display: flex;
   }
+}
 
-  .bg-sidebar-admin {
-    height: 100%;
-    background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);
+@media screen and (max-width: 700px) {
+  .sidenav {
+    width: 0;
   }
-
-  .turma-add-ano-input {
-   width: 80px;
-  }
-
-  .turma-add-ano {
-   font-size: 1.5rem;
-   text-decoration: dotted;
-  }
-
-  .turma-add-semestre {
-   width: 150px;
-  }
-
-  .turma-add-nome {
-    width: 250px;
-  }
-
-  .title-add-turma {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 3rem;
-  }
-
-  .icon-turma-add{
-    font-size: 10rem;
-  }
-
-  .sidenav{
-    width: 200px;
-    background-color: #0d101b;
-  }
-
-  .gradient{
-    background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);
-  }
-
-  .navbar {
-    background-color: #0d101b;
-    padding: 0;
-  }
-
-  .sidenav a:hover {
-    background-color: #011f41;
-  }
-  
-  .ativo {
-    background-color: #011f41;
-  }
-  .marca{
-    font-size: 0pt !important;
-  }
-  .marca-admin{
-    font-family: 'Exo 2', sans-serif;
-    font-weight: bold !important;
-    font-size: 12pt !important;
-    color: white !important;
-  }
-
-  .navbar{
-    justify-content: initial !important;
-  }
-
-  .botao{
-    font-weight: bold !important;
-    font-size: 20px !important;
-    margin-left: 3% !important;
-  }
-
-  .form-control {
-    display: inline;
-  }
-
-  input:focus~.floating-label,
-  input:not(:focus):valid~.floating-label {
-    top: 1px;
-    bottom: 12px;
-    left: 12px;
-    font-size: 6pt;
-    opacity: 25;
-
-  }
-
-  .floating-label {
-    position: absolute;
-    pointer-events: none;
-    left: 20px;
-    top: 6px;
-    transition: 0.2s ease all;
-  }
- 
-
-  @media (min-width: 1200px) {
-    .main-wrapper {
-      width: 60%;
-    }
-  }
-
-  @media screen and (max-width: 700px) {
-    .sidenav{
-      width: 0;
-    }
-    }
+}
