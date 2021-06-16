@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.UserRepository;
 
@@ -38,6 +41,12 @@ public class UsuarioService {
 
         usuarios = usuarios.stream().sorted(Comparator.comparingInt(Usuario::getPontuacaoDoAluno).reversed())
                 .collect(Collectors.toList()).subList(0, usuarios.size() > 4 ? 5 : usuarios.size());
+        return usuarios;
+    }
+
+    public List<Usuario> getRankingAlunos(List<Usuario> usuarios) {
+        usuarios = usuarios.stream().sorted(Comparator.comparingInt(Usuario::getPontuacaoDoAluno).reversed())
+                .collect(Collectors.toList());
         return usuarios;
     }
 
