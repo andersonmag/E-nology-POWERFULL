@@ -78,6 +78,10 @@ public class TaskController {
 
         if(concluiu) {
             solucao.getTarefa().getConteudo().setPraticado(concluiu);
+            usuarioLogado.setFaseAtual(usuarioLogado.getFaseAtual() + 1);
+
+            solucao.setAluno(usuarioLogado);
+            usuarioService.save(usuarioLogado);
             solucaoService.save(solucao);
         }
 

@@ -2,6 +2,7 @@ package br.edu.ifal.enology.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.edu.ifal.enology.model.Turma;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.TurmaRepository;
@@ -112,10 +114,17 @@ public class ClassControler {
     @RequestMapping("/{id}/alunos")
     public ModelAndView exibirAlunosTurma(@PathVariable("id") Long id, @AuthenticationPrincipal Usuario usuario,
             ModelAndView model) {
+                
         model.setViewName("turma/lista-alunos");
+
+        Turma turma = turmaRepository.findById(id).get();
+        List<Usuario> alunosTurma = turmaRepository.findById(id).get().getUsuarios();
+        List<Usuario> rankingAlunos = usuarioService.getRankingAlunos(alunosTurma);
+
         model.addObject("usuario", usuario)
-            .addObject("turma", turmaRepository.findById(id).get())
-            .addObject("alunos", turmaRepository.findById(id).get().getUsuarios());
+            .addObject("turma", turma)
+            .addObject("alunos", alunosTurma)
+            .addObject("rankingAlunos", rankingAlunos);
 
         return model;
     }
