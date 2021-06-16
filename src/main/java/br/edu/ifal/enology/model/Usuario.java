@@ -31,6 +31,7 @@ public class Usuario implements UserDetails {
     private boolean ativouConta;
     private boolean jogouAteFinalYamato;
     private boolean jogouAteFinalMingle;
+    private int faseAtual;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Imagem imagem;
@@ -97,6 +98,13 @@ public class Usuario implements UserDetails {
         this.imagem = imagem;
     }
 
+    public int getFaseAtual() {
+        return faseAtual;
+    }
+
+    public void setFaseAtual(int faseAtual) {
+        this.faseAtual = faseAtual;
+    }
 
     public List<Role> getRoles() {
         return roles;
