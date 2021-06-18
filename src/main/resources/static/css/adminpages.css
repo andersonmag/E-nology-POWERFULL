@@ -6,21 +6,12 @@
   display: none !important;
 }
 
-.show {
-  display: flex !important;
-}
-
 .listagem {
   background-color: #ffffff;
   width: 60%;
   height: 100%;
   justify-content: center;
   display: flex;
-}
-
-.bg-sidebar-admin {
-  height: 100%;
-  background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);
 }
 
 .turma-add-ano-input {
@@ -52,20 +43,15 @@
 
 .sidenav {
   width: 200px;
-  background-color: #0d101b;
+  background-color: #0d101b !important;
+}
+
+.navbar {
+  background-color: #0d101b !important;
 }
 
 .gradient {
   background: repeating-linear-gradient(#0d101b, #0d101b 49.9%, #0d101b 50.1%, #0d101b 100%);
-}
-
-.navbar {
-  background-color: #0d101b;
-  padding: 0;
-}
-
-.sidenav a:hover {
-  background-color: #011f41;
 }
 
 .ativo {
@@ -83,9 +69,6 @@
   color: white !important;
 }
 
-.navbar {
-  justify-content: initial !important;
-}
 
 .botao {
   font-weight: bold !important;

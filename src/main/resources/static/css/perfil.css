@@ -15,6 +15,10 @@
     object-fit: cover;
 }
 
+.navbar i {
+    color: #FFF;
+}
+
 .nav a {
     color: #777777;
 }
