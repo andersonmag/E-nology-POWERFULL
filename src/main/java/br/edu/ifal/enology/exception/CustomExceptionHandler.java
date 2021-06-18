@@ -21,7 +21,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ModelAndView handleNoValuePresent(Exception exception) {
         ModelAndView model = new ModelAndView("error");
 
-        model.setViewName("error");
+        model.setViewName("error/404");
         model.addObject("msgErro", "O Link ou Recurso que você está buscando não existe, " +
                         "ou pode estar expirado!");
         return model;
