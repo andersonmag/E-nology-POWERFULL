@@ -93,10 +93,9 @@ public class EmailService {
         }
     }
 
-    public String enviarEmailRedefinirSenha(String token, Usuario usuario) {
+    public boolean enviarEmailRedefinirSenha(String token, Usuario usuario) {
 
         try {
-
             Map<String, Object> templateData = new HashMap<>();
             templateData.put("title", "Hello, " + usuario.getNome());
             templateData.put("link", "https://e-nology.herokuapp.com/redefinir-senha?tk=" + token);
@@ -104,10 +103,10 @@ public class EmailService {
             enviarEmail("E-nology - Tudo Pronto para Você Redefinir Sua Senha!", usuario.getEmail(),
                     "mails/redefinir-senha.html", templateData);
 
-            return "E-mail Enviado! Verifique seu e-mail, por favor.";
+            return true;
         } catch (Exception e) {
             System.err.println(e);
-            return "Não foi possivel concluir o envio de e-mail.";
+            return false; 
         }
     }
 

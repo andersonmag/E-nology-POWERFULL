@@ -29,6 +29,7 @@ import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.ImagemRepository;
 import br.edu.ifal.enology.repository.RedefinicaoSenhaRepository;
 import br.edu.ifal.enology.service.EmailService;
+import br.edu.ifal.enology.service.ImagemService;
 import br.edu.ifal.enology.service.SolucaoService;
 import br.edu.ifal.enology.service.UsuarioService;
 
@@ -49,6 +50,9 @@ public class UserController {
 
     @Autowired
     private SolucaoService solucaoService;
+
+    @Autowired
+    private ImagemService imagemService;
 
     @RequestMapping("/perfil")
     public ModelAndView mostrarPerfil(Authentication authentication, @AuthenticationPrincipal Usuario usuarioLogado) {
@@ -140,6 +144,7 @@ public class UserController {
             RedirectAttributes redirectAttributes) {
         Usuario usuario = usuarioService.findByEmail(email);
         String resultado = "Este email não está cadastrado!";
+        boolean enviouEmail = false;
         ModelAndView model = new ModelAndView("redirect:/login");
 
         if(Optional.ofNullable(usuarioLogado).isPresent())
@@ -152,14 +157,21 @@ public class UserController {
             redefinicaoSenha.setUsuario(usuario);
             redefinicaoSenhaRepository.save(redefinicaoSenha);
 
-            resultado = emailService.enviarEmailRedefinirSenha(redefinicaoSenha.getToken(), usuario);
-            redirectAttributes.addFlashAttribute("teveSucesso", true);
+            enviouEmail = emailService.enviarEmailRedefinirSenha(redefinicaoSenha.getToken(), usuario);
+
+            if(enviouEmail) {
+                resultado = "E-mail Enviado! Verifique seu e-mail, por favor.";
+            } else {
+                resultado = "Não foi possivel concluir o envio de e-mail.";
+            }
+
+            redirectAttributes.addFlashAttribute("teveSucesso", enviouEmail);
             redirectAttributes.addFlashAttribute("resultado", resultado);
 
             return model;
         }
 
-        redirectAttributes.addFlashAttribute("teveSucesso", false);
+        redirectAttributes.addFlashAttribute("teveSucesso", enviouEmail);
         redirectAttributes.addFlashAttribute("resultado", resultado);
 
         return model;
@@ -284,8 +296,6 @@ public class UserController {
 
     private Imagem salvarImagem(MultipartFile file, Usuario usuarioLogado) throws IOException {
 
-        Long secretPassword = 666 + usuarioLogado.getId();
-
         // Atualização
         if (usuarioLogado.getImagem() != null) {
             usuarioLogado.getImagem().setDados(file.getBytes());
@@ -297,13 +307,7 @@ public class UserController {
         }
 
         else {
-            Imagem imagem = new Imagem();
-            imagem.setDados(file.getBytes());
-            imagem.setLink(secretPassword);
-            imagem.setNome(file.getOriginalFilename());
-            imagem.setTipo(file.getContentType());
-            imagemRepository.save(imagem);
-
+            Imagem imagem = imagemService.salvar(file);
             return imagem;
         }
     }
