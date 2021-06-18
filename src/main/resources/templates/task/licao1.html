@@ -150,7 +150,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modalLongo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
-        aria-hidden="true" data-backdrop="static">
+        aria-hidden="true" data-backdrop="static" th:if="${tarefa.texto}">
         <div class="modal-dialog modal-dialog-scrollable " role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,7 +159,7 @@
                         leia o texto abaixo(em inglês) para
                         responder algumas das questões: </h5>
                 </div>
-                <div class="container mt-2 d-flex justify-content-center">
+                <div class="container mt-2 justify-content-center d-none">
                     <strong class="text-muted">
                         <p style="font-size: 15pt;">Bill Gates</p>
                     </strong>
@@ -167,80 +167,20 @@
                 <div class="modal-body d-flex justify-content-center pt-0">
                     <div class="row d-flex justify-content-center">
                         <a href="#" id="top"></a>
-                        <div class="row d-flex justify-content-center">
+                        <div class="row d-flex justify-content-center" th:if="${tarefa.texto.imagem}">
                             <div class="polaroid">
                                 <figure class="figure">
-                                    <img src="../../images/bill.jpg" alt="5 Terre" style="width:100%; border: 1px solid #ddd;
-                                    border-radius: 4px;
-                                    padding: 5px;">
-                                    <figcaption class="figure-caption text-center">Gates in 2014</figcaption>
+                                    <img th:src="@{'/localCloud/' + ${tarefa.texto.imagem.link}}"
+					                    alt="Imagem representativa do texto" style="width:100%; border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+                                    <figcaption  class="figure-caption text-center" th:text="Disponível em: ${tarefa.texto.fonteImagem}"></figcaption>
                                 </figure>
                             </div>
                         </div>
                         <div class="col-10 mt-4 mb-4">
                             <hr style="margin: 0;">
-                            <p class="texto text-justify">
-                                <strong>William Henry Gates III</strong> (born October 28, 1955) is an American business
-                                magnate,
-                                software
-                                developer, investor, and philanthropist. He is best known as the co-founder of Microsoft
-                                Corporation.[2][3] During his career at Microsoft, Gates held the positions
-                                of chairman, chief
-                                executive officer (CEO), president and chief software architect, while also being the
-                                largest
-                                individual shareholder until May 2014. He is one of the best-known entrepreneurs and
-                                pioneers of
-                                the microcomputer revolution of the 1970s and 1980s.
-                                Born and raised in Seattle, Washington, Gates co-founded Microsoft with childhood
-                                friend Paul
-                                Allen in 1975 in Albuquerque, New Mexico; it went on to become the world's
-                                largest personal
-                                computer software company.[4][a] Gates led the company as chairman and CEO until
-                                stepping
-                                down
-                                as CEO in January 2000, but he remained chairman and became chief software
-                                architect.[7] During
-                                the late 1990s, Gates had been criticized for his business tactics, which have been
-                                considered anti-competitive. This opinion has been upheld by numerous court
-                                rulings.[8] In
-                                June
-                                2006, Gates announced that he would be transitioning to a part-time role at Microsoft
-                                and
-                                full-time work at the Bill & Melinda Gates Foundation, the private charitable foundation
-                                that he
-                                and his wife, Melinda Gates, established in 2000.[9] He gradually transferred his duties
-                                to Ray
-                                Ozzie and Craig Mundie.[10] He stepped down as chairman of Microsoft in February 2014
-                                and
-                                assumed a new post as technology adviser to support the newly appointed CEO Satya
-                                Nadella.[11]
-                                Since 1987, he has been included in the Forbes list of the world's wealthiest documented
-                                individuals.[12][13] From 1995 to 2017, he held the Forbes title of the richest person
-                                in
-                                the
-                                world all but four of those years.[1] In October 2017, he was surpassed
-                                by Amazon founder
-                                and
-                                CEO Jeff Bezos, who had an estimated net worth of US$90.6 billion compared to Gates' net
-                                worth
-                                of US$89.9 billion at the time.[14] As of November 9, 2019, Gates had an estimated net
-                                worth
-                                of
-                                US$107.1 billion, making him the second wealthiest person in the world, behind Bezos.
-                                Later in his career and since leaving day-to-day operations at Microsoft in 2008, Gates
-                                pursued
-                                a number of philanthropic endeavors. He donated large amounts of money to various
-                                charitable
-                                organizations and scientific research programs through the Bill & Melinda Gates
-                                Foundation,
-                                reported to be the world's largest private charity.[15] In 2009, Gates and Warren
-                                Buffett founded The Giving Pledge, whereby they and other billionaires pledge to give at
-                                least
-                                half of their wealth to philanthropy.[16] The foundation works to save lives and improve
-                                global
-                                health, and is working with Rotary International to eliminate polio.[17]
+                            <p class="texto text-justify" th:text="${tarefa.texto.conteudo}">
                             </p>
-                            <small>Disponível em: https://en.wikipedia.org/wiki/Bill_Gates</small>
+                            <small th:text="'Disponível em: ' + ${tarefa.texto.fonteConteudo}"> </small>
                         </div>
                     </div>
 
