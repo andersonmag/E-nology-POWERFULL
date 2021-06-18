@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Tarefa{
@@ -16,6 +17,9 @@ public class Tarefa{
     private Nivel nivel;
     public TipoTarefa tipoTarefa;
     private String enunciado;
+
+    @OneToOne
+    private Texto texto;
 
     @ManyToOne
     private Conteudo conteudo;
@@ -77,5 +81,13 @@ public class Tarefa{
 
     public Conteudo getConteudo() {
         return conteudo;
+    }
+
+    public void setTexto(Texto texto) {
+        this.texto = texto;
+    }
+
+    public Texto getTexto() {
+        return texto;
     }
 }

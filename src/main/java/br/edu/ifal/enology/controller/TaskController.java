@@ -8,7 +8,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.ifal.enology.model.*;
@@ -30,17 +32,33 @@ public class TaskController {
     private SolucaoService solucaoService;
     @Autowired
     private ConteudoService conteudoService;
+    @Autowired
+    private ImagemService imagemService;
 
     @RequestMapping("/cadastrar")
-    public ModelAndView cadastrar(Palavra palavra, Tarefa tarefa) {
+    public ModelAndView cadastrar(@RequestParam(name = "imagem", required = false) MultipartFile file,
+                 ModelAndView model, Palavra palavra, Tarefa tarefa, RedirectAttributes redirect) {
+        model.setViewName("redirect:/admin/sistema/criar-tarefa");
+        Conteudo conteudo;
+        
         if (palavra.getIngles() != null) {
             palavraService.save(palavra);
+            conteudo = palavra.getConteudos().get(0);
         } else {
             tarefa.setConteudo(tarefa.getResposta().getConteudos().get(0));
-            tarefaService.save(tarefa);
-        }
 
-        return new ModelAndView("redirect:/tarefa");
+            if(tarefa.getTexto() != null) {
+                if(file != null) {
+                    Imagem imagem = imagemService.salvar(file);
+                    tarefa.getTexto().setImagem(imagem);
+                }
+            }
+            tarefaService.save(tarefa);
+            conteudo = tarefa.getResposta().getConteudos().get(0);
+        }
+        redirect.addFlashAttribute("message", "Cadastrado com sucesso!");
+        model.addObject("conteudo", conteudo);
+        return model;
     }
 
     @RequestMapping("/corrigir/{id}/{contId}")

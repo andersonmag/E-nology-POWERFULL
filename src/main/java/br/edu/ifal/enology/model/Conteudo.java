@@ -15,6 +15,7 @@ public class Conteudo{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    private String descricao;
     private boolean praticado;
 
     @ManyToMany(mappedBy = "conteudos", cascade = CascadeType.ALL)
@@ -49,6 +50,14 @@ public class Conteudo{
 
     public boolean isPraticado() {
         return praticado;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
 }
