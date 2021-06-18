@@ -15,7 +15,7 @@ public class Texto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(columnDefinition="LONGTEXT")
+    @Column(columnDefinition="TEXT")
     private String conteudo;
     private String fonteConteudo;
 
