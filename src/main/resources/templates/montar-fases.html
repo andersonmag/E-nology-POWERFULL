@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <title>Lista de Turmas || ADMIN </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/sidebar.css" rel="stylesheet">
+    <link href="/fonts/font-nunito.css" rel="stylesheet">
+    <link href="/fonts/font-exo.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="/css/main.css"> -->
+    <link rel="stylesheet" href="/css/adminpages.css">
+
+
+
+    <style>
+        .list-conteudos {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 100;
+
+        }
+
+        .list-group li {
+            margin-bottom: 10px;
+        }
+
+        .list-conteudos li span:last-child {
+            font-size: 0.9rem;
+        }
+
+        .list-conteudos .badge {
+            color: antiquewhite;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+
+<body>
+
+    <th:block th:include="navbar-admin"></th:block>
+
+    <div class="container mt-5">
+
+        <div class="row mt-5 d-flex justify-content-end" style="width: 92%;">
+            <button style="font-size: 0.8rem;" type="button" 
+                class="btn btn-md btn-info mt-5"><i class="fa fa-list-ol" aria-hidden="true"></i>
+                Ordenar</button>
+        </div>
+
+        <div class="list-conteudos row justify-content-center d-flex">
+
+            <ul class="list-group" style="width: 80%;">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <img src="/images/btn1.png" class="mr-1" alt="" width="30">
+                        Fase 1
+                    </div>
+
+                    <span th:if="${conteudos.empty}">Sem conteudo</span>
+                    <span th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 0}" 
+                        th:text="${conteudos[0].titulo}"></span>
+
+                    <span class="badge badge-pill" th:if="${!(conteudos.empty)}">Conteudo
+                        adicionado<i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    </span> 
+
+                    <span th:if="${conteudos.empty}"  class="badge bg-danger badge-pill">Conteudo
+                        faltante<i class="fa fa-window-close" aria-hidden="true"></i>
+                    </span>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <img src="/images/btn2.png" class="mr-1" alt="" width="30">
+                        Fase 2
+                    </div>
+
+                    <span th:if="${conteudos.empty}">Sem conteudo</span>
+                    <span th:if="${#lists.size(conteudos) > 1}"
+                        th:text="${conteudos[1].titulo}"></span>
+
+
+                    <span class="badge badge-pill" th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 1}">Conteudo
+                        adicionado<i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    </span>
+
+                    <span th:if="${conteudos.empty}" class="badge bg-danger badge-pill">Conteudo
+                        faltante<i class="fa fa-window-close" aria-hidden="true"></i>
+                    </span>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <img src="/images/btn3.png" class="mr-1" alt="" width="30">
+                        Fase 3
+                    </div>
+
+                    <span th:if="${conteudos.empty OR !(#lists.size(conteudos) > 2)}">Sem conteudo</span>
+                    <span th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 2}"
+                        th:text="${conteudos[2].titulo}"></span>
+
+
+                        <span class="badge badge-pill" th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 2}">Conteudo
+                            adicionado<i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        </span>
+    
+                        <span th:if="${conteudos.empty OR !(#lists.size(conteudos) > 2)}" class="badge bg-danger badge-pill">Conteudo
+                            faltante<i class="fa fa-window-close" aria-hidden="true"></i>
+                        </span>
+
+
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <img src="/images/btn4.png" class="mr-1" alt="" width="30">
+                        Fase 4
+                    </div>
+
+                    <span th:if="${conteudos.empty OR !(#lists.size(conteudos) > 3)}">Sem conteudo</span>
+                    <span th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 3}"
+                        th:text="${conteudos[3].titulo}"></span>
+
+                    <span class="badge badge-pill" th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 3}">Conteudo
+                        adicionado<i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    </span>
+
+                    <span th:if="${conteudos.empty OR !(#lists.size(conteudos) > 3)}" class="badge bg-danger badge-pill">Conteudo
+                        faltante<i class="fa fa-window-close" aria-hidden="true"></i>
+                    </span>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <img src="/images/btn5.png" class="mr-1" alt="" width="30">
+                        Fase 5
+                    </div>
+
+                    <span th:if="${conteudos.empty OR !(#lists.size(conteudos) > 4)}">Sem conteudo</span>
+                    <span th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 4}"
+                        th:text="${conteudos[4].titulo}"></span>
+
+                    <span class="badge badge-pill" th:if="${!(conteudos.empty) AND #lists.size(conteudos) > 4}">Conteudo
+                        adicionado<i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    </span>
+
+                    <span th:if="${conteudos.empty OR !(#lists.size(conteudos) > 4)}" class="badge bg-danger badge-pill">Conteudo
+                        faltante<i class="fa fa-window-close" aria-hidden="true"></i>
+                    </span>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/js/adminpages.js"></script>
+    <script src="/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
