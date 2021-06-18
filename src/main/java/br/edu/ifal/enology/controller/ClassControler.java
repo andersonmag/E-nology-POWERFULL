@@ -93,6 +93,22 @@ public class ClassControler {
         return model;
     }
 
+    @RequestMapping("/{id}/remover-alunos/{idAluno}")
+    public ModelAndView removerAlunoTurma(@PathVariable("idAluno") Long idAluno, @PathVariable("id") Long id,
+            @PageableDefault(size = 5, page = 0) Pageable pageable, ModelAndView model, RedirectAttributes redirect) {
+
+        Turma turma = turmaRepository.findById(id).get();
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.addAll(turma.getUsuarios());
+        usuarios.remove(usuarioService.findById(idAluno));
+
+        turma.setUsuarios(usuarios);
+        turmaRepository.save(turma);
+        model.setViewName("redirect:/admin/turmas/" + id + "/add-alunos");
+
+        return model;
+    }
+
     @RequestMapping("/editar/{id}")
     public ModelAndView editarTurma(@PathVariable("id") Long id, @AuthenticationPrincipal Usuario usuario,
             ModelAndView model) {
