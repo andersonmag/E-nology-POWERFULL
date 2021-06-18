@@ -170,19 +170,19 @@
                         <div class="row d-flex justify-content-center" th:if="${tarefa.texto.imagem}">
                             <div class="polaroid">
                                 <figure class="figure">
-                                    <div class="img-fluid ">
-                                    <img th:src="@{'/localCloud/' + ${tarefa.texto.imagem.link}}"
+                                    <div class="img-fluid">
+                                    <img th:src="@{'/localCloud/' + ${tarefa.texto.imagem.link}}" class="img-fluid"
 					                    alt="Imagem representativa do texto">
                                     </div>
-                                        <figcaption class="figure-caption text-center" th:text="'Disponível em: ' + ${tarefa.texto.fonteImagem}"></figcaption>
+                                        <figcaption class="figure-caption text-center w-40" th:text="'Disponível em: ' + ${tarefa.texto.fonteImagem}"></figcaption>
                                 </figure>
                             </div>
                         </div>
-                        <div class="col-10 mt-4 mb-4" th:if="${tarefa.texto.conteudo != null AND tarefa.texto.conteudo != ''}">
+                        <div class="col-10 mt-4 mb-4">
                             <hr style="margin: 0;">
                             <p class="texto text-justify" th:text="${tarefa.texto.conteudo}">
                             </p>
-                            <small th:text="'Disponível em: ' + ${tarefa.texto.fonteConteudo}"> </small>
+                            <small th:if="${tarefa.texto.fonteConteudo != null AND tarefa.texto.fonteConteudo != ''}" th:text="'Disponível em: ' + ${tarefa.texto.fonteConteudo}"> </small>
                         </div>
                     </div>
 
