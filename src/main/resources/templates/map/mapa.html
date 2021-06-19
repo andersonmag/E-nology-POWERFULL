@@ -32,12 +32,12 @@
         <div class="container">
           <div class="row d-flex justify-content-center">
             <a style="display: contents;" href="/"></a>
-            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 2 ? 'cursor-pointer' : ''}" 
-                 th:src="${usuario.faseAtual == 2 ? 'images/btn2.png' : 'images/btn2L.png'}"
-                 th:onclick="|changeContent(${usuario.faseAtual == 2}, 2)|" />
-            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 3 ? 'cursor-pointer' : ''}" 
-                 th:src="${usuario.faseAtual == 3 ? 'images/btn3.png' : 'images/btn3L.png'}"
-                 th:onclick="|changeContent(${usuario.faseAtual == 3}, 3)|" />
+            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual >= 2 ? 'cursor-pointer' : ''}" 
+                 th:src="${usuario.faseAtual >= 2 ? 'images/btn2.png' : 'images/btn2L.png'}"
+                 th:onclick="|changeContent(${usuario.faseAtual >= 2}, 2)|" />
+            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual >= 3 ? 'cursor-pointer' : ''}" 
+                 th:src="${usuario.faseAtual >= 3 ? 'images/btn3.png' : 'images/btn3L.png'}"
+                 th:onclick="|changeContent(${usuario.faseAtual >= 3}, 3)|" />
           </div>
         </div>
       </div>
@@ -45,12 +45,12 @@
     <div class="row d-flex justify-content-center mt-5">
       <div class="container">
         <div class="row d-flex justify-content-center">
-          <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 4 ? 'cursor-pointer' : ''}" 
-               th:src="${usuario.faseAtual == 4 ? 'images/btn4.png' : 'images/btn4L.png'}"
-               th:onclick="|changeContent(${usuario.faseAtual == 4}, 4)|" />
-          <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 5 ? 'cursor-pointer' : ''}" 
-               th:src="${usuario.faseAtual == 5 ? 'images/btn5.png' : 'images/btn5L.png'}"
-               th:onclick="|changeContent(${usuario.faseAtual == 5}, 5)|" />
+          <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual >= 4 ? 'cursor-pointer' : ''}" 
+               th:src="${usuario.faseAtual >= 4 ? 'images/btn4.png' : 'images/btn4L.png'}"
+               th:onclick="|changeContent(${usuario.faseAtual >= 4}, 4)|" />
+          <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual >= 5 ? 'cursor-pointer' : ''}" 
+               th:src="${usuario.faseAtual >= 5 ? 'images/btn5.png' : 'images/btn5L.png'}"
+               th:onclick="|changeContent(${usuario.faseAtual >= 5}, 5)|" />
         </div>
       </div>
     </div>

@@ -95,7 +95,6 @@ public class TaskController {
         .verificarConclusaoConteudo(tarefasRespondidasCorretamente, tarefasConteudo);
 
         if(concluiu) {
-            solucao.getTarefa().getConteudo().setPraticado(concluiu);
             usuarioLogado.setFaseAtual(usuarioLogado.getFaseAtual() + 1);
 
             solucao.setAluno(usuarioLogado);
@@ -125,7 +124,7 @@ public class TaskController {
         }
 
         boolean isProximo = sequenciadorService.isProximoConteudo(conteudo, tarefasRespondidasCorretamente,
-                tarefasConteudo);
+                tarefasConteudo, usuarioLogado.getFaseAtual());
 
         if (!isProximo) {
             model.setViewName("redirect:/mapa");

@@ -16,7 +16,6 @@ public class Conteudo{
     private Long id;
     private String titulo;
     private String descricao;
-    private boolean praticado;
 
     @ManyToMany(mappedBy = "conteudos", cascade = CascadeType.ALL)
     private List<Palavra> palavras;
@@ -42,14 +41,6 @@ public class Conteudo{
 
     public void setPalavras(List<Palavra> palavras) {
         this.palavras = palavras;
-    }
-
-    public void setPraticado(boolean praticado) {
-        this.praticado = praticado;
-    }
-
-    public boolean isPraticado() {
-        return praticado;
     }
 
     public void setDescricao(String descricao) {

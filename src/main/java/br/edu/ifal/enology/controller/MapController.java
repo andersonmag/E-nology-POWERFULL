@@ -1,12 +1,10 @@
 package br.edu.ifal.enology.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import br.edu.ifal.enology.model.Usuario;
 
 @RestController

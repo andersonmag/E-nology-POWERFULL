@@ -32,7 +32,7 @@ public class SequenciadorService {
                 .anyMatch(tarefa -> tarefa.getConteudo().equals(conteudo));
     }
 
-    public boolean isProximoConteudo(Conteudo conteudo, List<Tarefa> tarefasRespondidasCorretamente, List<Tarefa> tarefasConteudo) {
+    public boolean isProximoConteudo(Conteudo conteudo, List<Tarefa> tarefasRespondidasCorretamente, List<Tarefa> tarefasConteudo, Integer faseAtual) {
 
         if(tarefasRespondidasCorretamente.isEmpty() && conteudo.getId() == 1L) {
             return true;
@@ -42,25 +42,7 @@ public class SequenciadorService {
             return true;
 
         Long proximoConteudo = conteudo.getId();
-        
-        Long conteudoInicial = 1L;
-        Long maiorConteudo = conteudoInicial;
-
-        for (Tarefa tarefa : tarefasRespondidasCorretamente) {
-            Long proximoLista = conteudoInicial;
-
-            proximoLista = tarefa.getConteudo().getId();
-
-            if (proximoLista > maiorConteudo) {
-                maiorConteudo = proximoLista;
-            }
-        }
-        boolean anteriorJaPraticado = conteudoService.findById(maiorConteudo).isPraticado();
-        maiorConteudo ++;
-        boolean proximoSolicitado = maiorConteudo == proximoConteudo;
-
-        boolean isProximo = anteriorJaPraticado
-                && proximoSolicitado;
+        boolean isProximo = faseAtual.equals(proximoConteudo.intValue());
 
         return isProximo;
     }
