@@ -16,6 +16,7 @@
 		rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/index.css">
+
 	<link rel="stylesheet" href="css/perfil.css">
 	<link sec:authorize="hasRole('ROLE_ADMIN')" rel="stylesheet" href="css/adminpages.css">
 
@@ -23,9 +24,11 @@
 
 <body oncopy="return false" oncut="return false" onpaste="return false">
 
-	<th:block th:include="navbar"></th:block>
+	<div sec:authorize="!hasRole('ROLE_ADMIN')" class="row fixed-top navbar">
+		<th:block th:include="navbar"></th:block>
+	</div>
 
-	<div th:each="role:${usuario.roles}" th:if="${role.nome} == ROLE_ADMIN" class="row fixed-top navbar">
+	<div sec:authorize="hasRole('ROLE_ADMIN')" class="row fixed-top navbar">
 		<th:block th:include="navbar-admin"></th:block>
 	</div>
 
@@ -220,7 +223,7 @@
 		</div>
 	</div>
 	</div>
-	<div th:each="role:${usuario.roles}" th:if="${role.nome} != ROLE_ADMIN" class="container-fluid espaco-rodape fundo-do-poco d-flex justify-content-center">
+	<div sec:authorize="!hasRole('ROLE_ADMIN')" class="container-fluid espaco-rodape fundo-do-poco d-flex justify-content-center">
         <div class="row"></div>
         <p id="mensagem"></p>
     </div>
