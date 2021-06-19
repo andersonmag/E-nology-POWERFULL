@@ -264,9 +264,9 @@ public class UserController {
         ModelAndView model = new ModelAndView("user/progresso");
 
         model.addObject("usuario", usuarioLogado)
-            .addObject("quantidadeErros", solucaoService.getQuantidadeRespostasErradas(usuarioLogado)).
-            addObject("quantidadeAcertos", solucaoService.getQuantidadeRespostasCertas(usuarioLogado))
-            .addObject("quantidadeFasesConcluidas", solucaoService.buscarConteudosPraticadosPorUsuario(usuarioLogado).size());
+            .addObject("quantidadeErros", solucaoService.getQuantidadeRespostasErradas(usuarioLogado))
+            .addObject("quantidadeAcertos", solucaoService.getQuantidadeRespostasCertas(usuarioLogado))
+            .addObject("quantidadeFasesConcluidas", usuarioLogado.getFaseAtual() - 1);
         return model;
     }
 

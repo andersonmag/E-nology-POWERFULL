@@ -13,11 +13,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/mapa.css">
-
 </head>
 
 <body class="fundo" oncopy="return false" oncut="return false" onpaste="return false">
-
   <th:block th:include="navbar"></th:block>
 
   <div class="container" onclick="esconderSidebar()">
@@ -34,16 +32,12 @@
         <div class="container">
           <div class="row d-flex justify-content-center">
             <a style="display: contents;" href="/"></a>
-
-            <img th:classappend="${conteudo_atual > 0 ? 
-                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 0 ?
-                                     'images/btn2.png' : 'images/btn2L.png'}"
-              th:onclick="|changeContent(${conteudo_atual > 0}, 2)|" />
-
-            <img th:classappend="${conteudo_atual > 1 ? 
-                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 1 ?
-                                             'images/btn3.png' : 'images/btn3L.png'}"
-              th:onclick="|changeContent(${conteudo_atual > 1}, 3)|" />
+            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 2 ? 'cursor-pointer' : ''}" 
+                 th:src="${usuario.faseAtual == 2 ? 'images/btn2.png' : 'images/btn2L.png'}"
+                 th:onclick="|changeContent(${usuario.faseAtual == 2}, 2)|" />
+            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 3 ? 'cursor-pointer' : ''}" 
+                 th:src="${usuario.faseAtual == 3 ? 'images/btn3.png' : 'images/btn3L.png'}"
+                 th:onclick="|changeContent(${usuario.faseAtual == 3}, 3)|" />
           </div>
         </div>
       </div>
@@ -51,29 +45,25 @@
     <div class="row d-flex justify-content-center mt-5">
       <div class="container">
         <div class="row d-flex justify-content-center">
-          <img th:classappend="${conteudo_atual > 2 ? 
-                        'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 2 ?
-                                     'images/btn4.png' : 'images/btn4L.png'}"
-            th:onclick="|changeContent(${conteudo_atual > 2}, 4)|" />
-          <img th:classappend="${conteudo_atual > 3 ? 
-                                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 3 ?
-                                             'images/btn5.png' : 'images/btn5L.png'}"
-            th:onclick="|changeContent(${conteudo_atual > 3}, 5)|" />
+          <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 4 ? 'cursor-pointer' : ''}" 
+               th:src="${usuario.faseAtual == 4 ? 'images/btn4.png' : 'images/btn4L.png'}"
+               th:onclick="|changeContent(${usuario.faseAtual == 4}, 4)|" />
+          <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual == 5 ? 'cursor-pointer' : ''}" 
+               th:src="${usuario.faseAtual == 5 ? 'images/btn5.png' : 'images/btn5L.png'}"
+               th:onclick="|changeContent(${usuario.faseAtual == 5}, 5)|" />
         </div>
       </div>
     </div>
     <div class="row d-flex justify-content-center mt-5">
       <div class="container">
         <div class="row embaixo-botao d-flex justify-content-center">
-          <a th:onclick="|acessarJogo(${conteudo_atual > 4}, 'game1')|" id="game1" style="display: contents;">
-            <img th:classappend="${conteudo_atual > 4 ? 
-                'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 4 ?
-                             'images/btnMg1.png' : 'images/btnMg1L.png'}" />
+          <a th:onclick="|acessarJogo(${usuario.faseAtual >= 6}, 'game1')|" id="game1" style="display: contents;">
+            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual >= 6 ? 'cursor-pointer' : ''}" 
+                 th:src="${usuario.faseAtual >= 6 ? 'images/btnMg1.png' : 'images/btnMg1L.png'}" />
           </a>
-          <a th:onclick="|acessarJogo(${conteudo_atual > 4}, 'game2')|" id="game2" style="display: contents;">
-            <img th:classappend="${conteudo_atual > 4 ? 
-                            'img-fluid botoes-num mr-4 cursor-pointer' : 'img-fluid botoes-num mr-4'}" th:src="${conteudo_atual > 4 ?
-                                         'images/btnMg2.png' : 'images/btnMg2L.png'}" />
+          <a th:onclick="|acessarJogo(${usuario.faseAtual >= 6}, 'game2')|" id="game2" style="display: contents;">
+            <img class="img-fluid botoes-num mr-4" th:classappend="${usuario.faseAtual >= 6 ? 'cursor-pointer' : ''}" 
+                 th:src="${usuario.faseAtual >= 6 ? 'images/btnMg2.png' : 'images/btnMg2L.png'}" />
           </a>
         </div>
       </div>
@@ -89,7 +79,6 @@
               <div class="row d-flex justify-content-center">
                 <h1 class="marca" id="txtLevel"></h1>
               </div>
-
               <div class="row d-flex justify-content-center">
                 <i class="fa fa-linux" aria-hidden="true"></i>
                 <small id="txtTitle"> </small>
