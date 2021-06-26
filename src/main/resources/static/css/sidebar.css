@@ -4,6 +4,8 @@
 
 .navbar {
   background-color: #011f41;
+  margin-right: 0px !important; 
+  margin-left: 0px !important;
 }
 
 #img_perfil{
