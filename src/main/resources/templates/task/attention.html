@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/licao.css">
+    <link href="../../css/sidebar.css" rel="stylesheet">
 
     <style>
         @media only screen and (max-width: 600px) {
@@ -29,7 +30,8 @@
 </head>
 
 <body onload="iniciarCronometro()">
-    <div class="jumbotron">
+    <th:block th:include="navbar"></th:block>
+    <div class="jumbotron mt-3" onclick="esconderSidebar()">
         <div class="container ">
             <div class="row">
                 <div class="col col d-flex justify-content-center">
@@ -43,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" onclick="esconderSidebar()">
         <div class="row mt-5">
             <div class="col d-flex justify-content-center">
                 <ul class="list-group list-group-flush">
@@ -64,9 +66,9 @@
                 </ul>
             </div>
         </div>
-        <div class="row float-right mt-2">
+        <div class="row float-right mt-2" style="padding: 12px 20px">
             <a th:href="@{'/studies/' + ${conteudo} + '/practice'}">
-                <button class="btn btn-lg botao mt-4" style="width: 100%; background-color: #036977; color: white;"
+                <button class="btn btn-lg botao mt-4" style="width: 100%; background-color: #036977; color: white; font-size: 20px !important"
                     type="button" disabled id="butao" onmouseover="this.style.backgroundColor='#0f8191'"
                     onmouseout="this.style.backgroundColor='#036977'">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -88,6 +90,7 @@
             setTimeout('iniciarCronometro()', 1000);
         }
     </script>
+    <script src="../../js/sidebar.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

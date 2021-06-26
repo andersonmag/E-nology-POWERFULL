@@ -135,6 +135,7 @@ public class TaskController {
             Cookie cookie = new Cookie("user", "again");
             response.addCookie(cookie);
             model.setViewName("task/attention");
+            model.addObject("usuario", usuarioLogado);
             model.addObject("conteudo", contId);
             return model;
         }
