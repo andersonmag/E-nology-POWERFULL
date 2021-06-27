@@ -152,7 +152,7 @@ public class TaskController {
 
         } catch (NullPointerException e) {
             model.setViewName("task/resultado");
-            model.addObject("usuario", usuarioLogado);
+            model.addObject("usuario", usuarioLogado).addObject("tituloConteudo", conteudo.getTitulo());
         }
         return model;
     }

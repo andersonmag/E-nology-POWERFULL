@@ -35,7 +35,7 @@
 
                 <div class="dropdown-menu align-left" aria-labelledby="dropdownMenuButton"
                     style="min-width: 0; padding: 0; right: 0; left: auto !important;">
-                    <h6 class="dropdown-header">Aluno</h6>
+                    <h6 class="dropdown-header" th:text="${'Aluno | ' + ' ' + usuario.pontuacaoDoAluno + ' Pontos'}"></h6>
                     <a class="dropdown-item" href="/perfil">Ver Perfil</a>
                     <a class="dropdown-item" href="/progresso">Meu Progresso</a>
                 </div>
@@ -60,7 +60,7 @@
             <br>
         </div>
         <span></span>
-        <a name="link" href="/mapa#"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
+        <a name="link" href="/mapa"><span class="fa fa-home"><span class="ml-2 fonte">Home</span></span></a>
 
         <a name="link" href="/perfil"><span class="fa fa-user-circle"><span class="ml-2 fonte">Meu Perfil</span></span></a>
 
