@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yamato's Future - An Interactive Story Game | E-nology</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/yamato.css">
     <link href="../fonts/font-exo.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,8 +32,9 @@
             </div>
             <div class="col-4 text-right col-style col-space pr-0 mr-0">
                 <div class="navbar-brand title-blue">
-                    <h2 class="font-nav" onclick="playSong();"><span id="audioIcon"
-                            class="fa fa-volume-off cursor-pointer" title="Clique para ativar/desativar o som"></span></h2>
+                    <h2 class="font-nav" onclick="changeSoundIcon();">
+                        <span id="audioIcon" class="fa fa-volume-off cursor-pointer" title="Clique para ativar/desativar o som"></span>
+                    </h2>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
             </div>
             <div class="row float-right mt-2">
                 <button class="btn btn-lg botao mt-4 mb-3 btn-attention" type="button" disabled id="butao"
-                    onclick="hideAttention(), up()">
+                    onclick="hideAttention(), up(), playSong()">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
                 </button>
@@ -161,7 +161,7 @@
             <div class="container">
                 <div class="row d-flex justify-content-center mt-3 mb-5">
                     <input type="button" value="</Continuar>" class="btn btn-light mb-5 w-75 btn-continue"
-                        onclick="startGame(), up()">
+                        onclick="startGame(), up(), playSong()">
                 </div>
             </div>
         </div>

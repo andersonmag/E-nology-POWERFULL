@@ -143,12 +143,20 @@ function hideResume() {
 }
 
 function playSong() {
+    screen.changeClassList(audioIcon, "fa-volume-off", "fa-volume-up");
+    audio.play();
+}
+
+function pauseSong() {
+    screen.changeClassList(audioIcon, "fa-volume-up", "fa-volume-off");
+    audio.pause();
+}
+
+function changeSoundIcon() {
     if (audioIcon.classList.contains("fa-volume-off")) {
-        screen.changeClassList(audioIcon, "fa-volume-off", "fa-volume-up");
-        audio.play();
+        playSong();
     } else {
-        screen.changeClassList(audioIcon, "fa-volume-up", "fa-volume-off");
-        audio.pause();
+        pauseSong();
     }
 }
 
