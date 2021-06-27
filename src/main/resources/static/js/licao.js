@@ -1,4 +1,6 @@
 var tempo = new Number(61);
+let text = document.querySelector("#texto");
+let fontSize = 16;
 
 window.onload = function () {
     alterarIconeBateria();
@@ -103,4 +105,17 @@ function iniciarCronometro() {
     else {
         timeout();
     }
+}
+
+function changeFontSize(choice) {
+    if(choice == "bigger"){
+        if(fontSize < 24) {
+            fontSize += 1;
+        }
+    } else{
+        if(fontSize >= 11) {
+           fontSize -= 1;
+        }
+    }
+        text.style.fontSize = `${fontSize}pt`;
 }

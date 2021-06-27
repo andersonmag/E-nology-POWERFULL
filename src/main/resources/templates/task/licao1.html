@@ -180,22 +180,32 @@
                         </div>
                         <div class="col-10 mt-4 mb-4">
                             <hr style="margin: 0;">
-                            <p class="texto text-justify" th:text="${tarefa.texto.conteudo}">
-                            </p>
+                            <p id="texto" style="font-size:16pt" class="text-justify" th:text="${tarefa.texto.conteudo}"></p>
                             <small th:if="${tarefa.texto.fonteConteudo != null AND tarefa.texto.fonteConteudo != ''}" th:text="'Disponível em: ' + ${tarefa.texto.fonteConteudo}"> </small>
                         </div>
                     </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
-                        onclick="window.location.href='#top'" title="Voltar ao Topo">
-                    </button>
-                    <button class="btn btn-lg" data-dismiss="modal" type="submit" onclick="continuarCronometro()"
-                        style="background-color: #036977; color: white;"
-                        onmouseover="this.style.backgroundColor='#0f8191'"
-                        onmouseout="this.style.backgroundColor='#036977'">
-                        Continuar</button>
+                <div class="modal-footer d-flex">
+                    <div class="col-6">
+                        <button id="bigger-text" onclick="changeFontSize('bigger')" style="font-size: 10pt;" type="button" class="btn cursor-pointer p-0">
+                            <span class="fa fa-font"></span>
+                            <span class="fa fa-plus"></span>
+                        </button>
+                        <button id="smaller-text" onclick="changeFontSize('smaller')" style="font-size: 10pt;" type="button" class="btn cursor-pointer">
+                            <span class="fa fa-font"></span>
+                            <span class="fa fa-minus"></span>
+                        </button>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
+                            onclick="window.location.href='#top'" title="Voltar ao Topo"></button>
+                        <button class="btn btn-lg ml-2" data-dismiss="modal" type="submit" onclick="continuarCronometro()"
+                            style="background-color: #036977; color: white; margin-right: -15px" onmouseover="this.style.backgroundColor='#0f8191'"
+                            onmouseout="this.style.backgroundColor='#036977'">
+                            Continuar
+                        </button>
+                   </div>
                 </div>
             </div>
         </div>
