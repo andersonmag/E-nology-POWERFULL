@@ -41,7 +41,7 @@
     </nav>
     <div id="sidebar" class="sidenav vh-100 bg-white">
         <div class="d-flex justify-content-center bg-sidebar-user">
-            <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+            <img id="img_perfil" th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.id}}"
                 alt="Minha Foto" width="75" class="img-fluid d-flex justify-content-center img-user">
             <span th:unless="${usuario.imagem}" class="img-user-of fa fa-user-circle"></span>
         </div>

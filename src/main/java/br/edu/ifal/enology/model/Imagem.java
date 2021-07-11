@@ -3,11 +3,9 @@ package br.edu.ifal.enology.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "imagem_usuario")
 public class Imagem {
 
     @Id
@@ -18,7 +16,6 @@ public class Imagem {
     private byte[] dados;
     private String nome;
     private String tipo;
-    private Long link;
 
     public Long getId() {
         return id;
@@ -50,13 +47,5 @@ public class Imagem {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Long getLink() {
-        return link;
-    }
-
-    public void setLink(Long link) {
-        this.link = link;
     }
 }

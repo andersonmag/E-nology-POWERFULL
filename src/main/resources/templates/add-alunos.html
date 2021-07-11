@@ -47,7 +47,7 @@
                     <tbody id="students">
                         <tr th:each="aluno : ${alunos.content}">
                             <td>
-                                <img th:if="${aluno.imagem}" th:src="@{'/localCloud/' + ${aluno.imagem.link}}"
+                                <img th:if="${aluno.imagem}" th:src="@{'/localCloud/' + ${aluno.imagem.id}}"
                                     alt="imagem" style="border-radius: 10px;  max-width: 100%;
                                 width: 200px;
                                 height: 100px;

@@ -39,7 +39,7 @@
 					<form action="/upload" method="POST" enctype="multipart/form-data">
 						<div class="upload-imagem">
 							<label for="file-input" class="d-flex justify-content-center">
-								<img th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}"
+								<img th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.id}}"
 									alt="Minha Foto" width="250" class="img-fluid"
 									title="Clique para alterar imagem">
 								<span th:unless="${usuario.imagem}" class="imagemUser fa fa-user-circle"

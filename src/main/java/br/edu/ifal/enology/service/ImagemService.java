@@ -1,6 +1,5 @@
 package br.edu.ifal.enology.service;
 
-import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,12 +13,10 @@ public class ImagemService {
     private ImagemRepository imagemRepository;
 
     public Imagem controiImagem(MultipartFile file)  {
-        Long secretPassword = new Random().nextLong() + file.getOriginalFilename().length();
         Imagem imagem = new Imagem();
 
         try {
             imagem.setDados(file.getBytes());
-            imagem.setLink(secretPassword);
             imagem.setNome(file.getOriginalFilename());
             imagem.setTipo(file.getContentType());
         } catch (Exception e) {

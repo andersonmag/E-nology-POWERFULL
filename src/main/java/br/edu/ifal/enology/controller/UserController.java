@@ -77,9 +77,9 @@ public class UserController {
         return new ModelAndView("redirect:/perfil");
     }
 
-    @RequestMapping("/localCloud/{link}")
-    public byte[] retornarImagem(@PathVariable("link") Long link) {
-        return imagemRepository.findByLink(link).getDados();
+    @RequestMapping("/localCloud/{id}")
+    public byte[] retornarImagem(@PathVariable("id") Long idImagem) {
+        return imagemRepository.findById(idImagem).get().getDados();
     }
 
     @RequestMapping("/salvarUsuario")

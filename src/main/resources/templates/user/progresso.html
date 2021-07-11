@@ -27,7 +27,7 @@
 
         <div class="container mt-5">
             <div class="row justify-content-center upload-imagem">
-                <img th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.link}}" alt="Minha Foto"
+                <img th:if="${usuario.imagem}" th:src="@{'/localCloud/' + ${usuario.imagem.id}}" alt="Minha Foto"
                     width="130" class="img-fluid">
                 <span th:unless="${usuario.imagem}" class="imagemUser fa fa-user-circle"
                     style="color:darkcyan; font-size: 100pt !important;"></span>

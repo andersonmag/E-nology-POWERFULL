@@ -19,7 +19,7 @@ public class Texto {
     private String conteudo;
     private String fonteConteudo;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(orphanRemoval = true)
     private Imagem imagem;
 
     private String fonteImagem;

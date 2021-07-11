@@ -72,7 +72,7 @@
                             <td>
                                 <div class="row" style="align-items: center;">
                                     <img style="border-radius: 30px;" th:if="${aluno.imagem}"
-                                        th:src="@{'/localCloud/' + ${aluno.imagem.link}}" width="65" height="65"
+                                        th:src="@{'/localCloud/' + ${aluno.imagem.id}}" width="65" height="65"
                                         alt="Imagem do aluno" class="mr-3">
                                     <span th:unless="${aluno.imagem}" class="fa fa-user-circle mr-3"
                                         style="color: darkcyan !important; font-size: 4rem;"></span>

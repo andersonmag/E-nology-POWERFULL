@@ -183,7 +183,7 @@
                                                 <tr th:each="aluno : ${alunos}" id="linhaAluno" class="linhaAluno">
                                                     <td>
                                                         <img th:if="${aluno.imagem}" class="ml-5"
-                                                            th:src="@{'/localCloud/' + ${aluno.imagem.link}}"
+                                                            th:src="@{'/localCloud/' + ${aluno.imagem.id}}"
                                                             alt="imagem" style="border-radius: 50%;  max-width: 100%;
                                                             width: 30px;
                                                             height: 30px;
