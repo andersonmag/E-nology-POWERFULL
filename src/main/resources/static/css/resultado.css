@@ -8,10 +8,7 @@
 }
 
 .icon {
-    font-size: 10rem;margin-top: 20px;   background: linear-gradient(to left, #0062cc 50%, #6c757d 50%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+    font-size: 10rem;margin-top: 20px;  color: #0062cc;
 }
 
 .btn:hover{
@@ -19,23 +16,16 @@
     border-color: #011422 !important;
 }
 
-
-@media only screen and (max-width: 600px) {
-.imagem{
-    width: 100%;
-}
-
-.container{
-    margin-top: 90px !important;
-}
+span {
+    text-align: center;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    .container{
-        margin-top: 90px !important;
+    
+    span {
+        font-size: 0.8rem;
     }
 
-    
     .fonte-mensagem{
         font-size: 28pt;
     }
