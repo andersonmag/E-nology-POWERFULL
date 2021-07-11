@@ -10,37 +10,50 @@
     <link href="/css/sidebar.css" rel="stylesheet">
     <link href="/fonts/font-nunito.css" rel="stylesheet">
     <link href="/fonts/font-exo.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="/css/main.css"> -->
     <link rel="stylesheet" href="/css/adminpages.css">
+
+    <style>
+        table tbody tr:hover {
+            cursor: pointer;
+        }
+
+        table th {
+            padding: .40rem !important;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    </style>
+
 </head>
 
 <body>
-
     <th:block th:include="navbar-admin"></th:block>
-
-    <div class="container sessao">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 mt-3 mb-2">
-                <a href="/admin/turmas/criar">
-                    <button type="button" class="btn btn-lg btn-success float-right"><span
-                            class="fa fa-users teste"></span> Criar
-                        Turma</button>
-                </a>
-            </div>
-        </div>
+    <div class="container sessao ">
         <div class="row">
             <div class="col-sm-12 mb-3">
-                <h1 class="text-center">Turmas</h1>
+                <h1 class="text-center">Minhas Turmas
+                    <button type="button" class="btn btn-md btn-success" data-toggle="modal"
+                        data-target="#staticBackdrop">Nova <span class="fa fa-plus-circle"></span></i>
+
+                    </button>
+                </h1>
+                <span class="d-flex justify-content-center text-muted">Lista de turmas: Adicione alunos e edite suas
+                    turmas</span>
             </div>
         </div>
+
         <div class="row pl-5">
             <div class="col-sm-12 col-md-12 listagem">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col"></th>
                             <th scope="col">Nome</th>
                             <th scope="col">Semestre</th>
                             <th scope="col"> </th>
@@ -49,7 +62,9 @@
                     <tbody>
                         <tr th:each="turma:${turmas}">
                             <td th:text="${turma.id}"></td>
-                            <td><a style="text-decoration: none; color: darkcyan;" th:href="'/admin/turmas/' + ${turma.id} + '/alunos'" th:text="${turma.nome}"></a></td>
+                            <td><a style="text-decoration: none; color: darkcyan;"
+                                    th:href="'/admin/turmas/' + ${turma.id} + '/alunos'" th:text="${turma.nome}"></a>
+                            </td>
                             <td th:text="${turma.ano} + '.' + ${turma.semestre}"></td>
                             <td>
                                 <div class="dropright">
@@ -74,11 +89,163 @@
         </div>
     </div>
 
-    <script src="/js/adminpages.js"></script>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <form action="/admin/turmas/criar" method="POST" onsubmit=" return verificarCampos()">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title " id="staticBackdropLabel">
+                            <i class="fa fa-graduation-cap" style="color: #036977;"></i>
+                            Criar Turma
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="erroAlert" role="alert" style="font-size: 15px;">
+                            <p class="erroCor" id="erroNome"></p>
+                            <p class="erroCor" id="erroSemestre"></p>
+                            <p class="erroCor" id="erroListaAlunos"></p>
+                        </div>
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">Detalhes</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                    aria-controls="profile" aria-selected="false">Alunos</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="container">
+
+                                    <div class="row d-flex  mt-2 justify-content-center">
+                                        <div class="col-sm-12">
+                                            <label for="nome">Nome da Turma</label>
+                                            <input type="text" class="form-control" id="nome" rows="1" name="nome"
+                                                placeholder="Digite o nome da turma" style="min-width: 100%;"></input>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex  mt-2 justify-content-center ">
+
+                                        <div class="col-6">
+                                            <label for="semestre">Semestre: </label>
+                                            <select name="semestre" class="form-control" id="semestre">
+                                                <option value="" disabled selected>Selecione</option>
+                                                <option value="1">1° Semestre</option>
+                                                <option value="2">2° Semestre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="ano"> Ano: </label>
+                                            <input type="number" id="ano" name="ano" class="form-control"
+                                                placeholder="Disabled input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="container">
+                                    <div class="row d-flex  mt-2 justify-content-center ">
+                                        <div class="col-sm-12">
+
+                                            <div class="form-group d-flex justify-content-center">
+                                                <input type="text" class="form-control form-control-sm" id="inputBusca"
+                                                    onkeyup="buscarAlunos()" placeholder="Buscar aluno"
+                                                    style="min-width: 80%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-center"
+                                        style="overflow-y: auto; max-height:360px;">
+
+                                        <small id="helpId" class="form-text text-muted text-center mb-1">
+                                            Selecione os alunos da turma:
+                                        </small>
+
+                                        <table id="tableAlunos" class="table table-hover"
+                                            style="width: 80%;font-size: 0.8rem">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">Nome</th>
+                                                    <th scope="col">Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="aluno : ${alunos}" id="linhaAluno" class="linhaAluno">
+                                                    <td>
+                                                        <img th:if="${aluno.imagem}" class="ml-5"
+                                                            th:src="@{'/localCloud/' + ${aluno.imagem.link}}"
+                                                            alt="imagem" style="border-radius: 50%;  max-width: 100%;
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            object-fit: cover;">
+                                                        <span th:unless="${aluno.imagem}"
+                                                            class="fa fa-user-circle d-flex justify-content-left ml-5"
+                                                            style="font-size: 2rem; color: #011f41;"></span>
+
+                                                    </td>
+                                                    <td th:text="${aluno.nome} + ' ' + ${aluno.sobrenome}"></td>
+                                                    <td th:text="${aluno.email}"></td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <label id="check" class="form-check-label"
+                                                                style="vertical-align: middle;">
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    name="usuarios" th:value="${aluno.id}">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-block" style="background-color: #036977; color: white;" type="submit"
+                            onmouseover="this.style.backgroundColor='#0f8191'"
+                            onmouseout="this.style.backgroundColor='#036977'"
+                            onclick="validarNome(), validaSemestre(), validarAlunosSelecionados(), classColor()">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
     <script src="/js/sidebar.js"></script>
     <script src="/js/jquery-3.3.1.slim.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/adminpages.js"></script>
+
+    <script>
+        $(".linhaAluno").on('click', function (event) {
+            var checkbox = $(this).find(":checkbox");
+            var idElement = $(event.target.parentElement)[0].id;
+
+            if (idElement != "check") {
+                if (checkbox.prop("checked")) {
+                    checkbox.prop("checked", false);
+                } else {
+                    checkbox.prop("checked", true);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

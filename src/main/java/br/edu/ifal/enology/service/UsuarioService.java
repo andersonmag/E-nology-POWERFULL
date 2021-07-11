@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifal.enology.model.Role;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.UserRepository;
 
@@ -35,6 +36,10 @@ public class UsuarioService {
 
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public List<Usuario> buscarSomenteAlunos() {
+        return userRepository.findByRolesIsNull();
     }
 
     public List<Usuario> getUsuariosComMaioresPontuacoes(List<Usuario> usuarios) {

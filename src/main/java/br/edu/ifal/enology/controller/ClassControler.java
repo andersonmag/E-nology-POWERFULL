@@ -1,7 +1,9 @@
 package br.edu.ifal.enology.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,15 +46,16 @@ public class ClassControler {
         model.setViewName("turma/lista-turmas");
         model.addObject("usuario", usuario);
         model.addObject("turmas", turmaRepository.findAll());
+        model.addObject("alunos", usuarioService.buscarSomenteAlunos());
+
         return model;
     }
 
     @RequestMapping(value = "/criar", method = RequestMethod.POST)
     public ModelAndView salvarTurma(Turma turma, ModelAndView model) {
-
         turmaRepository.save(turma);
+        model.setViewName("redirect:/admin/turmas");
 
-        model.setViewName("redirect:/admin/turmas/" + turma.getId() + "/" + "add-alunos");
         return model;
     }
 
