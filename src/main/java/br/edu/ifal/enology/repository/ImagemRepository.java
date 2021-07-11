@@ -6,5 +6,4 @@ import br.edu.ifal.enology.model.Imagem;
 
 @Repository
 public interface ImagemRepository extends JpaRepository<Imagem, Long> {
-    Imagem findByLink(Long link);
 }
