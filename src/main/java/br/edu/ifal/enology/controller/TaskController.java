@@ -142,8 +142,13 @@ public class TaskController {
 
         try {
             Tarefa tarefa = sequenciadorService.buscarTarefa(usuarioLogado, conteudo);
-            List<Palavra> palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo(
-                    sequenciadorService.pegarConteudoAleatorio(tarefa.getResposta()), tarefa.getResposta());
+            List<Palavra> palavrasEncontradas;
+
+            if (tarefa.getTipoTarefa() == TipoTarefa.MULTIPLA_ESCOLHA_TEXTO && conteudo.getId() != 3L) {
+                palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudoTexto(tarefa.getId().intValue());
+            } else {
+                palavrasEncontradas = sequenciadorService.buscarPalavrasPorConteudo(sequenciadorService.pegarConteudoAleatorio(tarefa.getResposta()), tarefa.getResposta());
+            }
 
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas)
                     .addObject("usuario", usuarioLogado).addObject("tarefasConteudo", tarefasConteudo.size())

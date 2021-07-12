@@ -28,17 +28,17 @@ public class SequenciadorService {
 
     public boolean verificarSolucaoExistenteComConteudo(Conteudo conteudo,
             List<Tarefa> tarefasRespondidasCorretamente) {
-        return tarefasRespondidasCorretamente.stream()
-                .anyMatch(tarefa -> tarefa.getConteudo().equals(conteudo));
+        return tarefasRespondidasCorretamente.stream().anyMatch(tarefa -> tarefa.getConteudo().equals(conteudo));
     }
 
-    public boolean isProximoConteudo(Conteudo conteudo, List<Tarefa> tarefasRespondidasCorretamente, List<Tarefa> tarefasConteudo, Integer faseAtual) {
+    public boolean isProximoConteudo(Conteudo conteudo, List<Tarefa> tarefasRespondidasCorretamente,
+            List<Tarefa> tarefasConteudo, Integer faseAtual) {
 
-        if(tarefasRespondidasCorretamente.isEmpty() && conteudo.getId() == 1L) {
+        if (tarefasRespondidasCorretamente.isEmpty() && conteudo.getId() == 1L) {
             return true;
         }
 
-        else if(verificarSolucaoExistenteComConteudo(conteudo, tarefasRespondidasCorretamente))
+        else if (verificarSolucaoExistenteComConteudo(conteudo, tarefasRespondidasCorretamente))
             return true;
 
         Long proximoConteudo = conteudo.getId();
@@ -58,7 +58,7 @@ public class SequenciadorService {
                 tarefasConteudo = tarefaService.buscarPorConteudo(conteudo);
             }
         }
-        
+
         return selecionarTarefa(tarefasConteudo, tarefasRespondidasCorretamente);
     }
 
@@ -72,17 +72,16 @@ public class SequenciadorService {
         return tarefasRespondidasCorretamente;
     }
 
-    public List<Tarefa> filtrarTarefasRespondidasPorConteudo(List<Solucao> solucoesDoAlunoDoConteudo, Conteudo conteudo) {
+    public List<Tarefa> filtrarTarefasRespondidasPorConteudo(List<Solucao> solucoesDoAlunoDoConteudo,
+            Conteudo conteudo) {
         List<Tarefa> tarefasRespondidasCorretamente = new ArrayList<>();
 
         for (Solucao solucao : solucoesDoAlunoDoConteudo) {
-            if (solucao.isAcertou() && 
-                    solucao.getTarefa().getConteudo().equals(conteudo))
+            if (solucao.isAcertou() && solucao.getTarefa().getConteudo().equals(conteudo))
                 tarefasRespondidasCorretamente.add(solucao.getTarefa());
         }
         return tarefasRespondidasCorretamente;
     }
-
 
     private Tarefa selecionarTarefa(List<Tarefa> tarefasConteudo, List<Tarefa> tarefasRespondidasCorretamente) {
         List<Tarefa> tarefasRestantesTexto = new ArrayList<>();
@@ -92,14 +91,14 @@ public class SequenciadorService {
         int indexTarefa = 0;
 
         for (Tarefa tarefa : tarefasConteudo) {
-                if (tarefasRespondidasCorretamente.isEmpty() || !tarefasRespondidasCorretamente.contains(tarefa)) {
-                    if (tarefa.getTipoTarefa() == TipoTarefa.MULTIPLA_ESCOLHA_TEXTO) {
-                        tarefasRestantesTexto.add(tarefa);
-                    } else {
-                        tarefasRestantesGeral.add(tarefa);
-                    }
+            if (tarefasRespondidasCorretamente.isEmpty() || !tarefasRespondidasCorretamente.contains(tarefa)) {
+                if (tarefa.getTipoTarefa() == TipoTarefa.MULTIPLA_ESCOLHA_TEXTO) {
+                    tarefasRestantesTexto.add(tarefa);
+                } else {
+                    tarefasRestantesGeral.add(tarefa);
                 }
             }
+        }
 
         if (verificarConclusaoConteudo(tarefasRespondidasCorretamente, tarefasConteudo))
             return null;
@@ -126,6 +125,41 @@ public class SequenciadorService {
         indexConteudo = numeroAleatorio.nextInt(todosConteudos.size());
 
         return todosConteudos.get(indexConteudo);
+    }
+
+    public List<Palavra> buscarPalavrasPorConteudoTexto(int idTarefa) {
+        List<Palavra> palavrasFiltradasPorConteudo = new ArrayList<>();
+        Conteudo conteudo = new Conteudo();
+
+        switch (idTarefa) {
+            case 1:
+                conteudo.setId(6L);
+                palavrasFiltradasPorConteudo = palavraRepository.findByConteudos(conteudo);
+                break;
+
+            case 7:
+                conteudo.setId(7L);
+                palavrasFiltradasPorConteudo = palavraRepository.findByConteudos(conteudo);
+                break;
+
+            case 8:
+                conteudo.setId(8L);
+                palavrasFiltradasPorConteudo = palavraRepository.findByConteudos(conteudo);
+                break;
+
+            case 9:
+                conteudo.setId(9L);
+                palavrasFiltradasPorConteudo = palavraRepository.findByConteudos(conteudo);
+                break;
+
+            case 10:
+                conteudo.setId(10L);
+                palavrasFiltradasPorConteudo = palavraRepository.findByConteudos(conteudo);
+                break;
+        }
+
+        Collections.shuffle(palavrasFiltradasPorConteudo);
+        return palavrasFiltradasPorConteudo;
     }
 
     public List<Palavra> buscarPalavrasPorConteudo(Conteudo conteudo, Palavra respostaDaTarefa) {
