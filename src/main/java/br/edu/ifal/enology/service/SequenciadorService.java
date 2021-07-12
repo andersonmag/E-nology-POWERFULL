@@ -55,7 +55,7 @@ public class SequenciadorService {
         if (solucoesDoAluno.isEmpty()) {
             if (!conteudo.getId().equals(1L)) {
                 conteudo = conteudoService.findById(1L);
-                tarefasConteudo = tarefaService.buscarPorConteudo(conteudo).subList(1, 3);
+                tarefasConteudo = tarefaService.buscarPorConteudo(conteudo).subList(0, 3);
             }
         }
 

@@ -151,7 +151,7 @@ public class TaskController {
             }
 
             model.addObject("tarefa", tarefa).addObject("palavras", palavrasEncontradas)
-                    .addObject("usuario", usuarioLogado).addObject("tarefasConteudo", tarefasConteudo.size())
+                    .addObject("usuario", usuarioLogado).addObject("tarefasConteudo", tarefasConteudo.subList(0, 3).size())
                     .addObject("tarefasRespondidasAtualmente", sequenciadorService.
                                     filtrarTarefasRespondidasPorConteudo(solucoesDoAluno, conteudo).size());
 
