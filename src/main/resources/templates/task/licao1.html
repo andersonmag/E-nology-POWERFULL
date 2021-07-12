@@ -173,7 +173,7 @@
                                     <img th:src="@{'/localCloud/' + ${tarefa.texto.imagem.id}}" class="img-fluid"
 					                    alt="Imagem representativa do texto">
                                     </div>
-                                        <figcaption class="figure-caption text-center w-40" th:text="'Disponível em: ' + ${tarefa.texto.fonteImagem}"></figcaption>
+                                        <figcaption style="word-break: break-word" class="figure-caption text-center w-40" th:text="'Disponível em: ' + ${tarefa.texto.fonteImagem}"></figcaption>
                                 </figure>
                             </div>
                         </div>
