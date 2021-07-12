@@ -3,21 +3,17 @@ const txtTitle = document.querySelector('#txtTitle');
 const txtContent = document.querySelector('#txtContent');
 const lessonId = document.querySelector('#lessonId');
 
-const fases = ["Introdução", "Fase 2!", "Fase 3!", "Fase 4!", "Fase 5!"];
+const fases = ["Ada Lovelace", "Partes do computador", "Bill Gates", "Javascript", "Informática Básica"];
 const [txtOne, txtTwo, txtThree, txtFour, txtFive] = fases;
 
-const titles = ["First Content", "Sisthgfgfh", "Neque porro quisquam", "est qui dolorem ipsum", "LALALALA"];
+const titles = ["First Content", "Second Content", "Third Content", "Fourth Content", "Fifth Content"];
 const [title1, title2, title3, title4, title5] = titles;
 
-const contents = ["Aqui você aprenderá mais sobre JavaScript e poderá exercitar sua leitura " +
-    "do inglês e o conteudo aprendido.",
-"Chegou ao nível 2! Aqui você aprenderá blá blá blá e mais alguma coisa " +
-"bem difícil! Espero que erre tudo :)",
-"Lorem ipsum dolor sit amet, consectetur adipiscing " +
-"elit. Cras nec elit vulputate, suscipit purus id, rutrum nibh",
-"Mauris suscipit, magna sit amet volutpat euismod, leo ligula luctus nunc, a vulputate risus est " +
-"at nisi. Phasellus ",
-    "Maecenas vulputate, tellus eget aliquet bibendum, lacus turpis cursus orci, et dictum lacus"];
+const contents = ["Nesta fase você aprenderá sobre uma das pessoas mais famosas da história da computação: Ada Lovelace!",
+"Você conhece as partes do computador em inglês? Teste seus conhecimentos e descubra! ",
+"Você conhece o Bill Gates? Ele criou na década de 1970 uma das empresas mais conhecidas da área de informática. Nesta fase você descobrirá várias novidades sobre ele! ",
+"Você sabe programar usando JavaScript? Teste seus conhecimentos sobre os comandos de JavaScript em inglês!",
+"Você conseguiria usar um editor de texto ou um navegador web em inglês? Teste seus conhecimentos e descubra!"];
 const [content1, content2, content3, content4, content5] = contents;
 
 const changeContent = (pode, id) => {
