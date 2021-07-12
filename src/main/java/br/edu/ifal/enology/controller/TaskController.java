@@ -89,7 +89,7 @@ public class TaskController {
         List<Solucao> solucoesDoAluno = solucaoService.buscarPorUsuario(usuarioLogado);
         List<Tarefa> tarefasRespondidasCorretamente = sequenciadorService
                 .filtrarTarefasRespondidas(solucoesDoAluno);
-        List<Tarefa> tarefasConteudo = tarefaService.buscarPorConteudo(conteudo);
+        List<Tarefa> tarefasConteudo = tarefaService.buscarPorConteudo(conteudo).subList(0, 3);
 
         boolean concluiu = sequenciadorService
         .verificarConclusaoConteudo(tarefasRespondidasCorretamente, tarefasConteudo);

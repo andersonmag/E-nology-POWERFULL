@@ -50,7 +50,7 @@ public class SequenciadorService {
     public Tarefa buscarTarefa(Usuario usuario, Conteudo conteudo) {
         List<Solucao> solucoesDoAluno = solucaoService.buscarPorUsuario(usuario);
         List<Tarefa> tarefasRespondidasCorretamente = filtrarTarefasRespondidas(solucoesDoAluno);
-        List<Tarefa> tarefasConteudo = tarefaService.buscarPorConteudo(conteudo);
+        List<Tarefa> tarefasConteudo = tarefaService.buscarPorConteudo(conteudo).subList(0, 3);
 
         if (solucoesDoAluno.isEmpty()) {
             if (!conteudo.getId().equals(1L)) {
