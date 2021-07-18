@@ -68,7 +68,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="aluno:${usuarios}">
-                            <th scope="row" th:text="${alunoStat.count}"></th>
+                            <th scope="row" th:text="${ordem[alunoStat.index]}"></th>
                             <td>
                                 <div class="row" style="align-items: center;">
                                     <img style="border-radius: 30px;" th:if="${aluno.imagem}"
@@ -80,7 +80,8 @@
                                 </div>
                             </td>
                             <td th:text="${aluno.pontuacaoDoAluno}"></td>
-                            <td><i class="fa fa-trophy  text-warning" style="font-size: 2rem;" aria-hidden="true"></i>
+                            <td>
+                                <i class="fa fa-trophy  text-warning" style="font-size: 2rem;" aria-hidden="true"></i>
                             </td>
                         </tr>
                     </tbody>

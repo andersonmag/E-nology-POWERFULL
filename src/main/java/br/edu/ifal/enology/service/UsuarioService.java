@@ -5,13 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.edu.ifal.enology.model.Role;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.UserRepository;
 
@@ -42,10 +38,13 @@ public class UsuarioService {
         return userRepository.findByRolesIsNull();
     }
 
-    public List<Usuario> getUsuariosComMaioresPontuacoes(List<Usuario> usuarios) {
+    public List<Usuario> getUsuariosComMaioresPontuacoes() {
+        List<Usuario> usuarios = userRepository.findByRolesIsNull();
 
-        usuarios = usuarios.stream().sorted(Comparator.comparingInt(Usuario::getPontuacaoDoAluno).reversed())
-                .collect(Collectors.toList()).subList(0, usuarios.size() > 4 ? 5 : usuarios.size());
+        usuarios = usuarios.stream().sorted(Comparator.comparingInt(Usuario::getPontuacaoDoAluno).reversed()).collect(Collectors.toList());
+        int menorPontuacaoTop5 = usuarios.stream().mapToInt(usuario -> usuario.getPontuacaoDoAluno()).distinct().limit(5).min().getAsInt();
+        usuarios = usuarios.stream().filter(usuario -> usuario.getPontuacaoDoAluno() >= menorPontuacaoTop5)
+                                .collect(Collectors.toList());
         return usuarios;
     }
 
@@ -55,7 +54,8 @@ public class UsuarioService {
         return usuarios;
     }
 
-    public double getMediaPontuacaoUsuarios(List<Usuario> usuarios) {
+    public double getMediaPontuacaoUsuarios() {
+        List<Usuario> usuarios = userRepository.findByRolesIsNull();
         return usuarios.stream().mapToDouble(Usuario::getPontuacaoDoAluno).average().orElse(Double.NaN);
     }
 

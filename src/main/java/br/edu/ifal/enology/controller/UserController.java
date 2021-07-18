@@ -2,6 +2,8 @@ package br.edu.ifal.enology.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -276,16 +278,27 @@ public class UserController {
     @RequestMapping("/ranking")
     public ModelAndView mostrarPaginaRanking(@AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("user/ranking");
-        
-        List<Usuario> usuarios = usuarioService.findAll().stream().filter(
-                usuario -> usuario.getRoles().isEmpty()).collect(Collectors.toList());
 
-        List<Usuario> usuariosComMaioresPontuacoes = usuarioService.getUsuariosComMaioresPontuacoes(usuarios);
-        double mediaPontuacoes = usuarioService.getMediaPontuacaoUsuarios(usuarios);
+        List<Usuario> usuariosComMaioresPontuacoes = usuarioService.getUsuariosComMaioresPontuacoes();
+        List<Integer> pontuacoesEmOrdem =  usuariosComMaioresPontuacoes.stream()
+                                                    .map(u -> u.getPontuacaoDoAluno()).collect(Collectors.toList());
+        List<Integer> ordemRank =  new ArrayList<>();
+        double mediaPontuacoes = usuarioService.getMediaPontuacaoUsuarios();
+
+        int posicao = 0;
+        int ultimaPontuacao = 0;
+        for (Integer pontuacao : pontuacoesEmOrdem) {
+            if (ultimaPontuacao != pontuacao){
+                posicao++;
+                ultimaPontuacao = pontuacao;
+            }
+            ordemRank.add(posicao);
+        }
 
         model.addObject("usuario", usuarioLogado)
              .addObject("usuarios", usuariosComMaioresPontuacoes)
-             .addObject("media", mediaPontuacoes);
+             .addObject("media", mediaPontuacoes)
+             .addObject("ordem", ordemRank);
         return model;
     }
 
