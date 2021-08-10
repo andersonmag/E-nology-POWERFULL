@@ -207,9 +207,6 @@
                 <div class="row mt-4">
                     <div class="container">
                         <div class="col-sm-12 d-flex justify-content-center mt-2">
-                            <span class="hide text-center text-warning" id="result"></span>
-                        </div>
-                        <div class="col-sm-12 d-flex justify-content-center mt-2">
                             <input type="text" id="answerTxt" class="bg-dark text-white w-50 text-monospace"
                                 value="[Hack@Har ~]$ ">
                         </div>
@@ -257,10 +254,39 @@
         </div>
     </div>
 
+        <!-- Modal dica -->
+        <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="hintModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #2c2f33;"> 
+                <div class="row d-flex justify-content-center p-2">
+                    <h5 class="modal-title text-white" id="modalLongTitle">
+                        <i class="fa fa-lightbulb-o text-warning" aria-hidden="true"></i> 
+                        HINT 
+                        <i class="fa fa-lightbulb-o text-warning" aria-hidden="true"></i>
+                    </h5>
+                </div>
+                <div class="row text-center text-white p-4">
+                    <div class="col-12">
+                        <p id="hintDescription"></p>
+                    </div>
+                    <div class="col-12">
+                        <p id="hintAnswer"></p>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center pb-3">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">UNDERSTOOD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/attention.js"></script>
     <script src="../js/sidebar.js"></script>
-    <script src="../js/yamato.js"></script>
     <script src="../js/yamatosContent.js"></script>
+    <script src="../js/yamato.js"></script>
+    <script src="../js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 
 </html>

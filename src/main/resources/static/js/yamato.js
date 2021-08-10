@@ -15,7 +15,8 @@ const audio = document.querySelector("#audio");
 const alreadyPlayed = document.querySelector("#alreadyPlayed");
 
 let currentChoice = '';
-let currentQuestion = 0;
+let question;
+setNewRandomQuestion();
 
 const screen = {
     changeClassList: (item, prev, cur) => {
@@ -63,16 +64,15 @@ function startGame() {
 function checkAnswer() {
     const answer = document.querySelector("#answerTxt");
 
-    if (answer.value.toLowerCase().includes(questions[currentQuestion].questionAnswer)) {
-        showMessage(true)
+    if (answer.value.toLowerCase().includes(question.questionAnswer)) {
         screen.changeClassList(questionScreen, 'show', 'hide');
         screen.changeButtonValue(answer, '[Hack@Har ~]$ ')
 
         showStory(choices.get(currentChoice))
-        currentQuestion++;
+        setNewRandomQuestion();
     }
     else {
-        showMessage(false)
+        showHint();
     }
 }
 
@@ -105,8 +105,8 @@ function continueStory(story) {
     const questionMessage = document.querySelector("#questionMessage");
     const questionImage = document.querySelector("#questionImage");
 
-    screen.changeText(questionMessage, questions[currentQuestion].questionMessage);
-    screen.changeCardImage(questionImage, questions[currentQuestion].questionImage);
+    screen.changeText(questionMessage, question.questionMessage);
+    screen.changeCardImage(questionImage, question.questionImage);
     screen.changeCardImage(continueImage, story.continueImage);
     screen.changeText(continueTitle, story.continueTitle);
     screen.changeText(continueText, story.continueText)
@@ -125,16 +125,6 @@ function showStory(story) {
     screen.changeButtonValue(btn1, story.opt1);
     screen.changeButtonValue(btn2, story.opt2);
     screen.changeText(cardText, story.cardTxt);
-}
-
-function showMessage(acertou) {
-    const result = document.querySelector("#result");
-    const message = acertou ? 'Acertou! xD' : 'Errou! :P';
-
-    screen.changeClassList(result, 'hide', 'show');
-    screen.changeText(result, message);
-
-    setTimeout(screen.changeClassList, 2000, result, 'show', 'hide');
 }
 
 function hideResume() {
@@ -163,3 +153,27 @@ function changeSoundIcon() {
 function up() {
     window.scrollTo(0, 0);
 };
+
+function setNewRandomQuestion() {
+    let randomIndexQuestion = Math.floor(Math.random() * (questions.length - 1));
+    let randomQuestion = questions[randomIndexQuestion];
+    question = randomQuestion;
+
+    removeQuestionFromArray(randomQuestion);
+}
+
+function removeQuestionFromArray(question) {
+    let index = questions.indexOf(question);
+
+    questions.splice(index, 1);
+}
+
+function showHint() {
+    const hintDescription = document.querySelector("#hintDescription");
+    const hintAnswer = document.querySelector("#hintAnswer");
+
+    screen.changeText(hintDescription, question.hintDescription);
+    screen.changeText(hintAnswer, question.hintAnswer);
+
+    $("#hintModal").modal();
+}
