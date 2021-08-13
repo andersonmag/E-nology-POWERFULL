@@ -36,12 +36,6 @@
         </span>
         </span>
         <div class="direita">
-            <span th:if="${tarefa.tipoTarefa == T(br.edu.ifal.enology.model.TipoTarefa).MULTIPLA_ESCOLHA_TEXTO}"
-                class="teste fa fa-eye icone-normal mr-3" data-toggle="modal" data-target="#modalLongo"
-                style="font-size: 22pt;cursor: pointer;"><small style="font-size: 12pt;" class="teste">
-                    Texto
-                </small>
-            </span>
             <span class="teste fa fa-hourglass-1 icone-normal" id="ampulheta"></span>
             <span id="relogioDoFaustao" class="teste"></span>
 
@@ -78,6 +72,11 @@
             </div>
             <hr class="linha mt-5">
             <div class="text-right">
+                <button type="button" class="btn btn-lg btn-info mb-5" 
+                            th:if="${tarefa.tipoTarefa == T(br.edu.ifal.enology.model.TipoTarefa).MULTIPLA_ESCOLHA_TEXTO}"
+                             data-toggle="modal" data-target="#modalLongo">
+                    <small>Abrir Texto</small> <i class="fa fa-file-text" aria-hidden="true"></i>
+                </button>
                 <button type="button" class="btn btn-lg btn-dark mb-5" id="butao" disabled>
                     < Run />
                 </button>
@@ -197,8 +196,8 @@
                         </button>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <button style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
-                            onclick="window.location.href='#top'" title="Voltar ao Topo"></button>
+                        <button id="retornaTopo" style="font-size: 25pt;" type="button" class="btn btn-secondary fa fa-caret-square-o-up"
+                            onclick="retornarAoTopo()" title="Voltar ao Topo"></button>
                         <button class="btn btn-lg ml-2" data-dismiss="modal" type="submit" onclick="continuarCronometro()"
                             style="background-color: #036977; color: white; margin-right: -15px" onmouseover="this.style.backgroundColor='#0f8191'"
                             onmouseout="this.style.backgroundColor='#036977'">

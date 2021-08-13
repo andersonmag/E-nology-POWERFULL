@@ -29,6 +29,10 @@ function init(rt) {
     }
 }
 
+function retornarAoTopo() {
+    document.querySelector("#modalLongo").scrollTo(0, 0);
+}
+
 function alterarIconeBateria() {
     var pontuacao = document.getElementById("pontuacao").textContent;
     var bateria = document.getElementById("bateria");
