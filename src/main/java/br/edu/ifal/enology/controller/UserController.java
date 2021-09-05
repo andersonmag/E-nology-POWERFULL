@@ -91,12 +91,12 @@ public class UserController {
 
             return new ModelAndView("redirect:/cadastro");
         } else {
-            // usuario.setCodigoVerificacao(usuarioService.gerarCodigoAtivacao());
+            usuario.setCodigoVerificacao(usuarioService.gerarCodigoAtivacao());
             usuario.setCodigoVerificacao(0);
             usuario.setAtivouConta(true);
             usuario.setFaseAtual(1);
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-            // emailService.enviarEmailConfirmacao(usuario);
+            emailService.enviarEmailConfirmacao(usuario);
             usuarioService.save(usuario);
             return new ModelAndView("redirect:/login");
         }
