@@ -13,8 +13,8 @@
 <img src="https://user-images.githubusercontent.com/48331431/89482312-f9c4fe00-d76f-11ea-91b9-7489859446d3.png" width="245"  title="hover text">
 </p>
 
-							Home page after the student has logged in
-							    	Home page do aluno logado
+						Home page after the student has logged in
+							Home page do aluno logado
 >- Finish a level to unlock the next padlock
 <p>Mapa do Sistema contendo todas as fases e atividades feitas com o aluno. 
 <p align="center">
