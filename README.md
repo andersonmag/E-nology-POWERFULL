@@ -1,7 +1,7 @@
 
 <h1 align="center"> E-nology Project (v0.5) </h1>
 		
-							First Contact with System
+								Landing page
 						      Primeiro Contato com o Sistema
 
 <p align="center">
@@ -13,23 +13,23 @@
 <img src="https://user-images.githubusercontent.com/48331431/89482312-f9c4fe00-d76f-11ea-91b9-7489859446d3.png" width="245"  title="hover text">
 </p>
 
-							Already Inside the System 
-							    Dentro do Sistema
->- Map of System 
+							Home page after the student has logged in
+							    	Home page do aluno logado
+>- Finish a level to unlock the next padlock
 <p>Mapa do Sistema contendo todas as fases e atividades feitas com o aluno. 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/48331431/89482473-5fb18580-d770-11ea-9c5d-0d658c1129e3.png" width="600" title="hover text">
+  <img src="https://user-images.githubusercontent.com/48254551/155371051-788ca7a5-c472-4aba-ae69-5190c81d65aa.png" width="600" title="hover text">
 </p>
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/48331431/89482474-604a1c00-d770-11ea-820d-d137f8e1906d.png" width="450" height="300" title="hover text">
+    <img src="https://user-images.githubusercontent.com/48254551/155372062-8bc33fa0-34e6-4500-87e3-83d8559cd2da.png" width="450" height="300" title="hover text">
 </p>
 
 
 <h3 align="center"> Um pouco sobre o aprendizado:</h3>
 
 
->- Time of Reading
+>- Reading Time
 <p> Um exemplo de texto existente em nosso sistema para treinar a leitura do inglês.</p>
 
 <p align="center">
@@ -37,7 +37,7 @@
 </p>
 
 
->- Time of Practice
+>- Practice Time
 <p> Respondendo lições para praticar novos conhecimentos</p>
 
 <p align="center">
@@ -84,7 +84,7 @@
 
  - `Esse é um projeto em desenvolvimento, sendo construindo por estudantes do Curso técnico em Informática do IFAL(Instituto Federal de Alagoas) visando ensinar e auxiliar alunos de cursos de Informática em sua aprendizagem de inglês instrumental, e proporcionando, dessa forma, uma melhor introdução e um melhor entendimento sobre à área de informática e toda a sua abrangência. `
 
-- `This is a project under development, being built by students of the Technical Course in Computer Science at IFAL (Federal Institute of Alagoas) aiming to teach and assist students of Computer Science courses in your instrumental English learning, and thus providing a better introduction and a better understanding about the IT area and all its scope.`
+- `This is a project under development, being built by students of the Computer Technician Course at IFAL (Federal Institute of Alagoas) aiming to teach and assist students of Computer Technician Courses in their instrumental English learning, and thus providing a better introduction and a better understanding about the IT area and all its scope.`
 
 	**Developer by:**
 		👨‍💻👨🏿‍💻 
