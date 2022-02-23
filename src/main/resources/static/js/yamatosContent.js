@@ -8,7 +8,7 @@ const questions = [
   },
   {
     questionMessage: 'Qual termo em inglês usado para denominar partes físicas do computador?',
-    questionImage: 'https://i.imgur.com/zZav5eK.jpg',
+    questionImage: 'https://i.imgur.com/DjEKvOp.png',
     questionAnswer: 'hardware',
     hintDescription: 'Teclado, mouse e monitor são exemplos de...',
     hintAnswer: 'H_RD_A_E'
@@ -29,7 +29,7 @@ const questions = [
   },
   {
     questionMessage: 'Qual termo em inglês é usado para se referir a um erro não esperado nos códigos?',
-    questionImage: 'https://i.imgur.com/E5w6enY.jpg',
+    questionImage: 'https://i.imgur.com/RzlyZ46.png',
     questionAnswer: 'bug',
     hintDescription: 'A resposta é uma das formas de dizer "besouro" em inglês',
     hintAnswer: 'B_G'
