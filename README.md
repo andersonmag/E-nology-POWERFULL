@@ -1,20 +1,26 @@
 
 <h1 align="center"> E-nology Project (v0.5) </h1>
-		
-								Landing page
-						      Primeiro Contato com o Sistema
-
+			   
 <p align="center">
   <img src="https://user-images.githubusercontent.com/48331431/89482002-5a077000-d76f-11ea-9f92-277cf63af22f.png" width="800" title="E-nology Inicial Page">
+	<div align="center" style=>
+Landing page
+</br>
+Primeiro Contato com o Sistema
+</div>
 </p>
+
 
 <p align="center">
 <img style="margin=10" src="https://user-images.githubusercontent.com/48331431/89482186-ace12780-d76f-11ea-8eeb-a2aad2e59530.png" width="260" title="hover text">
 <img src="https://user-images.githubusercontent.com/48331431/89482312-f9c4fe00-d76f-11ea-91b9-7489859446d3.png" width="245"  title="hover text">
+<div align="center" >
+Home page after the student has logged in
+</br>
+Home page do aluno logado
+</div>
 </p>
-
-						Home page after the student has logged in
-							Home page do aluno logado
+							
 >- Finish a level to unlock the next padlock
 <p>Mapa do Sistema contendo todas as fases e atividades feitas com o aluno. 
 <p align="center">
@@ -82,7 +88,7 @@
 
 ## About the Project
 
- - `Esse é um projeto em desenvolvimento, sendo construindo por estudantes do Curso técnico em Informática do IFAL(Instituto Federal de Alagoas) visando ensinar e auxiliar alunos de cursos de Informática em sua aprendizagem de inglês instrumental, e proporcionando, dessa forma, uma melhor introdução e um melhor entendimento sobre à área de informática e toda a sua abrangência. `
+ - `Esse é um projeto em desenvolvimento, sendo construido por estudantes do Curso técnico em Informática do IFAL(Instituto Federal de Alagoas) visando ensinar e auxiliar alunos de cursos de Informática em sua aprendizagem de inglês instrumental, e proporcionando, dessa forma, uma melhor introdução e um melhor entendimento sobre à área de informática e toda a sua abrangência. `
 
 - `This is a project under development, being built by students of the Computer Technician Course at IFAL (Federal Institute of Alagoas) aiming to teach and assist students of Computer Technician Courses in their instrumental English learning, and thus providing a better introduction and a better understanding about the IT area and all its scope.`
 
