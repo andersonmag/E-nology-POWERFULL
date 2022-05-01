@@ -53,6 +53,12 @@
 
             <div class="col-md-9 col-sm-10 mt-5">
 
+                <div class="minha-posicao-ranking text-center">
+                    <small style="color: #818181;/* border-bottom: 1px solid #c5a2a2; */">Minha posição:</small>
+                    <span style="font-size: 1.3rem; color: #818181;" ></span>
+                    <h1 class="text-muted" th:text="${posicaoRankingUsuarioLogado} + '°(' + ${usuario.pontuacaoDoAluno} + ')'"></h1>
+                </div>
+
                 <div class="form-group">
                     <select class="form-control text-center" id="exampleFormControlSelect1" disabled>
                         <option class="text-center">Ranking Geral</option>
