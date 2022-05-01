@@ -1,5 +1,6 @@
 package br.edu.ifal.enology.service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -38,14 +39,65 @@ public class UsuarioService {
         return userRepository.findByRolesIsNull();
     }
 
-    public List<Usuario> getUsuariosComMaioresPontuacoes() {
-        List<Usuario> usuarios = userRepository.findByRolesIsNull();
+    public Integer buscaPosicaoRankingUsuario(Long idUsuario) {
+        List<Usuario> usuariosOrdenadoPorPontuacao = ordenaUsuariosPorPontuacao();
 
-        usuarios = usuarios.stream().sorted(Comparator.comparingInt(Usuario::getPontuacaoDoAluno).reversed()).collect(Collectors.toList());
-        int menorPontuacaoTop5 = usuarios.stream().mapToInt(usuario -> usuario.getPontuacaoDoAluno()).distinct().limit(5).min().getAsInt();
-        usuarios = usuarios.stream().filter(usuario -> usuario.getPontuacaoDoAluno() >= menorPontuacaoTop5)
-                                .collect(Collectors.toList());
-        return usuarios;
+        int posicao = 0;
+        int ultimaPontuacao = 0;
+        for (Usuario usuario : usuariosOrdenadoPorPontuacao) {
+            if (ultimaPontuacao != usuario.getPontuacaoDoAluno()){
+                posicao++;
+                ultimaPontuacao = usuario.getPontuacaoDoAluno();
+            }
+
+            if(usuario.getId().equals(idUsuario))
+                break;
+        }
+
+        return posicao;
+    }
+
+    public List<Integer> buscarPosicoesTop5UsuariosComMaioresPontuacoes() {
+        List<Usuario> usuariosComMaioresPontuacoes = buscarTop5UsuariosComMaioresPontuacoes();
+        List<Integer> pontuacoesEmOrdem =  usuariosComMaioresPontuacoes.stream()
+                                                                        .map(u -> u.getPontuacaoDoAluno())
+                                                                        .collect(Collectors.toList());
+        List<Integer> ordemRank = new ArrayList<>();
+        
+        int posicao = 0;
+        int ultimaPontuacao = 0;
+        for (Integer pontuacao : pontuacoesEmOrdem) {
+            if (ultimaPontuacao != pontuacao){
+                posicao++;
+                ultimaPontuacao = pontuacao;
+            }
+            ordemRank.add(posicao);
+        }
+        return ordemRank;
+    }
+
+    private List<Usuario> ordenaUsuariosPorPontuacao() {
+        return userRepository.findByRolesIsNull()
+                             .stream()
+                             .sorted(
+                                 Comparator.comparingInt(Usuario::getPontuacaoDoAluno).reversed())
+                             .collect(Collectors.toList());
+    }
+
+    public List<Usuario> buscarTop5UsuariosComMaioresPontuacoes() {
+         List<Usuario> usuariosOrdenadoPorPontuacao = ordenaUsuariosPorPontuacao();
+
+        int menorPontuacaoTop5 = usuariosOrdenadoPorPontuacao.stream()
+                                                             .mapToInt(usuario -> usuario.getPontuacaoDoAluno())
+                                                             .distinct()
+                                                             .limit(5).min().getAsInt();
+        
+        List<Usuario> top5MaioresPontuacoes = usuariosOrdenadoPorPontuacao
+                                                      .stream()
+                                                      .filter(usuario -> usuario.getPontuacaoDoAluno() >= menorPontuacaoTop5)
+                                                      .collect(Collectors.toList());
+
+        return top5MaioresPontuacoes;
     }
 
     public List<Usuario> getRankingAlunos(List<Usuario> usuarios) {
@@ -55,8 +107,7 @@ public class UsuarioService {
     }
 
     public double getMediaPontuacaoUsuarios() {
-        List<Usuario> usuarios = userRepository.findByRolesIsNull();
-        return usuarios.stream().mapToDouble(Usuario::getPontuacaoDoAluno).average().orElse(Double.NaN);
+        return userRepository.calculateAverageScores();
     }
 
     public List<Usuario> findAll() {

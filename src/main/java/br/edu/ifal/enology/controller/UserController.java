@@ -279,26 +279,11 @@ public class UserController {
     public ModelAndView mostrarPaginaRanking(@AuthenticationPrincipal Usuario usuarioLogado) {
         ModelAndView model = new ModelAndView("user/ranking");
 
-        List<Usuario> usuariosComMaioresPontuacoes = usuarioService.getUsuariosComMaioresPontuacoes();
-        List<Integer> pontuacoesEmOrdem =  usuariosComMaioresPontuacoes.stream()
-                                                    .map(u -> u.getPontuacaoDoAluno()).collect(Collectors.toList());
-        List<Integer> ordemRank =  new ArrayList<>();
-        double mediaPontuacoes = usuarioService.getMediaPontuacaoUsuarios();
-
-        int posicao = 0;
-        int ultimaPontuacao = 0;
-        for (Integer pontuacao : pontuacoesEmOrdem) {
-            if (ultimaPontuacao != pontuacao){
-                posicao++;
-                ultimaPontuacao = pontuacao;
-            }
-            ordemRank.add(posicao);
-        }
-
         model.addObject("usuario", usuarioLogado)
-             .addObject("usuarios", usuariosComMaioresPontuacoes)
-             .addObject("media", mediaPontuacoes)
-             .addObject("ordem", ordemRank);
+             .addObject("posicaoRankingUsuarioLogado", usuarioService.buscaPosicaoRankingUsuario(usuarioLogado.getId()))
+             .addObject("usuarios", usuarioService.buscarTop5UsuariosComMaioresPontuacoes())
+             .addObject("media", usuarioService.getMediaPontuacaoUsuarios())
+             .addObject("ordem", usuarioService.buscarPosicoesTop5UsuariosComMaioresPontuacoes());
         return model;
     }
 
