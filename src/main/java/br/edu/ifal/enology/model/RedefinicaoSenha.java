@@ -1,17 +1,16 @@
 package br.edu.ifal.enology.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "redefinicao_senha_usuarios")
+@Getter
+@Setter
 public class RedefinicaoSenha {
 
     @Id
@@ -20,7 +19,7 @@ public class RedefinicaoSenha {
 
     @OneToOne
     private Usuario usuario;
-    
+
     @Column(name = "token_usuario", unique = true,
             updatable = false, nullable = false)
     private String token;
@@ -30,31 +29,7 @@ public class RedefinicaoSenha {
 
     public RedefinicaoSenha() {
         UUID uuid = UUID.randomUUID();
-		this.token = uuid.toString().substring(0, 23).replaceAll("-", "");
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public LocalDateTime getTimeout() {
-        return timeout;
+        this.token = uuid.toString().substring(0, 23).replaceAll("-", "");
     }
 
     public void setTimeout(LocalDateTime timeout) {

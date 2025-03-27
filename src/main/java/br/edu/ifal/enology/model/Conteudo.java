@@ -1,5 +1,8 @@
 package br.edu.ifal.enology.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
+@Getter @Setter
 public class Conteudo{
     
     @Id
@@ -19,36 +23,4 @@ public class Conteudo{
 
     @ManyToMany(mappedBy = "conteudos", cascade = CascadeType.ALL)
     private List<Palavra> palavras;
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public List<Palavra> getPalavras() {
-        return palavras;
-    }
-
-    public void setPalavras(List<Palavra> palavras) {
-        this.palavras = palavras;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
 }

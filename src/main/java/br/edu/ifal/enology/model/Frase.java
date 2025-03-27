@@ -1,5 +1,8 @@
 package br.edu.ifal.enology.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
+@Getter @Setter
 public class Frase{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,37 +22,4 @@ public class Frase{
 
     @ManyToMany
     private List<Palavra> palavras;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getIngles() {
-        return ingles;
-    }
-
-    public void setIngles(String ingles) {
-        this.ingles = ingles;
-    }
-
-    public String getPortugues() {
-        return portugues;
-    }
-
-    public void setPortugues(String portugues) {
-        this.portugues = portugues;
-    }
-
-    public List<Palavra> getPalavras() {
-        return palavras;
-    }
-
-    public void setPalavras(List<Palavra> palavras) {
-        this.palavras = palavras;
-    }
-    
 }
