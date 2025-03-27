@@ -1,20 +1,17 @@
 package br.edu.ifal.enology.controller;
 
-import java.util.List;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import br.edu.ifal.enology.model.*;
+import br.edu.ifal.enology.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import br.edu.ifal.enology.model.*;
-import br.edu.ifal.enology.service.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @RequestMapping("/studies")
 @RestController
@@ -124,7 +121,7 @@ public class TaskController {
         }
 
         boolean isProximo = sequenciadorService.isProximoConteudo(conteudo, tarefasRespondidasCorretamente,
-                tarefasConteudo, usuarioLogado.getFaseAtual());
+            usuarioLogado.getFaseAtual());
 
         if (!isProximo) {
             model.setViewName("redirect:/mapa");

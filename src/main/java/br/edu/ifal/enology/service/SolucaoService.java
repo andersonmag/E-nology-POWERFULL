@@ -1,38 +1,32 @@
 package br.edu.ifal.enology.service;
 
-import java.util.List;
-import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import br.edu.ifal.enology.model.Solucao;
 import br.edu.ifal.enology.model.Usuario;
 import br.edu.ifal.enology.repository.SolucaoRepository;
+import org.springframework.stereotype.Service;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Service
 public class SolucaoService {
 
-    @Autowired
-    SolucaoRepository solucaoRepository;
+	final SolucaoRepository solucaoRepository;
 
-    public void save(@Valid Solucao solucao) {
-        solucaoRepository.save(solucao);
-    }
+	public SolucaoService(SolucaoRepository solucaoRepository) {
+		this.solucaoRepository = solucaoRepository;
+	}
 
-    public List<Solucao> buscarPorUsuario(Usuario aluno) {
-        return solucaoRepository.findByAluno(aluno);
-    }
+	public void save(@Valid Solucao solucao) {
+		solucaoRepository.save(solucao);
+	}
 
-    public Long getQuantidadeRespostasErradas(Usuario aluno) {
-        List<Solucao> solucoesUsuario = buscarPorUsuario(aluno);
-        Long totalErros = solucoesUsuario.stream().filter(solucao -> !solucao.isAcertou()).count();
+	public Long getQuantidadeRespostasAlunoPorCondicao(Usuario aluno, boolean condicao) {
+		List<Solucao> solucoesUsuario = buscarPorUsuario(aluno);
+		return solucoesUsuario.stream().filter(solucao -> solucao.isAcertou() == condicao).count();
+	}
 
-        return totalErros;
-    }
-
-    public Long getQuantidadeRespostasCertas(Usuario aluno){
-        List<Solucao> solucoesUsuario = buscarPorUsuario(aluno);
-        Long totalErros = solucoesUsuario.stream().filter(solucao -> solucao.isAcertou()).count();
-
-        return totalErros;
-    }
+	public List<Solucao> buscarPorUsuario(Usuario aluno) {
+		return solucaoRepository.findByAluno(aluno);
+	}
 }

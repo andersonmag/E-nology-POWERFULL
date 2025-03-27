@@ -39,6 +39,13 @@ public class EmailService {
             }
         });
 
+        Message message = construirEmailEnvio(assunto, emailDestino, html, templateData, session);
+        Transport.send(message);
+    }
+
+    private Message construirEmailEnvio(
+        String assunto, String emailDestino, String html, Map<String, Object> templateData, Session session
+    ) throws Exception {
         Address[] adressDestination = InternetAddress.parse(emailDestino);
 
         InternetAddress adressSender = new InternetAddress();
@@ -52,15 +59,12 @@ public class EmailService {
         message.setSubject(assunto);
         message.setContent(pageContent, "text/html; charset=utf-8");
         // message.setText(mensagem);
-
-        Transport.send(message);
+        return message;
     }
 
     private String convertTemplatePageIntoString(String html, Map<String, Object> templateData) throws Exception {
         Template pageTemplate = config.getTemplate(html);
-        String pageContent = FreeMarkerTemplateUtils.processTemplateIntoString(pageTemplate, templateData);
-
-        return pageContent;
+        return FreeMarkerTemplateUtils.processTemplateIntoString(pageTemplate, templateData);
     }
 
     public void enviarEmailRedefinirEmail(String token, Usuario usuario) {

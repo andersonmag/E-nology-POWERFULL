@@ -1,27 +1,25 @@
 package br.edu.ifal.enology.service;
 
-import java.util.List;
-import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import br.edu.ifal.enology.model.Conteudo;
 import br.edu.ifal.enology.repository.ConteudoRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ConteudoService {
 
-    @Autowired
-    ConteudoRepository conteudoRepository;
+	final ConteudoRepository conteudoRepository;
 
-    public void save(@Valid Conteudo conteudo) {
-        conteudoRepository.save(conteudo);
-    }
+	public ConteudoService(ConteudoRepository conteudoRepository) {
+		this.conteudoRepository = conteudoRepository;
+	}
 
-    public List<Conteudo> findAll() {
-        return conteudoRepository.findAll();
-    }
+	public List<Conteudo> findAll() {
+		return conteudoRepository.findAll();
+	}
 
-    public Conteudo findById(Long id) {
-        return conteudoRepository.findById(id).orElse(null);
-    }
+	public Conteudo findById(Long id) {
+		return conteudoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conteudo não existente!"));
+	}
 }

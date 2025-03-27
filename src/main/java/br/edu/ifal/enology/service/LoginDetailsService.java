@@ -1,6 +1,5 @@
 package br.edu.ifal.enology.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,15 +10,18 @@ import br.edu.ifal.enology.repository.UserRepository;
 @Service
 public class LoginDetailsService implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+	final UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String email) {
-        Usuario usuario = userRepository.findByEmail(email);
+	public LoginDetailsService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
-        if (usuario != null)
-            return usuario;
-        throw new AuthenticationServiceException("Este email não está cadastrado!");
-    }
+	@Override
+	public UserDetails loadUserByUsername(String email) {
+		Usuario usuario = userRepository.findByEmail(email);
+
+		if (usuario == null)
+			throw new AuthenticationServiceException("Este email não está cadastrado!");
+		return usuario;
+	}
 }
